@@ -53,6 +53,27 @@
       font-weight: 700;
     }
 
+    .rune-mode {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .mode-btn {
+      border: 1px solid var(--frame);
+      background: #fff4de;
+      color: var(--ink);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .mode-btn.is-active {
+      background: var(--frame);
+      color: #fff;
+    }
+
     .fon_hero {
       position: relative;
       width: 200px;
@@ -215,6 +236,10 @@
 
     <section class="rune-pane">
       <h1 class="pane-title" id="rune-title">Комбінації рун</h1>
+      <div class="rune-mode" role="tablist" aria-label="Тип рун">
+        <button type="button" class="mode-btn is-active" data-mode="normal">Звичайні</button>
+        <button type="button" class="mode-btn" data-mode="ancient">Античні</button>
+      </div>
       <div id="rune-content">
         <p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>
       </div>
@@ -225,15 +250,15 @@
     const RUNE_ICON = "wp-content/assets/shared/artifacts/rune/";
 
     const RUNES = {
-      feo: { id: "f", name: "Фео" },
-      ur: { id: "u", name: "Ур" },
-      thorn: { id: "th", name: "Торн" },
-      io: { id: "eo", name: "Ио" },
-      rad: { id: "r", name: "Рад" },
-      tyr: { id: "t", name: "Тир" },
-      gifu: { id: "x", name: "Гифу" },
-      yar: { id: "ia", name: "Йар" },
-      hegl: { id: "h", name: "Хегль" }
+      feo: { id: "f", ancientId: "fp", name: "Фео" },
+      ur: { id: "u", ancientId: "up", name: "Ур" },
+      thorn: { id: "th", ancientId: "thp", name: "Торн" },
+      io: { id: "eo", ancientId: "eop", name: "Ио" },
+      rad: { id: "r", ancientId: "rp", name: "Рад" },
+      tyr: { id: "t", ancientId: "tp", name: "Тир" },
+      gifu: { id: "x", ancientId: "xp", name: "Гифу" },
+      yar: { id: "ia", ancientId: "iap", name: "Йар" },
+      hegl: { id: "h", ancientId: "hp", name: "Хегль" }
     };
 
     const SLOT_COMBOS = {
@@ -311,19 +336,100 @@
       ]
     };
 
+    const ANCIENT_COMBOS = {
+      necklace: [
+        { runes: ["rad", "tyr", "yar"], effects: [
+          { text: "Максимальна мана +3500", target: "self" },
+          { text: "Регенерація мани героя +250 / год", target: "self" }
+        ] }
+      ],
+      backpack: [
+        { runes: ["ur", "yar"], effects: [
+          { text: "Параметри науки «Спостереження» +4", target: "self" },
+          { text: "Параметри науки «Шпигунство» +4", target: "self" }
+        ] }
+      ],
+      ring: [
+        { runes: ["gifu", "yar"], effects: [
+          { text: "Шанс провалу ворожого закляття +60%", target: "enemy" },
+          { text: "Атака магічним вежам +12%", target: "self" }
+        ] }
+      ],
+      armor: [
+        { runes: ["io", "yar", "yar", "yar", "hegl"], effects: [
+          { text: "Межа максимального захисту +36", target: "self" },
+          { text: "Здоров'я всіх військ (діє на противника) -24%", target: "enemy" }
+        ] }
+      ],
+      belt: [
+        { runes: ["ur", "gifu"], effects: [
+          { text: "Місткість сумки героя +12", target: "self" },
+          { text: "Вивчення лабораторіями алхіміків +12%", target: "self" }
+        ] },
+        { runes: ["feo", "thorn", "yar"], effects: [
+          { text: "Шанс знайти магічний предмет у руїні +240%", target: "self" },
+          { text: "Отримуваний героєм досвід у бою +240%", target: "self" }
+        ] }
+      ],
+      weapon: [
+        { runes: ["feo", "rad", "gifu", "hegl"], effects: [
+          { text: "Атака всіх військ собі і союзнику +36%", target: "ally" },
+          { text: "Здоров'я всіх військ (діє на противника) -24%", target: "enemy" }
+        ] }
+      ],
+      shield: [
+        { runes: ["thorn", "io", "yar", "yar"], effects: [
+          { text: "Захист усіх військ собі і союзнику +30", target: "ally" },
+          { text: "Атака магічних веж (діє на противника) -12%", target: "enemy" }
+        ] }
+      ],
+      boots: [
+        { runes: ["tyr", "yar"], effects: [
+          { text: "Тривалість місії загону героя -12%", target: "self" },
+          { text: "Вартість відправки місій з військами -12%", target: "self" }
+        ] },
+        { runes: ["thorn", "rad", "gifu", "yar"], effects: [
+          { text: "Тривалість вхідних атак (діє на противника) +36%", target: "enemy" },
+          { text: "Дальність заклять +6", target: "self" }
+        ] }
+      ],
+      bracers: [
+        { runes: ["tyr", "gifu"], effects: [
+          { text: "Посилення атаки армії +24%", target: "self" },
+          { text: "Атака переслідувачів +36%", target: "self" }
+        ] }
+      ],
+      greaves: [
+        { runes: ["feo", "io", "yar", "hegl"], effects: [
+          { text: "Межа максимального захисту собі і союзнику +18", target: "ally" }
+        ] }
+      ],
+      cloak: [
+        { runes: ["tyr", "tyr", "tyr"], effects: [
+          { text: "Отримувані ресурси при грабунку в руїні +48%", target: "self" },
+          { text: "Отримуваний героєм досвід у бою +120%", target: "self" }
+        ] }
+      ]
+    };
+
     const slots = document.querySelectorAll(".shmotka");
+    const modeButtons = document.querySelectorAll(".mode-btn");
     const title = document.getElementById("rune-title");
     const content = document.getElementById("rune-content");
+    let runeMode = "normal";
+    let activeSlot = null;
 
     function showEmpty() {
-      title.textContent = "Комбінації рун";
+      title.textContent = runeMode === "ancient" ? "Комбінації античних рун" : "Комбінації рун";
       content.innerHTML = '<p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>';
     }
 
     function runeImg(key) {
       const rune = RUNES[key];
+      const file = runeMode === "ancient" ? rune.ancientId : rune.id;
+      const label = (runeMode === "ancient" ? "Антична " : "") + rune.name;
       return (
-        '<img class="combo-rune" src="' + RUNE_ICON + rune.id + '.png" alt="' + rune.name + '" title="' + rune.name + '">'
+        '<img class="combo-rune" src="' + RUNE_ICON + file + '.png" alt="' + label + '" title="' + label + '">'
       );
     }
 
@@ -333,8 +439,21 @@
       }).join("");
     }
 
+    function currentCombos(slotId) {
+      return runeMode === "ancient" ? ANCIENT_COMBOS[slotId] : SLOT_COMBOS[slotId];
+    }
+
+    function refreshActiveSlot() {
+      if (!activeSlot) {
+        showEmpty();
+        return;
+      }
+
+      showCombos(activeSlot.title, currentCombos(activeSlot.dataset.slot));
+    }
+
     function showCombos(slotName, combos) {
-      title.textContent = "Комбінації рун — " + slotName;
+      title.textContent = (runeMode === "ancient" ? "Комбінації античних рун — " : "Комбінації рун — ") + slotName;
 
       if (!combos || !combos.length) {
         content.innerHTML = '<p class="rune-placeholder">Комбінації для цього слота з’являться пізніше.</p>';
@@ -385,12 +504,22 @@
         slots.forEach((item) => item.classList.remove("is-active"));
 
         if (alreadyActive) {
+          activeSlot = null;
           showEmpty();
           return;
         }
 
         slot.classList.add("is-active");
-        showCombos(slot.title, SLOT_COMBOS[slot.dataset.slot]);
+        activeSlot = slot;
+        showCombos(slot.title, currentCombos(slot.dataset.slot));
+      });
+    });
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        runeMode = button.dataset.mode;
+        modeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+        refreshActiveSlot();
       });
     });
   </script>
