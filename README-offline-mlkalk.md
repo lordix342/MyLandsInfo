@@ -33,14 +33,10 @@ Then open:
 
 ## 3) Publish to GitHub Pages
 
-The site is static. GitHub Actions publishes `offline-mlkalk` and rewrites root-absolute links so they work under `https://<user>.github.io/<repo>/`.
+The published site is the rewritten `docs/` folder plus a root `index.html`.
 
-After the repository exists:
-
-1. In GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**
-2. Push this folder to `main` (or `master`)
-3. Open the **Actions** tab and wait for **Deploy GitHub Pages**
-4. The live URL appears on the successful workflow run and in **Settings → Pages**
+GitHub Pages should use **Deploy from a branch**: `main` / `/ (root)`.
+Live URL: `https://<user>.github.io/<repo>/`
 
 Local preview of the same rewrite:
 

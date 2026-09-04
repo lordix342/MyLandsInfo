@@ -1,0 +1,5107 @@
+﻿body {
+    font-family: "Calibri Light", Times, serif;
+  }
+  
+  html {
+    scrollbar-color: #d4a02d #c2bfea;
+      border-radius: 5px;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  }
+  
+  /*  .reclama{
+  width: 680px;
+    height: 95px;
+    border: 2px;
+    border-color: black;
+    border-style: double;
+  }*/
+  
+  .units_levels {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  width: 42%;
+  }
+  
+  .units_levels button {
+  background-color: initial;
+  border: none
+  
+  }
+  
+  .spec_levels {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  width: 86%;
+  height: 22%;
+  }
+  
+  .spec_levels button {
+  background-color: initial;
+  border: none
+  
+  }
+  
+  
+  .litle_dress {
+    display: none;
+    width: 22px;
+    height: 22px;
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  .creator_bonus {
+    top: -2px;
+    left: -3px;
+    z-index: 55;
+    width: 674px;
+    height: 488px;
+    display: none;
+    position: absolute;
+    border: 1px black solid;
+    overflow: auto;
+  }
+  
+  .creator_bonus>div {
+    vertical-align: top;
+  }
+  
+  .creator_bonus_part {
+    width: 47%;
+    padding: 1%;
+    display: inline-block;
+  }
+  
+  .creat_proizvol_bonus input {
+    margin: 0 0 0 6px;
+  }
+  
+  .creat_one_bonus {
+    width: 40px;
+  }
+  
+  .standartKZ,
+  .kz_show {
+    display: none;
+  }
+  
+  .type_server {
+    text-align: center;
+    width: 700px;
+    margin: 6px 0;
+  }
+  
+  .type_server input[type=radio] {
+    cursor: pointer;
+  }
+  
+  .magic_to_hero_select h4 {
+    margin: 0;
+  }
+  
+  table {
+    border-width: 0px;
+    border-spacing: 0px;
+    border-collapse: collapse;
+  }
+  
+  td,
+  tr {
+    border-width: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 3px;
+    padding-bottom: 0px;
+  }
+  
+  .kastul_hero {
+    vertical-align: top;
+    width: 86px;
+    padding-right: 0px;
+  }
+  
+  .units_td {
+    width: 70px;
+  }
+  
+  .kastul_0 {
+    width: 100px;
+  }
+  
+  .kastul_1 {
+    width: 110px;
+  }
+  
+  .kastul_2 {
+    width: 215px;
+  }
+  
+  .kastul_3 {
+    width: 250px;
+  }
+  
+  .kastul_4 {
+    width: 40px;
+  }
+  
+  .fon_red {
+    background: #FFCCCC;
+  }
+  
+  .fon_green {
+    background: #99FF99;
+  }
+  
+  .army {
+    width: 700px;
+    height: 228px;
+    border: 2px;
+    border-color: black;
+    border-style: double;
+  }
+  
+  .title_unit {
+    height: 21px;
+    text-align: center;
+  }
+  
+  .title_unit span {
+    float: right;
+  }
+  
+  .title_unit span button {
+    height: 21px;
+    line-height: 5px;
+    cursor: pointer;
+  }
+  
+  #army_0,
+  #army_1,
+  #rez_0,
+  #rez_1,
+  #army_6,
+  #rez_6 {
+    background: rgb(255, 170, 170);
+  }
+  
+  #army_2,
+  #army_3,
+  #army_4,
+  #rez_2,
+  #rez_3,
+  #rez_4,
+  #army_5,
+  #rez_5 {
+    background: rgb(146 255 146);
+  }
+  
+  #army_2,
+  #army_3,
+  #army_4 {
+    margin-top: 8px;
+  }
+  
+  #army_1,
+  #army_6 {
+    margin: 4px 0;
+  }
+  
+  #army_0,
+  #army_4 {
+    margin-bottom: 4px;
+  }
+  
+  #army_6 {
+    margin-bottom: 8px;
+  }
+  
+  .settins {
+    width: 700px;
+    height: 32px;
+    border-top: 2px;
+    border-bottom: 2px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: black;
+    border-style: solid;
+    padding-top: 4px;
+  }
+  
+  div.settins button {
+  /*   background: #fff;  */
+    width: 17px;
+    height: 20px;
+  }
+  
+  .clear {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .hero {
+    width: 82px;
+    height: 99px;
+    display: inline-block;
+    border: 1px;
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: black;
+    float: left;
+  }
+  
+  div.hero img {
+    width: 50px; /*82*/
+    height: 50px; /*99*/
+    cursor: pointer;
+  }
+  
+  .hero_setting {
+    width: 593px;
+    height: 490px;
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 15;
+    position: relative;
+    top: -69px;
+    left: -2px;
+  }
+  
+  .left_hero_setting {
+    display: inline-block;
+    width: 220px;
+    border: 0px;
+    border-right: 2px;
+    border-style: solid;
+    border-color: black;
+  
+  }
+  
+  .right_hero_setting {
+    display: inline-block;
+    float: right;
+    width: 305px;
+    padding: 3px;
+    padding-left: 0px;
+    position: relative;
+    left: -2px;
+    top: 6px;
+  }
+  
+  .shtandart {
+    width: 46px;
+    height: 46px;
+    display: inline-block;
+    border: 1px solid gray;
+    margin-right: 2px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: small;
+    text-align: center;
+  }
+  
+  .alximick,
+  .alximick_vkl {
+    width: 16px;
+    height: 15px;
+    left: 34px;
+    top: -68px;
+    position: relative;
+  }
+  
+  .alximick {
+    background-image: url("image/crystal_deact.png");
+  }
+  
+  .alximick_vkl {
+    background-image: url("image/crystal_act.png");
+  }
+  
+  .old_dress,
+  .old_dress_vkl {
+    width: 16px;
+    height: 15px;
+    top: -19px;
+    left: 34px;
+    position: relative;
+  }
+  
+  .old_dress {
+    background-image: url("image/drew_deact.png");
+  }
+  
+  .old_dress_vkl {
+    background-image: url("image/drew_act.png");
+  }
+  
+  .rynu_label,
+  .rynu_label_vkl {
+    width: 15px;
+    height: 53px;
+    /* 53 */
+    position: relative;
+  }
+  
+  .rynu_label {
+    background-image: url("image/mini_runa_deact.png?123");
+  }
+  
+  .rynu_label_vkl {
+    background-image: url("image/mini_runa_act.png?123");
+  }
+  
+  .black_fon,
+  .black-shtandart {
+    width: 49px;
+    height: 46px;
+    background: black;
+    opacity: 0.6;
+    filter: alpha(Opacity=60);
+  }
+  
+  .black-shtandart {
+    width: 46px;
+  }
+  
+  .litle_shtandart {
+    width: 22px;
+    height: 22px;
+    display: none;
+  }
+  
+  .search_input {
+    width: 360px;
+    margin-left: 5px;
+  }
+  
+  .to_do_dress {
+    left: 5px;
+    width: 100px;
+    font-size: 12px;
+  
+  }
+  
+  .to_del_dress {
+    top: -4px;
+    left: 45px;
+    width: 75px;
+    font-size: 12px;
+  }
+  
+  .save_hero {
+    font-size: 12px;
+    position: relative;
+    top: -4px;
+    left: 41px;
+    width: 110px;
+    height: 23px;
+  }
+
+  #save_id {
+    width: 150px;
+  }
+  
+  .units {
+    background: url(image/arm_slot.png?4);
+    width: 591px;
+    height: 98px;
+    display: inline-block;
+    border: 0px;
+    border-bottom: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+  
+  
+  .otst {
+    width: 25px;
+  }
+  
+  div.units input[type=text] {
+    position: absolute;
+    margin-top: 73px;
+    margin-left: -65px;
+    width: 60px;
+    height: 15px;
+    text-align: right;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+  }
+  
+  div.units img {
+    width: 68px;
+    height: 82px;
+    border: 0px;
+  }
+  
+  div.units div {
+    display: inline-block;
+    width: 68px;
+    height: 98px;
+    text-align: center;
+    border-left: 2px;
+    border-right: 2px;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin: 0px;
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+  }
+  
+  #armor_setting {
+    margin-top: 12px;
+    width: 702px;
+    height: 142px;
+    border: 1px;
+    border-style: solid;
+    border-color: green;
+    background-color: #ccfefe;
+  }
+  
+  #armor_content_left {
+    width: 110px;
+    height: 135px;
+    border: 1px;
+    border-style: solid;
+    border-color: green;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+  }
+  
+  div#armor_content_left img {
+    width: 109px;
+    height: 95px;
+  }
+  
+  div#armor_content_left button {
+    width: 17px;
+    height: 20px;
+  }
+  
+  #batonu_spec {
+    margin-top: 4px;
+  }
+  
+  #armor_content_right {
+    width: 568px;
+    height: 140px;
+    border: 0px;
+    margin: 0px;
+    display: inline-block;
+  }
+  
+  #teretory {
+    width: 584px;
+    height: 30px;
+    border: 1px;
+    border-style: solid;
+    border-color: green;
+    text-align: right;
+    padding-top: 4px;
+    padding-right: 4px;
+  }
+  
+  #bashni {
+    width: 581px;
+    height: 99px;
+    border: 1px;
+    border-style: solid;
+    border-color: green;
+    padding-top: 5px;
+    padding-left: 7px;
+  
+  }
+  
+  #profa_rem {
+    width: 95px;
+    height: 95px;
+    margin-left: 7px;
+    background: url("image/spetc_zaschitnick.png");
+  
+  }
+  
+  div#bashni div {
+    cursor: pointer;
+  }
+  
+  #yb_add {
+    display: inline-block;
+  }
+  
+  #mb_add {
+    display: inline-block;
+  }
+  
+  #bb_add,
+  #gate_add {
+    display: inline-block;
+  }
+  
+  #yb {
+    display: none;
+    width: 324px;
+    height: 60px;
+  }
+  
+  #gate,
+  .gates,
+  .gateEnds {
+    display: none;
+  }
+  
+  #gateEnd {
+    width: 70px;
+  }
+  
+  #crash {
+    color: rgb(255, 0, 0);
+  }
+  
+  .kz_img {
+    width: 32px;
+    height: 33px;
+    background: url("image/worota_kz.png");
+  }
+  
+  .terr_0 {
+    background: url("image/0.png");
+  }
+  
+  .terr_1 {
+    background: url("image/1.png");
+  }
+  
+  .terr_2 {
+    background: url("image/2.png");
+  }
+  
+  .terr_3 {
+    background: url("image/3.png");
+  }
+  
+  .terr_4 {
+    background: url("image/4.png");
+  }
+  
+  .terr_5 {
+    background: url("image/5.png");
+  }
+  
+  .terr_6 {
+    background: url("image/6.png");
+  }
+  
+  .terr_7 {
+    background: url("image/7.png");
+  }
+  
+  .terr_8 {
+    background: url("image/8.png");
+  }
+  
+  div#yb div {
+    display: inline-block;
+    width: 35px;
+    cursor: text;
+  }
+  
+  div#yb input[type=text] {
+    width: 28px;
+  }
+  
+  .num_for_y {
+    color: #fff;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+    position: relative;
+    font-weight: bold;
+  }
+  
+  .yb_text {
+    left: 13px;
+    top: 10px;
+  }
+  
+  .yb_img {
+    width: 34px !important;
+    height: 33px;
+    background: url("image/ycrep.png");
+    margin-bottom: 4px;
+    cursor: pointer !important;
+  }
+  
+  .bb_img {
+    width: 23px !important;
+    height: 33px;
+    background: url("image/tower.png");
+  }
+  
+  .bb_img span {
+    left: 8px;
+    top: 10px;
+  }
+  
+  .kz_img span {
+    left: 12px;
+    top: 14px;
+  }
+  
+  .mb_img {
+    width: 20px !important;
+    height: 33px;
+    background: url("image/mag_tower.png");
+  }
+  
+  .mb_img span {
+    left: 6px;
+    top: 10px;
+  }
+  
+  .wq {
+    width: 12px;
+  }
+  
+  ._w {
+    background: url("image/up.png");
+  }
+  
+  ._q {
+    background: url("image/down.png");
+  }
+  
+  ._w,
+  ._q {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+  }
+  
+  .myb {
+    width: 42px;
+    display: none;
+  }
+  
+  #yb_delete {
+    width: 12px !important;
+    cursor: pointer !important;
+  }
+  
+  #spec_but_0 {
+    background: #a4ff9c;
+    border-radius: 10px;
+  }
+  
+  /*#b1 {
+    background: rgb(102, 255, 255); 
+  }*/
+  
+  #spec_but_1,
+  #spec_but_2,
+  #spec_but_3,
+  #b2,
+  #b3 {
+    background: #fff;
+  }
+  
+  
+  #rez_faiting,
+  #army_1,
+  #army_3,
+  #army_4,
+  #army_5,
+  #army_6,
+  #hero_settings_0,
+  #hero_settings_1,
+  #hero_settings_2,
+  #hero_settings_3,
+  #hero_settings_5,
+  #hero_settings_6,
+  #hero_settings_4,
+  #plus_army_4,
+  #delete_army_1,
+  #delete_army_3,
+  #delete_army_4,
+  #plus_army_5,
+  #delete_army_5,
+  #plus_army_6,
+  #delete_army_6 {
+    display: none;
+  }
+  
+  .cursor_pointer,
+  .name_select_dress,
+  .smotkisu,
+  .cursor {
+    cursor: pointer;
+  }
+  
+  .center_text {
+    width: 680px;
+    text-align: center;
+  }
+  
+  .skils {
+    display: inline-block;
+    width: 48px;
+    height: 46px;
+    color: #fff;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+      position: relative;
+      font-size: small;
+      text-align: center;
+      margin-top: 5px;
+      margin-left: 30px;
+  }
+  
+  .fon_hero {
+    margin-left: 10px;
+    width: 200px;
+    height: 324px;
+    background: url("image/_big2.jpg?410") no-repeat;
+  }
+  
+  .navuki_hero {
+    background: #f3e5bb !important;
+    width: 150px !important;
+    color: black !important;
+    height: 25px !important;
+    display: none !important;
+  }
+  
+  .lvl_hero {
+    width: 25px;
+  }
+  #lvl_0_3, #lvl_1_3, #lvl_2_3, #lvl_3_3, #lvl_4_3, #lvl_5_3, #lvl_6_3
+  {
+    background: #afa;
+    border-radius: 10px;
+  }
+  .update_hero {
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 25;
+    position: absolute;
+    overflow: auto;
+    width: 360px;
+    height: 484px;
+    top: 0px;
+    left: 229px;
+  }
+  .update_hero_pr {
+    margin-top: -212px;
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 25;
+    position: absolute;
+    overflow: auto;
+    width: 400px;
+    height: 648px;
+  }
+  .vkl_vukl_setting {
+    margin-top: -31px;
+    margin-left: -233px;
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 25;
+    position: absolute;
+    overflow: auto;
+    width: 350px;
+    height: 148px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+  .image_hero {
+    cursor: pointer;
+    width: 82px;
+    height: 99px;
+  }
+  
+  .complect_dres {
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 24;
+    position: absolute;
+    overflow: auto;
+    width: 220px;
+    height: 200px;
+  }
+  
+  .magic_to_hero_select {
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 23;
+    position: absolute;
+    overflow: auto;
+    width: 591px;
+    top: -1px;
+    left: -4px;
+    height: 485px;
+  }
+  
+  #magic_to_hero_select_0,
+  #magic_to_hero_select_1,
+  #magic_to_hero_select_6 {
+    height: 485px;
+  }
+  
+  .magic_to_hero {
+    cursor: pointer;
+    border: 0px;
+    border-top: 2px;
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: black;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+  }
+  
+  .button_for_dress {
+    margin-top: 3px;
+    min-height: 28px;
+    margin-left: 15px;
+  }
+  
+  .monster_settings {
+    position: relative;
+    width: 140px;
+    left: 87px;
+    top: -475px;
+    font-size: 14px;
+    display: none;
+  }
+  
+  #info_calck {
+    float: right;
+    font-size: 12px;
+  }
+  
+  .no_dead_men {
+    position: relative;
+    left: -1px;
+  }
+  .nej_dead_men{
+    position: relative;
+    left: -1px;
+  }
+  
+  label {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  #maraderstvo {
+    display: none;
+  }
+  
+  #maraderstvo>div {
+    padding: 4px 0;
+    border-bottom: 1px gray solid;
+  }
+  
+  .marader_img {
+    width: 30px;
+    height: 26px;
+    display: inline-block;
+    margin: 0;
+  }
+  
+  .select_shmotka_0,
+  .select_shmotka_1,
+  .select_shmotka_2,
+  .select_shmotka_3,
+  .select_shmotka_4,
+  .select_shmotka_5,
+  .select_shmotka_6,
+  .select_shmotka_7,
+  .select_shmotka_8,
+  .select_shmotka_9,
+  .select_shmotka_10,
+  .select_shmotka_11 {
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 22;
+    position: absolute;
+    /* overflow: scroll; */
+    width: 609px;
+    height: 488px;
+    top: -2px;
+    margin-left: -18px;
+  }
+  
+  .select_rynu_0,
+  .select_rynu_1,
+  .select_rynu_2,
+  .select_rynu_3,
+  .select_rynu_4,
+  .select_rynu_5,
+  .select_rynu_6,
+  .select_rynu_7,
+  .select_rynu_8,
+  .select_rynu_9,
+  .select_rynu_10,
+  .select_rynu_11 {
+    display: none;
+    background-color: #f3e5bb;
+    z-index: 26;
+    position: absolute;
+    width: 620px;
+    height: 488px;
+    border: 2px black solid;
+    top: -2px;
+    left: -2px;
+    overflow: auto;
+  }
+  
+  .hide_select_rynu button_nw_mrg {
+    display: block;
+    float: right;
+    margin: 8px;
+    cursor: pointer;
+  }
+  .hide_select_rynu_cleer button_nw_mrg {
+    display: block;
+    float: right;
+    margin: 8px;
+    cursor: pointer;
+  }
+  .one_ryna_block {
+    width: 54px;
+    display: inline-block;
+    margin: 4px;
+  }
+  
+  .ryna_img {
+    height: 58px;
+    width: 54px;
+    display: block;
+    background: url("image/rynu.png") no-repeat;
+  }
+  
+  .ryna_img_0 {
+    background-position: 0 -60px;
+  }
+  
+  .ryna_img_vkl_0 {
+    background-position: 0 -1px;
+  }
+  
+  .ryna_img_1 {
+    background-position: -61px -60px;
+  }
+  
+  .ryna_img_vkl_1 {
+    background-position: -61px -1px;
+  }
+  
+  .ryna_img_2 {
+    background-position: -122px -60px;
+  }
+  
+  .ryna_img_vkl_2 {
+    background-position: -122px -1px;
+  }
+  
+  .ryna_img_3 {
+    background-position: -183px -60px;
+  }
+  
+  .ryna_img_vkl_3 {
+    background-position: -183px -1px;
+  }
+  
+  .ryna_img_4 {
+    background-position: -243px -60px;
+  }
+  
+  .ryna_img_vkl_4 {
+    background-position: -243px -1px;
+  }
+  
+  .ryna_img_5 {
+    background-position: -302px -60px;
+  }
+  
+  .ryna_img_vkl_5 {
+    background-position: -302px -1px;
+  }
+  
+  .ryna_img_6 {
+    background-position: -361px -60px;
+  }
+  
+  .ryna_img_vkl_6 {
+    background-position: -361px -1px;
+  }
+  
+  .ryna_img_7 {
+    background-position: -422px -60px;
+  }
+  
+  .ryna_img_vkl_7 {
+    background-position: -422px -1px;
+  }
+  
+  .ryna_img_8 {
+    background-position: -483px -60px;
+  }
+  
+  .ryna_img_vkl_8 {
+    background-position: -483px -1px;
+  }
+  
+  .ryna_count {
+    width: 54px;
+  }
+  
+  .ryna_work_count {
+    width: 54px;
+  }
+  
+  .one_word_bonus {
+    margin: 5px 8px;
+  }
+  
+  .fon_hero_div {
+    background: url("image/fon.png");
+    border: 2px solid #000;
+  }
+  
+  .select_rynu_div h5 {
+    margin: 5px 8px;
+  }
+  
+  .fig {
+    top: -220;
+  }
+  
+  #setting_razshet,
+  #rez_faiting {
+    text-align: center;
+    width: 750px;
+  }
+  
+  .shmotka_0,
+  .shmotka_1,
+  .shmotka_2,
+  .shmotka_3,
+  .shmotka_4,
+  .shmotka_5,
+  .shmotka_6,
+  .shmotka_7,
+  .shmotka_8,
+  .shmotka_9,
+  .shmotka_10,
+  .shmotka_11 {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: 1px;
+    border-style: ridge;
+    border-color: black;
+  }
+  
+  .shmotka_0 {
+    top: 6px;
+    left: 75px;
+    cursor: pointer;
+  }
+  
+  .shmotka_1 {
+    top: -3px;
+    left: 5px;
+    cursor: pointer;
+  }
+  
+  .shmotka_2 {
+    top: 76px;
+    left: 5px;
+    cursor: pointer;
+  }
+  
+  .shmotka_3 {
+    top: 90px;
+    left: 5px;
+    cursor: pointer;
+  }
+  
+  .shmotka_4 {
+    top: -136px;
+    left: 75px;
+    cursor: pointer;
+  }
+  
+  .shmotka_5 {
+    top: -123px;
+    left: 75px;
+    cursor: pointer;
+  }
+  
+  .shmotka_6 {
+    top: -43px;
+    left: 75px;
+    cursor: pointer;
+  }
+  
+  .shmotka_7 {
+    top: -282px;
+    left: 145px;
+    cursor: pointer;
+  }
+  
+  .shmotka_8 {
+    top: -203px;
+    left: 145px;
+    cursor: pointer;
+  }
+  
+  .shmotka_9 {
+    top: -354px;
+    left: 5px;
+    cursor: pointer;
+  }
+  
+  .shmotka_10 {
+    top: -317px;
+    left: 75px;
+    cursor: pointer;
+  }
+  
+  .shmotka_11 {
+    top: -425px;
+    left: 145px;
+    cursor: pointer;
+  }
+  
+  div.select_shmotka_0 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_1 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_2 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_3 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_4 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_5 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_6 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_7 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_8 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_9 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_10 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div.select_shmotka_11 div {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+  }
+  
+  div#rez_faiting input[type=text] {
+    width: 60px;
+    border: 2px;
+    border-style: solid;
+    border-color: #bbb
+  }
+  
+  #frakcuonka_0,
+  #frakcuonka_1,
+  #frakcuonka_6 {
+    width: 254px !important;
+  }
+  
+  .frackc {
+    position: relative;
+    left: 25px;
+  }
+  
+  div#load_image img {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    z-index: -2;
+    top: -1000px;
+  }
+  
+  .vkl_vukl_hero {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    top: -30px;
+    left: 2px;
+    font-size: smaller;
+  
+  }
+  
+  div#volnu button {
+    width: 17px;
+    height: 20px;
+  }
+  
+  .cleen_hero {
+    z-index: 16;
+    position: absolute;
+    top: 3px;
+    left: 177px;
+  }
+  
+  .unit_image {
+    width: 68px !important;
+    height: 97px !important;
+    margin: 0 0 0 0 !important;
+    border: 0px !important;
+  }
+  
+  .new_profa_1,
+  .new_profa_2 {
+    color: black;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .new_profa_1 {
+    left: 130px;
+    top: 5px;
+  }
+  
+  .new_profa_2 {
+    left: 185px;
+    top: 5px;
+  }
+  
+  .select_profa_1,
+  .select_profa_2 {
+    position: absolute;
+    z-index: 16;
+    display: none;
+    background-color: #f3e5bb;
+  }
+  
+  .s_p {
+    width: 158px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .div_magick {
+    display: inline-block;
+    height: 46px;
+    width: 50px;
+    margin-top: 4px;
+    margin-left: 1px;
+    margin-right: 2px;
+    color: white;
+    font-size: small;
+    text-align: center;
+    cursor: pointer;
+  
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+    position: relative;
+  }
+  
+  
+  #setting_min_max {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 680px;
+    text-align: center;
+    display: none;
+  }
+  
+  #min_max_0,
+  #min_max_1,
+  #min_max_6 {
+    display: inline-block;
+    background-color: #FFCCCC;
+  }
+  
+  #min_max_2,
+  #min_max_3,
+  #min_max_4,
+  #min_max_5 {
+    display: inline-block;
+    background-color: #99FF99;
+  }
+  
+  .on_magick {
+    width: 22px;
+    min-height: 22px;
+    display: none;
+    margin: 2px;
+  }
+  
+  .hero_title {
+    cursor: pointer;
+    width: 82px;
+    height: 99px;
+  }
+  
+  #info_unit,
+  #info_yb,
+  #info_mb,
+  #info_bb {
+    display: none;
+    position: absolute;
+    width: 125px;
+    height: 100px;
+    background: black;
+    opacity: 0.8;
+    z-index: 3;
+    filter: alpha(Opacity=80);
+    color: white;
+    border: 2px solid #cccccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+  }
+  
+  #info_yb {
+    padding: 3px;
+    height: 65px;
+    width: 199px;
+  }
+  
+  #info_mb,
+  #info_bb {
+    padding: 5px;
+    height: 50px;
+    width: 135px;
+  }
+  
+  #img_armor,
+  #img_hp,
+  #img_attac,
+  #text_armor,
+  #text_hp,
+  #text_attac,
+  #bonus_hp,
+  #bonus_attac,
+  #bonus_armor {
+    display: inline-block;
+    position: relative;
+  }
+  
+  #img_attac,
+  .attac_img {
+    width: 20px;
+    height: 20px;
+    background: url("image/attack.png");
+    top: 5px;
+  }
+  
+  #img_hp {
+    width: 20px;
+    height: 20px;
+    background: url("image/healt.png");
+    top: 5px;
+  }
+  
+  .armor_img,
+  #img_armor {
+    width: 20px;
+    height: 20px;
+    background: url("image/defender.png");
+    top: 5px;
+  }
+  
+  .armor_img,
+  #yb_armor,
+  .attac_img {
+    display: inline-block;
+  }
+  
+  #yb_armor {
+    position: relative;
+    top: -4px;
+  }
+  
+  #info_armor,
+  #info_hp,
+  #info_attac,
+  #personal {
+    position: relative;
+    top: 7px;
+    left: 7px;
+  }
+  
+  #personal {
+    font-size: small;
+  }
+  
+  #cost,
+  .escape_1,
+  .escape_4,
+  .escape_3,
+  .nickrom_1,
+  .nickrom_4,
+  .nickrom_3,
+  .back_1,
+  .back_3,
+  .back_4,
+  .xil_1,
+  .xil_3,
+  .xil_4,
+  .go_ykrp_1,
+  .raynd_0_1,
+  .raynd_0_3,
+  .raynd_0_4,
+  .raynd_1_1,
+  .raynd_1_3,
+  .raynd_1_4,
+  .raynd_2_1,
+  .raynd_2_3,
+  .raynd_2_4,
+  .raynd_3_1,
+  .raynd_3_3,
+  .raynd_3_4,
+  .raynd_4_1,
+  .raynd_4_3,
+  .raynd_4_4,
+  .raynd_5_1,
+  .raynd_5_3,
+  .raynd_5_4,
+  .raynd_6_1,
+  .raynd_6_3,
+  .raynd_6_4,
+  .raynd_7_1,
+  .raynd_7_3,
+  .raynd_7_4,
+  .raynd_8_1,
+  .raynd_8_3,
+  .raynd_8_4,
+  .raynd_9_1,
+  .raynd_9_3,
+  .raynd_9_4,
+  .raynd_10_1,
+  .raynd_10_3,
+  .raynd_10_4,
+  .raynd_11_1,
+  .raynd_11_3,
+  .raynd_11_4,
+  .raynd_12_1,
+  .raynd_12_3,
+  .raynd_12_4,
+  .raynd_13_1,
+  .raynd_13_3,
+  .raynd_13_4,
+  .raynd_14_1,
+  .raynd_14_3,
+  .raynd_14_4,
+  .raynd_15_1,
+  .raynd_15_3,
+  .raynd_15_4,
+  .raynd_16_1,
+  .raynd_16_3,
+  .raynd_16_4,
+  .raynd_17_1,
+  .raynd_17_3,
+  .raynd_17_4,
+  .raynd_18_1,
+  .raynd_18_3,
+  .raynd_18_4,
+  .raynd_19_1,
+  .raynd_19_3,
+  .raynd_19_4,
+  #cost_1,
+  #cost_3,
+  #cost_4,
+  .escape_5,
+  .escape_6,
+  .nickrom_5,
+  .nickrom_6,
+  .back_5,
+  .back_6,
+  .xil_5,
+  .xil_6,
+  .go_ykrp_5,
+  .raynd_0_5,
+  .raynd_0_6,
+  .raynd_1_5,
+  .raynd_1_6,
+  .raynd_2_5,
+  .raynd_2_6,
+  .raynd_3_5,
+  .raynd_3_6,
+  .raynd_4_5,
+  .raynd_4_6,
+  .raynd_5_5,
+  .raynd_5_6,
+  .raynd_6_5,
+  .raynd_6_6,
+  .raynd_7_5,
+  .raynd_7_6,
+  .raynd_8_5,
+  .raynd_8_6,
+  .raynd_9_5,
+  .raynd_9_6,
+  .raynd_10_5,
+  .raynd_10_6,
+  .raynd_11_5,
+  .raynd_11_6,
+  .raynd_12_5,
+  .raynd_12_6,
+  .raynd_13_5,
+  .raynd_13_6,
+  .raynd_14_5,
+  .raynd_14_6,
+  .raynd_15_5,
+  .raynd_15_6,
+  .raynd_16_5,
+  .raynd_16_6,
+  .raynd_17_5,
+  .raynd_17_6,
+  .raynd_18_5,
+  .raynd_18_6,
+  .raynd_19_5,
+  .raynd_19_6,
+  #cost_5,
+  #cost_6 {
+    display: none;
+  }
+  
+  #ditals {
+    display: none;
+  }
+  
+  .first_cost {
+    display: inline-block;
+  }
+  
+  .first_cost div {
+    width: 30px;
+    height: 26px;
+    position: relative;
+    left: 30px;
+  }
+  
+  .first_cost_0 {
+    background: url("image/gold.png");
+  }
+  
+  .first_cost_1 {
+    background: url("image/wood.png");
+  }
+  
+  .first_cost_2 {
+    background: url("image/grain.png");
+  }
+  
+  .first_cost_3 {
+    background: url("image/iron.png");
+  }
+  
+  .first_cost_4 {
+    background: url("image/people.png");
+  }
+  
+  .div_hero_select_img,
+  .div_hero_select_img2 {
+    width: 82px;
+    height: 99px;
+    display: inline-block;
+    margin: -1px;
+    cursor: pointer;
+  }
+  
+  .div_hero_select_img2 {
+    width: 82px;
+  }
+  
+  .first_img {
+    background: url("image/_first2.png?410") no-repeat;
+   /* cursor: pointer; */
+  }
+  
+  .big_img {
+    background: url("image/_big2.jpg?410") no-repeat;
+    cursor: pointer;
+  }
+  
+  #file-settings {
+    background: #9F9;
+    border: 2px solid black;
+    padding: 5px;
+    width: 670px;
+  }
+  
+  .plus,
+  .mines {
+    width: 12px !important;
+    height: 12px !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+  }
+  
+  .plus {
+    background: url("image/plus.png");
+  }
+  
+  .mines {
+    background: url("image/deleted.png");
+  }
+  
+  .cleen_class,
+  .cleen_hero {
+    width: 40px !important;
+    height: 27px !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+  }
+  
+  .cleen_class,
+  .cleen_hero {
+    background: url("image/clear.png");
+  }
+  
+  #link-for-load {
+    display: none;
+  }
+  
+  #link-for-load input {
+    width: 365px;
+  }
+  
+  /********new******/
+  .unselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .loser {
+    background-color: #00d4ff;
+  }
+  .colortext_nej {
+         background-color: #00d4ff;
+    color: #000000;
+  }
+  .vinner_attak {
+    background-color: #afa;
+    color: #000000;
+  }
+  .colortext_vinner {
+   background-color: #afa;
+    color: #000000;
+  }
+  .vinner_attak_pogiblo {
+    background-color: #ff9292;
+    color: #000000;
+  }
+  .colortext_vinner_pogiblo {
+   background-color: #ff9292;
+    color: #000000;
+  }
+  .add_attacer{
+  width: 700px;
+  height: 20px;
+  border: 2px double black;
+  background-color: rgb(255, 170, 170);
+  display: block;
+  }
+  .add_defender{
+  width: 700px;
+  height: 20px;
+  border: 2px double black;
+  background-color: rgb(146 255 146);
+  display: block;
+  }
+  
+  /*ÐžÑ‚ÑÑ‚ÑƒÐ¿Ñ‹ Ð±Ð»Ð¾ÐºÐ¾Ð² Ð´Ð¾Ð±Ð°Ð²ÐºÐ¸ ÑÑ‚Ð¾Ñ€Ð¾Ð½*/
+  .ots {
+  margin-top: 2px;
+  }
+  
+  .ots_attackers {
+  margin-top: -2px;
+  }   
+  
+  /*Ð¿ÑÑ‚Ñ‹Ð¹ Ð·Ð°Ñ‰Ð¸Ñ‚Ð½Ð¸Ðº*/
+  .ots_defender_5{
+  margin-top: 2px;
+  margin-bottom: 4px;
+  }
+  
+  
+  .attack_text{
+  margin-left: 190px;
+  
+  }
+  
+  .slots
+  {
+  background: url("image/slots.png?6") no-repeat;
+  }
+  
+  .button_nw
+  {
+  border-width: 0 10px;
+  border-image: url(image/button.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 37px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+
+  }
+
+  .button_nw_setting {
+      border-width: 0 10px;
+      border-image: url(image/button.png);
+      border-image-slice: 0 10 0 10 fill;
+      /* border-image-repeat: stretch; */
+      border-radius: 0;
+      height: 30px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 125px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+
+
+  .button_setting
+  {
+  border-width: 0 10px;
+  border-image: url(image/setting.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 37px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  
+  }
+
+  .button_nw_mrg
+  {
+  
+    margin-top: 8px;
+  margin-left: 250px;
+  border-width: 0 10px;
+  border-image: url(image/button.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 37px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  
+  }
+  .button_nw_mrg_cleer
+  {
+  
+    margin-top: 8px;
+  margin-left: 200px;
+  border-width: 0 10px;
+  border-image: url(image/button.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 37px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  
+  }
+  
+  
+  .listbox_nw
+  {
+  
+  border-style: solid;
+  border-color: transparent;
+  border-width: 4px;
+  border-image: url(image/box.png);
+  border-image-slice: 4 4 4 4 fill;
+  border-image-repeat: stretch;
+  background: #f2eee2;
+  cursor: unset;
+  color: #000000;
+  margin-right: -2px;
+  }
+  
+  .textbox_attacker
+  {
+  
+  border-style: none;
+ /* border-color: #515151;
+  border-width: 1.5px;*/
+  background: rgb(251 251 251 / 25%)
+  }
+  .textbox_deffender
+  {
+  border-style: none;
+  /* border-style: solid;
+  border-color: #515151;
+  border-width: 1.5px;*/
+  background: rgb(251 251 251 / 25%)
+  }
+  .text_armor_setting
+  {
+  
+  border-style: solid;
+  border-color: #515151;
+  border-width: 1.5px;
+  background: #e1fefe
+  }
+  
+  .preset {
+  border-width: 0 10px;
+  border-image: url(image/preset.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 37px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .preset_list {
+    background: url("image/fon.png");
+    border: 2px solid #000;
+    display: inline-block;
+    float: inherit;
+    width: 350px;
+    padding: 3px;
+    padding-left: 5px;
+    position: relative;
+    left: 682px;
+    top: -333px;
+  }
+  
+  .popup {
+  display: none;
+  position: fixed;
+  top: 22%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  background: url("image/fon.png");
+  border: 2px solid #000;
+  padding: 10px;
+  width: 390px;
+  }
+  
+  .popup_content {
+  text-align: left;
+  }
+  
+  .popup button {
+  /* margin-top: 10px;*/
+  }
+  table.iksweb{
+  width: 100%;
+  border-collapse:collapse;
+  border-spacing:0;
+  height: auto;
+  }
+  table.iksweb,table.iksweb td, table.iksweb th {
+  border: 1px solid #000000;
+  }
+  table.iksweb td,table.iksweb th {
+  padding: 3px;
+  width: 30px;
+  height: 35px;
+  }
+  table.iksweb th {
+  background: #347c99; 
+  color: #fff; 
+  font-weight: normal;
+  }
+  .fe {
+  border-width: 0 10px;
+  border-image: url(image/f.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .u {
+  border-width: 0 10px;
+  border-image: url(image/u.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .th {
+  border-width: 0 10px;
+  border-image: url(image/th.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .eo {
+  border-width: 0 10px;
+  border-image: url(image/eo.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .r {
+  border-width: 0 10px;
+  border-image: url(image/r.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .t {
+  border-width: 0 10px;
+  border-image: url(image/t.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .ia {
+  border-width: 0 10px;
+  border-image: url(image/ia.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .x {
+  border-width: 0 10px;
+  border-image: url(image/x.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .h {
+  border-width: 0 10px;
+  border-image: url(image/h.png);
+  border-image-slice: 0 10 0 10 fill;
+  /* border-image-repeat: stretch; */
+  border-radius: 0;
+  height: 30px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 5px;
+  }
+  .r1_1 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/1_1.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r1_2 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/1_2.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r1_3 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/1_3.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r1_4 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/1_4.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r1_5 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/1_5.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r2_1 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/2_1.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r2_2 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/2_2.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r2_3 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/2_3.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r2_4 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/2_4.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r3_1 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/3_1.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r3_2 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/3_2.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r3_3 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/3_3.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r3_4 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/3_4.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r3_5 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/3_5.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r4_1 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/4_1.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r4_2 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/4_2.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r4_3 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/4_3.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r4_4 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/4_4.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .r4_5 {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/4_5.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  .rscroll_5_crystals {
+  /*  border-width: 0 10px;*/
+  border-image: url(image/recept/scroll_5_crystals.png);
+  border-image-slice: 0 10 0 10 fill;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  WIDTH: 30px;
+  height: 50px;
+  background-color: transparent;
+  padding: 0 2px;
+  min-width: 32px;
+  background: none;
+  color: #000000;
+  font-weight: bold;
+  text-transform: none;
+  cursor: pointer;
+  position: relative;
+  }
+  
+  .armystrength1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrength_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrength2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrength_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrength3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrength_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrength4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrength_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrength5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrength_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+  .protection1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protection_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .protection2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protection_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .protection3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protection_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+      .protection4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protection_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+      .protection5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protection_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  
+  .armyres1 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyres_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyres2 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyres_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyres3 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyres_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyres4 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyres_4.png);
+    border-image-slice: 0 10 0 10 fill;
+    border-image-repeat: stretch;
+    border-radius: 0;
+    WIDTH: 30px;
+    height: 50px;
+    background-color: transparent;
+    padding: 0 2px;
+    min-width: 32px;
+    background: none;
+    color: #000000;
+    font-weight: bold;
+    text-transform: none;
+    cursor: pointer;
+    position: relative;
+  }
+  .armyres5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armyres_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+    /**/
+    .armystrength1s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrength_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrength2s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrength_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrength3s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrength_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrength4s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrength_s_4.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrength5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrength_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+    
+      .protection1s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protection_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .protection2s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protection_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .protection3s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protection_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+          .protection4s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protection_s_4.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+          .protection5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protection_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      
+      .armyres1s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyres_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyres2s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyres_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyres3s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyres_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyres4s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyres_s_4.png);
+        border-image-slice: 0 10 0 10 fill;
+        border-image-repeat: stretch;
+        border-radius: 0;
+        WIDTH: 30px;
+        height: 50px;
+        background-color: transparent;
+        padding: 0 2px;
+        min-width: 32px;
+        background: none;
+        color: #000000;
+        font-weight: bold;
+        text-transform: none;
+        cursor: pointer;
+        position: relative;
+      }
+      .armyres5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armyres_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+  .armystrengthally1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrengthally_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrengthally2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrengthally_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrengthally3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrengthally_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrengthally4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrengthally_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armystrengthally5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armystrengthally_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+  .protectally1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protectally_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .protectally2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protectally_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .protectally3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protectally_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+      .protectally4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protectally_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+      .protectally5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/protectally_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  
+  .armyresally1 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyresally_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyresally2 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyresally_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyresally3 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyresally_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+  .armyresally4 {
+    /*  border-width: 0 10px;*/
+    border-image: url(image/zatochki/armyresally_4.png);
+    border-image-slice: 0 10 0 10 fill;
+    border-image-repeat: stretch;
+    border-radius: 0;
+    WIDTH: 30px;
+    height: 50px;
+    background-color: transparent;
+    padding: 0 2px;
+    min-width: 32px;
+    background: none;
+    color: #000000;
+    font-weight: bold;
+    text-transform: none;
+    cursor: pointer;
+    position: relative;
+  }
+  .armyresally5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/armyresally_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+    }
+    /**/
+    .armystrengthally1s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrengthally_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrengthally2s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrengthally_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrengthally3s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrengthally_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrengthally4s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrengthally_s_4.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armystrengthally5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armystrengthally_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+    
+      .protectally1s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protectally_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .protectally2s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protectally_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .protectally3s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protectally_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+          .protectally4s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protectally_s_4.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+          .protectally5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/protectally_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      
+      .armyresally1s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyresally_s_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyresally2s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyresally_s_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyresally3s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyresally_s_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .armyresally4s {
+        /*  border-width: 0 10px;*/
+        border-image: url(image/zatochki/armyresally_s_4.png);
+        border-image-slice: 0 10 0 10 fill;
+        border-image-repeat: stretch;
+        border-radius: 0;
+        WIDTH: 30px;
+        height: 50px;
+        background-color: transparent;
+        padding: 0 2px;
+        min-width: 32px;
+        background: none;
+        color: #000000;
+        font-weight: bold;
+        text-transform: none;
+        cursor: pointer;
+        position: relative;
+      }
+      .armyresally5s {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/armyresally_s_5.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+      .maxdef1 {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/maxdef_1.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+        .maxdef2 {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/maxdef_2.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+        .maxdef3 {
+        /*  border-width: 0 10px;*/
+          border-image: url(image/zatochki/maxdef_3.png);
+          border-image-slice: 0 10 0 10 fill;
+          border-image-repeat: stretch;
+          border-radius: 0;
+          WIDTH: 30px;
+          height: 50px;
+          background-color: transparent;
+          padding: 0 2px;
+          min-width: 32px;
+          background: none;
+          color: #000000;
+          font-weight: bold;
+          text-transform: none;
+          cursor: pointer;
+          position: relative;
+        }
+        .maxdef1s {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/maxdef_s_1.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+            }
+            .maxdef2s {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/maxdef_s_2.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+            }
+            .maxdef3s {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/maxdef_s_3.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+}
+        .maxdefally1 {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/maxdefally_1.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+}
+        .maxdefally2 {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/maxdefally_2.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+            }
+            .maxdefally1s {
+                /*  border-width: 0 10px;*/
+                  border-image: url(image/zatochki/maxdefally_s_1.png);
+                  border-image-slice: 0 10 0 10 fill;
+                  border-image-repeat: stretch;
+                  border-radius: 0;
+                  WIDTH: 30px;
+                  height: 50px;
+                  background-color: transparent;
+                  padding: 0 2px;
+                  min-width: 32px;
+                  background: none;
+                  color: #000000;
+                  font-weight: bold;
+                  text-transform: none;
+                  cursor: pointer;
+                  position: relative;
+    }
+            .maxdefally2s {
+                /*  border-width: 0 10px;*/
+                  border-image: url(image/zatochki/maxdefally_s_2.png);
+                  border-image-slice: 0 10 0 10 fill;
+                  border-image-repeat: stretch;
+                  border-radius: 0;
+                  WIDTH: 30px;
+                  height: 50px;
+                  background-color: transparent;
+                  padding: 0 2px;
+                  min-width: 32px;
+                  background: none;
+                  color: #000000;
+                  font-weight: bold;
+                  text-transform: none;
+                  cursor: pointer;
+                  position: relative;
+    }
+            .terr1 {
+                /*  border-width: 0 10px;*/
+                  border-image: url(image/zatochki/terr_1.png);
+                  border-image-slice: 0 10 0 10 fill;
+                  border-image-repeat: stretch;
+                  border-radius: 0;
+                  WIDTH: 30px;
+                  height: 50px;
+                  background-color: transparent;
+                  padding: 0 2px;
+                  min-width: 32px;
+                  background: none;
+                  color: #000000;
+                  font-weight: bold;
+                  text-transform: none;
+                  cursor: pointer;
+                  position: relative;
+    }
+            .terr2 {
+                /*  border-width: 0 10px;*/
+                  border-image: url(image/zatochki/terr_2.png);
+                  border-image-slice: 0 10 0 10 fill;
+                  border-image-repeat: stretch;
+                  border-radius: 0;
+                  WIDTH: 30px;
+                  height: 50px;
+                  background-color: transparent;
+                  padding: 0 2px;
+                  min-width: 32px;
+                  background: none;
+                  color: #000000;
+                  font-weight: bold;
+                  text-transform: none;
+                  cursor: pointer;
+                  position: relative;
+    }
+            .terr3 {
+                /*  border-width: 0 10px;*/
+                  border-image: url(image/zatochki/terr_3.png);
+                  border-image-slice: 0 10 0 10 fill;
+                  border-image-repeat: stretch;
+                  border-radius: 0;
+                  WIDTH: 30px;
+                  height: 50px;
+                  background-color: transparent;
+                  padding: 0 2px;
+                  min-width: 32px;
+                  background: none;
+                  color: #000000;
+                  font-weight: bold;
+                  text-transform: none;
+                  cursor: pointer;
+                  position: relative;
+                }
+                .terr1s {
+                    /*  border-width: 0 10px;*/
+                      border-image: url(image/zatochki/terr_s_1.png);
+                      border-image-slice: 0 10 0 10 fill;
+                      border-image-repeat: stretch;
+                      border-radius: 0;
+                      WIDTH: 30px;
+                      height: 50px;
+                      background-color: transparent;
+                      padding: 0 2px;
+                      min-width: 32px;
+                      background: none;
+                      color: #000000;
+                      font-weight: bold;
+                      text-transform: none;
+                      cursor: pointer;
+                      position: relative;
+                    }
+                    .terr2s {
+                        /*  border-width: 0 10px;*/
+                          border-image: url(image/zatochki/terr_s_2.png);
+                          border-image-slice: 0 10 0 10 fill;
+                          border-image-repeat: stretch;
+                          border-radius: 0;
+                          WIDTH: 30px;
+                          height: 50px;
+                          background-color: transparent;
+                          padding: 0 2px;
+                          min-width: 32px;
+                          background: none;
+                          color: #000000;
+                          font-weight: bold;
+                          text-transform: none;
+                          cursor: pointer;
+                          position: relative;
+                        }
+                        .terr3s {
+                            /*  border-width: 0 10px;*/
+                              border-image: url(image/zatochki/terr_s_3.png);
+                              border-image-slice: 0 10 0 10 fill;
+                              border-image-repeat: stretch;
+                              border-radius: 0;
+                              WIDTH: 30px;
+                              height: 50px;
+                              background-color: transparent;
+                              padding: 0 2px;
+                              min-width: 32px;
+                              background: none;
+                              color: #000000;
+                              font-weight: bold;
+                              text-transform: none;
+                              cursor: pointer;
+                              position: relative;
+                        }
+                        .herospeed1 {
+                            /*  border-width: 0 10px;*/
+                              border-image: url(image/zatochki/herospeed_1.png);
+                              border-image-slice: 0 10 0 10 fill;
+                              border-image-repeat: stretch;
+                              border-radius: 0;
+                              WIDTH: 30px;
+                              height: 50px;
+                              background-color: transparent;
+                              padding: 0 2px;
+                              min-width: 32px;
+                              background: none;
+                              color: #000000;
+                              font-weight: bold;
+                              text-transform: none;
+                              cursor: pointer;
+                              position: relative;
+                        }
+                        .herospeed2 {
+                            /*  border-width: 0 10px;*/
+                              border-image: url(image/zatochki/herospeed_2.png);
+                              border-image-slice: 0 10 0 10 fill;
+                              border-image-repeat: stretch;
+                              border-radius: 0;
+                              WIDTH: 30px;
+                              height: 50px;
+                              background-color: transparent;
+                              padding: 0 2px;
+                              min-width: 32px;
+                              background: none;
+                              color: #000000;
+                              font-weight: bold;
+                              text-transform: none;
+                              cursor: pointer;
+                              position: relative;
+                }
+                .herospeed3 {
+                    /*  border-width: 0 10px;*/
+                      border-image: url(image/zatochki/herospeed_3.png);
+                      border-image-slice: 0 10 0 10 fill;
+                      border-image-repeat: stretch;
+                      border-radius: 0;
+                      WIDTH: 30px;
+                      height: 50px;
+                      background-color: transparent;
+                      padding: 0 2px;
+                      min-width: 32px;
+                      background: none;
+                      color: #000000;
+                      font-weight: bold;
+                      text-transform: none;
+                      cursor: pointer;
+                      position: relative;
+        }
+        .herospeed1s {
+            /*  border-width: 0 10px;*/
+              border-image: url(image/zatochki/herospeed_s_1.png);
+              border-image-slice: 0 10 0 10 fill;
+              border-image-repeat: stretch;
+              border-radius: 0;
+              WIDTH: 30px;
+              height: 50px;
+              background-color: transparent;
+              padding: 0 2px;
+              min-width: 32px;
+              background: none;
+              color: #000000;
+              font-weight: bold;
+              text-transform: none;
+              cursor: pointer;
+              position: relative;
+}
+.herospeed2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/herospeed_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.herospeed3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/herospeed_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense4s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_s_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.magdefense5s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/Magdefense_s_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp5 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp4s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_s_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.heoexp5s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/heoexp_s_5.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemweak4s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemweak_s_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemdef4s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemdef_s_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth4 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemhealth4s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemhealth_s_4.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef1 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef2 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef3 {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef1s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_s_1.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef2s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_s_2.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.enemmaxdef3s {
+    /*  border-width: 0 10px;*/
+      border-image: url(image/zatochki/enemmaxdef_s_3.png);
+      border-image-slice: 0 10 0 10 fill;
+      border-image-repeat: stretch;
+      border-radius: 0;
+      WIDTH: 30px;
+      height: 50px;
+      background-color: transparent;
+      padding: 0 2px;
+      min-width: 32px;
+      background: none;
+      color: #000000;
+      font-weight: bold;
+      text-transform: none;
+      cursor: pointer;
+      position: relative;
+}
+.box {
+  border: 4px solid transparent;
+  border-image: url(image/box_ramka.png);
+  border-image-repeat: stretch;
+  border-image-slice: 4 4 4 4 fill;
+}
+.hero_bar {
+  width: 593px !important;
+  height: 27px !important;
+  background: #8b5728;
+  display: inline-block !important;
+  z-index: 16;
+  position: absolute;
+  top: -35px;
+  left: -4px;
+}
+.hero_icon {
+  background: url(image/tabs/hero.png);
+  width: 40px !important;
+  height: 24px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  z-index: 16;
+  position: absolute;
+  top: -26px;
+  left: 9px;
+}
+.hero_icon_2 {
+  background: url(image/tabs/skills.png);
+  width: 31px !important;
+  height: 20px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  z-index: 16;
+  position: absolute;
+  top: -23px;
+  left: 237px;
+}
+.hero_icon_3 {
+  background: url(image/tabs/spells.png);
+  width: 31px !important;
+  height: 20px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  z-index: 16;
+  position: absolute;
+  top: -24px;
+  left: 286px;
+}
+.hero_icon_4 {
+  background: url(image/tabs/hero_exchange.png);
+  width: 40px !important;
+  height: 22px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  z-index: 16;
+  position: absolute;
+  top: -25px;
+  left: 338px;
+}
+.hero_icon_5 {
+  background: url(image/tabs/artifact_store.png);
+  width: 40px !important;
+  height: 22px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  z-index: 16;
+  position: absolute;
+  top: -25px;
+  left: 388px;
+}
+.hero_box{
+  z-index: 16;
+  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image-slice: 0 10 0 10 fill;
+  border-style: solid;
+  border-width: 0 10px;
+  padding: 6px 0 3px;
+  width: 34px;
+  position: absolute;
+  top: -29px;
+  height: 17px;
+}
+.hero_box_2{
+  z-index: 16;
+  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image-slice: 0 10 0 10 fill;
+  border-style: solid;
+  border-width: 0 10px;
+  padding: 6px 0 3px;
+  width: 34px;
+  position: absolute;
+  top: -29px;
+  height: 17px;
+  left: 227px;
+}
+.hero_box_3{
+  z-index: 16;
+  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image-slice: 0 10 0 10 fill;
+  border-style: solid;
+  border-width: 0 10px;
+  padding: 6px 0 3px;
+  width: 34px;
+  position: absolute;
+  top: -29px;
+  height: 17px;
+  left: 280px;
+}
+.hero_box_4{
+  z-index: 16;
+  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image-slice: 0 10 0 10 fill;
+  border-style: solid;
+  border-width: 0 10px;
+  padding: 6px 0 3px;
+  width: 34px;
+  position: absolute;
+  top: -29px;
+  height: 17px;
+  left: 332px;
+}
+.hero_box_5{
+  z-index: 16;
+  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image-slice: 0 10 0 10 fill;
+  border-style: solid;
+  border-width: 0 10px;
+  padding: 6px 0 3px;
+  width: 34px;
+  position: absolute;
+  top: -29px;
+  height: 17px;
+  left: 382px;
+}
+.update_hero_art_complect_list {
+  display: none;
+  background-color: #f3e5bb;
+  z-index: 25;
+  position: absolute;
+  overflow: auto;
+  width: 360px;
+  height: 484px;
+  top: 0px;
+  left: 227px;
+}
+
+.units p {
+  text-align: right;
+  bottom: -8px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: -28px;
+  right: 4px;
+  text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+}
+
+p {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
