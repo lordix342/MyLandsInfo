@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Руни</title>
+  <style>
+    :root {
+      --parchment: #f4e0b6;
+      --panel: #f8e9c8;
+      --ink: #2f2413;
+      --gold: #d4a017;
+      --gold-bright: #f4d27a;
+      --frame: #b38f50;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+    }
+
+    .page {
+      display: flex;
+      gap: 20px;
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    .hero-pane,
+    .rune-pane {
+      border: 1px solid var(--frame);
+      background: var(--panel);
+      border-radius: 10px;
+    }
+
+    .hero-pane {
+      flex: 0 0 260px;
+      padding: 18px 20px 24px;
+    }
+
+    .rune-pane {
+      flex: 1 1 auto;
+      padding: 18px 20px;
+      min-width: 0;
+    }
+
+    .pane-title {
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .fon_hero {
+      position: relative;
+      width: 200px;
+      height: 324px;
+      margin: 0 auto;
+      background: url("image/_big2.jpg?410") no-repeat;
+      background-position: -664px 0;
+    }
+
+    .shmotka {
+      position: absolute;
+      box-sizing: content-box;
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      margin: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .shmotka:hover {
+      border-color: rgba(244, 210, 122, 0.85);
+      box-shadow: 0 0 0 2px rgba(244, 210, 122, 0.55);
+    }
+
+    .shmotka.is-active {
+      z-index: 2;
+      border-color: var(--gold-bright);
+      box-shadow:
+        0 0 0 2px var(--gold-bright),
+        0 0 14px rgba(212, 160, 23, 0.95);
+    }
+
+    /* Same slot map as the battle calculator paperdoll */
+    .shmotka-0  { top: 6px;   left: 75px; }
+    .shmotka-1  { top: 49px;  left: 5px; }
+    .shmotka-2  { top: 180px; left: 5px; }
+    .shmotka-3  { top: 246px; left: 5px; }
+    .shmotka-4  { top: 72px;  left: 75px; }
+    .shmotka-5  { top: 137px; left: 75px; }
+    .shmotka-6  { top: 269px; left: 75px; }
+    .shmotka-7  { top: 82px;  left: 145px; }
+    .shmotka-8  { top: 213px; left: 145px; }
+    .shmotka-9  { top: 114px; left: 5px; }
+    .shmotka-10 { top: 203px; left: 75px; }
+    .shmotka-11 { top: 147px; left: 145px; }
+
+    .rune-placeholder {
+      color: #6b572e;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero-pane">
+      <h1 class="pane-title">Герой</h1>
+      <div class="fon_hero" id="hero-paperdoll">
+        <button type="button" class="shmotka shmotka-0" data-slot="0" title="Шолом" aria-label="Шолом"></button>
+        <button type="button" class="shmotka shmotka-1" data-slot="1" title="Зброя" aria-label="Зброя"></button>
+        <button type="button" class="shmotka shmotka-2" data-slot="2" title="Щит" aria-label="Щит"></button>
+        <button type="button" class="shmotka shmotka-3" data-slot="3" title="Броня" aria-label="Броня"></button>
+        <button type="button" class="shmotka shmotka-4" data-slot="4" title="Намисто" aria-label="Намисто"></button>
+        <button type="button" class="shmotka shmotka-5" data-slot="5" title="Пояс" aria-label="Пояс"></button>
+        <button type="button" class="shmotka shmotka-6" data-slot="6" title="Черевики" aria-label="Черевики"></button>
+        <button type="button" class="shmotka shmotka-7" data-slot="7" title="Плащ" aria-label="Плащ"></button>
+        <button type="button" class="shmotka shmotka-8" data-slot="8" title="Кільце" aria-label="Кільце"></button>
+        <button type="button" class="shmotka shmotka-9" data-slot="9" title="Наручі" aria-label="Наручі"></button>
+        <button type="button" class="shmotka shmotka-10" data-slot="10" title="Предмет" aria-label="Предмет"></button>
+        <button type="button" class="shmotka shmotka-11" data-slot="11" title="Кільце 2" aria-label="Кільце 2"></button>
+      </div>
+    </section>
+
+    <section class="rune-pane">
+      <h1 class="pane-title">Комбінації рун</h1>
+      <p class="rune-placeholder" id="rune-hint">Оберіть слот зліва, щоб побачити комбінації рун.</p>
+    </section>
+  </div>
+
+  <script>
+    const slots = document.querySelectorAll(".shmotka");
+    const hint = document.getElementById("rune-hint");
+
+    slots.forEach((slot) => {
+      slot.addEventListener("click", () => {
+        const alreadyActive = slot.classList.contains("is-active");
+
+        slots.forEach((item) => item.classList.remove("is-active"));
+
+        if (alreadyActive) {
+          hint.textContent = "Оберіть слот зліва, щоб побачити комбінації рун.";
+          return;
+        }
+
+        slot.classList.add("is-active");
+        hint.textContent = "Слот «" + slot.title + "» вибрано. Комбінації рун з’являться тут.";
+      });
+    });
+  </script>
+</body>
+</html>
