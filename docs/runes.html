@@ -112,6 +112,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      padding: 8px 4px 16px;
     }
 
     .combo-card {
@@ -122,6 +123,24 @@
       border: 1px solid #d2b57a;
       border-radius: 8px;
       background: #fff4de;
+      cursor: pointer;
+      transform-origin: center center;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .combo-list.has-selection .combo-card {
+      transform: scale(0.94);
+      opacity: 0.7;
+    }
+
+    .combo-list.has-selection .combo-card.is-selected {
+      transform: scale(1.08);
+      opacity: 1;
+      z-index: 1;
+      border-color: var(--gold-bright);
+      box-shadow:
+        0 0 0 2px var(--gold-bright),
+        0 0 16px rgba(212, 160, 23, 0.85);
     }
 
     .combo-num {
@@ -164,17 +183,17 @@
       <h1 class="pane-title">Герой</h1>
       <div class="fon_hero" id="hero-paperdoll">
         <button type="button" class="shmotka shmotka-0" data-slot="0" title="Шолом" aria-label="Шолом"></button>
-        <button type="button" class="shmotka shmotka-1" data-slot="1" title="Зброя" aria-label="Зброя"></button>
-        <button type="button" class="shmotka shmotka-2" data-slot="2" title="Щит" aria-label="Щит"></button>
-        <button type="button" class="shmotka shmotka-3" data-slot="3" title="Броня" aria-label="Броня"></button>
-        <button type="button" class="shmotka shmotka-4" data-slot="4" title="Намисто" aria-label="Намисто"></button>
-        <button type="button" class="shmotka shmotka-5" data-slot="5" title="Пояс" aria-label="Пояс"></button>
-        <button type="button" class="shmotka shmotka-6" data-slot="6" title="Черевики" aria-label="Черевики"></button>
-        <button type="button" class="shmotka shmotka-7" data-slot="7" title="Плащ" aria-label="Плащ"></button>
-        <button type="button" class="shmotka shmotka-8" data-slot="8" title="Кільце" aria-label="Кільце"></button>
-        <button type="button" class="shmotka shmotka-9" data-slot="9" title="Наручі" aria-label="Наручі"></button>
-        <button type="button" class="shmotka shmotka-10" data-slot="10" title="Предмет" aria-label="Предмет"></button>
-        <button type="button" class="shmotka shmotka-11" data-slot="11" title="Кільце 2" aria-label="Кільце 2"></button>
+        <button type="button" class="shmotka shmotka-1" data-slot="necklace" title="Намисто" aria-label="Намисто"></button>
+        <button type="button" class="shmotka shmotka-3" data-slot="weapon" title="Зброя" aria-label="Зброя"></button>
+        <button type="button" class="shmotka shmotka-4" data-slot="armor" title="Броня" aria-label="Броня"></button>
+        <button type="button" class="shmotka shmotka-8" data-slot="shield" title="Щит" aria-label="Щит"></button>
+        <button type="button" class="shmotka shmotka-2" data-slot="ring" title="Кільце" aria-label="Кільце"></button>
+        <button type="button" class="shmotka shmotka-5" data-slot="belt" title="Пояс" aria-label="Пояс"></button>
+        <button type="button" class="shmotka shmotka-6" data-slot="boots" title="Черевики" aria-label="Черевики"></button>
+        <button type="button" class="shmotka shmotka-11" data-slot="cloak" title="Плащ" aria-label="Плащ"></button>
+        <button type="button" class="shmotka shmotka-9" data-slot="bracers" title="Наручі" aria-label="Наручі"></button>
+        <button type="button" class="shmotka shmotka-10" data-slot="greaves" title="Поножі" aria-label="Поножі"></button>
+        <button type="button" class="shmotka shmotka-7" data-slot="backpack" title="Заплечна сумка" aria-label="Заплечна сумка"></button>
       </div>
     </section>
 
@@ -240,7 +259,7 @@
       const cards = combos.map(function (combo, index) {
         const icons = combo.runes.map(runeImg).join('<span class="combo-plus">+</span>');
         return (
-          '<article class="combo-card">' +
+          '<article class="combo-card" data-combo="' + index + '" role="button" tabindex="0">' +
             '<div class="combo-num">' + (index + 1) + '</div>' +
             '<div class="combo-runes">' + icons + '</div>' +
             '<div class="combo-effect">' + combo.effect + '</div>' +
@@ -249,6 +268,29 @@
       }).join("");
 
       content.innerHTML = '<div class="combo-list">' + cards + '</div>';
+      bindComboSelection(content.querySelector(".combo-list"));
+    }
+
+    function bindComboSelection(list) {
+      if (!list) {
+        return;
+      }
+
+      list.querySelectorAll(".combo-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const alreadySelected = card.classList.contains("is-selected");
+
+          list.querySelectorAll(".combo-card").forEach((item) => item.classList.remove("is-selected"));
+
+          if (alreadySelected) {
+            list.classList.remove("has-selection");
+            return;
+          }
+
+          card.classList.add("is-selected");
+          list.classList.add("has-selection");
+        });
+      });
     }
 
     slots.forEach((slot) => {
