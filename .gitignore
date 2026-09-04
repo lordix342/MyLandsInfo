@@ -1,0 +1,16 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Local GitHub Pages publish output
+_site/
+
+# Large dumps not used by the offline site
+Heropedia.js
+live_*.php
+live_*.js
+live_*.css
+cdx_*.json

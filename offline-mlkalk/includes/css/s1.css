@@ -1,0 +1,385 @@
+﻿
+html{
+
+}
+body {
+    margin: 0 auto;
+    min-width: 240px;
+    max-width: 500px;
+    font-size: 14px;
+    font-family: arial,verdana,tahoma,sans-serif;
+    font-style: normal;
+    color: #ffffff;
+    background: #212121;
+}
+a {
+	
+	color: #fff;
+}
+.aTDN{
+    text-decoration: none;
+}
+form{
+    margin: 0;
+}
+hr{
+	border: solid 1px #000000;
+    height: 1px;
+    background: #c5ad63;
+    padding: 0px;
+    margin: 0px 3px;
+    border-radius: 8px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.w100 {
+    width: 100%;
+}
+.w33 {
+    width: 33%;
+}
+.w20 {
+    width: 100%;
+}
+.col2 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.col7 {
+    flex: 0 0 14.28%;
+    max-width: 14.28%;
+}
+
+.col3-320 {
+	    flex: 0 0 33%;
+	    max-width: 33%;
+	}
+@media (min-width: 320px){
+	.col5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}	
+}
+@media (min-width: 400px){
+	.col3 {
+	    flex: 0 0 33%;
+	    max-width: 33%;
+	}
+}
+
+.fz12{
+	font-size: 12px;
+}
+.strokeText{
+    text-shadow: 
+    -0   -1px 1px #000000,
+     0   -1px 1px #000000,
+    -0    1px 1px #000000,
+     0    1px 1px #000000,
+    -1px -0   1px #000000,
+     1px -0   1px #000000,
+    -1px  0   1px #000000,
+     1px  0   1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000,
+    -1px -1px 1px #000000,
+     1px -1px 1px #000000,
+    -1px  1px 1px #000000,
+     1px  1px 1px #000000;
+}
+
+.bg{
+    background: url(images/game/background/fon.png) repeat;
+    border: solid 1px #000000;
+    box-shadow: inset 0px 0px 0px 1px #311100;
+    border-radius: 2px;
+}
+.p-5-10{
+    padding: 5px 10px;
+    color: black;
+}
+.p20-0-0-0{
+	padding: 20px 0px 0px 0px;
+}
+.p3-0{
+	padding: 3px 0;
+}
+.p4-0{
+    padding: 4px 0;
+}
+.p3{
+	padding: 3px;
+}
+.p7-0{
+    padding: 7px 0;
+}
+.p2{
+    padding: 2px;
+}
+.p10{
+    padding: 10px;
+}
+.p10-0{
+    padding: 10px 0px;
+}
+.p0-10{
+    padding: 0px 10px;
+}
+.p0-5{
+    padding: 0px 5px;
+}
+.mTop10{
+    margin-top: 10px;
+}
+.mTop3 {
+    margin-top: 3px;
+}
+.mLeft10{
+    margin-left: 10px;
+}
+.content{
+    background: #1f2d3b;
+    border-radius: 5px;
+}
+.center{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
+.fr {
+    float: right;
+}
+.fl {
+    float: left;
+}
+.inputForm {
+    color: #fff;
+    border: solid 1px #020202;
+    box-shadow: inset 0px 0px 0px 1px #948D6E;
+    background: #670303;
+    padding: 7px 10px;
+}
+.button{
+	background: #8B7F4F;
+    border: solid 1px #2a0000;
+    box-shadow: inset 0px -3px 0px 0px #525232, inset 0px 3px 0px 0px #9F9F60;
+    border-radius: 4px;
+    color: #fff;
+    padding: 8px 20px;
+}
+.errorColor{
+	color: red;
+}
+.red{
+	color: red;
+}
+.green{
+    color: #28cf28;
+}
+.topPanel{
+    color: white;
+	background: #470000;
+    padding: 5px;
+    border-top: solid 1px #b1a57f;
+    border-bottom: solid 1px #b1a57f;
+    box-shadow: 0px 0px 0px 1px #000000, inset 0px 1px 0px 1px #221500, inset 0px -1px 0px 1px #221500, inset 0px -10px 13px 1px #00000078, inset 0px 11px 9px 1px #ffffff3b;
+}
+.vs{
+	vertical-align: sub;
+}
+.vm {
+    vertical-align: middle;
+}
+.minW100{
+	min-width: 100px;
+}
+.minW150{
+	min-width: 150px;
+}
+.minW180{
+    min-width: 180px;
+}
+.minW200{
+    min-width: 200px;
+}
+.tdlt{
+	text-decoration: line-through;
+}
+.mapBack{
+    background: url(/public/img/back/grass.png) repeat;
+}
+.pml0{
+    padding: 0px;
+    margin: 0;
+    line-height: 0px;
+}
+.buttonBig{
+    background: #945232;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0px;
+    border-top: solid 1px #fff;
+    border-bottom: solid 1px #000;
+    box-shadow: inset 0px 0px 5px 1px #C96C40;
+}
+.tableInfoBack1{
+    background: #7E330F;
+}
+.tableInfoBack2{
+    background: #722500;
+}
+.tableInfoBackGold{
+    background: #D28A04;
+}
+.nav_button_on {
+    background-color: #944017;
+    border-color: #ffffff;
+}
+.nav_button_off {
+    background-color: #D78651;
+    box-shadow: inset -1px -1px 0px 0px #fdfdfd94, inset 1px 1px 0px 0px #0000003d;
+}
+.nav {
+    padding: 3px;
+    font-size: 17px;
+    border: solid 1px #000;
+    min-width: 26px;
+}
+.displayIB{
+    display:inline-block
+}
+.checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 1px 0 0 0px;
+}
+.checkbox + label {
+    position: relative;
+    padding: 0px 0px 0px 40px;
+    cursor: pointer;
+}
+.checkbox + label:before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 33px;
+    height: 15px;
+    border-radius: 13px;
+    background: #751f20;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+    transition: .2s;
+}
+.checkbox + label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 13px;
+    border-radius: 10px;
+    background: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    transition: .2s;
+}
+.checkbox:checked + label:before {
+    background: #9FD468;
+}
+.checkbox:checked + label:after {
+    left: 20px;
+}
+.checkbox:focus + label:before {
+}
+.bflex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.header .headerCenterBlock {
+    width: calc(100% - 28%);
+    text-align: center;
+}
+.header .headerLeftBlock, .header .headerRightBlock {
+    width: 14%;
+    display: inline-block;
+}
+.slot{
+    border: solid 1px #020202;
+    box-shadow: inset 0px 0px 0px 1px #948D6E;
+    border-radius: 4px;
+    background: #600;
+    padding: 2px;
+}
+.profileSlotLeft{
+    width: 25%;
+}
+.profileSlotCenter{
+    width: calc(100% - 50%);
+}
+.profileSlotRight{
+    width: 25%;
+}
+.item {
+    display: block;
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #000;
+    text-decoration: none;
+    border-radius: 5px;
+    background: #E3473B;
+    box-shadow: inset 0px -2px 0px 1px #00000047, inset 0px 2px 1px 1px #ffffff52;
+}
+.itemImg {
+    height: 30px;
+    padding: 12px 0 2px 0;
+    background: url(https://bratki.mobi/images/klyak.png) no-repeat 50% 4px;
+}
+.menuItem {
+    height: auto;
+    padding: 5px 0;
+    text-align: left;
+    background: #6C757E;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    border: 1px solid #000;
+    text-decoration: none;
+    border-radius: 3px;
+}
+.menuItem img {
+    vertical-align: middle;
+    margin: 0 3px;
+}
+.right{
+    text-align: right;
+}
+.left{
+    text-align: left;
+}
+.imgParamGeneral{
+    max-height: 200px;
+    max-width: 200px;
+}
+.yellow{
+    color:yellow;
+}
+.earth{
+    width: 100%;
+    background-image: url(/public/img/map/earth.png);
+    height: 100%;
+    background-size: cover;
+}
+.leftimg {
+    float:left; /* Р’С‹СЂР°РІРЅРёРІР°РЅРёРµ РїРѕ Р»РµРІРѕРјСѓ РєСЂР°СЋ */
+    margin: 7px 7px 7px 0; /* РћС‚СЃС‚СѓРїС‹ РІРѕРєСЂСѓРі РєР°СЂС‚РёРЅРєРё */
+   }

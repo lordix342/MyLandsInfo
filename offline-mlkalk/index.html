@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyLands Offline Tools</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4e0b6;
+      color: #222;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      border-bottom: 1px solid #cfb68f;
+      background: #f8e9c8;
+    }
+    .tab-btn {
+      border: 1px solid #b38f50;
+      background: #fff4de;
+      color: #2f2413;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .tab-btn.active {
+      background: #b38f50;
+      color: #fff;
+    }
+    .panel {
+      display: none;
+      height: calc(100vh - 60px);
+    }
+    .panel.active {
+      display: block;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <button class="tab-btn active" data-target="quests">Квести</button>
+    <button class="tab-btn" data-target="battle">Калькулятор битв</button>
+  </div>
+
+  <section id="quests" class="panel active">
+    <iframe src="./qes.php" title="Quests"></iframe>
+  </section>
+
+  <section id="battle" class="panel">
+    <iframe src="./kalklb.php?v304" title="Battle Calculator"></iframe>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll(".tab-btn");
+    const panels = document.querySelectorAll(".panel");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.target;
+
+        buttons.forEach((b) => b.classList.remove("active"));
+        panels.forEach((p) => p.classList.remove("active"));
+
+        button.classList.add("active");
+        document.getElementById(target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
