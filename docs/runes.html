@@ -107,6 +107,55 @@
       color: #6b572e;
       line-height: 1.5;
     }
+
+    .combo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .combo-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 12px;
+      border: 1px solid #d2b57a;
+      border-radius: 8px;
+      background: #fff4de;
+    }
+
+    .combo-num {
+      flex: 0 0 28px;
+      font-weight: 700;
+      color: #7a5a22;
+    }
+
+    .combo-runes {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      min-width: 220px;
+    }
+
+    .combo-rune {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      background: #111;
+      border-radius: 6px;
+    }
+
+    .combo-plus {
+      color: #7a5a22;
+      font-weight: 700;
+    }
+
+    .combo-effect {
+      flex: 1 1 200px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
@@ -130,14 +179,77 @@
     </section>
 
     <section class="rune-pane">
-      <h1 class="pane-title">Комбінації рун</h1>
-      <p class="rune-placeholder" id="rune-hint">Оберіть слот зліва, щоб побачити комбінації рун.</p>
+      <h1 class="pane-title" id="rune-title">Комбінації рун</h1>
+      <div id="rune-content">
+        <p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>
+      </div>
     </section>
   </div>
 
   <script>
+    const RUNE_ICON = "wp-content/assets/shared/artifacts/rune/";
+
+    const RUNES = {
+      feo: { id: "f", name: "Фео" },
+      ur: { id: "u", name: "Ур" },
+      thorn: { id: "th", name: "Торн" },
+      io: { id: "eo", name: "Ио" },
+      rad: { id: "r", name: "Рад" },
+      tyr: { id: "t", name: "Тир" },
+      gifu: { id: "x", name: "Гифу" },
+      yar: { id: "ia", name: "Йар" },
+      hegl: { id: "h", name: "Хегль" }
+    };
+
+    const SLOT_COMBOS = {
+      0: [
+        { runes: ["feo", "ur", "thorn"], effect: "Жах 12%" },
+        { runes: ["rad", "gifu"], effect: "Жах 24%" },
+        { runes: ["ur", "thorn"], effect: "+700 науки на годину" },
+        { runes: ["thorn", "thorn", "thorn"], effect: "+1200 науки на годину" },
+        { runes: ["thorn", "rad", "tyr", "gifu"], effect: "+2400 науки на годину" },
+        { runes: ["feo", "feo", "feo"], effect: "+1200 максимальної мани" },
+        { runes: ["gifu", "yar"], effect: "+3600 максимальної мани" }
+      ]
+    };
+
     const slots = document.querySelectorAll(".shmotka");
-    const hint = document.getElementById("rune-hint");
+    const title = document.getElementById("rune-title");
+    const content = document.getElementById("rune-content");
+
+    function showEmpty() {
+      title.textContent = "Комбінації рун";
+      content.innerHTML = '<p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>';
+    }
+
+    function runeImg(key) {
+      const rune = RUNES[key];
+      return (
+        '<img class="combo-rune" src="' + RUNE_ICON + rune.id + '.png" alt="' + rune.name + '" title="' + rune.name + '">'
+      );
+    }
+
+    function showCombos(slotName, combos) {
+      title.textContent = "Комбінації рун — " + slotName;
+
+      if (!combos || !combos.length) {
+        content.innerHTML = '<p class="rune-placeholder">Комбінації для цього слота з’являться пізніше.</p>';
+        return;
+      }
+
+      const cards = combos.map(function (combo, index) {
+        const icons = combo.runes.map(runeImg).join('<span class="combo-plus">+</span>');
+        return (
+          '<article class="combo-card">' +
+            '<div class="combo-num">' + (index + 1) + '</div>' +
+            '<div class="combo-runes">' + icons + '</div>' +
+            '<div class="combo-effect">' + combo.effect + '</div>' +
+          '</article>'
+        );
+      }).join("");
+
+      content.innerHTML = '<div class="combo-list">' + cards + '</div>';
+    }
 
     slots.forEach((slot) => {
       slot.addEventListener("click", () => {
@@ -146,12 +258,12 @@
         slots.forEach((item) => item.classList.remove("is-active"));
 
         if (alreadyActive) {
-          hint.textContent = "Оберіть слот зліва, щоб побачити комбінації рун.";
+          showEmpty();
           return;
         }
 
         slot.classList.add("is-active");
-        hint.textContent = "Слот «" + slot.title + "» вибрано. Комбінації рун з’являться тут.";
+        showCombos(slot.title, SLOT_COMBOS[slot.dataset.slot]);
       });
     });
   </script>
