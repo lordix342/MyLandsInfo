@@ -174,7 +174,22 @@
       flex: 1 1 200px;
       font-weight: 600;
       line-height: 1.4;
-      white-space: pre-line;
+    }
+
+    .combo-effect-line + .combo-effect-line {
+      margin-top: 4px;
+    }
+
+    .effect-enemy {
+      color: #c62828;
+    }
+
+    .effect-self {
+      color: #2e7d32;
+    }
+
+    .effect-ally {
+      color: #c9a000;
     }
   </style>
 </head>
@@ -223,40 +238,76 @@
 
     const SLOT_COMBOS = {
       0: [
-        { runes: ["feo", "ur", "thorn"], effect: "Жах 12%" },
-        { runes: ["rad", "gifu"], effect: "Жах 24%" },
-        { runes: ["ur", "thorn"], effect: "+700 науки на годину" },
-        { runes: ["thorn", "thorn", "thorn"], effect: "+1200 науки на годину" },
-        { runes: ["thorn", "rad", "tyr", "gifu"], effect: "+2400 науки на годину" },
-        { runes: ["feo", "feo", "feo"], effect: "+1200 максимальної мани" },
-        { runes: ["gifu", "yar"], effect: "+3600 максимальної мани" }
+        { runes: ["feo", "ur", "thorn"], effects: [{ text: "Жах 12%", target: "enemy" }] },
+        { runes: ["rad", "gifu"], effects: [{ text: "Жах 24%", target: "enemy" }] },
+        { runes: ["ur", "thorn"], effects: [{ text: "+700 науки на годину", target: "self" }] },
+        { runes: ["thorn", "thorn", "thorn"], effects: [{ text: "+1200 науки на годину", target: "self" }] },
+        { runes: ["thorn", "rad", "tyr", "gifu"], effects: [{ text: "+2400 науки на годину", target: "self" }] },
+        { runes: ["feo", "feo", "feo"], effects: [{ text: "+1200 максимальної мани", target: "self" }] },
+        { runes: ["gifu", "yar"], effects: [{ text: "+3600 максимальної мани", target: "self" }] }
       ],
       necklace: [
-        { runes: ["feo", "thorn"], effect: "Атака всіх військ (діє на противника) -7%" },
-        { runes: ["feo", "io", "rad", "rad"], effect: "Атака всіх військ (діє на противника) -12%" },
-        { runes: ["gifu", "hegl", "hegl"], effect: "Атака всіх військ (діє на противника) -18%" }
+        { runes: ["feo", "thorn"], effects: [{ text: "Атака всіх військ (діє на противника) -7%", target: "enemy" }] },
+        { runes: ["feo", "io", "rad", "rad"], effects: [{ text: "Атака всіх військ (діє на противника) -12%", target: "enemy" }] },
+        { runes: ["gifu", "hegl", "hegl"], effects: [{ text: "Атака всіх військ (діє на противника) -18%", target: "enemy" }] }
       ],
       backpack: [
-        { runes: ["ur", "ur"], effect: "Регенерація мани героя +120 / год" },
-        { runes: ["feo", "feo", "feo", "thorn"], effect: "Регенерація мани героя +240 / год" },
-        { runes: ["io", "tyr"], effect: "Регенерація мани героя +360 / год" }
+        { runes: ["ur", "ur"], effects: [{ text: "Регенерація мани героя +120 / год", target: "self" }] },
+        { runes: ["feo", "feo", "feo", "thorn"], effects: [{ text: "Регенерація мани героя +240 / год", target: "self" }] },
+        { runes: ["io", "tyr"], effects: [{ text: "Регенерація мани героя +360 / год", target: "self" }] }
       ],
       ring: [
-        { runes: ["feo", "ur"], effect: "Шанс провалу ворожого закляття 18%" },
-        { runes: ["feo", "feo", "feo", "tyr"], effect: "Шанс провалу ворожого закляття 36%" },
-        { runes: ["io", "yar"], effect: "Шанс провалу ворожого закляття 54%" }
+        { runes: ["feo", "ur"], effects: [{ text: "Шанс провалу ворожого закляття 18%", target: "enemy" }] },
+        { runes: ["feo", "feo", "feo", "tyr"], effects: [{ text: "Шанс провалу ворожого закляття 36%", target: "enemy" }] },
+        { runes: ["io", "yar"], effects: [{ text: "Шанс провалу ворожого закляття 54%", target: "enemy" }] }
       ],
       armor: [
-        { runes: ["ur", "ur", "thorn"], effect: "Здоров'я всіх військ (діє на противника) -12%" },
-        { runes: ["ur", "ur", "io", "rad"], effect: "Здоров'я всіх військ (діє на противника) -24%" },
-        { runes: ["feo", "yar", "hegl"], effect: "Здоров'я всіх військ (діє на противника) -36%" },
-        { runes: ["feo", "feo", "feo", "feo"], effect: "Здоров'я всіх військ +18%" },
-        { runes: ["thorn", "thorn", "rad"], effect: "Здоров'я всіх військ +36%" },
-        { runes: ["gifu", "yar", "hegl"], effect: "Здоров'я всіх військ +54%" },
-        { runes: ["gifu", "yar", "yar", "yar", "hegl"], effect: "Здоров'я всіх військ (діє на себе) +55%\nАтака всіх військ (діє на противника) -12%" }
+        { runes: ["ur", "ur", "thorn"], effects: [{ text: "Здоров'я всіх військ (діє на противника) -12%", target: "enemy" }] },
+        { runes: ["ur", "ur", "io", "rad"], effects: [{ text: "Здоров'я всіх військ (діє на противника) -24%", target: "enemy" }] },
+        { runes: ["feo", "yar", "hegl"], effects: [{ text: "Здоров'я всіх військ (діє на противника) -36%", target: "enemy" }] },
+        { runes: ["feo", "feo", "feo", "feo"], effects: [{ text: "Здоров'я всіх військ +18%", target: "self" }] },
+        { runes: ["thorn", "thorn", "rad"], effects: [{ text: "Здоров'я всіх військ +36%", target: "self" }] },
+        { runes: ["gifu", "yar", "hegl"], effects: [{ text: "Здоров'я всіх військ +54%", target: "self" }] },
+        { runes: ["gifu", "yar", "yar", "yar", "hegl"], effects: [
+          { text: "Здоров'я всіх військ (діє на себе) +55%", target: "self" },
+          { text: "Атака всіх військ (діє на противника) -12%", target: "enemy" }
+        ] }
       ],
       belt: [
-        { runes: ["thorn", "rad", "tyr"], effect: "Шанс знайти магічний предмет +120%" }
+        { runes: ["thorn", "rad", "tyr"], effects: [{ text: "Шанс знайти магічний предмет +120%", target: "self" }] }
+      ],
+      weapon: [
+        { runes: ["feo", "feo", "feo", "ur"], effects: [{ text: "Атака всіх військ +18%", target: "self" }] },
+        { runes: ["feo", "io", "rad"], effects: [{ text: "Атака всіх військ +36%", target: "self" }] },
+        { runes: ["thorn", "thorn", "tyr", "yar"], effects: [{ text: "Атака всіх військ +54%", target: "self" }] },
+        { runes: ["feo", "feo", "ur", "ur"], effects: [{ text: "Шанс пошкодити кожну будівлю +30%", target: "enemy" }] },
+        { runes: ["feo", "ur", "thorn", "io"], effects: [{ text: "Шанс пошкодити кожну будівлю +60%", target: "enemy" }] }
+      ],
+      shield: [
+        { runes: ["feo", "ur", "ur"], effects: [{ text: "Захист усіх військ +12", target: "self" }] },
+        { runes: ["thorn", "io", "io"], effects: [{ text: "Захист усіх військ +24", target: "self" }] },
+        { runes: ["feo", "rad", "rad", "tyr"], effects: [{ text: "Захист усіх військ +36", target: "self" }] },
+        { runes: ["ur", "ur", "ur", "ur"], effects: [{ text: "Межа максимального захисту +7", target: "self" }] },
+        { runes: ["thorn", "io", "tyr"], effects: [{ text: "Межа максимального захисту +12", target: "self" }] },
+        { runes: ["ur", "yar", "yar", "hegl"], effects: [{ text: "Межа максимального захисту +18", target: "self" }] },
+        { runes: ["ur", "ur", "ur"], effects: [{ text: "Атака магічних веж (діє на противника) -7%", target: "enemy" }] },
+        { runes: ["feo", "feo", "rad", "tyr"], effects: [{ text: "Атака магічних веж (діє на противника) -12%", target: "enemy" }] }
+      ],
+      boots: [
+        { runes: ["ur", "io", "rad"], effects: [{ text: "Вартість відправки місій з військами (жалування всіх військ) -12%", target: "self" }] },
+        { runes: ["thorn", "rad", "tyr", "yar"], effects: [{ text: "Вартість відправки місій з військами (жалування всіх військ) -24%", target: "self" }] },
+        { runes: ["tyr", "gifu", "gifu", "hegl"], effects: [{ text: "Вартість відправки місій з військами (жалування всіх військ) -36%", target: "self" }] }
+      ],
+      bracers: [
+        { runes: ["feo", "rad", "yar"], effects: [{ text: "Атака всіх військ (діє на себе і союзника) +18%", target: "ally" }] }
+      ],
+      greaves: [
+        { runes: ["feo", "feo", "feo", "io"], effects: [{ text: "Здоров'я всіх військ (діє на себе і союзника) +12%", target: "ally" }] },
+        { runes: ["tyr", "yar", "hegl", "hegl"], effects: [{ text: "Здоров'я всіх військ (діє на себе і союзника) +36%", target: "ally" }] }
+      ],
+      cloak: [
+        { runes: ["feo", "ur", "ur", "thorn"], effects: [{ text: "Отримувані ресурси при грабунку монстрів +12%", target: "self" }] },
+        { runes: ["feo", "thorn", "rad", "rad"], effects: [{ text: "Отримувані ресурси при грабунку монстрів +24%", target: "self" }] }
       ]
     };
 
@@ -276,6 +327,12 @@
       );
     }
 
+    function effectLines(combo) {
+      return combo.effects.map(function (item) {
+        return '<div class="combo-effect-line effect-' + item.target + '">' + item.text + '</div>';
+      }).join("");
+    }
+
     function showCombos(slotName, combos) {
       title.textContent = "Комбінації рун — " + slotName;
 
@@ -290,7 +347,7 @@
           '<article class="combo-card" data-combo="' + index + '" role="button" tabindex="0">' +
             '<div class="combo-num">' + (index + 1) + '</div>' +
             '<div class="combo-runes">' + icons + '</div>' +
-            '<div class="combo-effect">' + combo.effect + '</div>' +
+            '<div class="combo-effect">' + effectLines(combo) + '</div>' +
           '</article>'
         );
       }).join("");
