@@ -264,8 +264,8 @@
 
     const SLOT_COMBOS = {
       0: [
-        { runes: ["feo", "ur", "thorn"], effects: [{ text: "Жах 12%", target: "enemy" }] },
-        { runes: ["rad", "gifu"], effects: [{ text: "Жах 24%", target: "enemy" }] },
+        { runes: ["feo", "ur", "thorn"], effects: [{ text: "Жах 12%", target: "self" }] },
+        { runes: ["rad", "gifu"], effects: [{ text: "Жах 24%", target: "self" }] },
         { runes: ["ur", "thorn"], effects: [{ text: "+700 науки на годину", target: "self" }] },
         { runes: ["thorn", "thorn", "thorn"], effects: [{ text: "+1200 науки на годину", target: "self" }] },
         { runes: ["thorn", "rad", "tyr", "gifu"], effects: [{ text: "+2400 науки на годину", target: "self" }] },
@@ -283,9 +283,9 @@
         { runes: ["io", "tyr"], effects: [{ text: "Регенерація мани героя +360 / год", target: "self" }] }
       ],
       ring: [
-        { runes: ["feo", "ur"], effects: [{ text: "Шанс провалу ворожого закляття 18%", target: "enemy" }] },
-        { runes: ["feo", "feo", "feo", "tyr"], effects: [{ text: "Шанс провалу ворожого закляття 36%", target: "enemy" }] },
-        { runes: ["io", "yar"], effects: [{ text: "Шанс провалу ворожого закляття 54%", target: "enemy" }] }
+        { runes: ["feo", "ur"], effects: [{ text: "Шанс провалу ворожого закляття 18%", target: "self" }] },
+        { runes: ["feo", "feo", "feo", "tyr"], effects: [{ text: "Шанс провалу ворожого закляття 36%", target: "self" }] },
+        { runes: ["io", "yar"], effects: [{ text: "Шанс провалу ворожого закляття 54%", target: "self" }] }
       ],
       armor: [
         { runes: ["ur", "ur", "thorn"], effects: [{ text: "Здоров'я всіх військ (діє на противника) -12%", target: "enemy" }] },
@@ -306,8 +306,8 @@
         { runes: ["feo", "feo", "feo", "ur"], effects: [{ text: "Атака всіх військ +18%", target: "self" }] },
         { runes: ["feo", "io", "rad"], effects: [{ text: "Атака всіх військ +36%", target: "self" }] },
         { runes: ["thorn", "thorn", "tyr", "yar"], effects: [{ text: "Атака всіх військ +54%", target: "self" }] },
-        { runes: ["feo", "feo", "ur", "ur"], effects: [{ text: "Шанс пошкодити кожну будівлю +30%", target: "enemy" }] },
-        { runes: ["feo", "ur", "thorn", "io"], effects: [{ text: "Шанс пошкодити кожну будівлю +60%", target: "enemy" }] }
+        { runes: ["feo", "feo", "ur", "ur"], effects: [{ text: "Шанс пошкодити кожну будівлю +30%", target: "self" }] },
+        { runes: ["feo", "ur", "thorn", "io"], effects: [{ text: "Шанс пошкодити кожну будівлю +60%", target: "self" }] }
       ],
       shield: [
         { runes: ["feo", "ur", "ur"], effects: [{ text: "Захист усіх військ +12", target: "self" }] },
@@ -352,7 +352,7 @@
       ],
       ring: [
         { runes: ["gifu", "yar"], effects: [
-          { text: "Шанс провалу ворожого закляття +60%", target: "enemy" },
+          { text: "Шанс провалу ворожого закляття +60%", target: "self" },
           { text: "Атака магічним вежам +12%", target: "self" }
         ] }
       ],
