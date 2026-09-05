@@ -10,16 +10,20 @@
   }
 
   #calk {
-    width: 1280px;
-    max-width: 100%;
-    margin: 16px auto 40px;
-    box-sizing: border-box;
+    width: 100%;
+    margin: 16px 0 40px;
   }
 
   #volnu,
   #main_mlgame_div,
-  .type_server {
-    margin-left: 32px;
+  .type_server,
+  #setting_razshet,
+  #rez_faiting {
+    width: 750px;
+    max-width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
   }
   
   /*  .reclama{
