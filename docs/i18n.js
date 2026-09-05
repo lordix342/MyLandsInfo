@@ -525,16 +525,6 @@
       renegade[i].textContent = t("calc.renegade");
     }
 
-    var groups = document.querySelectorAll("optgroup[label]");
-    for (i = 0; i < groups.length; i++) {
-      groups[i].label = t("calc.faction");
-      var opts = groups[i].querySelectorAll("option");
-      var keys = ["calc.knights", "calc.lightElves", "calc.demons", "calc.darkElves", "calc.monsters", "calc.undead", "calc.mage"];
-      for (var o = 0; o < opts.length && o < keys.length; o++) {
-        opts[o].textContent = t(keys[o]);
-      }
-    }
-
     var serverBox = document.querySelector(".type_server");
     if (serverBox) {
       for (n = 0; n < serverBox.childNodes.length; n++) {
@@ -562,11 +552,6 @@
     var saveId = document.getElementById("save_id");
     if (saveId) {
       saveId.setAttribute("placeholder", t("calc.savePlaceholder"));
-    }
-
-    var randomOpt = document.querySelector("#type_doing option[value='6']");
-    if (randomOpt) {
-      randomOpt.textContent = t("calc.randomDmg");
     }
   }
 

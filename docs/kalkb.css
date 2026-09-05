@@ -2,9 +2,6 @@
     font-family: "Calibri Light", Times, serif;
     background: #f4e0b6;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   
   html {
@@ -13,16 +10,13 @@
   }
 
   #calk {
-    display: table;
-    width: max-content;
-    max-width: 100%;
     margin: 16px auto 40px;
   }
 
   #volnu,
   #main_mlgame_div,
   .type_server {
-    margin-left: 0 !important;
+    margin-left: 32px;
   }
   
   /*  .reclama{

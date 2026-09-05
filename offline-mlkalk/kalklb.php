@@ -7,8 +7,8 @@
   <meta name="keywords" content="" />
 
   <title>...</title>
-  <link rel="stylesheet" href="kalkb.css?505">
-  <script type="text/javascript" src="i18n.js"></script>
+  <link rel="stylesheet" href="kalkb.css?506">
+  <script type="text/javascript" src="i18n.js?2"></script>
   <script type="text/javascript" src="db20.js?501"></script>
   <script type="text/javascript" src="js20.js?502"></script>
   <script type="text/javascript" src="jquery.js"></script>
