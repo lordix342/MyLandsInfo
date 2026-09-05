@@ -10,7 +10,10 @@
   }
 
   #calk {
+    width: 1280px;
+    max-width: 100%;
     margin: 16px auto 40px;
+    box-sizing: border-box;
   }
 
   #volnu,
