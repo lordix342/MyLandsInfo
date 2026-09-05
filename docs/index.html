@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyLands Offline Tools</title>
+  <title data-i18n="meta.title">MyLands Info</title>
   <style>
     :root {
       color-scheme: light;
@@ -48,27 +48,52 @@
       width: 100%;
       height: 100%;
       border: 0;
-      background: #fff;
+      background: #f4e0b6;
+    }
+    .lang-switch {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+    }
+    .lang-btn {
+      border: 1px solid #b38f50;
+      background: #fff4de;
+      color: #2f2413;
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      min-width: 44px;
+    }
+    .lang-btn.is-active {
+      background: #b38f50;
+      color: #fff;
     }
   </style>
+  <script src="./i18n.js"></script>
 </head>
 <body>
   <div class="topbar">
-    <button class="tab-btn active" data-target="quests">Квести</button>
-    <button class="tab-btn" data-target="battle">Калькулятор битв</button>
-    <button class="tab-btn" data-target="runes">Руни</button>
+    <button class="tab-btn active" data-target="quests" data-i18n="tab.quests">Квести</button>
+    <button class="tab-btn" data-target="battle" data-i18n="tab.battle">Калькулятор битв</button>
+    <button class="tab-btn" data-target="runes" data-i18n="tab.runes">Руни</button>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en" title="English">EN</button>
+      <button type="button" class="lang-btn" data-lang="uk" title="Українська">УК</button>
+      <button type="button" class="lang-btn" data-lang="ru" title="Русский">RU</button>
+    </div>
   </div>
 
   <section id="quests" class="panel active">
-    <iframe src="./qes.html" title="Quests"></iframe>
+    <iframe src="./qes.html" data-i18n-title="iframe.quests" title="Quests"></iframe>
   </section>
 
   <section id="battle" class="panel">
-    <iframe src="./kalklb.html?v304" title="Battle Calculator"></iframe>
+    <iframe src="./kalklb.html?v306" data-i18n-title="iframe.battle" title="Battle Calculator"></iframe>
   </section>
 
   <section id="runes" class="panel">
-    <iframe src="./runes.html" title="Runes"></iframe>
+    <iframe src="./runes.html" data-i18n-title="iframe.runes" title="Runes"></iframe>
   </section>
 
   <script>
@@ -84,6 +109,14 @@
 
         button.classList.add("active");
         document.getElementById(target).classList.add("active");
+      });
+    });
+
+    document.querySelectorAll("iframe").forEach((frame) => {
+      frame.addEventListener("load", () => {
+        if (window.MLI18N) {
+          frame.contentWindow.postMessage({ type: "mylands-lang", lang: MLI18N.lang }, "*");
+        }
       });
     });
   </script>

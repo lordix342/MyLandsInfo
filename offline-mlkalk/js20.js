@@ -17406,14 +17406,14 @@ if (xilu[6] > 0) {
         }
         //ставим надписе о победе проиграше
         if (unitu[0].win) {
-            $('.atk_title').html("победил");
-            $('.def_title').html("проиграл");
+            $('.atk_title').html(window.MLI18N ? MLI18N.t("calc.won") : "победил");
+            $('.def_title').html(window.MLI18N ? MLI18N.t("calc.lost") : "проиграл");
             $('.atac_fatal, #maraderstvo .fon_green').hide();
             $('.zash_fatal').show();
         }
         else {
-            $('.atk_title').html("проиграл");
-            $('.def_title').html("победил");
+            $('.atk_title').html(window.MLI18N ? MLI18N.t("calc.lost") : "проиграл");
+            $('.def_title').html(window.MLI18N ? MLI18N.t("calc.won") : "победил");
             $('.atac_fatal').show();
             $('.zash_fatal, #maraderstvo .fon_red').hide();
         }

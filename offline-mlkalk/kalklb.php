@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -7,9 +7,10 @@
   <meta name="keywords" content="" />
 
   <title>...</title>
-  <link rel="stylesheet" href="kalkb.css?503">
+  <link rel="stylesheet" href="kalkb.css?505">
+  <script type="text/javascript" src="i18n.js"></script>
   <script type="text/javascript" src="db20.js?501"></script>
-  <script type="text/javascript" src="js20.js?501"></script>
+  <script type="text/javascript" src="js20.js?502"></script>
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="json.js"></script>
   <script type="text/javascript" src="custom_set_overrides.js"></script>
@@ -38,12 +39,6 @@
 </form><div id='load_image'><img src='image/_first.jpg' alt='' /><img src='image/_big.jpg' alt='' /></div>    
 
 
-<div id='info_calck'>
-  Калькулятор Обновляет игрок сервера Молкар - bbv2008 <a
-    href="/wps/ver_info/" target="_blank">ОПИСАНИЕ
-    ИЗМЕНЕНИЙ</a>
-</div>
-<br><br><br>
 <div id="volnu" style="margin-left: 32px;"> 
     <b>Волны</b> <button class="cursor button_nw" id='b1'>1</button><button class="cursor button_nw" id='b2'>2</button><button class="cursor button_nw" id='b3'>3</button>
     <br>
@@ -68477,24 +68472,6 @@ onClick="heroes[5].update_hero_image(5,4,0,5)" title="для выбора гер
       });
     });
   </script>
-
-<div class="reclama">
-
-
-
-  </div>
-<br>
-  <center>
-<font size="3" color="red"><b>Игра "Последний Мир Эпоха Королей" - Новый проект от bbv2008! </b> <br>
-Уважаемые игроки, я написал свою игру (стратегию), связанную с развитием замков, <b>буду рад видеть Вас!<br>
-<a href="/login.php">Игра Последний Мир Эпоха Королей</a>
-
-<br>
-<br><br>
-
-</font>
-
-</center>
 
 
 </body>

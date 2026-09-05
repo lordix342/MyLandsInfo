@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Руни</title>
+  <title data-i18n="tab.runes">Руни</title>
+  <script src="i18n.js"></script>
   <style>
     :root {
       --parchment: #f4e0b6;
@@ -217,31 +218,31 @@
 <body>
   <div class="page">
     <section class="hero-pane">
-      <h1 class="pane-title">Герой</h1>
+      <h1 class="pane-title" data-i18n="runes.hero">Герой</h1>
       <div class="fon_hero" id="hero-paperdoll">
-        <button type="button" class="shmotka shmotka-0" data-slot="0" title="Шолом" aria-label="Шолом"></button>
-        <button type="button" class="shmotka shmotka-1" data-slot="necklace" title="Намисто" aria-label="Намисто"></button>
-        <button type="button" class="shmotka shmotka-3" data-slot="weapon" title="Зброя" aria-label="Зброя"></button>
-        <button type="button" class="shmotka shmotka-4" data-slot="armor" title="Броня" aria-label="Броня"></button>
-        <button type="button" class="shmotka shmotka-8" data-slot="shield" title="Щит" aria-label="Щит"></button>
-        <button type="button" class="shmotka shmotka-2" data-slot="ring" title="Кільце" aria-label="Кільце"></button>
-        <button type="button" class="shmotka shmotka-5" data-slot="belt" title="Пояс" aria-label="Пояс"></button>
-        <button type="button" class="shmotka shmotka-6" data-slot="boots" title="Черевики" aria-label="Черевики"></button>
-        <button type="button" class="shmotka shmotka-11" data-slot="cloak" title="Плащ" aria-label="Плащ"></button>
-        <button type="button" class="shmotka shmotka-9" data-slot="bracers" title="Наручі" aria-label="Наручі"></button>
-        <button type="button" class="shmotka shmotka-10" data-slot="greaves" title="Поножі" aria-label="Поножі"></button>
-        <button type="button" class="shmotka shmotka-7" data-slot="backpack" title="Заплечна сумка" aria-label="Заплечна сумка"></button>
+        <button type="button" class="shmotka shmotka-0" data-slot="0" data-i18n-title="slot.helmet" title="Шолом" aria-label="Шолом"></button>
+        <button type="button" class="shmotka shmotka-1" data-slot="necklace" data-i18n-title="slot.necklace" title="Намисто" aria-label="Намисто"></button>
+        <button type="button" class="shmotka shmotka-3" data-slot="weapon" data-i18n-title="slot.weapon" title="Зброя" aria-label="Зброя"></button>
+        <button type="button" class="shmotka shmotka-4" data-slot="armor" data-i18n-title="slot.armor" title="Броня" aria-label="Броня"></button>
+        <button type="button" class="shmotka shmotka-8" data-slot="shield" data-i18n-title="slot.shield" title="Щит" aria-label="Щит"></button>
+        <button type="button" class="shmotka shmotka-2" data-slot="ring" data-i18n-title="slot.ring" title="Кільце" aria-label="Кільце"></button>
+        <button type="button" class="shmotka shmotka-5" data-slot="belt" data-i18n-title="slot.belt" title="Пояс" aria-label="Пояс"></button>
+        <button type="button" class="shmotka shmotka-6" data-slot="boots" data-i18n-title="slot.boots" title="Черевики" aria-label="Черевики"></button>
+        <button type="button" class="shmotka shmotka-11" data-slot="cloak" data-i18n-title="slot.cloak" title="Плащ" aria-label="Плащ"></button>
+        <button type="button" class="shmotka shmotka-9" data-slot="bracers" data-i18n-title="slot.bracers" title="Наручі" aria-label="Наручі"></button>
+        <button type="button" class="shmotka shmotka-10" data-slot="greaves" data-i18n-title="slot.greaves" title="Поножі" aria-label="Поножі"></button>
+        <button type="button" class="shmotka shmotka-7" data-slot="backpack" data-i18n-title="slot.backpack" title="Заплечна сумка" aria-label="Заплечна сумка"></button>
       </div>
     </section>
 
     <section class="rune-pane">
-      <h1 class="pane-title" id="rune-title">Комбінації рун</h1>
-      <div class="rune-mode" role="tablist" aria-label="Тип рун">
-        <button type="button" class="mode-btn is-active" data-mode="normal">Звичайні</button>
-        <button type="button" class="mode-btn" data-mode="ancient">Античні</button>
+      <h1 class="pane-title" id="rune-title" data-i18n="runes.title">Комбінації рун</h1>
+      <div class="rune-mode" role="tablist" data-i18n-title="runes.type" aria-label="Тип рун">
+        <button type="button" class="mode-btn is-active" data-mode="normal" data-i18n="runes.regular">Звичайні</button>
+        <button type="button" class="mode-btn" data-mode="ancient" data-i18n="runes.ancient">Античні</button>
       </div>
       <div id="rune-content">
-        <p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>
+        <p class="rune-placeholder" data-i18n="runes.pickSlot">Оберіть слот зліва, щоб побачити комбінації рун.</p>
       </div>
     </section>
   </div>
@@ -418,16 +419,42 @@
     const content = document.getElementById("rune-content");
     let runeMode = "normal";
     let activeSlot = null;
+    const SLOT_I18N = {
+      "0": "slot.helmet",
+      necklace: "slot.necklace",
+      weapon: "slot.weapon",
+      armor: "slot.armor",
+      shield: "slot.shield",
+      ring: "slot.ring",
+      belt: "slot.belt",
+      boots: "slot.boots",
+      cloak: "slot.cloak",
+      bracers: "slot.bracers",
+      greaves: "slot.greaves",
+      backpack: "slot.backpack"
+    };
+
+    function t(key) {
+      return window.MLI18N ? MLI18N.t(key) : key;
+    }
+
+    function tEffect(text) {
+      return window.MLI18N ? MLI18N.tEffect(text) : text;
+    }
+
+    function slotName(slot) {
+      return t(SLOT_I18N[slot.dataset.slot] || slot.dataset.slot);
+    }
 
     function showEmpty() {
-      title.textContent = runeMode === "ancient" ? "Комбінації античних рун" : "Комбінації рун";
-      content.innerHTML = '<p class="rune-placeholder">Оберіть слот зліва, щоб побачити комбінації рун.</p>';
+      title.textContent = t(runeMode === "ancient" ? "runes.titleAncient" : "runes.title");
+      content.innerHTML = '<p class="rune-placeholder">' + t("runes.pickSlot") + "</p>";
     }
 
     function runeImg(key) {
       const rune = RUNES[key];
       const file = runeMode === "ancient" ? rune.ancientId : rune.id;
-      const label = (runeMode === "ancient" ? "Антична " : "") + rune.name;
+      const label = (runeMode === "ancient" ? t("runes.ancientPrefix") : "") + rune.name;
       return (
         '<img class="combo-rune" src="' + RUNE_ICON + file + '.png" alt="' + label + '" title="' + label + '">'
       );
@@ -435,7 +462,7 @@
 
     function effectLines(combo) {
       return combo.effects.map(function (item) {
-        return '<div class="combo-effect-line effect-' + item.target + '">' + item.text + '</div>';
+        return '<div class="combo-effect-line effect-' + item.target + '">' + tEffect(item.text) + '</div>';
       }).join("");
     }
 
@@ -443,20 +470,11 @@
       return runeMode === "ancient" ? ANCIENT_COMBOS[slotId] : SLOT_COMBOS[slotId];
     }
 
-    function refreshActiveSlot() {
-      if (!activeSlot) {
-        showEmpty();
-        return;
-      }
-
-      showCombos(activeSlot.title, currentCombos(activeSlot.dataset.slot));
-    }
-
-    function showCombos(slotName, combos) {
-      title.textContent = (runeMode === "ancient" ? "Комбінації античних рун — " : "Комбінації рун — ") + slotName;
+    function showCombos(name, combos) {
+      title.textContent = t(runeMode === "ancient" ? "runes.titleAncientSlot" : "runes.titleSlot") + name;
 
       if (!combos || !combos.length) {
-        content.innerHTML = '<p class="rune-placeholder">Комбінації для цього слота з’являться пізніше.</p>';
+        content.innerHTML = '<p class="rune-placeholder">' + t("runes.later") + "</p>";
         return;
       }
 
@@ -511,7 +529,7 @@
 
         slot.classList.add("is-active");
         activeSlot = slot;
-        showCombos(slot.title, currentCombos(slot.dataset.slot));
+        showCombos(slotName(slot), currentCombos(slot.dataset.slot));
       });
     });
 
@@ -522,6 +540,19 @@
         refreshActiveSlot();
       });
     });
+
+    function refreshActiveSlot() {
+      if (!activeSlot) {
+        showEmpty();
+        return;
+      }
+
+      showCombos(slotName(activeSlot), currentCombos(activeSlot.dataset.slot));
+    }
+
+    if (window.MLI18N) {
+      MLI18N.onChange = refreshActiveSlot;
+    }
   </script>
 </body>
 </html>
