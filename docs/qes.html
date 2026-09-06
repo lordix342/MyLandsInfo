@@ -39,7 +39,7 @@
 					﻿<style>
 
 .gamefont {font: normal 10px Verdana;}
-.quest {display: inline-block; flex: 1 1 auto; min-width: 0; width: auto !important; font: normal 12px Verdana; background-color: #fde5a6; outline: 1px solid #C5C7C5;}
+.quest {display: block; flex: 1 1 auto; min-width: 0; font: normal 12px Verdana; background-color: #fde5a6; outline: 1px solid #C5C7C5;}
 .quest_header {display: block; width: 100%; height: 30px; line-height: 30px; vertical-align: middle; cursor: pointer;}
 .quest_header_title {float: left; padding-left: 5px;}
 .quest_header_server {float: right; margin: 3px 5px 0 0; display: inline-block;}
@@ -61,8 +61,11 @@
 .quest-group-holder {display: none; width: 100%; margin-bottom: 10px;}
 .quest-group-title {display: block; width: 100%; text-align: right; margin-bottom: 10px;}
 .quest-group-title A {color: #888; font-style: italic; text-decoration: underline;}
-.quest-holder {display: flex; flex-wrap: nowrap; align-items: flex-start; width: 100%; vertical-align: top; margin-bottom: 10px;}
+.quest-holder {display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; vertical-align: top; margin-bottom: 10px;}
 .quest-holder > a[name] {position: absolute; width: 0; height: 0; overflow: hidden;}
+.quest-holder > .quest-holder,
+.quest-holder > .quest-children-holder {flex: 1 1 100%; width: 100%;}
+.quest-children-holder {display: block; width: 100%;}
 .quest_pre {flex: 0 0 20px; display: block; width: 20px; height: 30px; vertical-align: top;}
 .quest_pre IMG {display: block; width: 20px; height: 30px; vertical-align: top;}
 
@@ -20984,7 +20987,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 					</span>
 		</div>
-		</div>	
+		</div>
+		</div>
 	
 	
 	<br><br>
@@ -24508,6 +24512,91 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 			</div>
 			</div>
 			</div>
+			</div>
+			</div>
+
+		</div>
+<br><hr>
+			<h3 data-i18n="quests.alchemy6">Алхимия 6</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
+				<br>
+
+			<!--Профсоюз алхимиков-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY6_UNION"><a name="ALCHEMY6_UNION"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BUFF_SCIENCE_BOOST ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='-7500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_in_progress.png" title="Этот квест выполняется как за ЧЖ, так и без ЧЖ"></span>
+						<span class='quest_header_title'>Профсоюз алхимиков!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/alchimia.png' /></span>
+							Владыка! Наши ученые умы день и ночь трудятся в лабораториях, поэтому они требуют повысить вознаграждение за свои старания! В былые времена острый топор или прочная веревочная петля быстро решили бы вопрос, но, учитывая Ваше снисхождение, мы достойно вознаградим трудящихся.
+							<br><br>
+							<b>Задача:</b>
+							Заплатить 7500 ЧЖ трудовому коллективу алхимиков за ускоренное изучение науки "Алхимия 6"
+							<br><br>
+							<b>Подсказка:</b>
+							Заплатив ЧЖ за этот квест, Вы изучите науку "Алхимия 6". Если Вы изучите науку "Алхимия 6" каким-либо другим способом до того, как истечет время таймера, квест просто будет засчитан как выполненный.
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 7500 ЧЖ</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Мгновенное изучение науки Алхимия-6</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Новый предел совершенства-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY6_PERFECTION"><a name="ALCHEMY6_PERFECTION"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Новый предел совершенства!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+						<span class="quest_header_progress">0 / 6</span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/alchimia.png' /></span>
+							Ваше Сиятельство! Наши алхимики утверждают, что нашли способ улучшить наши совершенные здания до монументального уровня. Для этого понадобится огромное количество ресурсов, но, кроме того, новые виды кристаллов – шедевральные. По слухам, с появлением новой расы Химер в агрессивных руинах стали встречаться эти новые кристаллы, и теперь стало понятно где их можно использовать. Необходимо бросить все научные силы нашего королевства на изучение новых кристаллов!
+							<br><br>
+							<b>Задача:</b>
+							Изучите науку "Алхимия 6"
+							<br><br>
+							<b>Подсказка:</b>
+							Изучив науку "Алхимия 6" Вы сможете грабить шедевральные кристаллы в агрессивных руинах и улучшать здания до монументального уровня.
+						</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
 
 		</div>
 <br><hr>

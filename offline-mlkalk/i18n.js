@@ -66,6 +66,7 @@
       "quests.dungeons": "Dungeon quest chain",
       "quests.alchemy4": "Alchemy 4",
       "quests.alchemy5": "Alchemy 5",
+      "quests.alchemy6": "Alchemy 6",
       "quests.dragonCloak": "Quest chain — Dragon Cloak",
       "quests.build": "Construction quests",
 
@@ -164,6 +165,7 @@
       "quests.dungeons": "Ланцюжок квестів, пов’язаний із підземеллями",
       "quests.alchemy4": "Алхімія 4",
       "quests.alchemy5": "Алхімія 5",
+      "quests.alchemy6": "Алхімія 6",
       "quests.dragonCloak": "Ланцюжок квестів — «Плащ дракона»",
       "quests.build": "Квести на будівництво",
 
@@ -262,6 +264,7 @@
       "quests.dungeons": "Цепочка квестов, связанная с подземельями",
       "quests.alchemy4": "Алхимия 4",
       "quests.alchemy5": "Алхимия 5",
+      "quests.alchemy6": "Алхимия 6",
       "quests.dragonCloak": "Цепочка квестов — «Плащ дракона»",
       "quests.build": "Квесты на строительство",
 
