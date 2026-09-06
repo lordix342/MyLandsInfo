@@ -38,6 +38,9 @@
       "slot.backpack": "Backpack",
 
       "quests.showAll": "Show all quests",
+      "quests.hideAll": "Hide all quests",
+      "quests.search": "Search quests by name",
+      "quests.noResults": "No quests found.",
       "quests.show": "Show quests:",
       "quests.day1": "First-day development quests",
       "quests.early": "Early development quests",
@@ -62,6 +65,7 @@
       "quests.fiveRunes": "Chain added with 5-rune words",
       "quests.dungeons": "Dungeon quest chain",
       "quests.alchemy4": "Alchemy 4",
+      "quests.alchemy5": "Alchemy 5",
       "quests.dragonCloak": "Quest chain — Dragon Cloak",
       "quests.build": "Construction quests",
 
@@ -132,6 +136,9 @@
       "slot.backpack": "Заплечна сумка",
 
       "quests.showAll": "Показати всі квести",
+      "quests.hideAll": "Приховати всі квести",
+      "quests.search": "Пошук квестів за назвою",
+      "quests.noResults": "Квестів не знайдено.",
       "quests.show": "Показати квести:",
       "quests.day1": "Квести першого дня розвитку",
       "quests.early": "Квести раннього рівня розвитку",
@@ -156,6 +163,7 @@
       "quests.fiveRunes": "Ланцюжок, доданий разом із рунними словами з 5 рун",
       "quests.dungeons": "Ланцюжок квестів, пов’язаний із підземеллями",
       "quests.alchemy4": "Алхімія 4",
+      "quests.alchemy5": "Алхімія 5",
       "quests.dragonCloak": "Ланцюжок квестів — «Плащ дракона»",
       "quests.build": "Квести на будівництво",
 
@@ -226,6 +234,9 @@
       "slot.backpack": "Заплечная сумка",
 
       "quests.showAll": "Отобразить все квесты",
+      "quests.hideAll": "Скрыть все квесты",
+      "quests.search": "Поиск квестов по названию",
+      "quests.noResults": "Квесты не найдены.",
       "quests.show": "Отобразить квесты:",
       "quests.day1": "Квесты первого дня развития",
       "quests.early": "Квесты раннего уровня развития",
@@ -250,6 +261,7 @@
       "quests.fiveRunes": "Цепочка, добавленная в игру вместе с рунными словами из 5 рун",
       "quests.dungeons": "Цепочка квестов, связанная с подземельями",
       "quests.alchemy4": "Алхимия 4",
+      "quests.alchemy5": "Алхимия 5",
       "quests.dragonCloak": "Цепочка квестов — «Плащ дракона»",
       "quests.build": "Квесты на строительство",
 
