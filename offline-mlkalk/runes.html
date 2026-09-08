@@ -123,8 +123,9 @@
 
     .fon_hero {
       position: relative;
+      flex: 0 0 auto;
       width: 200px;
-      height: 324px;
+      height: 360px;
       margin: 0 auto;
       background: url("image/_big2.jpg?410") no-repeat;
       background-position: -664px 0;
@@ -1220,8 +1221,8 @@
       const data = collectTotals();
       const runeItems = [];
 
-      RUNE_KEYS.forEach(function (key) {
-        ["normal", "ancient"].forEach(function (mode) {
+      ["normal", "ancient"].forEach(function (mode) {
+        RUNE_KEYS.forEach(function (key) {
           const n = data.runeCounts[key + "|" + mode] || 0;
           if (!n) {
             return;
