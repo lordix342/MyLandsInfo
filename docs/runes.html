@@ -15,6 +15,11 @@
       --frame: #b38f50;
     }
 
+    html,
+    body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -23,11 +28,21 @@
       color: var(--ink);
     }
 
+    .layout {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+    }
+
     .page {
       display: flex;
+      align-items: stretch;
       gap: 20px;
       padding: 16px;
-      min-height: 100vh;
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     .hero-pane,
@@ -44,8 +59,18 @@
 
     .rune-pane {
       flex: 1 1 auto;
-      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
       min-width: 0;
+      min-height: 0;
+      padding: 18px 20px;
+    }
+
+    #rune-content {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .pane-title {
@@ -111,6 +136,37 @@
         0 0 14px rgba(212, 160, 23, 0.95);
     }
 
+    .shmotka.has-runes {
+      background: rgba(17, 12, 6, 0.32);
+    }
+
+    .slot-runes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .slot-rune {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      border-radius: 3px;
+      background: rgba(0, 0, 0, 0.55);
+      box-shadow: 0 0 0 1px rgba(244, 210, 122, 0.4);
+    }
+
+    .slot-rune.pos-0 { top: 1px; left: 1px; }
+    .slot-rune.pos-1 { top: 1px; right: 1px; }
+    .slot-rune.pos-2 { bottom: 1px; right: 1px; }
+    .slot-rune.pos-3 { bottom: 1px; left: 1px; }
+    .slot-rune.pos-4 {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
     /* Same slot map as the battle calculator paperdoll */
     .shmotka-0  { top: 6px;   left: 75px; }
     .shmotka-1  { top: 49px;  left: 5px; }
@@ -130,6 +186,115 @@
       line-height: 1.5;
     }
 
+    .rune-builder[hidden] {
+      display: none;
+    }
+
+    .rune-builder {
+      flex: 0 0 auto;
+      margin: 0 0 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--frame);
+    }
+
+    .builder-title {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .rune-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .palette-rune {
+      box-sizing: border-box;
+      width: 52px;
+      height: 52px;
+      padding: 2px;
+      border: 1px solid var(--frame);
+      border-radius: 8px;
+      background: #111;
+      cursor: pointer;
+    }
+
+    .palette-rune img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .palette-rune:hover:not(:disabled) {
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 0 2px rgba(244, 210, 122, 0.55);
+    }
+
+    .palette-rune:disabled {
+      opacity: 0.38;
+      cursor: default;
+    }
+
+    .rune-draft-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .rune-draft {
+      display: flex;
+      gap: 6px;
+    }
+
+    .draft-rune,
+    .draft-empty {
+      box-sizing: border-box;
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+    }
+
+    .draft-empty {
+      border: 1px dashed #c4a36a;
+      background: rgba(255, 244, 222, 0.45);
+    }
+
+    .draft-rune {
+      padding: 0;
+      border: 1px solid var(--frame);
+      background: #111;
+      cursor: pointer;
+    }
+
+    .draft-rune img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .draft-rune:hover {
+      border-color: #c62828;
+    }
+
+    .draft-clear {
+      border: 1px solid var(--frame);
+      background: #fff4de;
+      color: var(--ink);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .draft-clear[hidden] {
+      display: none;
+    }
+
     .combo-list {
       display: flex;
       flex-direction: column;
@@ -146,18 +311,17 @@
       border-radius: 8px;
       background: #fff4de;
       cursor: pointer;
-      transform-origin: center center;
-      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: opacity 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .combo-list.has-selection .combo-card {
-      transform: scale(0.94);
-      opacity: 0.7;
+      opacity: 0.38;
+      filter: grayscale(0.25);
     }
 
     .combo-list.has-selection .combo-card.is-selected {
-      transform: scale(1.08);
       opacity: 1;
+      filter: none;
       z-index: 1;
       border-color: var(--gold-bright);
       box-shadow:
@@ -213,25 +377,140 @@
     .effect-ally {
       color: #c9a000;
     }
+
+    .rune-bonuses:empty {
+      display: none;
+    }
+
+    .rune-bonuses {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--frame);
+    }
+
+    .rune-bonuses h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .rune-bonus-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+    }
+
+    .rune-bonus-name {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .summary-pane {
+      flex: 0 1 auto;
+      max-height: 34vh;
+      overflow: auto;
+      margin: 0 16px 16px;
+      padding: 12px 16px 14px;
+      border: 1px solid var(--frame);
+      background: var(--panel);
+      border-radius: 10px;
+    }
+
+    .summary-title {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .summary-empty {
+      margin: 0;
+      color: #6b572e;
+    }
+
+    .summary-cols {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .summary-col {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .summary-col h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+    }
+
+    .summary-rune-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .summary-rune {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px 4px 4px;
+      border: 1px solid #d2b57a;
+      border-radius: 8px;
+      background: #fff4de;
+      font-weight: 700;
+    }
+
+    .summary-rune img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      background: #111;
+      border-radius: 4px;
+    }
+
+    .summary-stat {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(179, 143, 80, 0.35);
+    }
+
+    .summary-stat-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .summary-stat-break {
+      margin-top: 2px;
+      font-size: 12px;
+      color: #6b572e;
+      font-weight: 600;
+    }
+
+    @media (max-width: 820px) {
+      .summary-cols {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="layout">
   <div class="page">
     <section class="hero-pane">
       <h1 class="pane-title" data-i18n="runes.hero">Герой</h1>
       <div class="fon_hero" id="hero-paperdoll">
-        <button type="button" class="shmotka shmotka-0" data-slot="0" data-i18n-title="slot.helmet" title="Шолом" aria-label="Шолом"></button>
-        <button type="button" class="shmotka shmotka-1" data-slot="necklace" data-i18n-title="slot.necklace" title="Намисто" aria-label="Намисто"></button>
-        <button type="button" class="shmotka shmotka-3" data-slot="weapon" data-i18n-title="slot.weapon" title="Зброя" aria-label="Зброя"></button>
-        <button type="button" class="shmotka shmotka-4" data-slot="armor" data-i18n-title="slot.armor" title="Броня" aria-label="Броня"></button>
-        <button type="button" class="shmotka shmotka-8" data-slot="shield" data-i18n-title="slot.shield" title="Щит" aria-label="Щит"></button>
-        <button type="button" class="shmotka shmotka-2" data-slot="ring" data-i18n-title="slot.ring" title="Кільце" aria-label="Кільце"></button>
-        <button type="button" class="shmotka shmotka-5" data-slot="belt" data-i18n-title="slot.belt" title="Пояс" aria-label="Пояс"></button>
-        <button type="button" class="shmotka shmotka-6" data-slot="boots" data-i18n-title="slot.boots" title="Черевики" aria-label="Черевики"></button>
-        <button type="button" class="shmotka shmotka-11" data-slot="cloak" data-i18n-title="slot.cloak" title="Плащ" aria-label="Плащ"></button>
-        <button type="button" class="shmotka shmotka-9" data-slot="bracers" data-i18n-title="slot.bracers" title="Наручі" aria-label="Наручі"></button>
-        <button type="button" class="shmotka shmotka-10" data-slot="greaves" data-i18n-title="slot.greaves" title="Поножі" aria-label="Поножі"></button>
-        <button type="button" class="shmotka shmotka-7" data-slot="backpack" data-i18n-title="slot.backpack" title="Заплечна сумка" aria-label="Заплечна сумка"></button>
+        <button type="button" class="shmotka shmotka-0" data-slot="0" data-i18n-title="slot.helmet" title="Шолом" aria-label="Шолом"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-1" data-slot="necklace" data-i18n-title="slot.necklace" title="Намисто" aria-label="Намисто"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-3" data-slot="weapon" data-i18n-title="slot.weapon" title="Зброя" aria-label="Зброя"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-4" data-slot="armor" data-i18n-title="slot.armor" title="Броня" aria-label="Броня"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-8" data-slot="shield" data-i18n-title="slot.shield" title="Щит" aria-label="Щит"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-2" data-slot="ring" data-i18n-title="slot.ring" title="Кільце" aria-label="Кільце"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-5" data-slot="belt" data-i18n-title="slot.belt" title="Пояс" aria-label="Пояс"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-6" data-slot="boots" data-i18n-title="slot.boots" title="Черевики" aria-label="Черевики"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-11" data-slot="cloak" data-i18n-title="slot.cloak" title="Плащ" aria-label="Плащ"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-9" data-slot="bracers" data-i18n-title="slot.bracers" title="Наручі" aria-label="Наручі"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-10" data-slot="greaves" data-i18n-title="slot.greaves" title="Поножі" aria-label="Поножі"><span class="slot-runes" aria-hidden="true"></span></button>
+        <button type="button" class="shmotka shmotka-7" data-slot="backpack" data-i18n-title="slot.backpack" title="Заплечна сумка" aria-label="Заплечна сумка"><span class="slot-runes" aria-hidden="true"></span></button>
       </div>
     </section>
 
@@ -241,10 +520,20 @@
         <button type="button" class="mode-btn is-active" data-mode="normal" data-i18n="runes.regular">Звичайні</button>
         <button type="button" class="mode-btn" data-mode="ancient" data-i18n="runes.ancient">Античні</button>
       </div>
+      <div id="rune-builder" class="rune-builder" hidden>
+        <h2 class="builder-title" data-i18n="runes.build">Створити комбінацію</h2>
+        <div class="rune-palette" id="rune-palette"></div>
+        <div class="rune-draft-row">
+          <div class="rune-draft" id="rune-draft"></div>
+          <button type="button" class="draft-clear" id="rune-draft-clear" hidden data-i18n="runes.clearDraft">Очистити</button>
+        </div>
+      </div>
       <div id="rune-content">
         <p class="rune-placeholder" data-i18n="runes.pickSlot">Оберіть слот зліва, щоб побачити комбінації рун.</p>
       </div>
     </section>
+  </div>
+  <section class="summary-pane" id="rune-summary"></section>
   </div>
 
   <script>
@@ -261,6 +550,7 @@
       yar: { id: "ia", ancientId: "iap", name: "Йар" },
       hegl: { id: "h", ancientId: "hp", name: "Хегль" }
     };
+    const RUNE_KEYS = ["feo", "ur", "thorn", "io", "rad", "tyr", "gifu", "yar", "hegl"];
 
     const SLOT_COMBOS = {
       0: [
@@ -413,12 +703,184 @@
       ]
     };
 
+    const RUNE_SOLO_STATS = {
+      normal: {
+        feo: { stat: "xp_monsters", amount: 25 },
+        ur: { stat: "xp_battle", amount: 10 },
+        thorn: { stat: "defense_monsters", amount: 5 },
+        io: { stat: "defense_all", amount: 3 },
+        rad: { stat: "health_all", amount: 5 },
+        tyr: { stat: "attack_enemy_monsters", amount: -5 },
+        gifu: { stat: "attack_all", amount: 3 },
+        yar: { stat: "mission_duration", amount: -2 },
+        hegl: { stat: "attack_enemy", amount: -3 }
+      },
+      ancient: {
+        feo: { stat: "xp_monsters", amount: 30 },
+        ur: { stat: "xp_battle", amount: 12 },
+        thorn: { stat: "defense_monsters", amount: 6 },
+        io: { stat: "defense_all", amount: 4 },
+        rad: { stat: "health_all", amount: 6 },
+        tyr: { stat: "attack_enemy_monsters", amount: -6 },
+        gifu: { stat: "attack_all", amount: 4 },
+        yar: { stat: "mission_duration", amount: -3 },
+        hegl: { stat: "attack_enemy", amount: -4 }
+      }
+    };
+
+    const EFFECT_STATS = {
+      "Жах 12%": [{ stat: "fear", amount: 12 }],
+      "Жах 24%": [{ stat: "fear", amount: 24 }],
+      "+700 науки на годину": [{ stat: "science", amount: 700 }],
+      "+1200 науки на годину": [{ stat: "science", amount: 1200 }],
+      "+2400 науки на годину": [{ stat: "science", amount: 2400 }],
+      "+1200 максимальної мани": [{ stat: "max_mana", amount: 1200 }],
+      "+3600 максимальної мани": [{ stat: "max_mana", amount: 3600 }],
+      "Атака всіх військ (діє на противника) -7%": [{ stat: "attack_enemy", amount: -7 }],
+      "Атака всіх військ (діє на противника) -12%": [{ stat: "attack_enemy", amount: -12 }],
+      "Атака всіх військ (діє на противника) -18%": [{ stat: "attack_enemy", amount: -18 }],
+      "Регенерація мани героя +120 / год": [{ stat: "mana_regen", amount: 120 }],
+      "Регенерація мани героя +240 / год": [{ stat: "mana_regen", amount: 240 }],
+      "Регенерація мани героя +360 / год": [{ stat: "mana_regen", amount: 360 }],
+      "Регенерація мани героя +250 / год": [{ stat: "mana_regen", amount: 250 }],
+      "Шанс провалу ворожого закляття 18%": [{ stat: "spell_fail", amount: 18 }],
+      "Шанс провалу ворожого закляття 36%": [{ stat: "spell_fail", amount: 36 }],
+      "Шанс провалу ворожого закляття 54%": [{ stat: "spell_fail", amount: 54 }],
+      "Шанс провалу ворожого закляття +60%": [{ stat: "spell_fail", amount: 60 }],
+      "Здоров'я всіх військ (діє на противника) -12%": [{ stat: "health_enemy", amount: -12 }],
+      "Здоров'я всіх військ (діє на противника) -24%": [{ stat: "health_enemy", amount: -24 }],
+      "Здоров'я всіх військ (діє на противника) -36%": [{ stat: "health_enemy", amount: -36 }],
+      "Здоров'я всіх військ +18%": [{ stat: "health_all", amount: 18 }],
+      "Здоров'я всіх військ +36%": [{ stat: "health_all", amount: 36 }],
+      "Здоров'я всіх військ +54%": [{ stat: "health_all", amount: 54 }],
+      "Здоров'я всіх військ (діє на себе) +55%": [{ stat: "health_all", amount: 55 }],
+      "Шанс знайти магічний предмет +120%": [{ stat: "magic_item", amount: 120 }],
+      "Атака всіх військ +18%": [{ stat: "attack_all", amount: 18 }],
+      "Атака всіх військ +36%": [{ stat: "attack_all", amount: 36 }],
+      "Атака всіх військ +54%": [{ stat: "attack_all", amount: 54 }],
+      "Шанс пошкодити кожну будівлю +30%": [{ stat: "building_damage", amount: 30 }],
+      "Шанс пошкодити кожну будівлю +60%": [{ stat: "building_damage", amount: 60 }],
+      "Захист усіх військ +12": [{ stat: "defense_all", amount: 12 }],
+      "Захист усіх військ +24": [{ stat: "defense_all", amount: 24 }],
+      "Захист усіх військ +36": [{ stat: "defense_all", amount: 36 }],
+      "Межа максимального захисту +7": [{ stat: "defense_cap", amount: 7 }],
+      "Межа максимального захисту +12": [{ stat: "defense_cap", amount: 12 }],
+      "Межа максимального захисту +18": [{ stat: "defense_cap", amount: 18 }],
+      "Межа максимального захисту +36": [{ stat: "defense_cap", amount: 36 }],
+      "Атака магічних веж (діє на противника) -7%": [{ stat: "tower_attack_enemy", amount: -7 }],
+      "Атака магічних веж (діє на противника) -12%": [{ stat: "tower_attack_enemy", amount: -12 }],
+      "Вартість відправки місій з військами (жалування всіх військ) -12%": [{ stat: "mission_cost", amount: -12 }],
+      "Вартість відправки місій з військами (жалування всіх військ) -24%": [{ stat: "mission_cost", amount: -24 }],
+      "Вартість відправки місій з військами (жалування всіх військ) -36%": [{ stat: "mission_cost", amount: -36 }],
+      "Вартість відправки місій з військами -12%": [{ stat: "mission_cost", amount: -12 }],
+      "Атака всіх військ (діє на себе і союзника) +18%": [
+        { stat: "attack_all", amount: 18 },
+        { stat: "attack_all_ally", amount: 18 }
+      ],
+      "Здоров'я всіх військ (діє на себе і союзника) +12%": [
+        { stat: "health_all", amount: 12 },
+        { stat: "health_all_ally", amount: 12 }
+      ],
+      "Здоров'я всіх військ (діє на себе і союзника) +36%": [
+        { stat: "health_all", amount: 36 },
+        { stat: "health_all_ally", amount: 36 }
+      ],
+      "Отримувані ресурси при грабунку монстрів +12%": [{ stat: "plunder_monsters", amount: 12 }],
+      "Отримувані ресурси при грабунку монстрів +24%": [{ stat: "plunder_monsters", amount: 24 }],
+      "Максимальна мана +3500": [{ stat: "max_mana", amount: 3500 }],
+      "Параметри науки «Спостереження» +4": [{ stat: "observation", amount: 4 }],
+      "Параметри науки «Шпигунство» +4": [{ stat: "espionage", amount: 4 }],
+      "Атака магічним вежам +12%": [{ stat: "tower_attack", amount: 12 }],
+      "Місткість сумки героя +12": [{ stat: "bag", amount: 12 }],
+      "Вивчення лабораторіями алхіміків +12%": [{ stat: "alchemy", amount: 12 }],
+      "Шанс знайти магічний предмет у руїні +240%": [{ stat: "magic_item_ruin", amount: 240 }],
+      "Отримуваний героєм досвід у бою +240%": [{ stat: "xp_battle", amount: 240 }],
+      "Отримуваний героєм досвід у бою +120%": [{ stat: "xp_battle", amount: 120 }],
+      "Атака всіх військ собі і союзнику +36%": [
+        { stat: "attack_all", amount: 36 },
+        { stat: "attack_all_ally", amount: 36 }
+      ],
+      "Захист усіх військ собі і союзнику +30": [
+        { stat: "defense_all", amount: 30 },
+        { stat: "defense_all_ally", amount: 30 }
+      ],
+      "Тривалість місії загону героя -12%": [{ stat: "mission_duration", amount: -12 }],
+      "Тривалість вхідних атак (діє на противника) +36%": [{ stat: "incoming_attack", amount: 36 }],
+      "Дальність заклять +6": [{ stat: "spell_range", amount: 6 }],
+      "Посилення атаки армії +24%": [{ stat: "army_attack", amount: 24 }],
+      "Атака переслідувачів +36%": [{ stat: "pursuer_attack", amount: 36 }],
+      "Межа максимального захисту собі і союзнику +18": [
+        { stat: "defense_cap", amount: 18 },
+        { stat: "defense_cap_ally", amount: 18 }
+      ],
+      "Отримувані ресурси при грабунку в руїні +48%": [{ stat: "plunder_ruin", amount: 48 }]
+    };
+
+    const STAT_META = {
+      attack_all: { unit: "percent", target: "self" },
+      attack_all_ally: { unit: "percent", target: "ally" },
+      attack_enemy: { unit: "percent", target: "enemy" },
+      attack_enemy_monsters: { unit: "percent", target: "enemy" },
+      army_attack: { unit: "percent", target: "self" },
+      pursuer_attack: { unit: "percent", target: "self" },
+      health_all: { unit: "percent", target: "self" },
+      health_all_ally: { unit: "percent", target: "ally" },
+      health_enemy: { unit: "percent", target: "enemy" },
+      defense_all: { unit: "flat", target: "self" },
+      defense_all_ally: { unit: "flat", target: "ally" },
+      defense_monsters: { unit: "flat", target: "self" },
+      defense_cap: { unit: "flat", target: "self" },
+      defense_cap_ally: { unit: "flat", target: "ally" },
+      fear: { unit: "percent", target: "self" },
+      xp_battle: { unit: "percent", target: "self" },
+      xp_monsters: { unit: "percent", target: "self" },
+      mission_duration: { unit: "percent", target: "self" },
+      mission_cost: { unit: "percent", target: "self" },
+      science: { unit: "perHour", target: "self" },
+      max_mana: { unit: "flat", target: "self" },
+      mana_regen: { unit: "perHour", target: "self" },
+      spell_fail: { unit: "percent", target: "self" },
+      magic_item: { unit: "percent", target: "self" },
+      magic_item_ruin: { unit: "percent", target: "self" },
+      building_damage: { unit: "percent", target: "self" },
+      tower_attack_enemy: { unit: "percent", target: "enemy" },
+      tower_attack: { unit: "percent", target: "self" },
+      plunder_monsters: { unit: "percent", target: "self" },
+      plunder_ruin: { unit: "percent", target: "self" },
+      bag: { unit: "flat", target: "self" },
+      alchemy: { unit: "percent", target: "self" },
+      observation: { unit: "flat", target: "self" },
+      espionage: { unit: "flat", target: "self" },
+      incoming_attack: { unit: "percent", target: "enemy" },
+      spell_range: { unit: "flat", target: "self" }
+    };
+
+    const STAT_ORDER = [
+      "attack_all", "attack_all_ally", "army_attack", "pursuer_attack",
+      "attack_enemy", "attack_enemy_monsters",
+      "health_all", "health_all_ally", "health_enemy",
+      "defense_all", "defense_all_ally", "defense_monsters", "defense_cap", "defense_cap_ally",
+      "fear", "xp_battle", "xp_monsters",
+      "mission_duration", "mission_cost",
+      "science", "max_mana", "mana_regen", "spell_fail", "spell_range",
+      "magic_item", "magic_item_ruin", "building_damage",
+      "tower_attack", "tower_attack_enemy",
+      "plunder_monsters", "plunder_ruin",
+      "bag", "alchemy", "observation", "espionage", "incoming_attack"
+    ];
+
     const slots = document.querySelectorAll(".shmotka");
     const modeButtons = document.querySelectorAll(".mode-btn");
     const title = document.getElementById("rune-title");
     const content = document.getElementById("rune-content");
+    const builder = document.getElementById("rune-builder");
+    const palette = document.getElementById("rune-palette");
+    const draft = document.getElementById("rune-draft");
+    const draftClear = document.getElementById("rune-draft-clear");
+    const summary = document.getElementById("rune-summary");
     let runeMode = "normal";
     let activeSlot = null;
+    const slotSelections = {};
     const SLOT_I18N = {
       "0": "slot.helmet",
       necklace: "slot.necklace",
@@ -433,6 +895,7 @@
       greaves: "slot.greaves",
       backpack: "slot.backpack"
     };
+    const ENEMY_RUNES = { tyr: true, hegl: true };
 
     function t(key) {
       return window.MLI18N ? MLI18N.t(key) : key;
@@ -446,17 +909,55 @@
       return t(SLOT_I18N[slot.dataset.slot] || slot.dataset.slot);
     }
 
+    function runeLabel(key, mode) {
+      return (mode === "ancient" ? t("runes.ancientPrefix") : "") + t("rune." + key);
+    }
+
+    function runeFile(key, mode) {
+      const rune = RUNES[key];
+      return RUNE_ICON + (mode === "ancient" ? rune.ancientId : rune.id) + ".png";
+    }
+
     function showEmpty() {
       title.textContent = t(runeMode === "ancient" ? "runes.titleAncient" : "runes.title");
       content.innerHTML = '<p class="rune-placeholder">' + t("runes.pickSlot") + "</p>";
+      renderBuilder();
+      renderSummary();
+    }
+
+    function runeSignature(runes) {
+      return (runes || []).slice().sort().join(",");
+    }
+
+    function findComboIndex(slotId, mode, runes) {
+      const combos = combosFor(slotId, mode) || [];
+      const sig = runeSignature(runes);
+      if (!sig) {
+        return -1;
+      }
+      for (let i = 0; i < combos.length; i++) {
+        if (runeSignature(combos[i].runes) === sig) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function currentSlotRunes() {
+      if (!activeSlot) {
+        return [];
+      }
+      const sel = slotSelections[activeSlot.dataset.slot];
+      if (!sel || sel.mode !== runeMode) {
+        return [];
+      }
+      return (sel.runes || []).slice();
     }
 
     function runeImg(key) {
-      const rune = RUNES[key];
-      const file = runeMode === "ancient" ? rune.ancientId : rune.id;
-      const label = (runeMode === "ancient" ? t("runes.ancientPrefix") : "") + rune.name;
+      const label = runeLabel(key, runeMode);
       return (
-        '<img class="combo-rune" src="' + RUNE_ICON + file + '.png" alt="' + label + '" title="' + label + '">'
+        '<img class="combo-rune" src="' + runeFile(key, runeMode) + '" alt="' + label + '" title="' + label + '">'
       );
     }
 
@@ -470,11 +971,125 @@
       return runeMode === "ancient" ? ANCIENT_COMBOS[slotId] : SLOT_COMBOS[slotId];
     }
 
+    function combosFor(slotId, mode) {
+      return mode === "ancient" ? ANCIENT_COMBOS[slotId] : SLOT_COMBOS[slotId];
+    }
+
+    function selectedIndexFor(slotId) {
+      const sel = slotSelections[slotId];
+      if (!sel || sel.mode !== runeMode) {
+        return -1;
+      }
+      return sel.index;
+    }
+
+    function renderSlotRunes(slotId) {
+      const slot = document.querySelector('.shmotka[data-slot="' + slotId + '"]');
+      if (!slot) {
+        return;
+      }
+
+      const holder = slot.querySelector(".slot-runes");
+      const sel = slotSelections[slotId];
+      const runes = sel && sel.runes && sel.runes.length ? sel.runes : null;
+
+      if (!holder) {
+        return;
+      }
+
+      if (!runes) {
+        holder.innerHTML = "";
+        slot.classList.remove("has-runes");
+        return;
+      }
+
+      holder.innerHTML = runes.map(function (key, index) {
+        const label = runeLabel(key, sel.mode);
+        return (
+          '<img class="slot-rune pos-' + index + '" src="' + runeFile(key, sel.mode) + '" alt="' + label + '" title="' + label + '">'
+        );
+      }).join("");
+      slot.classList.add("has-runes");
+    }
+
+    function scaleBonusText(text, times) {
+      return text.replace(/([+\-−])(\d+)/, function (_, sign, num) {
+        const value = Number(num) * times;
+        return (sign === "-" || sign === "−" ? "−" : "+") + value;
+      });
+    }
+
+    function soloBonusRows(runes, mode) {
+      const order = [];
+      const count = {};
+
+      runes.forEach(function (key) {
+        if (!count[key]) {
+          order.push(key);
+          count[key] = 0;
+        }
+        count[key] += 1;
+      });
+
+      return order.map(function (key) {
+        const n = count[key];
+        const name = runeLabel(key, mode) + (n > 1 ? " ×" + n : "");
+        const bonusKey = mode === "ancient" ? "runeBonus.ancient." + key : "runeBonus." + key;
+        const target = ENEMY_RUNES[key] ? "enemy" : "self";
+        return (
+          '<div class="rune-bonus-row">' +
+            '<img class="combo-rune" src="' + runeFile(key, mode) + '" alt="' + name + '">' +
+            '<div>' +
+              '<div class="rune-bonus-name">' + name + '</div>' +
+              '<div class="combo-effect-line effect-' + target + '">' + scaleBonusText(t(bonusKey), n) + '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join("");
+    }
+
+    function renderBonusPanel() {
+      const box = document.getElementById("rune-bonuses");
+      if (!box || !activeSlot) {
+        return;
+      }
+
+      const slotId = activeSlot.dataset.slot;
+      const sel = slotSelections[slotId];
+      const runes = sel && sel.mode === runeMode ? sel.runes : null;
+
+      if (!runes || !runes.length) {
+        box.innerHTML = "";
+        return;
+      }
+
+      box.innerHTML = "<h2>" + t("runes.soloBonuses") + "</h2>" + soloBonusRows(runes, sel.mode);
+    }
+
+    function applyListSelection(list, slotId) {
+      const selected = selectedIndexFor(slotId);
+      const sel = slotSelections[slotId];
+      const hasCustom = sel && sel.mode === runeMode && sel.runes && sel.runes.length && selected < 0;
+      list.querySelectorAll(".combo-card").forEach(function (item) {
+        item.classList.toggle("is-selected", Number(item.dataset.combo) === selected);
+      });
+      list.classList.toggle("has-selection", selected >= 0 || hasCustom);
+      if (selected >= 0) {
+        const card = list.querySelector('.combo-card.is-selected');
+        if (card && card.scrollIntoView) {
+          card.scrollIntoView({ block: "nearest" });
+        }
+      }
+      renderBonusPanel();
+    }
+
     function showCombos(name, combos) {
       title.textContent = t(runeMode === "ancient" ? "runes.titleAncientSlot" : "runes.titleSlot") + name;
+      renderBuilder();
 
       if (!combos || !combos.length) {
-        content.innerHTML = '<p class="rune-placeholder">' + t("runes.later") + "</p>";
+        content.innerHTML = '<p class="rune-placeholder">' + t("runes.later") + '</p><div id="rune-bonuses" class="rune-bonuses"></div>';
+        renderBonusPanel();
         return;
       }
 
@@ -489,30 +1104,237 @@
         );
       }).join("");
 
-      content.innerHTML = '<div class="combo-list">' + cards + '</div>';
-      bindComboSelection(content.querySelector(".combo-list"));
+      content.innerHTML = '<div class="combo-list">' + cards + '</div><div id="rune-bonuses" class="rune-bonuses"></div>';
+      const list = content.querySelector(".combo-list");
+      bindComboSelection(list);
+      applyListSelection(list, activeSlot.dataset.slot);
     }
 
     function bindComboSelection(list) {
-      if (!list) {
+      if (!list || !activeSlot) {
         return;
       }
 
-      list.querySelectorAll(".combo-card").forEach((card) => {
-        card.addEventListener("click", () => {
-          const alreadySelected = card.classList.contains("is-selected");
-
-          list.querySelectorAll(".combo-card").forEach((item) => item.classList.remove("is-selected"));
+      list.querySelectorAll(".combo-card").forEach(function (card) {
+        function choose() {
+          const index = Number(card.dataset.combo);
+          const slotId = activeSlot.dataset.slot;
+          const sel = slotSelections[slotId];
+          const alreadySelected = sel && sel.mode === runeMode && sel.index === index;
+          const combo = currentCombos(slotId)[index];
 
           if (alreadySelected) {
-            list.classList.remove("has-selection");
+            setActiveRunes([]);
             return;
           }
 
-          card.classList.add("is-selected");
-          list.classList.add("has-selection");
+          setActiveRunes((combo && combo.runes) || []);
+        }
+
+        card.addEventListener("click", choose);
+        card.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            choose();
+          }
         });
       });
+    }
+
+    function addPart(bucket, stat, amount, part) {
+      if (!bucket[stat]) {
+        bucket[stat] = { combo: 0, solo: 0 };
+      }
+      bucket[stat][part] += amount;
+    }
+
+    function collectTotals() {
+      const runeCounts = {};
+      const totals = {};
+
+      Object.keys(slotSelections).forEach(function (slotId) {
+        const sel = slotSelections[slotId];
+        if (!sel || !sel.runes || !sel.runes.length) {
+          return;
+        }
+
+        sel.runes.forEach(function (key) {
+          const id = key + "|" + sel.mode;
+          runeCounts[id] = (runeCounts[id] || 0) + 1;
+          const solo = RUNE_SOLO_STATS[sel.mode] && RUNE_SOLO_STATS[sel.mode][key];
+          if (solo) {
+            addPart(totals, solo.stat, solo.amount, "solo");
+          }
+        });
+
+        if (sel.index >= 0) {
+          const combos = combosFor(slotId, sel.mode) || [];
+          const combo = combos[sel.index];
+          if (combo && combo.effects) {
+            combo.effects.forEach(function (effect) {
+              const parts = EFFECT_STATS[effect.text] || [];
+              parts.forEach(function (item) {
+                addPart(totals, item.stat, item.amount, "combo");
+              });
+            });
+          }
+        }
+      });
+
+      return { runeCounts: runeCounts, totals: totals };
+    }
+
+    function formatAmount(amount, unit) {
+      const sign = amount > 0 ? "+" : "−";
+      const abs = Math.abs(amount);
+      if (unit === "percent") {
+        return sign + abs + "%";
+      }
+      if (unit === "perHour") {
+        return sign + abs + " / " + t("runes.perHour");
+      }
+      return sign + abs;
+    }
+
+    function renderSummary() {
+      if (!summary) {
+        return;
+      }
+
+      const data = collectTotals();
+      const runeItems = [];
+
+      RUNE_KEYS.forEach(function (key) {
+        ["normal", "ancient"].forEach(function (mode) {
+          const n = data.runeCounts[key + "|" + mode] || 0;
+          if (!n) {
+            return;
+          }
+          const label = runeLabel(key, mode);
+          runeItems.push(
+            '<div class="summary-rune">' +
+              '<img src="' + runeFile(key, mode) + '" alt="' + label + '">' +
+              "<span>" + label + " ×" + n + "</span>" +
+            "</div>"
+          );
+        });
+      });
+
+      const statItems = [];
+      STAT_ORDER.forEach(function (stat) {
+        const row = data.totals[stat];
+        if (!row) {
+          return;
+        }
+        const total = row.combo + row.solo;
+        if (!total) {
+          return;
+        }
+        const meta = STAT_META[stat] || { unit: "flat", target: "self" };
+        let extra = "";
+        if (row.combo && row.solo) {
+          extra =
+            '<div class="summary-stat-break">' +
+              t("runes.fromCombo") + " " + formatAmount(row.combo, meta.unit) +
+              " · " + t("runes.fromSolo") + " " + formatAmount(row.solo, meta.unit) +
+            "</div>";
+        }
+        statItems.push(
+          '<div class="summary-stat">' +
+            '<div class="summary-stat-main">' +
+              '<span class="effect-' + meta.target + '">' + t("stat." + stat) + "</span>" +
+              '<span class="effect-' + meta.target + '">' + formatAmount(total, meta.unit) + "</span>" +
+            "</div>" + extra +
+          "</div>"
+        );
+      });
+
+      if (!runeItems.length) {
+        summary.innerHTML = '<h2 class="summary-title">' + t("runes.summary") + '</h2><p class="summary-empty">' + t("runes.summaryEmpty") + "</p>";
+        return;
+      }
+
+      summary.innerHTML =
+        '<h2 class="summary-title">' + t("runes.summary") + "</h2>" +
+        '<div class="summary-cols">' +
+          '<div class="summary-col">' +
+            "<h3>" + t("runes.summaryRunes") + "</h3>" +
+            '<div class="summary-rune-list">' + runeItems.join("") + "</div>" +
+          "</div>" +
+          '<div class="summary-col">' +
+            "<h3>" + t("runes.summaryBonuses") + "</h3>" +
+            (statItems.length ? statItems.join("") : '<p class="summary-empty">' + t("runes.summaryEmpty") + "</p>") +
+          "</div>" +
+        "</div>";
+    }
+
+    function setActiveRunes(runes) {
+      if (!activeSlot) {
+        return;
+      }
+
+      const slotId = activeSlot.dataset.slot;
+      if (!runes.length) {
+        delete slotSelections[slotId];
+      } else {
+        slotSelections[slotId] = {
+          mode: runeMode,
+          index: findComboIndex(slotId, runeMode, runes),
+          runes: runes.slice()
+        };
+      }
+
+      renderSlotRunes(slotId);
+      renderBuilder();
+      const list = content.querySelector(".combo-list");
+      if (list) {
+        applyListSelection(list, slotId);
+      } else {
+        renderBonusPanel();
+      }
+      renderSummary();
+    }
+
+    function renderBuilder() {
+      if (!builder) {
+        return;
+      }
+
+      if (!activeSlot) {
+        builder.hidden = true;
+        return;
+      }
+
+      builder.hidden = false;
+      const runes = currentSlotRunes();
+      const full = runes.length >= 5;
+
+      palette.innerHTML = RUNE_KEYS.map(function (key) {
+        const label = runeLabel(key, runeMode);
+        return (
+          '<button type="button" class="palette-rune" data-rune="' + key + '"' +
+            (full ? " disabled" : "") +
+            ' title="' + label + '" aria-label="' + label + '">' +
+            '<img src="' + runeFile(key, runeMode) + '" alt="' + label + '">' +
+          "</button>"
+        );
+      }).join("");
+
+      let draftHtml = "";
+      for (let i = 0; i < 5; i++) {
+        const key = runes[i];
+        if (key) {
+          const label = runeLabel(key, runeMode);
+          draftHtml +=
+            '<button type="button" class="draft-rune" data-index="' + i + '" title="' + t("runes.removeRune") + '" aria-label="' + t("runes.removeRune") + '">' +
+              '<img src="' + runeFile(key, runeMode) + '" alt="' + label + '">' +
+            "</button>";
+        } else {
+          draftHtml += '<span class="draft-empty"></span>';
+        }
+      }
+      draft.innerHTML = draftHtml;
+      draftClear.hidden = runes.length === 0;
     }
 
     slots.forEach((slot) => {
@@ -548,11 +1370,41 @@
       }
 
       showCombos(slotName(activeSlot), currentCombos(activeSlot.dataset.slot));
+      renderSummary();
     }
+
+    palette.addEventListener("click", function (event) {
+      const button = event.target.closest("[data-rune]");
+      if (!button || button.disabled || !activeSlot) {
+        return;
+      }
+      const runes = currentSlotRunes();
+      if (runes.length >= 5) {
+        return;
+      }
+      runes.push(button.getAttribute("data-rune"));
+      setActiveRunes(runes);
+    });
+
+    draft.addEventListener("click", function (event) {
+      const button = event.target.closest("[data-index]");
+      if (!button || !activeSlot) {
+        return;
+      }
+      const runes = currentSlotRunes();
+      runes.splice(Number(button.getAttribute("data-index")), 1);
+      setActiveRunes(runes);
+    });
+
+    draftClear.addEventListener("click", function () {
+      setActiveRunes([]);
+    });
 
     if (window.MLI18N) {
       MLI18N.onChange = refreshActiveSlot;
     }
+
+    renderSummary();
   </script>
 </body>
 </html>
