@@ -459,23 +459,16 @@
 
     .summary-rune-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 10px;
-    }
-
-    .summary-rune-group + .summary-rune-group {
-      margin-top: 10px;
-    }
-
-    .summary-rune-group h3 {
-      margin: 0 0 6px;
-      font-size: 13px;
+      overflow-x: auto;
     }
 
     .summary-rune {
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex: 0 0 auto;
       gap: 4px;
       min-width: 56px;
       padding: 6px 8px 8px;
@@ -1229,31 +1222,22 @@
 
     function renderSummary() {
       const data = collectTotals();
-      const runeGroups = [];
+      const runeItems = [];
 
       ["normal", "ancient"].forEach(function (mode) {
-        const items = [];
         RUNE_KEYS.forEach(function (key) {
           const n = data.runeCounts[key + "|" + mode] || 0;
           if (!n) {
             return;
           }
           const label = runeLabel(key, mode);
-          items.push(
+          runeItems.push(
             '<div class="summary-rune" title="' + label + '">' +
               '<img src="' + runeFile(key, mode) + '" alt="' + label + '">' +
               "<span>×" + n + "</span>" +
             "</div>"
           );
         });
-        if (items.length) {
-          runeGroups.push(
-            '<div class="summary-rune-group">' +
-              "<h3>" + t(mode === "ancient" ? "runes.ancient" : "runes.regular") + "</h3>" +
-              '<div class="summary-rune-list">' + items.join("") + "</div>" +
-            "</div>"
-          );
-        }
       });
 
       const statItems = [];
@@ -1286,14 +1270,14 @@
       });
 
       if (summary) {
-        if (!runeGroups.length) {
+        if (!runeItems.length) {
           summary.innerHTML = "";
           summary.hidden = true;
         } else {
           summary.hidden = false;
           summary.innerHTML =
             '<h2 class="summary-title">' + t("runes.summaryRunes") + "</h2>" +
-            runeGroups.join("");
+            '<div class="summary-rune-list">' + runeItems.join("") + "</div>";
         }
       }
 
