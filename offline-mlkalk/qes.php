@@ -6168,7 +6168,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 			<span class='quest_body_bg'>Условия появления:</span>Нет данных
 			<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span><span class='quest_body_reward'> <span class='subspell'><img src='/wp-content/assets/shared/artifacts/1/windrider/footwear.png' /></span> <br></span>
 		</div>
-	</div></div></div><div class='quest-children-holder'></div>
+	</div></div></div><div class='quest-children-holder'></div></div>
 	<br><hr>
 	<h3 data-i18n="quests.crystals">Кристаллы, Стоунхенджи, Руны</h3>
 	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
@@ -18355,7 +18355,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 
     
 
-    </div></div></div></div></div>
+    </div></div></div>
 	<br><hr>
 	<h3 data-i18n="quests.newChains"> Новые цепочки квестов</h3>
 	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
