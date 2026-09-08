@@ -462,6 +462,15 @@
       gap: 10px;
     }
 
+    .summary-rune-group + .summary-rune-group {
+      margin-top: 10px;
+    }
+
+    .summary-rune-group h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+    }
+
     .summary-rune {
       display: flex;
       flex-direction: column;
@@ -1219,22 +1228,31 @@
 
     function renderSummary() {
       const data = collectTotals();
-      const runeItems = [];
+      const runeGroups = [];
 
       ["normal", "ancient"].forEach(function (mode) {
+        const items = [];
         RUNE_KEYS.forEach(function (key) {
           const n = data.runeCounts[key + "|" + mode] || 0;
           if (!n) {
             return;
           }
           const label = runeLabel(key, mode);
-          runeItems.push(
+          items.push(
             '<div class="summary-rune" title="' + label + '">' +
               '<img src="' + runeFile(key, mode) + '" alt="' + label + '">' +
               "<span>×" + n + "</span>" +
             "</div>"
           );
         });
+        if (items.length) {
+          runeGroups.push(
+            '<div class="summary-rune-group">' +
+              "<h3>" + t(mode === "ancient" ? "runes.ancient" : "runes.regular") + "</h3>" +
+              '<div class="summary-rune-list">' + items.join("") + "</div>" +
+            "</div>"
+          );
+        }
       });
 
       const statItems = [];
@@ -1267,14 +1285,14 @@
       });
 
       if (summary) {
-        if (!runeItems.length) {
+        if (!runeGroups.length) {
           summary.innerHTML = "";
           summary.hidden = true;
         } else {
           summary.hidden = false;
           summary.innerHTML =
             '<h2 class="summary-title">' + t("runes.summaryRunes") + "</h2>" +
-            '<div class="summary-rune-list">' + runeItems.join("") + "</div>";
+            runeGroups.join("");
         }
       }
 
