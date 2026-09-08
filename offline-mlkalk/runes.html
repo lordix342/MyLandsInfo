@@ -203,10 +203,20 @@
       font-weight: 700;
     }
 
+    .builder-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px 20px;
+    }
+
     .rune-palette {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      flex: 1 1 200px;
+      min-width: 0;
     }
 
     .palette-rune {
@@ -239,10 +249,11 @@
 
     .rune-draft-row {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
       gap: 10px;
-      margin-top: 10px;
+      flex: 0 0 auto;
+      margin-top: 0;
     }
 
     .rune-draft {
@@ -522,10 +533,12 @@
       </div>
       <div id="rune-builder" class="rune-builder" hidden>
         <h2 class="builder-title" data-i18n="runes.build">Створити комбінацію</h2>
-        <div class="rune-palette" id="rune-palette"></div>
-        <div class="rune-draft-row">
-          <div class="rune-draft" id="rune-draft"></div>
-          <button type="button" class="draft-clear" id="rune-draft-clear" hidden data-i18n="runes.clearDraft">Очистити</button>
+        <div class="builder-row">
+          <div class="rune-palette" id="rune-palette"></div>
+          <div class="rune-draft-row">
+            <div class="rune-draft" id="rune-draft"></div>
+            <button type="button" class="draft-clear" id="rune-draft-clear" hidden data-i18n="runes.clearDraft">Очистити</button>
+          </div>
         </div>
       </div>
       <div id="rune-content">
