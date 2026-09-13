@@ -1,4 +1,4 @@
-﻿//=====================
+//=====================
 //глoбальные переменные
 //=====================
 var skill_ost_mech = [0,0,0,0,0,0,0];
@@ -74,6 +74,51 @@ var ostatkiHP = [
 ];
 
 var $_GET;
+function i18nT(key, fallback, vars) {
+    if (window.MLI18N) {
+        return MLI18N.t(key, vars);
+    }
+    if (vars && fallback) {
+        var s = fallback;
+        for (var k in vars) {
+            if (Object.prototype.hasOwnProperty.call(vars, k)) {
+                s = String(s).split("{" + k + "}").join(String(vars[k]));
+            }
+        }
+        return s;
+    }
+    return fallback != null ? fallback : key;
+}
+function specNameList(kind) {
+    if (kind === "war") {
+        return [
+            i18nT("calc.spec.paladin", "Паладдин"),
+            i18nT("calc.spec.warrior", "Воитель"),
+            i18nT("calc.spec.saboteur", "Диверсант"),
+            i18nT("calc.spec.scout", "Разведчик"),
+            i18nT("calc.spec.peacemaker", "Миротворец"),
+            i18nT("calc.spec.destroyer", "Разрушитель")
+        ];
+    }
+    if (kind === "civil") {
+        return [
+            i18nT("calc.spec.gatherer", "Добытчик"),
+            i18nT("calc.spec.defender", "Защитник"),
+            i18nT("calc.spec.mentor", "Наставник"),
+            i18nT("calc.spec.trader", "Торговец"),
+            i18nT("calc.spec.builder", "Строитель"),
+            ""
+        ];
+    }
+    return [
+        i18nT("calc.spec.healer", "Целител"),
+        i18nT("calc.spec.illusionist", "Иллюзионист"),
+        i18nT("calc.spec.dissipator", "Рассеиватель"),
+        i18nT("calc.spec.necromancer", "Некромант"),
+        i18nT("calc.spec.spellcaster", "Заклинатель"),
+        ""
+    ];
+}
 //клик по заклинанию отступничества
 function no_backs(num) {
     go_back[num] = (go_back[num] == 5 ? 0 : (go_back[num] + 1));
@@ -1325,7 +1370,7 @@ Units.prototype.get_num = function (num, num2) {
     this.qq[num2] = isNaN(this.qq[num2]) ? 0 : this.qq[num2];
     $("#input_" + num + "_" + num2).val(this.qq[num2]);
     if (!ficha_ruinu || this.number == 2 || this.number == 3 || this.number == 4 || this.number == 5) {
-        switch (ficha_ruinu) {
+        switch (ficha_ruinu - 1) {
             case 7: {
                 this.qq[0] = this.qq[0];
                 this.qq[1] = this.qq[1];
@@ -1797,7 +1842,7 @@ Units.prototype.get_num = function (num, num2) {
 //формирование и вставка картинки для поля с героем без гeроя=)
 Units.prototype.no_hero_img = function () {
     if (!this.hero) {
-        $("#hero_" + this.number).removeClass('big_img').addClass('first_img').css({ 'background-position': '-1088px -' + (99 * this.type) + 'px' });
+        $("#hero_" + this.number).removeClass('big_img').addClass('first_img').css({ 'background-position': '-1088px -' + (396 * this.type) + 'px' });
     }
 }
 
@@ -1846,7 +1891,7 @@ Units.prototype.change_type = function (byl) {
         document.getElementById("input_otst_" + this.number).value = 100;
     }
     if (this.number == 2 && heroes[2].class_hero == 3) {
-        if (document.getElementById("type_" + this.number).selectedIndex == 8) {
+        if (document.getElementById("type_" + this.number).selectedIndex == 9) {
             heroes[2].skils[0] = 5;
             heroes[2].skils[1] = 5;
             heroes[2].skils[2] = 5;
@@ -1876,7 +1921,7 @@ Units.prototype.change_type = function (byl) {
             document.getElementById("skils_" + iks + "_" + this.number).innerHTML = "<br/>" + "<br/>" + heroes[2].skils[iks] + "/5";
         }
     }
-    if (this.type > 6) {
+    if (this.type > 7) {
         ficha_ruinu = this.type;
         this.type = 4;
         //скрываем ненужные войска и обнуляем их
@@ -1895,7 +1940,7 @@ Units.prototype.change_type = function (byl) {
         //            $('.raynd_'+km+'_3,.raynd_'+km+'_4,.raynd_'+km+'_5').hide();
         //        }
 
-        switch (ficha_ruinu) {
+        switch (ficha_ruinu - 1) {
             case 7: {
                 this.lvl[0] = 0;
                 this.lvl[1] = 0;
@@ -2602,6 +2647,7 @@ function Heroes(numb) {
     this.dress = Array(12).fill(-1);//одежда [номер одежды, какой комплект]
     this.dress_alximick = Array(12).fill(0);//одежда [номер одежды, какой комплект]
     this.dress_old = Array(12).fill(0);//одежда [номер одежды, какой комплект]
+    this.rynu_ancient = Array(12).fill(0);//древние руны на слоте
     this.rynu =  //[номер шмотки][
         // [фео, ур, торн, ио, рад, тир, гифу, хегль,йар]
         // [ужас, Атака войск противника, Своя атака, Атака маг башен противника, здоровье противника, свое здоровье, защита своих, предел максимальной защиты ]
@@ -2664,6 +2710,12 @@ Heroes.prototype.rewrite = function (old) {
     }
     else {
         this.dress_old = old.dress_old;
+    }
+    if (old.rynu_ancient == undefined) {
+        this.rynu_ancient = Array(12).fill(0);
+    }
+    else {
+        this.rynu_ancient = old.rynu_ancient;
     }
 
     if (old.rynu == undefined) {
@@ -2819,6 +2871,7 @@ Heroes.prototype.cleen = function () {
     this.dress_alximick = Array(12).fill(0);
     this.skils = Array(24).fill(0);
     this.dress_old = Array(12).fill(0);//одежда [номер одежды, какой комплект]
+    this.rynu_ancient = Array(12).fill(0);
 
     this.rynu =  //[номер шмотки][
         // [фео, ур, торн, ио, рад, тир, гифу, хегль,йар]
@@ -2931,11 +2984,13 @@ Heroes.prototype.hero_true = function (byl, num) {
         //картинки скилов
         for (var iks = 0; iks < 24; iks++) {
             this.change_image_skils(num, iks);
+            var skillEl = document.getElementById("skils_" + iks + "_" + num);
+            if (!skillEl) continue;
             if (this.skils[iks]) {
-                document.getElementById("skils_" + iks + "_" + num).innerHTML = "<br/><br/>" + this.skils[iks] + "/5";
+                skillEl.innerHTML = "<br/><br/>" + this.skils[iks] + "/5";
             }
             else {
-                document.getElementById("skils_" + iks + "_" + num).innerHTML = "<div class='black_fon'><br/><br/>0/5</div>";
+                skillEl.innerHTML = "<div class='black_fon'><br/><br/>0/5</div>";
             }
         }
 
@@ -2958,7 +3013,7 @@ Heroes.prototype.hero_true = function (byl, num) {
     else {
         //ставим картинки для героев
         $("#image_hero_" + num).removeClass('big_img').addClass('first_img').css({ 'background-position': '-1088px -693px' });
-        $("#hero_" + num).removeClass('big_img').addClass('first_img').css({ 'background-position': '-1088px -' + (99 * unitu[num].type) + 'px' });
+        $("#hero_" + num).removeClass('big_img').addClass('first_img').css({ 'background-position': '-1088px -' + (396 * unitu[num].type) + 'px' });
 
         //убираем уровень героя
         // document.getElementById('lvl_hero_'+num).value = 0;
@@ -2966,7 +3021,7 @@ Heroes.prototype.hero_true = function (byl, num) {
         //убираем картинки скилов
         for (var iks = 0; iks < 24; iks++) {
             $("#skils_" + iks + "_" + num).css("background-position", "-664px -1782px");
-            //document.getElementById("skils_"+iks+'_'+num).style.background = "url('image/skils.jpg') repeat -0px -828px;";
+            //document.getElementById("skils_"+iks+'_'+num).style.background = "url('img/skils.jpg') repeat -0px -828px;";
 
             if (this.skils[iks]) {
                 document.getElementById("skils_" + iks + "_" + num).innerHTML = "<br/><br/>" + this.skils[iks] + "/5";
@@ -3059,6 +3114,18 @@ Heroes.prototype.click_magick = function (num) {
 
 
 
+
+function hidePasMagick(army, from, to) {
+    var ms;
+    for (ms = from; ms < to; ms++) {
+        var el = document.getElementById("pas_do_magick_" + army + "_" + ms);
+        if (el) el.style.display = "none";
+    }
+}
+
+function pasMagickNode(el) {
+    return el || { style: {}, title: "" };
+}
 
 //вибор героя в диве для выбора героев
 Heroes.prototype.update_hero_image = function (class_hero, profa, m_zh, num) {
@@ -3162,71 +3229,37 @@ Heroes.prototype.update_hero_image = function (class_hero, profa, m_zh, num) {
     var ms;
     switch (class_hero){
         case 0:{
-            for(ms=60;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 60, 200);
             break;
         }
         case 1:{
-
-            for(ms=0;ms<60;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-
-            for(ms=110;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 0, 60);
+            hidePasMagick(this.number, 110, 200);
             break;
         }
         case 2:{
-            for(ms=0;ms<110;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-            for(ms=160;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 0, 110);
+            hidePasMagick(this.number, 160, 200);
             break;
         }
         case 3:{
-            for(ms=0;ms<160;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-            for(ms=170;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-
+            hidePasMagick(this.number, 0, 160);
+            hidePasMagick(this.number, 170, 200);
             break;
         }
-        case 4:{
-            for(ms=0;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-            break;
-        }
+        case 4:
         case 5:{
-            for(ms=0;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 0, 200);
             break;
         }
         case 6:{
-
-            for(ms=0;ms<60;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-
-            for(ms=110;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 0, 60);
+            hidePasMagick(this.number, 110, 200);
             break;
         }
         case 7:{
-            for(ms=0;ms<110;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
-            for(ms=160;ms<200;ms++){
-                document.getElementById("pas_do_magick_"+this.number+"_"+ms).style.display = 'none';
-            }
+            hidePasMagick(this.number, 0, 110);
+            hidePasMagick(this.number, 160, 200);
             break;
         }
     }
@@ -3257,9 +3290,11 @@ Heroes.prototype.update_hero_image = function (class_hero, profa, m_zh, num) {
 
     //обновляем спики профессий
     this.next_profession(1);
-    document.getElementById('select_profa_' + 1 + '_' + this.number).style.display = 'none';
+    var p1 = document.getElementById('select_profa_' + 1 + '_' + this.number);
+    if (p1) p1.style.display = 'none';
     this.next_profession(2);
-    document.getElementById('select_profa_' + 2 + '_' + this.number).style.display = 'none';
+    var p2 = document.getElementById('select_profa_' + 2 + '_' + this.number);
+    if (p2) p2.style.display = 'none';
 
 
     for (zxc = 10; zxc < 17; zxc++) {
@@ -3271,11 +3306,13 @@ Heroes.prototype.update_hero_image = function (class_hero, profa, m_zh, num) {
     }
     //открываем возможность выбора дополнительной специальности
 
-    document.getElementById('new_profa_' + 1 + '_' + this.number).style.display = 'inline-block';
-    document.getElementById('new_profa_' + 2 + '_' + this.number).style.display = 'inline-block';
+    var np1 = document.getElementById('new_profa_' + 1 + '_' + this.number);
+    var np2 = document.getElementById('new_profa_' + 2 + '_' + this.number);
+    if (np1) np1.style.display = 'inline-block';
+    if (np2) np2.style.display = 'inline-block';
 
     if (this.class_hero == 8) {
-        if (document.getElementById("type_" + this.number).selectedIndex == 8) {
+        if (document.getElementById("type_" + this.number).selectedIndex == 9) {
             this.skils[0] = 4;
             this.skils[1] = 4;
             this.skils[2] = 4;
@@ -3308,8 +3345,10 @@ Heroes.prototype.update_hero_image = function (class_hero, profa, m_zh, num) {
             this.change_lvl_skils(this.number, bp);
         }
         //скрываем возможность выбора дополнительной специальности
-        document.getElementById('new_profa_' + 1 + '_' + this.number).style.display = 'none';
-        document.getElementById('new_profa_' + 2 + '_' + this.number).style.display = 'none';
+        var hide1 = document.getElementById('new_profa_' + 1 + '_' + this.number);
+        var hide2 = document.getElementById('new_profa_' + 2 + '_' + this.number);
+        if (hide1) hide1.style.display = 'none';
+        if (hide2) hide2.style.display = 'none';
     }
 }
 
@@ -3337,9 +3376,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
     switch (this.class_hero) {
         case 0: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils * 50)) + "px -" + ((this.profession * 46)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[0][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3347,7 +3386,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                 }
                 else {
-                    //    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                    //    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3357,9 +3396,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + (this.profession2 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             if (!db_skils_hero[0][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
@@ -3368,7 +3407,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                             }
                         }
                         else {
-                            //                                    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                            //                                    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3376,16 +3415,16 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-664px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
                 else {
 
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + (this.profession3 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (((num_skils - 14) * 50)) + "px -" + ((this.profession3 * 46)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[0][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3394,7 +3433,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                             }
                         }
                         else {
-                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3402,7 +3441,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-664px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
@@ -3412,9 +3451,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
         }
         case 1: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 60 + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 60 + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils * 50)) + "px -" + ((this.profession * 46 + 276)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[1][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3422,7 +3461,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                 }
                 else {
-                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3431,19 +3470,19 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46 + 276)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
                         if (this.skils[num_skils]) {
                             if (!db_skils_hero[1][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
                                 document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[1][this.profession2][num_skils - 7][this.skils[num_skils]][0];
-                                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10)));
+                                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10))));
                                 pas_mag.style.display = 'inline-block';
                                 pas_mag.title = db_skils_hero[1][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             }
                         }
                         else {
-                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[1][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3451,16 +3490,16 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-714px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
                 }
                 else {
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 60 + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 60 + (this.profession3 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 14) * 50) + "px -" + ((this.profession3 * 46 + 276)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[1][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[1][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3469,7 +3508,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                             }
                         }
                         else {
-                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[1][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3477,7 +3516,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-714px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
@@ -3488,9 +3527,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
         }
         case 2: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 110 + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 110 + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (num_skils * 50) + "px -" + ((this.profession * 46 + 506)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+506) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+506) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[2][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3498,7 +3537,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                 }
                 else {
-                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3507,7 +3546,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 110 + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 110 + (this.profession2 * 10))));
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[2][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             if (!db_skils_hero[2][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
@@ -3516,26 +3555,26 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                             }
                         }
                         else {
-                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[2][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
                         }
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+506) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+506) + "px";
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46 + 506)) + "px");
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-764px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
                 else {
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 110 + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 110 + (this.profession3 * 10))));
 
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 14) * 50) + "px -" + ((this.profession3 * 46 + 506)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+506) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+506) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[2][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[2][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3544,7 +3583,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                             }
                         }
                         else {
-                            //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                            //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[2][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3552,7 +3591,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-764px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
@@ -3570,7 +3609,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                 if (num_skils > 7 && this.monster_type > 0) {
                     $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 3) * 50) + "px 0px");
                     document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][0][num_skils - 3][this.skils[num_skils]][0];
-                    pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10)));
+                    pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))));
                     if (num_skils == 8)
                         $("#pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))).attr('style', 'background-position: -110px -1640px;');
                     else
@@ -3590,7 +3629,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     if ((num_skils == 7 || num_skils == 6) && this.monster_type == 2) {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 3) * 50) + "px -46px");
                         document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[0][1][num_skils - 3][this.skils[num_skils]][0];
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))));
                         if (num_skils == 6)
                             $("#pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))).attr('style', 'background-position: -66px -1662px;');
                         else
@@ -3612,9 +3651,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                         //alert(db_skils_hero[3]+ '____' + this.profession + '__' + num_skils + '__' + this.skils + '__' + num_skils + '__' + [0])
                        // console.log(db_skils_hero[3][3][num_skils][this.skils[num_skils]][0])
                             $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (num_skils * 50) + "px -" + (46 + 1541) + "px"); //(profa * 46 + 1541)
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (profa*46+736) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (profa*46+736) + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[3][3][num_skils][this.skils[num_skils]][0];
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))));
                         pas_mag.style.backgroundPosition = $("#pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))).data("bp");
                         if (!db_skils_hero[3][this.profession][num_skils][this.skils[num_skils]][2]) {
                             pas_mag.style.display = 'inline-block';
@@ -3630,9 +3669,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
                     
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (num_skils * 50) + "px -" + (profa * 46 + 736) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (profa*46+736) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (profa*46+736) + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[3][this.profession][num_skils][this.skils[num_skils]][0];
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))));
                         pas_mag.style.backgroundPosition = $("#pas_do_magick_" + this.number + "_" + (num_skils + 160 + (profa * 10))).data("bp");
                         if (!db_skils_hero[3][this.profession][num_skils][this.skils[num_skils]][2]) {
                             pas_mag.style.display = 'inline-block';
@@ -3647,7 +3686,7 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
             }
             else {
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-814px -1782px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -150px -" + 828 + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -150px -" + 828 + "px";
                 document.getElementById("skils_" + num_skils + "_" + num).title = "";
             }
             break;
@@ -3656,9 +3695,9 @@ Heroes.prototype.change_image_skils = function (num, num_skils) {
 
 case 4 : {
             if(num_skils<10){
-                pas_mag = document.getElementById("pas_do_magick_"+this.number+"_"+(num_skils+180+(this.profession*10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_"+this.number+"_"+(num_skils+180+(this.profession*10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position","-"+((num_skils*50))+"px -"+((this.profession*46+826))+"px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
                 if(this.skils[num_skils]){
                     if(!db_skils_hero[4][this.profession][num_skils][this.skils[num_skils]][2]){
                         pas_mag.style.display = 'inline-block';
@@ -3669,7 +3708,7 @@ case 4 : {
                     }
                 }
                 else{
-                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3678,19 +3717,19 @@ case 4 : {
             else{
                 if(num_skils>9&&num_skils<17){
                     if(this.profession2!=-1){
-                        pas_mag = document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-7)+180+(this.profession2*10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-7)+180+(this.profession2*10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position","-"+((num_skils-7)*50)+"px -"+((this.profession2*46+826))+"px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
                         if(this.skils[num_skils]){
                             if(!db_skils_hero[4][this.profession2][num_skils-7][this.skils[num_skils]][2]){
                                 document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[4][this.profession2][num_skils-7][this.skils[num_skils]][0];
-                                pas_mag = document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-7)+180+(this.profession2*10)));
+                                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-7)+180+(this.profession2*10))));
                                 pas_mag.style.display = 'inline-block';
                                 pas_mag.title = db_skils_hero[4][this.profession2][num_skils-7][this.skils[num_skils]][0];
                             }
                         }
                         else{
-                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[4][this.profession2][num_skils-7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3698,16 +3737,16 @@ case 4 : {
                     }
                     else{
                         $("#skils_" + num_skils + "_" + num).css("background-position","-865px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
                 }
                 else{
                     if(this.profession3!=-1){
-                        pas_mag = document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-14)+180+(this.profession3*10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_"+this.number+"_"+((num_skils-14)+180+(this.profession3*10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position","-"+((num_skils-14)*50)+"px -"+((this.profession3+918))+"px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
                         if(this.skils[num_skils]){
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[4][this.profession3][num_skils-14][this.skils[num_skils]][0];
                             if(!db_skils_hero[4][this.profession3][num_skils-14][this.skils[num_skils]][2]){
@@ -3716,7 +3755,7 @@ case 4 : {
                             }
                         }
                         else{
-                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[4][this.profession3][num_skils-14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3724,7 +3763,7 @@ case 4 : {
                     }
                     else{
                         $("#skils_" + num_skils + "_" + num).css("background-position","-865px -1782px");  //Отрисовка не активированного скила - заглушки
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
@@ -3735,9 +3774,9 @@ case 4 : {
         }
         case 5: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils * 50)) + "px -" + ((this.profession * 46)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[5][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3745,7 +3784,7 @@ case 4 : {
                     }
                 }
                 else {
-                    //    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                    //    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3755,9 +3794,9 @@ case 4 : {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + (this.profession2 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[5][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             if (!db_skils_hero[5][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
@@ -3766,7 +3805,7 @@ case 4 : {
                             }
                         }
                         else {
-                            //                                    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                            //                                    document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[5][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3774,16 +3813,16 @@ case 4 : {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-664px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
                 else {
 
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + (this.profession3 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (((num_skils - 14) * 50)) + "px -" + ((this.profession3 * 46)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[5][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[5][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3792,7 +3831,7 @@ case 4 : {
                             }
                         }
                         else {
-                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[5][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3800,7 +3839,7 @@ case 4 : {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-664px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -0px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -0px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
@@ -3810,9 +3849,9 @@ case 4 : {
         }
         case 6: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 60 + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 60 + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils * 50)) + "px -" + ((this.profession * 46 + 276)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+276) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[6][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3820,7 +3859,7 @@ case 4 : {
                     }
                 }
                 else {
-                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3829,19 +3868,19 @@ case 4 : {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46 + 276)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+276) + "px";
                         if (this.skils[num_skils]) {
                             if (!db_skils_hero[6][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
                                 document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[6][this.profession2][num_skils - 7][this.skils[num_skils]][0];
-                                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10)));
+                                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 60 + (this.profession2 * 10))));
                                 pas_mag.style.display = 'inline-block';
                                 pas_mag.title = db_skils_hero[6][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             }
                         }
                         else {
-                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //  document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[6][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3849,16 +3888,16 @@ case 4 : {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-714px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
                 }
                 else {
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 60 + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 60 + (this.profession3 * 10))));
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 14) * 50) + "px -" + ((this.profession3 * 46 + 276)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+276) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[6][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[6][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3867,7 +3906,7 @@ case 4 : {
                             }
                         }
                         else {
-                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                            //   document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[6][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3875,7 +3914,7 @@ case 4 : {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-714px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -50px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -50px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
 
@@ -3886,9 +3925,9 @@ case 4 : {
         }
         case 7: {
             if (num_skils < 10) {
-                pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 110 + (this.profession * 10)));
+                pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + (num_skils + 110 + (this.profession * 10))));
                 $("#skils_" + num_skils + "_" + num).css("background-position", "-" + (num_skils * 50) + "px -" + ((this.profession * 46 + 506)) + "px");
-                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+506) + "px";
+                //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + (num_skils*50) + "px -" + (this.profession*46+506) + "px";
                 if (this.skils[num_skils]) {
                     if (!db_skils_hero[7][this.profession][num_skils][this.skils[num_skils]][2]) {
                         pas_mag.style.display = 'inline-block';
@@ -3896,7 +3935,7 @@ case 4 : {
                     }
                 }
                 else {
-                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                    // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                     pas_mag.style.display = 'none';
                     pas_mag.title = '';
                 }
@@ -3905,7 +3944,7 @@ case 4 : {
             else {
                 if (num_skils > 9 && num_skils < 17) {
                     if (this.profession2 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 110 + (this.profession2 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 7) + 110 + (this.profession2 * 10))));
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[7][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             if (!db_skils_hero[7][this.profession2][num_skils - 7][this.skils[num_skils]][2]) {
@@ -3914,26 +3953,26 @@ case 4 : {
                             }
                         }
                         else {
-                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                            // document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[7][this.profession2][num_skils - 7][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
                         }
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+506) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-7)*50) + "px -" + (this.profession2*46+506) + "px";
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 7) * 50) + "px -" + ((this.profession2 * 46 + 506)) + "px");
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-764px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
                 else {
                     if (this.profession3 != -1) {
-                        pas_mag = document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 110 + (this.profession3 * 10)));
+                        pas_mag = pasMagickNode(document.getElementById("pas_do_magick_" + this.number + "_" + ((num_skils - 14) + 110 + (this.profession3 * 10))));
 
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-" + ((num_skils - 14) * 50) + "px -" + ((this.profession3 * 46 + 506)) + "px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+506) + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -" + ((num_skils-14)*50) + "px -" + (this.profession3*46+506) + "px";
                         if (this.skils[num_skils]) {
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[7][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             if (!db_skils_hero[7][this.profession3][num_skils - 14][this.skils[num_skils]][2]) {
@@ -3942,7 +3981,7 @@ case 4 : {
                             }
                         }
                         else {
-                            //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                            //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                             document.getElementById("skils_" + num_skils + "_" + num).title = db_skils_hero[7][this.profession3][num_skils - 14][this.skils[num_skils]][0];
                             pas_mag.style.display = 'none';
                             pas_mag.title = '';
@@ -3950,7 +3989,7 @@ case 4 : {
                     }
                     else {
                         $("#skils_" + num_skils + "_" + num).css("background-position", "-764px -1782px");
-                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('image/skils.jpg') repeat -100px -" + 828 + "px";
+                        //document.getElementById("skils_" + num_skils + "_" + num).style.background = "url('img/skils.jpg') repeat -100px -" + 828 + "px";
                         document.getElementById("skils_" + num_skils + "_" + num).title = "";
                     }
                 }
@@ -4056,25 +4095,24 @@ if (this.number == 0 || this.number == 1 || this.number == 2 || this.number == 3
 
 //один элемент (номер частички одежды,номер костюма из БД)
 Heroes.prototype.to_dress_one = function (num_dress, num) {
+    var slotEl = document.getElementById("shmotka_" + num_dress + "_" + this.number);
 
 
     if (num > -1 && num != null) {
-        if (num == 48) {
-
-            document.getElementById("shmotka_" + num_dress + "_" + this.number).style.background = "url('image/_big2.jpg?410') repeat -" + (-38 + 50 * num_dress + 50) + "px -2318px";
-            
+        if (slotEl) {
+            if (num == 48) {
+                slotEl.style.background = "url('img/_big2.jpg?410') repeat -" + (-38 + 50 * num_dress + 50) + "px -2318px";
+            }
+            else {
+                slotEl.style.background = "url('img/_big2.jpg?410') repeat -" + (2448 + 50 * num_dress) + "px -" + (num * 50) + "px";
+            }
         }
-        else
-            document.getElementById("shmotka_" + num_dress + "_" + this.number).style.background = "url('image/_big2.jpg?410') repeat -" + (2448 + 50 * num_dress) + "px -" + (num * 50) + "px";
         this.dress[num_dress] = num;
         do_show_div('select_shmotka_' + num_dress + '_' + this.number, 0);
         
-        if (this.dress_old[num_dress]) {
-            this.efects[num_dress] = db_dress_old[num][num_dress][2] ? -1 : db_dress_old[num][num_dress][1];
-        }
-        else {
-            this.efects[num_dress] = db_dress[num][num_dress][2] ? -1 : db_dress[num][num_dress][1];
-        }
+        var dressSrc = this.dress_old[num_dress] ? db_dress_old[num] : db_dress[num];
+        var piece = dressSrc && dressSrc[num_dress];
+        this.efects[num_dress] = (piece && piece[2]) ? -1 : (piece ? piece[1] : -1);
         this.hide_mini_dress_one(num_dress);
         $('#litle_dress_' + this.number + '_' + num + '_' + num_dress).css('display', 'inline-block');
         format_title_for_dress(num, num_dress, this.number);
@@ -4121,10 +4159,12 @@ Heroes.prototype.to_dress_one = function (num_dress, num) {
         if (num == null) {
             num = -1;
         }
-        document.getElementById("shmotka_" + num_dress + "_" + this.number).style.background = "";
+        if (slotEl) {
+            slotEl.style.background = "";
+            slotEl.title = "";
+        }
        
         this.dress[num_dress] = num;
-        document.getElementById("shmotka_" + num_dress + "_" + this.number).title = "";
         
         this.efects[num_dress] = -1;
         this.hide_mini_dress_one(num_dress);
@@ -4158,9 +4198,12 @@ Heroes.prototype.to_dress = function (num) {
 //снятие одной шмотки
 Heroes.prototype.no_dress = function (num_dress, num) {
     $("#litle_dress_" + this.number + "_" + this.dress[num_dress] + "_" + num_dress).hide();
-    document.getElementById("shmotka_" + num_dress + "_" + this.number).style.background = "";
+    var slotEl = document.getElementById("shmotka_" + num_dress + "_" + this.number);
+    if (slotEl) {
+        slotEl.style.background = "";
+        slotEl.title = "";
+    }
     this.dress[num_dress] = -1;
-    document.getElementById("shmotka_" + num_dress + "_" + this.number).title = "";
     this.efects[num_dress] = -1;
     do_show_div('select_shmotka_' + num_dress + '_' + this.number, 0);
     
@@ -4175,6 +4218,11 @@ Heroes.prototype.no_dress = function (num_dress, num) {
         this.dress_old[num_dress] = 0;
     }
     this.rynu[num_dress] = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+    if (this.rynu_ancient) {
+        this.rynu_ancient[num_dress] = 0;
+    }
+    var ancientBtn = $("#ancient_rune_" + num_dress + "_" + this.number);
+    ancientBtn.addClass("ancient_rune").removeClass("ancient_rune_vkl");
     set_rynu_by_info(this.number, num_dress);
 
 }
@@ -4199,14 +4247,17 @@ Heroes.prototype.create_list_dress_one = function (num_dress) {
     var msx = 48;
     do {
         msx--;
-        document.getElementById("smotkisu_" + msx + "_" + num_dress + "_" + this.number).style.background = "url('image/_big2.jpg?400') repeat -" + (2446 + 50 * num_dress) + "px -" + (msx * 50) + "px";
-        document.getElementById("smotkisu_" + msx + "_" + num_dress + "_" + this.number).title = db_dress[msx][num_dress][0];
-        
+        var icon = document.getElementById("smotkisu_" + msx + "_" + num_dress + "_" + this.number);
+        if (icon) {
+            icon.style.background = "url('img/_big2.jpg?400') repeat -" + (2446 + 50 * num_dress) + "px -" + (msx * 50) + "px";
+            icon.title = db_dress[msx][num_dress][0];
+        }
     } while (msx);
-    //for 47
-    document.getElementById("smotkisu_48_" + num_dress + "_" + this.number).style.background = "url('image/_big2.jpg?400') repeat -" + (-38 + 50 * num_dress + 50) + "px -2318px";
-    document.getElementById("smotkisu_48_" + num_dress + "_" + this.number).title = db_dress[48][num_dress][0];
-
+    var last = document.getElementById("smotkisu_48_" + num_dress + "_" + this.number);
+    if (last) {
+        last.style.background = "url('img/_big2.jpg?400') repeat -" + (-38 + 50 * num_dress + 50) + "px -2318px";
+        last.title = db_dress[48][num_dress][0];
+    }
 }
 
 ////TODO: (цикл сменить)формирование перечня всех шмоток
@@ -4224,8 +4275,11 @@ Heroes.prototype.create_dress = function () {
     do {
         msx--;
 
-        document.getElementById("name_select_dress_" + msx + "_" + this.number).innerHTML = "<div class='plus'></div> " + db_dress[msx][13];
-        document.getElementById("name_select_dress_" + msx + "_" + this.number).title = "Нажми для выбора " + db_dress[msx][12][0];
+        var nameEl = document.getElementById("name_select_dress_" + msx + "_" + this.number);
+        if (nameEl) {
+            nameEl.innerHTML = "<div class='plus'></div> " + db_dress[msx][13];
+            nameEl.title = "Нажми для выбора " + db_dress[msx][12][0];
+        }
     } while (msx);
 }
 
@@ -4237,26 +4291,28 @@ Heroes.prototype.next_profession = function (next_prof) {
         
         if (this.class_hero != 4) 
         {
-           document.getElementById('select_profa_' + next_prof + '_' + this.number).style.display = 'block';
-            document.getElementById('select_profa_' + (next_prof == 1 ? 2 : 1) + '_' + this.number).style.display = 'none';
+           var profaOn = document.getElementById('select_profa_' + next_prof + '_' + this.number);
+           var profaOff = document.getElementById('select_profa_' + (next_prof == 1 ? 2 : 1) + '_' + this.number);
+           if (profaOn) profaOn.style.display = 'block';
+           if (profaOff) profaOff.style.display = 'none';
         }
 
         switch (this.class_hero) {
             case 0:
                 {
-                    var arr = ['Паладдин', 'Воитель', 'Диверсант', 'Разведчик', 'Миротворец', 'Разрушитель'];
+                    var arr = specNameList("war");
                     this.help_func(next_prof, arr);
                     break;
                 }
             case 1:
                 {
-                    var arr = ['Добытчик', 'Защитник', 'Наставник', 'Торговец', 'Строитель', ''];
+                    var arr = specNameList("civil");
                     this.help_func(next_prof, arr);
                     break;
                 }
             case 2:
                 {
-                    var arr = ['Целител', 'Иллюзионист', 'Рассеиватель', 'Некромант', 'Заклинатель', ''];
+                    var arr = specNameList("magic");
                     this.help_func(next_prof, arr);
                     break;
                 }
@@ -4269,26 +4325,26 @@ Heroes.prototype.next_profession = function (next_prof) {
 */
                        case 5:
                         {
-                         var arr = ['Паладдин', 'Воитель', 'Диверсант', 'Разведчик', 'Миротворец', 'Разрушитель'];
+                         var arr = specNameList("war");
                          this.help_func(next_prof, arr);
                             break;
                         } 
                         case 6:
                             {
-                                var arr = ['Добытчик', 'Защитник', 'Наставник', 'Торговец', 'Строитель', ''];
+                                var arr = specNameList("civil");
                                 this.help_func(next_prof, arr);
                                 break;
                             }
                             case 7:
                                 {
-                                    var arr = ['Целител', 'Иллюзионист', 'Рассеиватель', 'Некромант', 'Заклинатель', ''];
+                                    var arr = specNameList("magic");
                                     this.help_func(next_prof, arr);
                                     break;
                                 }
         }
     }
     else {
-        alert("выбери героя для определения его дополнительных навыков!");
+        alert(i18nT("calc.chooseHero", "выбери героя для определения его дополнительных навыков!"));
     }
 
 
@@ -4871,9 +4927,15 @@ function onSee(num, doo) {
 //показать/скрыть блок для настроек героя 
 function see_hero_settings(num, doo) {
     if (doo) {
-        document.getElementById("hero_settings_" + num).style.display = "block";
-        document.getElementById("hero_settings_" + num).style.left = document.getElementById("hero_" + num).offsetLeft;
-        document.getElementById("hero_settings_" + num).style.top = document.getElementById("hero_" + num).offsetTop;
+        var box = document.getElementById("hero_settings_" + num);
+        var anchor = document.getElementById("hero_" + num);
+        if (box) {
+            box.style.display = "block";
+            if (anchor) {
+                box.style.left = (anchor.offsetLeft || 0) + "px";
+                box.style.top = (anchor.offsetTop || 0) + "px";
+            }
+        }
         this_number2 = num;
 
     }
@@ -4887,7 +4949,6 @@ function see_hero_settings(num, doo) {
 
 //показать/скрыть блок для настроек героя 
 function close_window_pr() {
-        document.getElementById("update_hero_pr").style.display = "none";
         document.getElementById("vkl_vukl_setting").style.display = "none";
 }
 
@@ -4902,25 +4963,21 @@ function hide_menu_rynu(num_smotka, num_hero) {
 
 //высветить див с выбором героем
 function update_image_hero(num,num_smotka, num_hero) {
-    document.getElementById("update_hero_" + num).style.display = "block";
+    see_hero_settings(num, true);
+    var picker = document.getElementById("update_hero_" + num);
+    if (picker) picker.style.display = "block";
 
-    document.getElementById("update_art_list_" + num).style.display = "none";
-    document.getElementById("magic_to_hero_select_" + num).style.display = "none";
-    document.getElementById("creator_bonus_" + num).style.display = "none";
-
-    /* Закрытие менюшки со шмотками */
-    document.getElementById("select_shmotka_0_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_1_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_2_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_3_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_4_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_5_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_6_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_7_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_8_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_9_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_10_" + this_number2).style.display = "none";
-    document.getElementById("select_shmotka_11_" + this_number2).style.display = "none";
+    var hideIds = [
+        "update_art_list_" + num,
+        "magic_to_hero_select_" + num,
+        "creator_bonus_" + num
+    ];
+    var s;
+    for (s = 0; s < 12; s++) hideIds.push("select_shmotka_" + s + "_" + this_number2);
+    for (s = 0; s < hideIds.length; s++) {
+        var hideEl = document.getElementById(hideIds[s]);
+        if (hideEl) hideEl.style.display = "none";
+    }
 
 
    // alert(num_smotka + '__' + num_hero + '__' + this.number)
@@ -4931,11 +4988,7 @@ function update_image_hero(num,num_smotka, num_hero) {
      ошибка из-за этой строки */
  
 }
-//высветить див с пресетами
-function update_image_hero_pr() {
-    document.getElementById("update_hero_pr").style.display = "block";
-}
-//высветить див с пресетами
+//высветить див с настройками калькулятора
 function vkl_vukl_setting() {
     document.getElementById("vkl_vukl_setting").style.display = "block";
 }
@@ -5843,1864 +5896,6 @@ function help_skils_add(xyx, x) {
     }
 }
 
-//сохранение для ид
-function save_all() {
-    //в json
-    all = new Object();
-    all.unitu = unitu;
-    all.heroes = heroes;
-    all.other = new Array(
-        spes,
-        max_z,
-        teretory,
-        limit_b,
-        lvl_mb_1,
-        lvl_mb_2,
-        lvl_bb_1,
-        lvl_bb_2,
-        kol_vo_yb,
-        victory,
-        type_raz_,
-        num_volna,
-        ficha_ruinu,
-        othero,
-        go_back,
-        kz,
-        gate_hp,
-        gate_lvl,
-        flags_gate,
-        hero_vkl,
-        hero_voln,
-        type_server,
-        skill_ost_mech,
-        skill_presledovanie_assasina,
-        skill_hp_mamonta,
-        skill_kam_bronya
-    );
-    all2 = JSON.stringify(all);
-    //отправка
-    $.post('save-game.php', {
-        content: all2
-    },
-        Success2);
-}
-
-function Success2(data) {
-    $('#save_id').val(data);
-    $("#link-for-load input").val('' + data + '/');
-    $('#link-for-load').show();
-}
-
-//загрузка для ид
-function load_all(id) {
-    if (id == undefined)
-        id = $.trim($('#save_id').val());
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид feo_load
-function feo_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetFeo";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид ur_load
-function ur_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetUr";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид torn_load
-function torn_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetTorn";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид io_load
-function io_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetIo";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид rad_load
-function rad_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetRad";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид tir_load
-function tir_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetTir";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид gify_load
-function gify_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetGify";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид ia_load
-function ia_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetIa";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид hegl_load
-function hegl_load_all(id) {
-    if (id == undefined)
-        id = "preset/presetHegl";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид a_a_load
-function a_a_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset1_1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид a_aa_load
-function a_aa_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset1_2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид a_aaa_load
-function a_aaa_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset1_3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид a_aaaa_load
-function a_aaaa_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset1_4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид a_aaaaa_load
-function a_aaaaa_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset1_5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид b_b_load
-function b_b_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset2_1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид b_bb_load
-function b_bb_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset2_2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид b_bbb_load
-function b_bbb_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset2_3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид b_bbbb_load
-function b_bbbb_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset2_4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид c_c_load
-function c_c_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset3_1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид c_cc_load
-function c_cc_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset3_2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид c_ccc_load
-function c_ccc_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset3_3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид c_cc_load
-function c_cccc_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset3_4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид c_ccccc_load
-function c_ccccc_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset3_5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид d_d_load
-function d_d_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset4_1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид d_dd_load
-function d_dd_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset4_2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид d_ddd_load
-function d_ddd_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset4_3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид d_dddd_load
-function d_dddd_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset4_4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид d_ddddd_load
-function d_ddddd_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset4_5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид fiolet_load
-function fiolet_load_all(id) {
-    if (id == undefined)
-        id = "preset/preset5_1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-/* ЗАГРУЗКИ САРКОФАГОВ */
-
-//загрузка для ид armystrength1
-function armystrength1_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrength2
-function armystrength2_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength3
-function armystrength3_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength4
-function armystrength4_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength5
-function armystrength5_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength1s
-function armystrength1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrength2s
-function armystrength2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength3s
-function armystrength3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength4s
-function armystrength4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrength5s
-function armystrength5s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrength5s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид protection1
-function protection1_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection2
-function protection2_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection3
-function protection3_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection4
-function protection4_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection5
-function protection5_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection1s
-function protection1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection2s
-function protection2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection3s
-function protection3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection4s
-function protection4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protection5s
-function protection5s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protection5s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyres1
-function armyres1_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres2
-function armyres2_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres3
-function armyres3_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres4
-function armyres4_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyres5
-function armyres5_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyres1s
-function armyres1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres2s
-function armyres2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres3s
-function armyres3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyres4s
-function armyres4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyres5s
-function armyres5s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyres5s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrengthally1
-function armystrengthally1_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrengthally2
-function armystrengthally2_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrengthally3
-function armystrengthally3_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrengthally4
-function armystrengthally4_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид armystrengthally1s
-function armystrengthally1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrengthally2s
-function armystrengthally2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armystrengthally3s
-function armystrengthally3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armystrengthally4s
-function armystrengthally4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armystrengthally4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид protectally1
-function protectally1_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally2
-function protectally2_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally3
-function protectally3_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally4
-function protectally4_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид protectally1s
-function protectally1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally2s
-function protectally2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally3s
-function protectally3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид protectally4s
-function protectally4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/protectally4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyresally1
-function armyresally1_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyresally2
-function armyresally2_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyresally3
-function armyresally3_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyresally4
-function armyresally4_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyresally1s
-function armyresally1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид armyresally2s
-function armyresally2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyresally3s
-function armyresally3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид armyresally4s
-function armyresally4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/armyresally4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид maxdef1
-function maxdef1_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdef2
-function maxdef2_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdef3
-function maxdef3_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdef1s
-function maxdef1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdef2s
-function maxdef2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdef3s
-function maxdef3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdef3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид maxdefally1
-function maxdefally1_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdefally1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdefally2
-function maxdefally2_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdefally2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид maxdefally1s
-function maxdefally1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdefally1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид maxdefally2s
-function maxdefally2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/maxdefally2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид terr1
-function terr1_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид terr2
-function terr2_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид terr3
-function terr3_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид terr1s
-function terr1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид terr2s
-function terr2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид terr3s
-function terr3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/terr3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид herospeed1
-function herospeed1_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид herospeed2
-function herospeed2_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид herospeed3
-function herospeed3_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид herospeed1s
-function herospeed1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид herospeed2s
-function herospeed2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид herospeed3s
-function herospeed3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/herospeed3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид magdefense1
-function magdefense1_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense2
-function magdefense2_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense3
-function magdefense3_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense4
-function magdefense4_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense5
-function magdefense5_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид magdefense1s
-function magdefense1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense2s
-function magdefense2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense3s
-function magdefense3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense4s
-function magdefense4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид magdefense5s
-function magdefense5s_load_all(id) {
-    if (id == undefined)
-        id = "preset/magdefense5s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp1
-function heoexp1_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp2
-function heoexp2_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp3
-function heoexp3_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp4
-function heoexp4_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp5
-function heoexp5_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp5";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид heoexp1s
-function heoexp1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp2s
-function heoexp2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp3s
-function heoexp3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp4s
-function heoexp4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид heoexp5s
-function heoexp5s_load_all(id) {
-    if (id == undefined)
-        id = "preset/heoexp5s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak1
-function enemweak1_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak2
-function enemweak2_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak3
-function enemweak3_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak4
-function enemweak4_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak1s
-function enemweak1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak2s
-function enemweak2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak3s
-function enemweak3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemweak4s
-function enemweak4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemweak4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef1
-function enemdef1_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef2
-function enemdef2_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef3
-function enemdef3_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef4
-function enemdef4_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид enemdef1s
-function enemdef1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef2s
-function enemdef2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef3s
-function enemdef3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemdef4s
-function enemdef4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemdef4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-//загрузка для ид enemhealth1
-function enemhealth1_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth2
-function enemhealth2_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth3
-function enemhealth3_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth4
-function enemhealth4_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth4";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-
-//загрузка для ид enemhealth1s
-function enemhealth1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth2s
-function enemhealth2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth3s
-function enemhealth3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemhealth4s
-function enemhealth4s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemhealth4s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemmaxdef1
-function enemmaxdef1_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef1";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemmaxdef2
-function enemmaxdef2_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef2";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид enemmaxdef3
-function enemmaxdef3_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef3";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemmaxdef1s
-function enemmaxdef1s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef1s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-//загрузка для ид enemmaxdef2s
-function enemmaxdef2s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef2s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-//загрузка для ид enemmaxdef3s
-function enemmaxdef3s_load_all(id) {
-    if (id == undefined)
-        id = "preset/enemmaxdef3s";
-    if (id < 10)
-        return false;
-    $.post('load-game.php', {
-        id: id
-    },
-        Success);
-}
-
-
-
-
-/*КОНЕЦ ЗАГРУЗОК ДЛЯ ПРЕСЕТОВ*/
 
 function setHero(i, setHoroes) {
     heroes[i].rewrite(setHoroes);
@@ -7719,267 +5914,6 @@ function setHero(i, setHoroes) {
 
 
 
-function Success(data) {
-    if (data == '') {
-        alert('Это сохранение удалено по истечению срока годности. \n \n Если Вы загружали пресет, то разработчик еще не добавил его на сервер, поскольку у него нет информации о количестве армии в этом владении.');
-    }
-    //из json
-    var all3 = JSON.parse(data);
-    spes = all3.other[0];
-    max_z = all3.other[1];
-    teretory = all3.other[2];
-    limit_b = all3.other[3];
-    lvl_mb_1 = all3.other[4];
-    lvl_mb_2 = all3.other[5];
-    lvl_bb_1 = all3.other[6];
-    lvl_bb_2 = all3.other[7];
-    kol_vo_yb = all3.other[8];
-
-    victory = all3.other[9];
-    type_raz_ = all3.other[10];
-    $("#type_doing").val(type_raz_);
-    num_volna = all3.other[11];
-    ficha_ruinu = all3.other[12];
-    othero = all3.other[13];
-    if (all3.other[15] == undefined)
-        all3.other[15] = false;
-    kz = all3.other[15];
-
-    if (all3.other[16] == undefined)
-        all3.other[16] = [db_gate[0][1], db_gate[0][1], db_gate[0][1]];
-    gate_hp = all3.other[16];
-    if (all3.other[17] == undefined)
-        all3.other[17] = 0;
-    gate_lvl = all3.other[17];
-    if (all3.other[18] == undefined)
-        all3.other[18] = [false, false, false];
-    flags_gate = all3.other[18];
-    if (flags_gate[num_volna] && kz) {
-        document.getElementById("gate_add").style.display = 'none';
-        document.getElementById("gate").style.display = 'inline-block';
-    }
-    else {
-        document.getElementById("gate_add").style.display = 'inline-block';
-        document.getElementById("gate").style.display = 'none';
-    }
-    $("#hp_gate").val(gate_hp[num_volna]);
-
-    checkShowOrHideKZ();
-
-    if (all3.other[14] == undefined) {
-        go_back = [0, 0, 0, 0, 0];
-    }
-    else {
-        go_back = all3.other[14];
-    }
-
-
-    if (all3.other[19] != undefined) {
-        hero_vkl = all3.other[19];
-
-        for (var u = 0; u < 3; u++) {
-            for (var p = 0; p < 3; p++) {
-                hero_voln[u][p].rewrite(all3.other[20][u][p]);
-            }
-        }
-
-    }
-
-    if (all3.other[21] != undefined) {
-        type_server = all3.other[21];
-    }
-    else {
-        type_server = 1;
-    }
-
-
-    if (all3.other[22] != null) {
-        skill_ost_mech = all3.other[22];
-    }
-    else {
-        skill_ost_mech = [0,0,0,0,0,0,0];
-    }
-
-    if (all3.other[23] != null) {
-        skill_presledovanie_assasina = all3.other[23];
-    }
-    else {
-        skill_presledovanie_assasina = [0,0,0,0,0,0,0];
-    }
-
-    if (all3.other[24] != null) {
-        skill_hp_mamonta = all3.other[24];
-    }
-    else {
-        skill_hp_mamonta = [0,0,0,0,0,0,0];
-    }
-
-    if (all3.other[25] != null) {
-        skill_kam_bronya = all3.other[25];
-    }
-    else {
-        skill_kam_bronya = [0,0,0,0,0,0,0];
-    }
-
-
-    $('.type_server input[type=radio]').removeAttr('checked');
-    $('#servak-' + type_server).attr('checked', 'checked');
-    miniFun();
-
-    //выствляем номер волны  
-    document.getElementById("b1").style.background = "#FFFFFF";
-    document.getElementById("b2").style.background = "#FFFFFF";
-    document.getElementById("b3").style.background = "#FFFFFF";
-    document.getElementById("b" + (num_volna + 1)).style.background = "#66FFFF";
-
-    //растановка данных и шмоток как при save
-    for (var m = 0; m < 7; m++) {
-        //скрываем дивы с октивными заклнаниями внизу
-        for (var ms = 0; ms < 160; ms++) {
-            document.getElementById("pas_do_magick_" + m + "_" + ms).style.display = 'none';
-        }
-
-        unitu[m].rewrite(all3.unitu[m]);
-        unitu[m].input_true();
-        //растановка рас вклюая руины
-        unitu[m].change_type(true);
-        unitu[m].otst_true();//не пашет
-        unitu[m].checked_true();
-        setHero(m, all3.heroes[m]);
-        //      heroes[m].rewrite(all3.heroes[m]);
-        //      if(unitu[m].hero){
-        //          heroes[m].hero_true(true,m);
-        //      }
-        //      else{
-        //          //чистим все поля для героя
-        //          var zhalost = heroes[m].magick[118];
-        //          heroes[m].cleen();
-        //          heroes[m].magick[118] = zhalost;
-        //          heroes[m].hero_true(false,m);
-        //      }
-        //      heroes[m].hide_all_dress();
-
-    }
-    if (heroes[2].magick[118]) {
-        document.getElementById("magic_on_hero_2").style.display = 'inline-block';
-    } else {
-        document.getElementById("do_magick_2_118").style.display = 'none';
-    }
-
-    //закрыть открыть дивы
-    unitu[6].div_true();
-    unitu[1].div_true();
-    unitu[5].div_true();
-    unitu[4].div_true();
-    unitu[3].div_true();
-
-
-
-    //герой включен ли
-    //фон
-    $("#armor_content_left").removeClass().addClass('terr_' + teretory);
-
-    //ОТКЛ ГЕРОЯ!!!!!!!!!!!!
-
-    //башень
-    if (limit_b) {
-        if (limit_b == 1) { //если только одна башня
-            if (lvl_mb_1 > -1) { //если магическая
-                document.getElementById('mb_add').style.display = 'none';
-                document.getElementById('bb_add').style.display = 'inline-block';
-                document.getElementById('mb1').style.display = 'inline-block';
-                document.getElementById('mb2').style.display = 'none';
-                document.getElementById('bb1').style.display = 'none';
-                document.getElementById('bb2').style.display = 'none';
-            }
-            else { //если простая
-                document.getElementById('mb_add').style.display = 'inline-block';
-                document.getElementById('bb_add').style.display = 'none';
-                document.getElementById('mb1').style.display = 'none';
-                document.getElementById('mb2').style.display = 'none';
-                document.getElementById('bb1').style.display = 'inline-block';
-                document.getElementById('bb2').style.display = 'none';
-            }
-        }
-        else {//если две башни
-            if (lvl_mb_1 > -1 && lvl_mb_2 > -1) {//две магические                    
-                document.getElementById('bb1').style.display = 'none';
-                document.getElementById('bb2').style.display = 'none';
-                document.getElementById('bb_add').style.display = 'none';
-                document.getElementById('mb_add').style.display = 'none';
-                document.getElementById('mb1').style.display = 'inline-block';
-                document.getElementById('mb2').style.display = 'inline-block';
-                document.getElementById('plas_mb1').style.display = 'none';
-                //document.getElementById('plas_mb2').style.display = 'none';
-                document.getElementById('del_mb1').style.display = 'none';
-                document.getElementById('del_mb2').style.display = 'inline-block';
-            }
-            else {
-                if (lvl_mb_1 > -1) { //по одной каждого типа                                   
-                    document.getElementById('bb2').style.display = 'none';
-                    document.getElementById('mb2').style.display = 'none';
-                    document.getElementById('bb_add').style.display = 'none';
-                    document.getElementById('mb_add').style.display = 'none';
-                    document.getElementById('mb1').style.display = 'inline-block';
-                    document.getElementById('bb1').style.display = 'inline-block';
-                    document.getElementById('plas_mb1').style.display = 'none';
-                    document.getElementById('plas_bb1').style.display = 'none';
-                    document.getElementById('del_mb1').style.display = 'inline-block';
-                    document.getElementById('del_bb1').style.display = 'inline-block';
-                }
-                else { //две простые башни  
-                    document.getElementById('mb1').style.display = 'none';
-                    document.getElementById('mb2').style.display = 'none';
-                    document.getElementById('mb_add').style.display = 'none';
-                    document.getElementById('bb_add').style.display = 'none';
-                    document.getElementById('bb1').style.display = 'inline-block';
-                    document.getElementById('bb2').style.display = 'inline-block';
-                    document.getElementById('plas_bb1').style.display = 'none';
-                    //document.getElementById('plas_bb2').style.display = 'none';
-                    document.getElementById('del_bb1').style.display = 'none';
-                    document.getElementById('del_bb2').style.display = 'inline-block';
-                }
-            }
-        }
-    }
-    else {
-        document.getElementById('mb_add').style.display = 'inline-block';
-        document.getElementById('bb_add').style.display = 'inline-block';
-        document.getElementById('mb1').style.display = 'none';
-        document.getElementById('mb2').style.display = 'none';
-        document.getElementById('bb1').style.display = 'none';
-        document.getElementById('bb2').style.display = 'none';
-    }
-    //ставим соответствующие картинки на башни
-
-    lvl_mb_1 > -1 ? $("#mb1_img").html(lvl_mb_1 + 1) : $("#mb1_img").html(1);
-    lvl_mb_2 > -1 ? $("#mb2_img").html(lvl_mb_2 + 1) : $("#mb2_img").html(1);
-    lvl_bb_1 > -1 ? $("#bb1_img").html(lvl_bb_1 + 1) : $("#bb1_img").html(1);
-    lvl_bb_2 > -1 ? $("#bb2_img").html(lvl_bb_2 + 1) : $("#bb2_img").html(1);
-    //        document.getElementById("mb1_img").src = do_name_b("M",lvl_mb_1>-1?lvl_mb_1:0);
-    //        document.getElementById("mb2_img").src = do_name_b("M",lvl_mb_2>-1?lvl_mb_2:0);
-    //        document.getElementById("bb1_img").src = do_name_b("B",lvl_bb_1>-1?lvl_bb_1:0);
-    //        document.getElementById("bb2_img").src = do_name_b("B",lvl_bb_2>-1?lvl_bb_2:0);
-    //укрепления
-    var sm, ik;
-    for (ik = 0, sm = 0; ik < 8; ik++) {
-        sm += kol_vo_yb[ik];
-        document.getElementById('_Y' + ik).value = kol_vo_yb[ik];
-    }
-    if (sm) {
-        yb_add();
-    }
-    else {
-        yb_delete();
-    }
-
-    document.getElementById("ter").selectedIndex = teretory;
-    $("#mz").attr("checked", max_z);
-    $("#oz").attr("checked", othero);
-    $("#kz").attr("checked", kz);
-    spec_change(spes);
-
-}
 
 
 
@@ -8005,7 +5939,7 @@ unitu[i].type - это номер выбранной рассы
 */
 //alert("Выводим ID территории, если ее поменять " + db_teretory[teretory][1])
         //стандартные бонусы тереторий
-        if (db_teretory[teretory][1] == unitu[i].type && !unitu[i].red || db_teretory[teretory][1] == 3 && unitu[i].type == 5  && !unitu[i].red || db_teretory[teretory][1] == 1 && unitu[i].type == 6  && !unitu[i].red) {
+        if (db_teretory[teretory][1] == unitu[i].type && !unitu[i].red || db_teretory[teretory][1] == 3 && unitu[i].type == 5  && !unitu[i].red || db_teretory[teretory][1] == 1 && unitu[i].type == 6  && !unitu[i].red || db_teretory[teretory][1] == 2 && unitu[i].type == 7  && !unitu[i].red) {
 
             j = 0;
             do {
@@ -10703,13 +8637,13 @@ if (komplekt47_5 == 3) {
                     //SEBE
                     //опыт +10
                     if (heroes[i].rynu[km][0][1] > 0) {
-                        var tmp = 10 * heroes[i].rynu[km][0][1];
+                        var tmp = rynuSolo(heroes[i], km, 1);
                         tmpBonus[34] += tmp;
                     }
 
                     //защита всех +3
                     if (heroes[i].rynu[km][0][3] > 0) {
-                        var tmp = 3 * heroes[i].rynu[km][0][3];
+                        var tmp = rynuSolo(heroes[i], km, 3);
                         for (var m = 0; m < 8; m++) {
                             tmpBonus[m] += tmp;
                         }
@@ -10717,7 +8651,7 @@ if (komplekt47_5 == 3) {
 
                     //здоровье всех +5
                     if (heroes[i].rynu[km][0][4] > 0) {
-                        var tmp = 5 * heroes[i].rynu[km][0][4];
+                        var tmp = rynuSolo(heroes[i], km, 4);
                         for (var m = 0; m < 8; m++) {
                             tmpBonus[16 + m] += tmp;
                         }
@@ -10742,7 +8676,7 @@ if (komplekt47_5 == 3) {
                     }
                     //атака всех +3
                     if (heroes[i].rynu[km][0][6] > 0) {
-                        var tmp = 3 * heroes[i].rynu[km][0][6];
+                        var tmp = rynuSolo(heroes[i], km, 6);
                         for (var m = 0; m < 8; m++) {
                             tmpBonus[8 + m] += tmp;
                         }
@@ -10761,13 +8695,13 @@ if (komplekt47_5 == 3) {
                     if (unitu[i].type_vrag == 4 && (((i == 0 || i == 1 || i == 6) && !kz) || (i == 2 || i == 3 || i == 4 || i == 5))) {
                         //опыт +25
                         if (heroes[i].rynu[km][0][0] > 0) {
-                            var tmp = 25 * heroes[i].rynu[km][0][0];
+                            var tmp = rynuSolo(heroes[i], km, 0);
                             tmpBonus[34] += tmp;
                         }
 
                         //защита всех +5
                         if (heroes[i].rynu[km][0][2] > 0) {
-                            var tmp = 5 * heroes[i].rynu[km][0][2];
+                            var tmp = rynuSolo(heroes[i], km, 2);
                             for (var m = 0; m < 8; m++) {
                                 tmpBonus[m] += tmp;
                             }
@@ -10775,7 +8709,7 @@ if (komplekt47_5 == 3) {
                         //на врага
                         //атака всех монстров -5
                         if (heroes[i].rynu[km][0][5] > 0) {
-                            var tmp = -5 * heroes[i].rynu[km][0][5];
+                            var tmp = rynuSolo(heroes[i], km, 5);
                             for (var m = 0; m < 8; m++) {
                                 tmpBonusVrag[8 + m] += tmp;
                             }
@@ -11413,7 +9347,7 @@ if (komplekt47_5 == 3) {
                     //VRAGU
                     //атака всех -3
                     if (heroes[i].rynu[km][0][7] > 0) {
-                        var tmp = -3 * heroes[i].rynu[km][0][7];
+                        var tmp = rynuSolo(heroes[i], km, 7);
                         for (var m = 0; m < 8; m++) {
                             tmpBonusVrag[8 + m] += tmp;
                         }
@@ -11828,7 +9762,7 @@ function se_info(num, num_unit) {
                 var x = unitu[num].bonusu[40] ? unitu[num].bonusu[40] : '';
                 x = x > 0 ? ('+' + x) : x;
                 personal.append('<div id="pers_img"></div><div id="pers_inf">' + x + (x ? '%' : '') + '</div>');
-                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:image/png;base64,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\")" });
+                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:img/png;base64,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\")" });
                 pers_inf = $('#pers_inf');
                 pers_inf.css({ 'display': 'inline-block', 'vertical-align': 'top', 'font-size': 'large' });
                 if (x > 0) {
@@ -11844,7 +9778,7 @@ function se_info(num, num_unit) {
                 var x = unitu[num].bonusu[41] ? unitu[num].bonusu[41] : '';
                 x = x > 0 ? ('+' + x) : x;
                 personal.append('<div id="pers_img"></div><div id="pers_inf">' + x + (x ? '%' : '') + '</div>');
-                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:image/png;base64,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\")" });
+                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:img/png;base64,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\")" });
                 pers_inf = $('#pers_inf');
                 pers_inf.css({ 'display': 'inline-block', 'vertical-align': 'top', 'font-size': 'large' });
                 if (x > 0) {
@@ -11860,7 +9794,7 @@ function se_info(num, num_unit) {
                 var x = unitu[num].bonusu[42] ? unitu[num].bonusu[42] : '';
                 x = x > 0 ? ('+' + x) : x;
                 personal.append('<div id="pers_img"></div><div id="pers_inf">' + x + (x ? '%' : '') + '</div>');
-                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:image/png;base64,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\")" });
+                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:img/png;base64,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\")" });
                 pers_inf = $('#pers_inf');
                 pers_inf.css({ 'display': 'inline-block', 'vertical-align': 'top', 'font-size': 'large' });
                 if (x > 0) {
@@ -11876,7 +9810,7 @@ function se_info(num, num_unit) {
                 var x = unitu[num].bonusu[43] ? unitu[num].bonusu[43] : '';
                 x = x > 0 ? ('+' + x) : x;
                 personal.append('<div id="pers_img"></div><div id="pers_inf">' + x + (x ? '%' : '') + '</div>');
-                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:image/png;base64,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\")" });
+                $('#pers_img').css({ 'height': '42px', 'display': 'inline-block', 'width': '65px', 'background': "url(\"data:img/png;base64,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\")" });
                 pers_inf = $('#pers_inf');
                 pers_inf.css({ 'display': 'inline-block', 'vertical-align': 'top', 'font-size': 'large' });
                 if (x > 0) {
@@ -11943,8 +9877,8 @@ function getSpanBonus(numBonus, flagYkr) {
 function se_info_yb(lvl) {
     kalk_bonusu();
     var bonus = getSpanBonus(28);
-    $("#yb_lvl").html("Укрепление[" + (lvl + 1) + "ур]");
-    $("#yb_kill").html("Потери: " + db_yb_tmp[lvl][spes][0] + " юнитов " + bonus);
+    $("#yb_lvl").html(i18nT("calc.fortLvl", "Укрепление[{n}ур]", { n: lvl + 1 }));
+    $("#yb_kill").html(i18nT("calc.lossesUnits", "Потери: {n} юнитов", { n: db_yb_tmp[lvl][spes][0] }) + " " + bonus);
     $("#yb_armor").html("+" + db_yb_tmp[lvl][spes][1]);
 
     for (var k = 0; k < 7; k++) {
@@ -11974,7 +9908,7 @@ function se_info_mb(num) {
     unitu[2].limit_bonus(43, -90, false); //проверка лимита мин атаки
 
     if (num) {
-        $("#mb_lvl").html("Маг.башня[" + (lvl_mb_2 + 1) + "ур]");
+        $("#mb_lvl").html(i18nT("calc.magicTowerLvl", "Маг.башня[{n}ур]", { n: lvl_mb_2 + 1 }));
         unitu[2].nanas_damag_all(0);
         var damag_na_zaw = unitu[2].ataks;
         unitu[2].ataks = 0;
@@ -11984,7 +9918,7 @@ function se_info_mb(num) {
         var damag = Math.round(sredn_damag * db_mb_tmp[lvl_mb_2]);
     }
     else {
-        $("#mb_lvl").html("Маг.башня[" + (lvl_mb_1 + 1) + "ур]");
+        $("#mb_lvl").html(i18nT("calc.magicTowerLvl", "Маг.башня[{n}ур]", { n: lvl_mb_1 + 1 }));
         unitu[2].nanas_damag_all(0);
         var damag_na_zaw = unitu[2].ataks;
         unitu[2].ataks = 0;
@@ -12009,7 +9943,7 @@ function se_info_bb(num) {
 
     kalk_bonusu();
     if (num) {
-        $("#bb_lvl").html("Башня[" + (lvl_bb_2 + 1) + "ур]");
+        $("#bb_lvl").html(i18nT("calc.towerLvl", "Башня[{n}ур]", { n: lvl_bb_2 + 1 }));
         var damag = 0;
         switch (unitu[2].min_max) {
             case 0:
@@ -12036,7 +9970,7 @@ function se_info_bb(num) {
     }
     else {
 
-        $("#bb_lvl").html("Башня[" + (lvl_bb_1 + 1) + "ур]");
+        $("#bb_lvl").html(i18nT("calc.towerLvl", "Башня[{n}ур]", { n: lvl_bb_1 + 1 }));
         var damag = 0;
         switch (unitu[2].min_max) {
             case 0:
@@ -12890,8 +10824,14 @@ function format_title_for_dress(num, num_smotka, num_hero) {
     if (tmpText == null) {
         tmpText = '';
     }
-    document.getElementById("shmotka_" + num_smotka + "_" + num_hero).title = tmpText;
-    document.getElementById('litle_dress_' + num_hero + '_' + num + '_' + num_smotka).title = tmpText;
+    var worn = document.getElementById("shmotka_" + num_smotka + "_" + num_hero);
+    if (worn) {
+        worn.title = tmpText;
+    }
+    var litleDress = document.getElementById('litle_dress_' + num_hero + '_' + num + '_' + num_smotka);
+    if (litleDress) {
+        litleDress.title = tmpText;
+    }
 
 }
 
@@ -13001,6 +10941,31 @@ for (let i = 0; i <= 100; i++) {
 }
 
 
+function rynuSolo(hero, slot, idx) {
+    var n = hero && hero.rynu && hero.rynu[slot] ? hero.rynu[slot][0][idx] : 0;
+    if (!n) return 0;
+    var ancient = hero.rynu_ancient && hero.rynu_ancient[slot];
+    var table = ancient
+        ? [30, 12, 6, 4, 6, -6, 4, -4, -3]
+        : [25, 10, 5, 3, 5, -5, 3, -3, -2];
+    return n * table[idx];
+}
+
+function vkl_ancient_rune(num_smotka, num_hero) {
+    if (!heroes[num_hero].rynu_ancient) {
+        heroes[num_hero].rynu_ancient = Array(12).fill(0);
+    }
+    var on = !heroes[num_hero].rynu_ancient[num_smotka];
+    heroes[num_hero].rynu_ancient[num_smotka] = on ? 1 : 0;
+    var div = $("#ancient_rune_" + num_smotka + "_" + num_hero);
+    if (on) {
+        div.addClass("ancient_rune_vkl").removeClass("ancient_rune");
+    }
+    else {
+        div.addClass("ancient_rune").removeClass("ancient_rune_vkl");
+    }
+}
+
 function set_rynu_by_info(numberHero, num_dress) {
     //init rynu
     var countRynu = heroes[numberHero].rynu[num_dress][0].length;
@@ -13037,75 +11002,6 @@ var hero_vkl = [[false, false, false], [false, false, false], [false, false, fal
 //==================================================
 
 
-function seeJson(json) {
-    var all3 = JSON.parse(json);
-    if (undefined != all3.errors) {
-        alert(all3.errors);
-        return false;
-    }
-
-    var m = parseInt(all3.num);
-    //растановка данных и шмоток как при save
-
-    unitu[m].rewrite(all3.obj.unit);
-    unitu[m].number = m;
-    //почистить невозможные штандарты
-    if (m < 2 || m == 6) {
-        unitu[m].shtandart[0] = 0;
-        unitu[m].shtandart[1] = 0;
-        unitu[m].shtandart[2] = 0;
-        unitu[m].shtandart[7] = 0;
-        unitu[m].shtandart[8] = 0;
-        unitu[m].shtandart[9] = 0;
-        unitu[m].shtandart[10] = 0;
-    }
-    unitu[m].input_true();
-    //растановка рас вклюая руины
-    unitu[m].change_type(true);
-    unitu[m].otst_true();//не пашет
-    unitu[m].checked_true();
-
-
-    for (var ms = 0; ms < 160; ms++) {
-        document.getElementById("pas_do_magick_" + m + "_" + ms).style.display = 'none';
-    }
-
-    heroes[m].rewrite(all3.obj.hero);
-    heroes[m].number = m;
-    if (m < 2 || m == 6) {
-        heroes[m].magick[4] = 0;
-        heroes[m].magick[9] = 0;
-        heroes[m].magick[33] = 0;
-        heroes[m].magick[36] = 0;
-        heroes[m].magick[38] = 0;
-        heroes[m].magick[41] = 0;
-        heroes[m].magick[50] = 0;
-        heroes[m].magick[51] = 0;
-        heroes[m].magick[52] = 0;
-        heroes[m].magick[64] = 0;
-        heroes[m].magick[70] = 0;
-        heroes[m].magick[75] = 0;
-    }
-    if (m != 2)
-        heroes[m].magick[118] = 0;
-
-    //todo почистить невозможные штандарты
-
-
-
-    heroes[m].hero_true(unitu[m].hero, m);
-    heroes[m].hide_all_dress();
-
-
-    if (m == 2 && heroes[2].magick[118]) {
-        document.getElementById("magic_on_hero_2").style.display = 'inline-block';
-    } else {
-        document.getElementById("do_magick_2_118").style.display = 'none';
-    }
-
-
-    $('#load-one-army').trigger('reset');
-}
 
 function miniFun() // chenge type server
 {
@@ -13132,7 +11028,6 @@ window.onload = load;
 function load() {
     $_GET = parseGetParams();
 
-    $("#link-for-load input").click(function () { this.select() });
 
     $(".monster_settings input").click(function () {
         var num = $(this).parent().data('number');
@@ -13152,18 +11047,6 @@ function load() {
     $('iframe').attr('src', '#')
 
 
-    $('.save_one').bind('click', function () {
-        var num = $(this).data('num');
-        //checkbox on red check
-        unitu[num].red = $("#red_" + num).is(':checked');
-
-        var text = JSON.stringify({
-            hero: heroes[num],
-            unit: unitu[num]
-        });
-        $("#save-one-in-file").val(text);
-        $('#send-one').submit();
-    });
     $('#marader_lvl, .marader_lvl_child').bind('focus', function () {
         $(this).val() == 0 ? $(this).val('') : false;
     });
@@ -13187,14 +11070,6 @@ function load() {
         }
         calculate_marader();
     });
-    $('.load_one').bind('click', function () {
-        var num = $(this).data('num');
-        $("#load-file-num").val(num);
-        $('#load-file-inp').click();
-    });
-    $('#load-file-inp').live('change', (function () {
-        $('#load-one-army').submit();
-    }));
 
 
     i = 0;
@@ -13371,618 +11246,9 @@ function load() {
     document.getElementById("b3").onclick = function () {
         volnu_change(2);
     }
-    document.getElementById("save").onclick = function () {
-        save_all();
-    }
-    document.getElementById("load").onclick = function () {
-        load_all();
-    }
-    document.getElementById("feo_load").onclick = function () {
-        feo_load_all();
-    }
-    document.getElementById("ur_load").onclick = function () {
-        ur_load_all();
-    }
-    document.getElementById("torn_load").onclick = function () {
-        torn_load_all();
-    }
-    document.getElementById("io_load").onclick = function () {
-        io_load_all();
-    }
 
-    document.getElementById("rad_load").onclick = function () {
-        rad_load_all();
-    }
 
-    document.getElementById("tir_load").onclick = function () {
-        tir_load_all();
-    }
 
-    document.getElementById("gify_load").onclick = function () {
-        gify_load_all();
-    }
-
-    document.getElementById("ia_load").onclick = function () {
-        ia_load_all();
-    }
-
-    document.getElementById("hegl_load").onclick = function () {
-        hegl_load_all();
-    }
-    document.getElementById("a_a_load").onclick = function () {
-        a_a_load_all();
-    }
-    document.getElementById("a_aa_load").onclick = function () {
-        a_aa_load_all();
-    }
-    document.getElementById("a_aaa_load").onclick = function () {
-        a_aaa_load_all();
-    }
-    document.getElementById("a_aaaa_load").onclick = function () {
-        a_aaaa_load_all();
-    }
-    document.getElementById("a_aaaaa_load").onclick = function () {
-        a_aaaaa_load_all();
-    }
-    document.getElementById("b_b_load").onclick = function () {
-        b_b_load_all();
-    }
-    document.getElementById("b_bb_load").onclick = function () {
-        b_bb_load_all();
-    }
-    document.getElementById("b_bbb_load").onclick = function () {
-        b_bbb_load_all();
-    }
-    document.getElementById("b_bbbb_load").onclick = function () {
-        b_bbbb_load_all();
-    }
-    document.getElementById("c_c_load").onclick = function () {
-        c_c_load_all();
-    }
-    document.getElementById("c_cc_load").onclick = function () {
-        c_cc_load_all();
-    }
-    document.getElementById("c_ccc_load").onclick = function () {
-        c_ccc_load_all();
-    }
-    document.getElementById("c_cccc_load").onclick = function () {
-        c_cccc_load_all();
-    }
-    document.getElementById("c_ccccc_load").onclick = function () {
-        c_ccccc_load_all();
-    }
-    document.getElementById("d_d_load").onclick = function () {
-        d_d_load_all();
-    }
-    document.getElementById("d_dd_load").onclick = function () {
-        d_dd_load_all();
-    }
-    document.getElementById("d_ddd_load").onclick = function () {
-        d_ddd_load_all();
-    }
-    document.getElementById("d_dddd_load").onclick = function () {
-        d_dddd_load_all();
-    }
-    document.getElementById("d_ddddd_load").onclick = function () {
-        d_ddddd_load_all();
-    }
-    document.getElementById("fiolet_load").onclick = function () {
-        fiolet_load_all();
-    }
-/*сарки*/
-document.getElementById("armyres1_load").onclick = function () {
-    armyres1_load_all();
-}
-
-document.getElementById("armyres1s_load").onclick = function () {
-    armyres1s_load_all();
-}
-
-document.getElementById("armyres2_load").onclick = function () {
-    armyres2_load_all();
-}
-
-document.getElementById("armyres2s_load").onclick = function () {
-    armyres2s_load_all();
-}
-
-document.getElementById("armyres3_load").onclick = function () {
-    armyres3_load_all();
-}
-
-document.getElementById("armyres3s_load").onclick = function () {
-    armyres3s_load_all();
-}
-
-document.getElementById("armyres4_load").onclick = function () {
-    armyres4_load_all();
-}
-
-document.getElementById("armyres4s_load").onclick = function () {
-    armyres4s_load_all();
-}
-
-document.getElementById("armyres5_load").onclick = function () {
-    armyres5_load_all();
-}
-
-document.getElementById("armyres5s_load").onclick = function () {
-    armyres5s_load_all();
-}
-
-document.getElementById("armyresally1_load").onclick = function () {
-    armyresally1_load_all();
-        
-}
-
-document.getElementById("armyresally1s_load").onclick = function () {
-    armyresally1s_load_all();
-}
-
-document.getElementById("armyresally2_load").onclick = function () {
-    armyresally2_load_all();
-}
-
-document.getElementById("armyresally2s_load").onclick = function () {
-    armyresally2s_load_all();
-}
-
-document.getElementById("armyresally3_load").onclick = function () {
-    armyresally3_load_all();
-}
-
-document.getElementById("armyresally3s_load").onclick = function () {
-    armyresally3s_load_all();
-}
-
-document.getElementById("armyresally4_load").onclick = function () {
-    armyresally4_load_all();
-}
-
-document.getElementById("armyresally4s_load").onclick = function () {
-    armyresally4s_load_all();
-}
-
-document.getElementById("armystrength1_load").onclick = function () {
-    armystrength1_load_all();
-}
-
-document.getElementById("armystrength1s_load").onclick = function () {
-    armystrength1s_load_all();
-}
-
-document.getElementById("armystrength2_load").onclick = function () {
-    armystrength2_load_all();
-}
-
-document.getElementById("armystrength2s_load").onclick = function () {
-    armystrength2s_load_all();
-}
-
-document.getElementById("armystrength3_load").onclick = function () {
-    armystrength3_load_all();
-}
-
-document.getElementById("armystrength3s_load").onclick = function () {
-    armystrength3s_load_all();
-}
-
-document.getElementById("armystrength4_load").onclick = function () {
-    armystrength4_load_all();
-}
-
-document.getElementById("armystrength4s_load").onclick = function () {
-    armystrength4s_load_all();
-}
-
-document.getElementById("armystrength5_load").onclick = function () {
-    armystrength5_load_all();
-}
-
-document.getElementById("armystrength5s_load").onclick = function () {
-    armystrength5s_load_all();
-}
-
-document.getElementById("armystrengthally1_load").onclick = function () {
-    armystrengthally1_load_all();
-}
-
-document.getElementById("armystrengthally1s_load").onclick = function () {
-    armystrengthally1s_load_all();
-}
-
-document.getElementById("armystrengthally2_load").onclick = function () {
-    armystrengthally2_load_all();
-}
-
-document.getElementById("armystrengthally2s_load").onclick = function () {
-    armystrengthally2s_load_all();
-}
-
-document.getElementById("armystrengthally3_load").onclick = function () {
-    armystrengthally3_load_all();
-}
-
-document.getElementById("armystrengthally3s_load").onclick = function () {
-    armystrengthally3s_load_all();
-}
-
-document.getElementById("armystrengthally4_load").onclick = function () {
-    armystrengthally4_load_all();
-}
-
-document.getElementById("armystrengthally4s_load").onclick = function () {
-    armystrengthally4s_load_all();
-}
-//
-document.getElementById("enemdef1_load").onclick = function () {
-    enemdef1_load_all();
-}
-
-document.getElementById("enemdef1s_load").onclick = function () {
-    enemdef1s_load_all();
-}
-
-document.getElementById("enemdef2_load").onclick = function () {
-    enemdef2_load_all();
-}
-
-document.getElementById("enemdef2s_load").onclick = function () {
-    enemdef2s_load_all();
-}
-
-document.getElementById("enemdef3_load").onclick = function () {
-    enemdef3_load_all();
-}
-
-document.getElementById("enemdef3s_load").onclick = function () {
-    enemdef3s_load_all();
-}
-
-document.getElementById("enemdef4_load").onclick = function () {
-    enemdef4_load_all();
-}
-
-document.getElementById("enemdef4s_load").onclick = function () {
-    enemdef4s_load_all();
-}
-
-document.getElementById("enemhealth1_load").onclick = function () {
-    enemhealth1_load_all();
-}
-
-document.getElementById("enemhealth1s_load").onclick = function () {
-    enemhealth1s_load_all();
-}
-
-document.getElementById("enemhealth2_load").onclick = function () {
-    enemhealth2_load_all();
-}
-//
-document.getElementById("enemhealth2s_load").onclick = function () {
-    enemhealth2s_load_all();
-}
-
-document.getElementById("enemhealth3_load").onclick = function () {
-    enemhealth3_load_all();
-}
-
-document.getElementById("enemhealth3s_load").onclick = function () {
-    enemhealth3s_load_all();
-}
-
-document.getElementById("enemhealth4_load").onclick = function () {
-    enemhealth4_load_all();
-}
-
-document.getElementById("enemhealth4s_load").onclick = function () {
-    enemhealth4s_load_all();
-}
-
-document.getElementById("enemmaxdef1_load").onclick = function () {
-    enemmaxdef1_load_all();
-}
-
-document.getElementById("enemmaxdef1s_load").onclick = function () {
-    enemmaxdef1s_load_all();
-}
-
-document.getElementById("enemmaxdef2_load").onclick = function () {
-    enemmaxdef2_load_all();
-}
-
-document.getElementById("enemmaxdef2s_load").onclick = function () {
-    enemmaxdef2s_load_all();
-}
-
-document.getElementById("enemmaxdef3_load").onclick = function () {
-    enemmaxdef3_load_all();
-}
-
-document.getElementById("enemmaxdef3s_load").onclick = function () {
-    enemmaxdef3s_load_all();
-}
-
-document.getElementById("enemweak1_load").onclick = function () {
-    enemweak1_load_all();
-}
-
-document.getElementById("enemweak1s_load").onclick = function () {
-    enemweak1s_load_all();
-}
-
-document.getElementById("enemweak2_load").onclick = function () {
-    enemweak2_load_all();
-}
-
-document.getElementById("enemweak2s_load").onclick = function () {
-    enemweak2s_load_all();
-}
-
-document.getElementById("enemweak3_load").onclick = function () {
-    enemweak3_load_all();
-}
-
-document.getElementById("enemweak3s_load").onclick = function () {
-    enemweak3s_load_all();
-}
-
-document.getElementById("enemweak4_load").onclick = function () {
-    enemweak4_load_all();
-}
-
-document.getElementById("enemweak4s_load").onclick = function () {
-    enemweak4s_load_all();
-}
-//
-document.getElementById("heoexp1_load").onclick = function () {
-    heoexp1_load_all();
-}
-
-document.getElementById("heoexp1s_load").onclick = function () {
-    heoexp1s_load_all();
-}
-
-document.getElementById("heoexp2_load").onclick = function () {
-    heoexp2_load_all();
-}
-
-document.getElementById("heoexp2s_load").onclick = function () {
-    heoexp2s_load_all();
-}
-
-document.getElementById("heoexp3_load").onclick = function () {
-    heoexp3_load_all();
-}
-
-document.getElementById("heoexp3s_load").onclick = function () {
-    heoexp3s_load_all();
-}
-
-document.getElementById("heoexp4_load").onclick = function () {
-    heoexp4_load_all();
-}
-
-document.getElementById("heoexp4s_load").onclick = function () {
-    heoexp4s_load_all();
-}
-
-document.getElementById("heoexp5_load").onclick = function () {
-    heoexp5_load_all();
-}
-
-document.getElementById("heoexp5s_load").onclick = function () {
-    heoexp5s_load_all();
-}
-
-document.getElementById("herospeed1_load").onclick = function () {
-    herospeed1_load_all();
-}
-
-document.getElementById("herospeed1s_load").onclick = function () {
-    herospeed1s_load_all();
-}
-
-document.getElementById("herospeed2_load").onclick = function () {
-    herospeed2_load_all();
-}
-
-document.getElementById("herospeed2s_load").onclick = function () {
-    herospeed2s_load_all();
-}
-
-document.getElementById("herospeed3_load").onclick = function () {
-    herospeed3_load_all();
-}
-
-document.getElementById("herospeed3s_load").onclick = function () {
-    herospeed3s_load_all();
-}
-
-document.getElementById("magdefense1_load").onclick = function () {
-    magdefense1_load_all();
-}
-
-document.getElementById("magdefense1s_load").onclick = function () {
-    magdefense1s_load_all();
-}
-
-document.getElementById("magdefense2_load").onclick = function () {
-    magdefense2_load_all();
-}
-
-document.getElementById("magdefense2s_load").onclick = function () {
-    magdefense2s_load_all();
-}
-
-document.getElementById("magdefense3_load").onclick = function () {
-    magdefense3_load_all();
-}
-
-document.getElementById("magdefense3s_load").onclick = function () {
-    magdefense3s_load_all();
-}
-
-document.getElementById("magdefense4_load").onclick = function () {
-    magdefense4_load_all();
-}
-
-document.getElementById("magdefense4s_load").onclick = function () {
-    magdefense4s_load_all();
-}
-
-document.getElementById("magdefense5_load").onclick = function () {
-    magdefense5_load_all();
-}
-
-document.getElementById("magdefense5s_load").onclick = function () {
-    magdefense5s_load_all();
-}
-//
-document.getElementById("maxdef1_load").onclick = function () {
-    maxdef1_load_all();
-}
-document.getElementById("maxdef1s_load").onclick = function () {
-    maxdef1s_load_all();
-}
-
-document.getElementById("maxdef2_load").onclick = function () {
-    maxdef2_load_all();
-}
-
-document.getElementById("maxdef2s_load").onclick = function () {
-    maxdef2s_load_all();
-}
-
-document.getElementById("maxdef3_load").onclick = function () {
-    maxdef3_load_all();
-}
-
-document.getElementById("maxdef3s_load").onclick = function () {
-    maxdef3s_load_all();
-}
-
-document.getElementById("maxdefally1_load").onclick = function () {
-    maxdefally1_load_all();
-}
-
-document.getElementById("maxdefally1s_load").onclick = function () {
-    maxdefally1s_load_all();
-}
-
-document.getElementById("maxdefally2_load").onclick = function () {
-    maxdefally2_load_all();
-}
-
-document.getElementById("maxdefally2s_load").onclick = function () {
-    maxdefally2s_load_all();
-}
-
-document.getElementById("protectally1_load").onclick = function () {
-    protectally1_load_all();
-}
-
-document.getElementById("protectally1s_load").onclick = function () {
-    protectally1s_load_all();
-}
-
-document.getElementById("protectally2_load").onclick = function () {
-    protectally2_load_all();
-}
-
-document.getElementById("protectally2s_load").onclick = function () {
-    protectally2s_load_all();
-}
-
-document.getElementById("protectally3_load").onclick = function () {
-    protectally3_load_all();
-}
-
-document.getElementById("protectally3s_load").onclick = function () {
-    protectally3s_load_all();
-}
-
-document.getElementById("protectally4_load").onclick = function () {
-    protectally4_load_all();
-}
-
-document.getElementById("protectally4s_load").onclick = function () {
-    protectally4s_load_all();
-}
-//
-document.getElementById("protection1_load").onclick = function () {
-    protection1_load_all();
-}
-
-document.getElementById("protection1s_load").onclick = function () {
-    protection1s_load_all();
-}
-
-document.getElementById("protection2_load").onclick = function () {
-    protection2_load_all();
-}
-
-document.getElementById("protection2s_load").onclick = function () {
-    protection2s_load_all();
-}
-
-document.getElementById("protection3_load").onclick = function () {
-    protection3_load_all();
-}
-
-document.getElementById("protection3s_load").onclick = function () {
-    protection3s_load_all();
-}
-
-document.getElementById("protection4_load").onclick = function () {
-    protection4_load_all();
-}
-
-document.getElementById("protection4s_load").onclick = function () {
-    protection4s_load_all();
-}
-
-document.getElementById("protection5_load").onclick = function () {
-    protection5_load_all();
-}
-
-document.getElementById("protection5s_load").onclick = function () {
-    protection5s_load_all();
-}
-
-document.getElementById("terr1_load").onclick = function () {
-    terr1_load_all();
-}
-
-document.getElementById("terr1s_load").onclick = function () {
-    terr1s_load_all();
-}
-
-document.getElementById("terr2_load").onclick = function () {
-    terr2_load_all();
-}
-
-document.getElementById("terr2s_load").onclick = function () {
-    terr2s_load_all();
-}
-
-document.getElementById("terr3_load").onclick = function () {
-    terr3_load_all();
-}
-
-document.getElementById("terr3s_load").onclick = function () {
-    terr3s_load_all();
-}
-
-
-
-    $("#load_in_file").bind('click', function () {
-        $("#files").click();
-    });
-
-    $('#files').bind('change', function () {
-        readBlob();
-    });
 
     $('.search_input').bind('keyup', function () {
         var thisObj = $(this);
@@ -14013,327 +11279,6 @@ document.getElementById("terr3s_load").onclick = function () {
         $('.hide_this_magick').hide();
     });
 
-    function readBlob() {
-
-        var files = document.getElementById('files').files;
-        if (!files.length) {
-            alert('Please select a file!');
-            return;
-        }
-
-        var file = files[0];
-        var start = 0;
-        var stop = file.size - 1;
-
-        var reader = new FileReader();
-
-        // If we use onloadend, we need to check the readyState.
-        reader.onloadend = function (evt) {
-            if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-                var data = evt.target.result;
-
-                
-                var all3 = JSON.parse(data);
-                var skill_ost_mech = all3.skill_ost_mech;
-                if (all3.other !== false) {
-                    spes = all3.other[0];
-                    max_z = all3.other[1];
-                    teretory = all3.other[2];
-                    limit_b = all3.other[3];
-                    lvl_mb_1 = all3.other[4];
-                    lvl_mb_2 = all3.other[5];
-                    lvl_bb_1 = all3.other[6];
-                    lvl_bb_2 = all3.other[7];
-                    kol_vo_yb = all3.other[8];
-                    victory = all3.other[9];
-                    type_raz_ = all3.other[10];
-                    $("#type_doing").val(type_raz_);
-                    num_volna = all3.other[11];
-                    ficha_ruinu = all3.other[12];
-                    othero = all3.other[13];
-                    if (all3.other[15] == undefined)
-                        all3.other[15] = false;
-                    kz = all3.other[15];
-
-                    if (all3.other[16] == undefined)
-                        all3.other[16] = [db_gate[0][1], db_gate[0][1], db_gate[0][1]];
-                    gate_hp = all3.other[16];
-                    if (all3.other[17] == undefined)
-                        all3.other[17] = 0;
-                    gate_lvl = all3.other[17];
-                    if (all3.other[18] == undefined)
-                        all3.other[18] = [false, false, false];
-                    flags_gate = all3.other[18];
-
-                    if (flags_gate[num_volna] && kz) {
-                        document.getElementById("gate_add").style.display = 'none';
-                        document.getElementById("gate").style.display = 'inline-block';
-                    }
-                    else {
-                        document.getElementById("gate_add").style.display = 'inline-block';
-                        document.getElementById("gate").style.display = 'none';
-                    }
-
-                    $("#hp_gate").val(gate_hp[num_volna]);
-                    checkShowOrHideKZ();
-
-                    if (all3.other[14] == undefined) {
-                        go_back = [0, 0, 0, 0, 0];
-                    }
-                    else {
-                        go_back = all3.other[14];
-                    }
-
-
-
-                    if (all3.other[19] != undefined) {
-                        hero_vkl = all3.other[19];
-                        for (var u = 0; u < 3; u++) {
-                            for (var p = 0; p < 3; p++) {
-                                hero_voln[u][p].rewrite(all3.other[20][u][p]);
-                            }
-                        }
-                    }
-
-                    if (all3.other[21] != undefined) {
-                        type_server = all3.other[21];
-                    }
-                    else {
-                        type_server = 1;
-                    }
-                    $('.type_server input[type=radio]').removeAttr('checked');
-                    $('#servak-' + type_server).attr('checked', 'checked');
-                    miniFun();
-
-
-                    //выствляем номер волны
-                    document.getElementById("b1").style.background = "#FFFFFF";
-                    document.getElementById("b2").style.background = "#FFFFFF";
-                    document.getElementById("b3").style.background = "#FFFFFF";
-                    document.getElementById("b" + (num_volna + 1)).style.background = "#66FFFF";
-                    //герой включен ли
-                    //фон
-
-                    $("#armor_content_left").removeClass().addClass('terr_' + teretory);
-
-                    //ОТКЛ ГЕРОЯ!!!!!!!!!!!!
-
-                    //башень
-                    if (limit_b) {
-                        if (limit_b == 1) { //если только одна башня
-                            if (lvl_mb_1 > -1) { //если магическая
-                                document.getElementById('mb_add').style.display = 'none';
-                                document.getElementById('bb_add').style.display = 'inline-block';
-                                document.getElementById('mb1').style.display = 'inline-block';
-                                document.getElementById('mb2').style.display = 'none';
-                                document.getElementById('bb1').style.display = 'none';
-                                document.getElementById('bb2').style.display = 'none';
-                            }
-                            else { //если простая
-                                document.getElementById('mb_add').style.display = 'inline-block';
-                                document.getElementById('bb_add').style.display = 'none';
-                                document.getElementById('mb1').style.display = 'none';
-                                document.getElementById('mb2').style.display = 'none';
-                                document.getElementById('bb1').style.display = 'inline-block';
-                                document.getElementById('bb2').style.display = 'none';
-                            }
-                        }
-                        else {//если две башни
-                            if (lvl_mb_1 > -1 && lvl_mb_2 > -1) {//две магические
-                                document.getElementById('bb1').style.display = 'none';
-                                document.getElementById('bb2').style.display = 'none';
-                                document.getElementById('bb_add').style.display = 'none';
-                                document.getElementById('mb_add').style.display = 'none';
-                                document.getElementById('mb1').style.display = 'inline-block';
-                                document.getElementById('mb2').style.display = 'inline-block';
-                                document.getElementById('plas_mb1').style.display = 'none';
-                                //document.getElementById('plas_mb2').style.display = 'none';
-                                document.getElementById('del_mb1').style.display = 'none';
-                                document.getElementById('del_mb2').style.display = 'inline-block';
-                            }
-                            else {
-                                if (lvl_mb_1 > -1) { //по одной каждого типа
-                                    document.getElementById('bb2').style.display = 'none';
-                                    document.getElementById('mb2').style.display = 'none';
-                                    document.getElementById('bb_add').style.display = 'none';
-                                    document.getElementById('mb_add').style.display = 'none';
-                                    document.getElementById('mb1').style.display = 'inline-block';
-                                    document.getElementById('bb1').style.display = 'inline-block';
-                                    document.getElementById('plas_mb1').style.display = 'none';
-                                    document.getElementById('plas_bb1').style.display = 'none';
-                                    document.getElementById('del_mb1').style.display = 'inline-block';
-                                    document.getElementById('del_bb1').style.display = 'inline-block';
-                                }
-                                else { //две простые башни
-                                    document.getElementById('mb1').style.display = 'none';
-                                    document.getElementById('mb2').style.display = 'none';
-                                    document.getElementById('mb_add').style.display = 'none';
-                                    document.getElementById('bb_add').style.display = 'none';
-                                    document.getElementById('bb1').style.display = 'inline-block';
-                                    document.getElementById('bb2').style.display = 'inline-block';
-                                    document.getElementById('plas_bb1').style.display = 'none';
-                                    //document.getElementById('plas_bb2').style.display = 'none';
-                                    document.getElementById('del_bb1').style.display = 'none';
-                                    document.getElementById('del_bb2').style.display = 'inline-block';
-                                }
-                            }
-                        }
-                    }
-                    else {
-                        document.getElementById('mb_add').style.display = 'inline-block';
-                        document.getElementById('bb_add').style.display = 'inline-block';
-                        document.getElementById('mb1').style.display = 'none';
-                        document.getElementById('mb2').style.display = 'none';
-                        document.getElementById('bb1').style.display = 'none';
-                        document.getElementById('bb2').style.display = 'none';
-                    }
-                    //ставим соответствующие картинки на башни
-
-                    lvl_mb_1 > -1 ? $("#mb1_img").html(lvl_mb_1 + 1) : $("#mb1_img").html(1);
-                    lvl_mb_2 > -1 ? $("#mb2_img").html(lvl_mb_2 + 1) : $("#mb2_img").html(1);
-                    lvl_bb_1 > -1 ? $("#bb1_img").html(lvl_bb_1 + 1) : $("#bb1_img").html(1);
-                    lvl_bb_2 > -1 ? $("#bb2_img").html(lvl_bb_2 + 1) : $("#bb2_img").html(1);
-                    //                    document.getElementById("mb1_img").src = do_name_b("M",lvl_mb_1>-1?lvl_mb_1:0);
-                    //                    document.getElementById("mb2_img").src = do_name_b("M",lvl_mb_2>-1?lvl_mb_2:0);
-                    //                    document.getElementById("bb1_img").src = do_name_b("B",lvl_bb_1>-1?lvl_bb_1:0);
-                    //                    document.getElementById("bb2_img").src = do_name_b("B",lvl_bb_2>-1?lvl_bb_2:0);
-                    //укрепления
-                    var ik, sm;
-                    for (ik = 0, sm = 0; ik < 8; ik++) {
-                        sm += kol_vo_yb[ik];
-                        document.getElementById('_Y' + ik).value = kol_vo_yb[ik];
-                    }
-                    if (sm) {
-                        yb_add();
-                    }
-                    else {
-                        yb_delete();
-                    }
-
-                    document.getElementById("ter").selectedIndex = teretory;
-                    $("#mz").attr("checked", max_z);
-                    $("#oz").attr("checked", othero);
-                    $("#kz").attr("checked", kz);
-                    spec_change(spes);
-
-                }
-
-
-                //растановка данных и шмоток как при save
-                for (var m = 0; m < 7; m++) {
-                    //скрываем дивы с октивными заклнаниями внизу
-                    if (all3.unitu[m] !== false) {
-                        var tmp = unitu[m].hero;
-                        unitu[m].rewrite(all3.unitu[m]);
-                        unitu[m].input_true();
-                        //растановка рас вклюая руины
-                        unitu[m].change_type(true);
-                        unitu[m].otst_true();//не пашет
-                        unitu[m].checked_true();
-                        if (tmp && all3.heroes[m] === false) {
-                            unitu[m].hero = true;
-                        }
-
-                    }
-                    if (all3.heroes[m] !== false) {
-                        for (var ms = 0; ms < 160; ms++) {
-                            document.getElementById("pas_do_magick_" + m + "_" + ms).style.display = 'none';
-                        }
-
-                        heroes[m].rewrite(all3.heroes[m]);
-                        heroes[m].hero_true(true, m);
-                        heroes[m].hide_all_dress();
-                    }
-                }
-
-                if (heroes[2].magick[118]) {
-                    document.getElementById("magic_on_hero_2").style.display = 'inline-block';
-                } else {
-                    document.getElementById("do_magick_2_118").style.display = 'none';
-                }
-
-
-                //закрыть открыть дивы
-                unitu[1].div_true();
-                unitu[3].div_true();
-                unitu[4].div_true();
-                unitu[5].div_true();
-                unitu[6].div_true();
-
-
-            }
-        };
-
-        var blob = file.slice(start, stop + 1);
-        reader.readAsBinaryString(blob);
-    }
-
-    $("#save_in_file").bind("click", function () {
-        var check_varion = [];
-        var check_hero = [];
-        $(".check_worion").each(function () {
-            var thisObj = $(this);
-            check_varion[parseInt(thisObj.data('id'))] = thisObj.is(':checked');
-        });
-
-        $(".check_hero_save").each(function () {
-            var thisObj = $(this);
-            check_hero[parseInt(thisObj.data('id'))] = thisObj.is(':checked');
-        });
-
-        var lanshaft = $("#lanshaft").is(':checked');
-
-        all3.skill_ost_mech = skill_ost_mech;
-
-        var all = new Object();
-        all.unitu = new Object();
-        all.heroes = new Object();
-        for (var k = 7; k--;) {
-            check_varion[k] ? all.unitu[k] = unitu[k] : all.unitu[k] = false;
-            check_hero[k] ? all.heroes[k] = heroes[k] : all.heroes[k] = false;
-        }
-        if (lanshaft) {
-            all.other = new Array(
-                spes,
-                max_z,
-                teretory,
-                limit_b,
-                lvl_mb_1,
-                lvl_mb_2,
-                lvl_bb_1,
-                lvl_bb_2,
-                kol_vo_yb,
-                victory,
-                type_raz_,
-                num_volna,
-                ficha_ruinu,
-                othero,
-                go_back,
-                kz,
-                gate_hp,
-                gate_lvl,
-                flags_gate,
-                hero_vkl,
-                hero_voln,
-                type_server
-            );
-        }
-        else {
-            all.other = false;
-        }
-
-        var str = JSON.stringify(all);
-        if ($.browser.msie) //jQuery used
-        {
-            var mydoc = window.open();
-            mydoc.document.write(str);
-            mydoc.document.execCommand("saveAs", true, ".txt");
-        }
-        else {
-            var mydoc = window.open("data:application/download;charset=utf-8;base64," + btoa(str)); // see http://en.wikipedia.org/wiki/Data_URI_scheme
-        }
-
-    });
 
     $('#open_ditals').click(function () {
         $('#open_ditals').hide();
@@ -14376,8 +11321,6 @@ document.getElementById("terr3s_load").onclick = function () {
     unitu[4].min_max = 1;
     unitu[5].min_max = 1;
 
-    if ($_GET['saveID'] != undefined)
-        load_all($_GET['saveID']);
 }
 
 function min_max_select() {

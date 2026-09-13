@@ -3,7 +3,7 @@
 <html>
  <head>
 	<html style="
-    background-color: #fff2d5;
+    background-color: #f4e0b6;
 ">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -38,7 +38,7 @@
 					﻿<style>
 
 .gamefont {font: normal 10px Verdana;}
-.quest {display: inline-block; width: 100%; font: normal 12px Verdana; background-color: #fde5a6; outline: 1px solid #C5C7C5;}
+.quest {display: block; flex: 1 1 auto; min-width: 0; font: normal 12px Verdana; background-color: #fde5a6; outline: 1px solid #C5C7C5;}
 .quest_header {display: block; width: 100%; height: 30px; line-height: 30px; vertical-align: middle; cursor: pointer;}
 .quest_header_title {float: left; padding-left: 5px;}
 .quest_header_server {float: right; margin: 3px 5px 0 0; display: inline-block;}
@@ -60,9 +60,13 @@
 .quest-group-holder {display: none; width: 100%; margin-bottom: 10px;}
 .quest-group-title {display: block; width: 100%; text-align: right; margin-bottom: 10px;}
 .quest-group-title A {color: #888; font-style: italic; text-decoration: underline;}
-.quest-holder {display: block; width: 100%; vertical-align: top; margin-bottom: 10px;}
-.quest_pre {display: inline-block; width: 20px; height: 30px; vertical-align: top;}
-.quest_pre IMG {display: inline-block; width: 20px; height: 30px; vertical-align: top;}
+.quest-holder {display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; vertical-align: top; margin-bottom: 10px;}
+.quest-holder > a[name] {position: absolute; width: 0; height: 0; overflow: hidden;}
+.quest-holder > .quest-holder,
+.quest-holder > .quest-children-holder {flex: 1 1 100%; width: 100%;}
+.quest-children-holder {display: block; width: 100%;}
+.quest_pre {flex: 0 0 20px; display: block; width: 20px; height: 30px; vertical-align: top;}
+.quest_pre IMG {display: block; width: 20px; height: 30px; vertical-align: top;}
 
 
 .subspell {text-decoration: underline; font-weight: bold; cursor: pointer; display: inline-block;}
@@ -144,32 +148,63 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
      background-position: right center;
 }
 
+.quest-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 16px 0 8px;
+  flex-wrap: wrap;
+}
 
+#questSearch {
+  flex: 1 1 280px;
+  min-width: 220px;
+  border: 1px solid #b38f50;
+  background: #fff4de;
+  color: #2f2413;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
+#expandAll {
+  float: none;
+  margin-top: 0;
+  width: auto;
+  min-width: 220px;
+}
+
+.quest-search-empty {
+  color: #6b572e;
+  margin: 8px 0 16px;
+}
 
 </style>
 
-<button id="expandAll" class="sidebarlistlink" style="
-    float: inline-end;
-    margin-top: 20px;
+<div class="quest-toolbar">
+  <input type="search" id="questSearch" data-i18n-placeholder="quests.search" placeholder="Поиск квестов по названию" />
+  <button id="expandAll" class="sidebarlistlink" style="
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    padding: 10px;
-    width: 20%;
+    padding: 10px 16px;
     text-align: center;
     background-color: rgba(248 203 94);
 	text-decoration: none;
     color: #000;
     font-size: 16px;
     font-weight: 400;
-
-">Отобразить все квесты</button>
+    cursor: pointer;
+    border: 1px solid #b38f50;
+" data-i18n="quests.showAll">Отобразить все квесты</button>
+</div>
+<p id="questSearchEmpty" class="quest-search-empty" hidden data-i18n="quests.noResults">Квесты не найдены.</p>
 
 <br><br>
 <div style='width:100%;'>
-<h3>Квесты первого дня развития</h3>
-<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+<h3 data-i18n="quests.day1">Квесты первого дня развития</h3>
+<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 <br>
 <div class='quest-holder' data-shift='0' data-quest='START_VIDEO'><a name='START_VIDEO'></a>
 
@@ -2321,8 +2356,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div>
 	<br><hr>
-	<h3>Квесты раннего уровня развития</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.early">Квесты раннего уровня развития</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='QUEST_SETTLE_CITY'><a name='QUEST_SETTLE_CITY'></a>
 	<div class='quest' data-qid='1691' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BUFF_GIVE_FUNDS BUFF_GIVE_FUNDS BUFF_SCIENCE_BOOST ' data-servers='Miner Survival Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -3577,8 +3612,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div>
 	<br><hr>
-	<h3>Война с монстрами</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.monsters">Война с монстрами</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='MONSTER_RATING_1'><a name='MONSTER_RATING_1'></a>
 	<div class='quest' data-qid='7462' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_RANDOM_ARTIFACT_LVL ' data-servers='Miner Military Survival Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -4683,8 +4718,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div>
 	<br><hr>
-	<h3>Квесты, связанные с героем</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.hero">Квесты, связанные с героем</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='QUEST_HERO_58_HEROCOUNT_1'><a name='QUEST_HERO_58_HEROCOUNT_1'></a>
 	<div class='quest' data-qid='2167' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_ARMY ' data-servers='Miner Military Survival Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -6133,10 +6168,10 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 			<span class='quest_body_bg'>Условия появления:</span>Нет данных
 			<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span><span class='quest_body_reward'> <span class='subspell'><img src='./wp-content/assets/shared/artifacts/1/windrider/footwear.png' /></span> <br></span>
 		</div>
-	</div></div></div><div class='quest-children-holder'></div>
+	</div></div></div><div class='quest-children-holder'></div></div>
 	<br><hr>
-	<h3>Кристаллы, Стоунхенджи, Руны</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.crystals">Кристаллы, Стоунхенджи, Руны</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='ALCHEMY_BP'><a name='ALCHEMY_BP'></a>
 	<div class='quest' data-qid='2239' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='RESEARCH_SCIENCE ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='5000'>
@@ -7025,8 +7060,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div></div></div></div></div>
 	<br><hr>
-	<h3>Фракционная война</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.faction">Фракционная война</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='FRACTION_MAKE_ALLIANCE'><a name='FRACTION_MAKE_ALLIANCE'></a>
 	<div class='quest' data-qid='2385' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_ARMY ' data-servers='Miner Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -7867,8 +7902,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div>
 	<br><hr>
-	<h3>Братство меча</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.brotherhood">Братство меча</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='SWORD_BROTHERHOOD_1'><a name='SWORD_BROTHERHOOD_1'></a>
 	<div class='quest' data-qid='2293' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='ENABLE_BROTHERHOOD ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -8248,8 +8283,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 	<div class='quest-children-holder'></div></div></div></div>
 	<br><hr>
-	<h3>Турниры</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.tournaments">Турниры</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='FLAG_FIND_1'><a name='FLAG_FIND_1'></a>
 	<div class='quest' data-qid='2268' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_RANDOM_SCROLL_LVL ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -8591,8 +8626,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div></div></div>
 	<br><hr>
-	<h3>Наставничество</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.mentoring">Наставничество</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='NASTAVNIK_1'><a name='NASTAVNIK_1'></a>
 	<div class='quest' data-qid='2453' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BECOME_MENTOR ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='100'>
@@ -8874,8 +8909,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div></div></div></div></div></div>
 	<br><hr>
-	<h3>Клановые замки</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.clan">Клановые замки</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='CH_CAPTURE_1'><a name='CH_CAPTURE_1'></a>
 	<div class='quest' data-qid='2251' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_ARMY ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -9217,8 +9252,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div>
 	<br><hr>
-	<h3>Квесты за ЧЖ</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.bp">Квесты за ЧЖ</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='BP_TIME_MINER'><a name='BP_TIME_MINER'></a>
 	<div class='quest' data-qid='1900' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_ARMY ' data-servers='Miner Military Survival Econom Tactical ' data-timeout='1' data-pearls='-1'>
@@ -10918,8 +10953,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div>
 	<br><hr>
-	<h3>Циклические квесты за ЧЖ</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.bpCycle">Циклические квесты за ЧЖ</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='BP_TIME_HEALER2'><a name='BP_TIME_HEALER2'></a>
 	<div class='quest' data-qid='1780' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_ARMY ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='300'>
@@ -14391,8 +14426,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div></div><div class='quest-children-holder'></div></div></div></div></div></div>
 	<br><hr>
-	<h3>Квесты-рекорды</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.records">Квесты-рекорды</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='Records_ESPIONAGE_1'><a name='Records_ESPIONAGE_1'></a>
 	<div class='quest' data-qid='1736' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIFT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -15307,8 +15342,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div>
 	<br><hr>
-	<h3>Квесты социальных сетей</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.social">Квесты социальных сетей</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='SN_INVITE_2'><a name='SN_INVITE_2'></a>
 	<div class='quest' data-qid='7642' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Econom ' data-timeout='0' data-pearls='0'>
@@ -15494,8 +15529,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div><div class='quest-children-holder'></div></div></div></div></div>
 	<br><hr>
-	<h3>Steam DLC</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.steam">Steam DLC</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='DLC_313311'><a name='DLC_313311'></a>
 	<div class='quest' data-qid='7631' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BUFF_BOOST_BUILDING_CUMULATIVE BUFF_BOOST_BUILDING_CUMULATIVE BUFF_BOOST_BUILDING_CUMULATIVE BUFF_BOOST_BUILDING_CUMULATIVE BUFF_BOOST_BUILDING_CUMULATIVE BUFF_BOOST_BUILDING_CUMULATIVE ' data-servers='Miner Econom ' data-timeout='0' data-pearls='-1'>
@@ -15669,8 +15704,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>
 	</div></div></div>
 	<br><hr>
-	<h3>Специальные квесты</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.special">Специальные квесты</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='GIVE_MONOMAKH_ART'><a name='GIVE_MONOMAKH_ART'></a>
 	<div class='quest' data-qid='2100' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military ' data-timeout='0' data-pearls='0'>
@@ -18240,8 +18275,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
     
 	</div></div></div></div>
 	<br><hr>
-	<h3>Особые награды от администрации</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.admin">Особые награды от администрации</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='REWARD_moder'><a name='REWARD_moder'></a>
 	<div class='quest' data-qid='2430' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_SUBSCRIPTION BUFF_SCIENCE_BOOST ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
@@ -18320,10 +18355,10 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 
     
 
-    </div></div></div></div></div>
+    </div></div></div>
 	<br><hr>
-	<h3> Новые цепочки квестов</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.newChains"> Новые цепочки квестов</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	<div class='quest-holder' data-shift='0' data-quest='REWARD_moder'><a name='REWARD_moder'></a>
        
@@ -20951,7 +20986,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 					</span>
 		</div>
-		</div>	
+		</div>
+		</div>
 	
 	
 	<br><br>
@@ -21037,8 +21073,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 </div></div></div></div></div>
 </div></div>
 <br><hr>
-<h3> Цепочка квестов на сапоги</h3>
-			<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+<h3 data-i18n="quests.boots"> Цепочка квестов на сапоги</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 				<br>
 			<!--Сапоги-скороходы-->
 			
@@ -21162,8 +21198,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 	</div>
 	<br><hr>
-	<h3>Квесты, связанные с Героем-Полководцем</h3>
-	<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+	<h3 data-i18n="quests.warlord">Квесты, связанные с Героем-Полководцем</h3>
+	<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 		<br>
 	
 	
@@ -21297,8 +21333,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 	</div>
 	<br><hr>
-			<h3> Цепочка, добавленная игру вместе с рунными словами из 5 рун</h3>
-			<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+			<h3 data-i18n="quests.fiveRunes"> Цепочка, добавленная игру вместе с рунными словами из 5 рун</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 				<br>
 	
 	
@@ -21447,9 +21483,9 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 		</div>
 		<br><hr>
-			<h3> Цепочка квестов, связанная с подземельями</h3>
+			<h3 data-i18n="quests.dungeons"> Цепочка квестов, связанная с подземельями</h3>
 	
-			<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 				<br>
 	
 	
@@ -23496,8 +23532,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 			</div>
 	</div>
 	<br><hr>
-			<h3>Алхимия 4</h3>
-			<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+			<h3 data-i18n="quests.alchemy4">Алхимия 4</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 				<br>
 			<!--Ушлый торговев-->
 			
@@ -23583,8 +23619,988 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 
 		</div>
 <br><hr>
-			<h3>Цепочка квестов - "Плащ дракона"</h3>
-			<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+			<h3 data-i18n="quests.alchemy5">Алхимия 5</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
+				<br>
+
+			<!--100 новейших заданий-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY5_100"><a name="ALCHEMY5_100"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT REWARD_SELECT_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>100 новейших заданий!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+						<span class="quest_header_progress">0 / 100</span>
+						<span class="quest_header_fail">0 / 7</span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/artefact.png' /></span>
+							Владыка! В результате сильного землетрясения в Подземелье образовались огромные провалы, откуда на поверхность природа выпустила страшных созданий – химер. Эти гибриды мифических созданий вселяют одним своим видом ужас на местных жителей, но к счастью облюбовали себе для жизни выжженные земли Демонов. Очевидно, что эти твари встали на сторону Зла, поэтому нам нужно быть готовым защищать наши земли с помощью более сильного оружия!
+							<br><br>
+							<b>Задача:</b>
+							Выполнить 100 заданий
+							<br><br>
+							<b>Подсказка:</b>
+							Вы можете провалить не более 7 заданий.
+							<br><br>
+							В награду за это задание Вы получите Античную руну Хегль и один случайный артефакт 5 уровня (кроме артефактов неподходящей расы).
+						</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">
+							<img src="./wp-content/assets/shared/artifacts/rune/hp.png" alt="Античная руна Хегль" /> Античная руна Хегль<br>
+							Случайный артефакт 5 уровня
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Научный прорыв-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY5_BREAKTHROUGH"><a name="ALCHEMY5_BREAKTHROUGH"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BUFF_SCIENCE_BOOST ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='-7500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_in_progress.png" title="Этот квест выполняется как за ЧЖ, так и без ЧЖ"></span>
+						<span class='quest_header_title'>Научный прорыв!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Владыка! К нам пожаловал Торговец Артефактами с очередным выгодным предложением. Он предлагает изучить "Алхимию 5" в одно мгновение за щедрое вознаграждение. Войска уже давно готовы к походу за новыми сокровищами, а ученые снова отстают. В Вашей воле исправить это!
+							<br><br>
+							<b>Задача:</b>
+							Заплатить 7500 ЧЖ Торговцу Артефактами для мгновенного изучения науки "Алхимия 5"
+							<br><br>
+							<b>Подсказка:</b>
+							Заплатив ЧЖ за этот квест, Вы изучите науку "Алхимия 5". Если Вы изучите науку "Алхимия 5" каким-либо другим способом до того, как истечет время таймера, квест просто будет засчитан как выполненный.
+						</span>
+						<span class='quest_body_bg'>Стоимость квеста: 7500 ЧЖ</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Мгновенное изучение науки Алхимия-5</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Сокровища Эллады-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY5_HELLAS"><a name="ALCHEMY5_HELLAS"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Сокровища Эллады</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/alchimia.png' /></span>
+							Мой Император! До нас дошли слухи, что на черном рынке появились загадочные фиолетовые руны, которые имеют большую силу, чем синие. Торговцы контрабандой называют их между собой античными, и якобы их нашли где-то под землей. Быстро опросив придворного Рунмейстера удалось узнать, что новые руны находят в развалинах античных зданий, которые затеряны среди темных лабиринтов Подземелья. Немедленно отправляемся на поиски новых сокровищ!
+							<br><br>
+							<b>Задача:</b>
+							Изучите науку "Алхимия 5"
+							<br><br>
+							<b>Подсказка:</b>
+							Изучив науку "Алхимия 5" Вы сможете грабить Античные руны в Акрополях и использовать рецепты конвертации обычных синих рун в фиолетовые античные.
+						</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайный артефакт 4 уровня</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Подземный Акрополь-->
+			<div class="quest-holder" data-shift="20" data-quest="ALCHEMY5_ACROPOLIS"><a name="ALCHEMY5_ACROPOLIS"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 25px);' data-rewards='REWARD_SHOW_OUTER_ESTATES ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Подземный Акрополь</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/ancients.png' /></span>
+							Ваше Величество! Как и другие подземные владения, Акрополь может очень хорошо охраняться Монстрами, иметь многочисленный гарнизон и помощь из соседних подземных владений. Однако наших опытных воинов этим не испугать, в итоге нас ждет награда!
+							<br><br>
+							<b>Задача:</b>
+							Обнаружить Акрополь исследователями
+							<br><br>
+							<b>Подсказка:</b>
+							Чтобы обнаружить Акрополь, необходимо отправить исследователей в подземные королевства.
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Сокровища Эллады"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Вам откроется расположение неизвестных владений:<br>Тип: Акрополь<br>Количество: 3</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Античная руна-->
+			<div class="quest-holder" data-shift="40" data-quest="ALCHEMY5_ANCIENT_RUNE"><a name="ALCHEMY5_ANCIENT_RUNE"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 45px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Античная руна</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/hp.png' /></span>
+							Повелитель! Лазутчики докладывают о развалинах античного города. Снаружи выглядит как безжизненные руины, но наши шпионы скрытно пробрались в город и обнаружили притаившихся Монстров. Что ж, битва обещает быть грандиозной!
+							<br><br>
+							<b>Задача:</b>
+							Ограбить Античную руну в Акрополе
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Подземный Акрополь"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайная руна</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Новый ритуал-->
+			<div class="quest-holder" data-shift="60" data-quest="ALCHEMY5_RITUAL"><a name="ALCHEMY5_RITUAL"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 65px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Новый ритуал</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/HERO_ART.png' /></span>
+							Государь! Первую добытую Античную руну мы немедленно доставили Рунмейстеру. Его очень заинтересовала новая находка, и он сразу убежал в свою библиотеку искать какую-то информацию о находке. На следующий день он довольный собой явился во дворец и сообщил, что может провести ритуал с новой руной и артефактом.
+							<br><br>
+							<b>Задача:</b>
+							Нанести Античную руну на артефакт
+							<br><br>
+							<b>Подсказка:</b>
+							Поместите Античную руну и артефакт на закладку Рунмейстера и проведите ритуал
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Античная руна"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайная руна</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Ценитель античности-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_COLLECTOR"><a name="ALCHEMY5_COLLECTOR"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Ценитель античности</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+						<span class="quest_header_progress">0 / 100</span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/hp.png' /></span>
+							Правитель! Нам необходимо много Античных рун для новых рунных слов. Рунмейстер готов постоянно проводить обряды, если мы регулярно будем добывать для него новые руны. Чем больше мы соберем рун, тем сильнее станут наши войска!
+							<br><br>
+							<b>Задача:</b>
+							Ограбить 100 Античных рун
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Новый ритуал"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайная руна</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Опытный коллекционер-->
+			<div class="quest-holder" data-shift="100" data-quest="ALCHEMY5_EXP_COLLECTOR"><a name="ALCHEMY5_EXP_COLLECTOR"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_COLLECTOR"><img src="./wp-content/assets/q_next_level.png?3" title="Ценитель античности"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 105px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Опытный коллекционер</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+						<span class="quest_header_progress">0 / 500</span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/hp.png' /></span>
+							Владыка! Правители соседних земель активно прочесывают Подземелья в поисках Античных рун, а иногда даже обмениваются между собой наиболее редкими находками. Чем больше мы добудем рун, тем выше вероятность найти среди них наиболее ценные и могущественные.
+							<br><br>
+							<b>Задача:</b>
+							Ограбить 500 Античных рун
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Ценитель античности"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайный артефакт 4 уровня</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			</div>
+
+			<!--Сила древних богов-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_GODS"><a name="ALCHEMY5_GODS"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Сила древних богов</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/HERO_ART.png' /></span>
+							Государь! Похоже, что Рунмейстер разгадал тайну Античных рун. Как он заявляет, в этих рунах заключена сила античных богов, которые когда-то проживали в Акрополях. Зная это, он раздобыл древние манускрипты, на которых записаны некоторые ритуалы с этими рунами. Он предупредил, что никто раньше этого не делал, и мы рискуем разбудить силу древних богов.
+							<br><br>
+							<b>Задача:</b>
+							Собрать рунное слово из Античных рун
+							<br><br>
+							<b>Подсказка:</b>
+							Для того, чтобы собрать рунное слово, нужно поместить необходимые Античные руны на закладку Рунмейстера и нажать кнопку Совершить обряд.
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Новый ритуал"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/recipe/gifu_to_ancient.png" alt="Рецепт конвертации: Гифу в Античную Гифу" /> Рецепт конвертации: Гифу → Античная Гифу</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Энергетический синтез-->
+			<div class="quest-holder" data-shift="100" data-quest="ALCHEMY5_SYNTHESIS"><a name="ALCHEMY5_SYNTHESIS"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_GODS"><img src="./wp-content/assets/q_next_level.png?3" title="Сила древних богов"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 105px);' data-rewards='REWARD_SHOW_OUTER_ESTATES ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Энергетический синтез</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/thp.png' /></span>
+							Государь! Рунмейстер настолько наловчился в обрядах с рунами, что готов объединить энергию 3 одинаковых Античных рун в одну более сильную. Такие обряды требуют намного больше усилий, чем обряды с обычными рунами, но в результате мы получим более ценную руну.
+							<br><br>
+							<b>Задача:</b>
+							Сконвертировать 3 Античные руны Ур в 1 Античную руну Торн
+							<br><br>
+							<b>Подсказка:</b>
+							Для того, чтобы провести обряд, нужно поместить 3 одинаковые античные руны на закладку Рунмейстера и нажать кнопку Совершить обряд.
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Сила древних богов"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Вам откроется расположение неизвестных владений:<br>Тип: Акрополь<br>Количество: 10</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Рецепт абсолютного превосходства-->
+			<div class="quest-holder" data-shift="120" data-quest="ALCHEMY5_SUPERIORITY"><a name="ALCHEMY5_SUPERIORITY"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_GODS"><img src="./wp-content/assets/q_next_level.png?3" title="Сила древних богов"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SYNTHESIS"><img src="./wp-content/assets/q_next_level.png?3" title="Энергетический синтез"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 125px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Рецепт абсолютного превосходства</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/h.png' /></span>
+							Ваше Величество! Наиболее сильные слова требуют самых сильных и редких Античных рун Хегль. Добыть их очень сложно, однако разведчики докладывают, что в Гробницах могут попадаться рецепты, которые превращают руну Хегль в античную. Если мы раздобудем такой рецепт, то сможем заполучить самую редкую руну.
+							<br><br>
+							<b>Задача:</b>
+							Использовать рецепт конвертации руны Хегль в античную
+							<br><br>
+							<b>Подсказка:</b>
+							Для того, чтобы превратить руну Хегль в античную, нужно поместить соответствующий рецепт и руну Хегль на закладку Рунмейстера и нажать кнопку Использовать рецепт. Для проведения ритуала необходимо указанное количество ЧЖ.
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Энергетический синтез"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/recipe/yar_to_ancient.png" alt="Рецепт конвертации: Йар в Античную Йар" /> Рецепт конвертации: Йар → Античная Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			<!--Да это же Диллбир!-->
+			<div class="quest-holder" data-shift="120" data-quest="ALCHEMY5_DILLBIR"><a name="ALCHEMY5_DILLBIR"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_GODS"><img src="./wp-content/assets/q_next_level.png?3" title="Сила древних богов"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SYNTHESIS"><img src="./wp-content/assets/q_next_level.png?3" title="Энергетический синтез"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 125px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Да это же Диллбир!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Вкрадчивый шепот из-за угла - признак выгодного предложения. В замок снова пробрался Мотси Диллбир и пытается сбыть нам неплохой рецептик.
+							<br><br>
+							<b>Задача:</b>
+							Заплатить Диллбиру за рецепт
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 500 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Энергетический синтез"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/recipe/hegl_to_ancient.png" alt="Рецепт конвертации: Хегль в Античную Хегль" /> Рецепт конвертации: Хегль → Античная Хегль</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			</div>
+
+			<!--Лотерея Диллбира-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_LOTTERY"><a name="ALCHEMY5_LOTTERY"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Лотерея Диллбира</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/gift.png' /></span>
+							Император! Диллбир прошел очередные курсы маркетинга, и его предложения заиграли новыми красками. Можно приобрести у него красивую шкатулку, а внутри - как повезет. Но, как всегда, долго ждать он не будет...
+							<br><br>
+							<b>Задача:</b>
+							заплатить 500 ЧЖ за игру в лотерею Диллбира
+							<br><br>
+							<b>Подсказка:</b>
+							В награду за этот квест вы получите случайную Античную руну из списка: Рад, Тир, Гифу, Йар
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 500 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Новый ритуал"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайная античная руна: Рад, Тир, Гифу или Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Распродажа коллекции (Йар, 1)-->
+			<div class="quest-holder" data-shift="100" data-quest="ALCHEMY5_SALE"><a name="ALCHEMY5_SALE"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_LOTTERY"><img src="./wp-content/assets/q_next_level.png?3" title="Лотерея Диллбира"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 105px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='1500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons gs"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ, стоимость требует уточнения"></span>
+						<span class='quest_header_title'>Распродажа коллекции</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Диллбир снова готов поделиться прекрасным образцом античного творчества по очень хорошей цене!
+							<br><br>
+							<b>Задача:</b>
+							воспользоваться моментом и купить у Диллбира Античную руну Йар
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 1500 ЧЖ (?)</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить или провалить квест "Лотерея Диллбира"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Распродажа коллекции (Хегль, 1)-->
+			<div class="quest-holder" data-shift="120" data-quest="ALCHEMY5_SALE_HEGL"><a name="ALCHEMY5_SALE_HEGL"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_LOTTERY"><img src="./wp-content/assets/q_next_level.png?3" title="Лотерея Диллбира"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 125px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='3000'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Распродажа коллекции</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Диллбир снова готов поделиться прекрасным образцом античного творчества по очень хорошей цене!
+							<br><br>
+							<b>Задача:</b>
+							воспользоваться моментом и купить у Диллбира Античную руну Хегль
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 3000 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Распродажа коллекции" (купить Античную руну Йар)
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/hp.png" alt="Античная руна Хегль" /> Античная руна Хегль</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Ученик Торговца-->
+			<div class="quest-holder" data-shift="140" data-quest="ALCHEMY5_APPRENTICE"><a name="ALCHEMY5_APPRENTICE"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_LOTTERY"><img src="./wp-content/assets/q_next_level.png?3" title="Лотерея Диллбира"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE_HEGL"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 145px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='5000'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Ученик Торговца</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/meeting.png' /></span>
+							Император! На воскресном рынке мы встретили молодого человека, который назвался учеником торговца артефактами. Он предлагает нам две Античные руны Йар, которые якобы купил у состоятельного господина, только что вернувшегося из Подземелья. Юноша просит за них 5000 ЧЖ. Заодно он проговорился, что у того господина в нагруднике остались еще три такие же Античные руны Йар, а также другие неизвестные руны...
+							<br><br>
+							<b>Задача:</b>
+							Выкупить Античные руны Йар
+						</span>
+						<span class='quest_body_bg'>Стоимость квеста: 5000 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Распродажа коллекции" (купить Античную руну Хегль)
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар<br><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			<!--Распродажа коллекции (Йар, 2)-->
+			<div class="quest-holder" data-shift="140" data-quest="ALCHEMY5_SALE_YAR2"><a name="ALCHEMY5_SALE_YAR2"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_LOTTERY"><img src="./wp-content/assets/q_next_level.png?3" title="Лотерея Диллбира"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE_HEGL"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 145px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='1500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Распродажа коллекции</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Диллбир снова готов поделиться прекрасным образцом античного творчества по очень хорошей цене!
+							<br><br>
+							<b>Задача:</b>
+							воспользоваться моментом и купить у Диллбира Античную руну Йар
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 1500 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Распродажа коллекции" (купить Античную руну Хегль)
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Распродажа коллекции (Хегль, 2)-->
+			<div class="quest-holder" data-shift="160" data-quest="ALCHEMY5_SALE_HEGL2"><a name="ALCHEMY5_SALE_HEGL2"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RITUAL"><img src="./wp-content/assets/q_next_level.png?3" title="Новый ритуал"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_LOTTERY"><img src="./wp-content/assets/q_next_level.png?3" title="Лотерея Диллбира"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE_HEGL"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_SALE_YAR2"><img src="./wp-content/assets/q_next_level.png?3" title="Распродажа коллекции"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 165px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='3000'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Распродажа коллекции</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Диллбир снова готов поделиться прекрасным образцом античного творчества по очень хорошей цене!
+							<br><br>
+							<b>Задача:</b>
+							воспользоваться моментом и купить у Диллбира Античную руну Хегль
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 3000 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Распродажа коллекции" (купить Античную руну Йар)
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/hp.png" alt="Античная руна Хегль" /> Античная руна Хегль</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			</div>
+
+			</div>
+			</div>
+			</div>
+
+			</div>
+
+			<!--РАДостная новость-->
+			<div class="quest-holder" data-shift="60" data-quest="ALCHEMY5_RAD"><a name="ALCHEMY5_RAD"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 65px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>РАДостная новость</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/rp.png' /></span>
+							Император! С тех пор, как мы обнаружили под землей Акрополи, придворный Рунмейстер начал свои эксперименты по поиску новых рунных слов. В этот раз ему нужна Античная руна Рад. Он уверен, что уже близок к открытию новых слов.
+							<br><br>
+							<b>Задача:</b>
+							Ограбить в Акрополе Античную руну Рад
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "Античная руна"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/rp.png" alt="Античная руна Рад" /> Античная руна Рад</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder">
+
+			<!--Редкая находка-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_RARE_FIND"><a name="ALCHEMY5_RARE_FIND"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RAD"><img src="./wp-content/assets/q_next_level.png?3" title="РАДостная новость"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Редкая находка</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='./wp-content/assets/shared/artifacts/rune/hp.png' /></span>
+							Владыка! Лазутчики докладывают, что поблизости найдена редчайшая и сильнейшая Античная руна – Хегль. Несомненно, такая ценная находка пригодится для ритуалов Рунмейстера в будущем, поэтому необходимо добыть ее любой ценой. Но будьте осторожны, полчища монстров со всей округи готовы сбежаться в Акрополь, чтобы защитить свое сокровище.
+							<br><br>
+							<b>Задача:</b>
+							Ограбить в Акрополе Античную руну Хегль
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "РАДостная новость"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			<!--Король стиля-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_STYLE"><a name="ALCHEMY5_STYLE"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RAD"><img src="./wp-content/assets/q_next_level.png?3" title="РАДостная новость"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Король стиля</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/HERO_ART.png' /></span>
+							О, лучезарный! Походы и сражения утомляют, поэтому Вы решили организовать очередной костюмированный бал и учредили ценный приз за самый лучший карнавальный костюм. Но никто не запрещает Вам же его и выиграть! Лучшие портные принялись за работу, а Рунмейстер предложил изысканную идею - что может быть прекраснее, чем античные руны на карнавальном костюме?
+							<br><br>
+							<b>Задача:</b>
+							Нанести 5 Античных рун Хегль на артефакт
+						</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "РАДостная новость"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайный артефакт 5 уровня</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+
+		</div>
+<br><hr>
+			<h3 data-i18n="quests.alchemy6">Алхимия 6</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
+				<br>
+
+			<!--Профсоюз алхимиков-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY6_UNION"><a name="ALCHEMY6_UNION"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='BUFF_SCIENCE_BOOST ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='-7500'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_in_progress.png" title="Этот квест выполняется как за ЧЖ, так и без ЧЖ"></span>
+						<span class='quest_header_title'>Профсоюз алхимиков!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/alchimia.png' /></span>
+							Владыка! Наши ученые умы день и ночь трудятся в лабораториях, поэтому они требуют повысить вознаграждение за свои старания! В былые времена острый топор или прочная веревочная петля быстро решили бы вопрос, но, учитывая Ваше снисхождение, мы достойно вознаградим трудящихся.
+							<br><br>
+							<b>Задача:</b>
+							Заплатить 7500 ЧЖ трудовому коллективу алхимиков за ускоренное изучение науки "Алхимия 6"
+							<br><br>
+							<b>Подсказка:</b>
+							Заплатив ЧЖ за этот квест, Вы изучите науку "Алхимия 6". Если Вы изучите науку "Алхимия 6" каким-либо другим способом до того, как истечет время таймера, квест просто будет засчитан как выполненный.
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 7500 ЧЖ</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Мгновенное изучение науки Алхимия-6</span>
+					</div>
+				</div>
+			</div>
+
+			<!--Новый предел совершенства-->
+			<div class="quest-holder" data-shift="0" data-quest="ALCHEMY6_PERFECTION"><a name="ALCHEMY6_PERFECTION"></a>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 1px);' data-rewards='REWARD_GIVE_ARTIFACT ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class='quest_header_title'>Новый предел совершенства!</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+						<span class="quest_header_progress">0 / 6</span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/alchimia.png' /></span>
+							Ваше Сиятельство! Наши алхимики утверждают, что нашли способ улучшить наши совершенные здания до монументального уровня. Для этого понадобится огромное количество ресурсов, но, кроме того, новые виды кристаллов – шедевральные. По слухам, с появлением новой расы Химер в агрессивных руинах стали встречаться эти новые кристаллы, и теперь стало понятно где их можно использовать. Необходимо бросить все научные силы нашего королевства на изучение новых кристаллов!
+							<br><br>
+							<b>Задача:</b>
+							Изучите науку "Алхимия 6"
+							<br><br>
+							<b>Подсказка:</b>
+							Изучив науку "Алхимия 6" Вы сможете грабить шедевральные кристаллы в агрессивных руинах и улучшать здания до монументального уровня.
+						</span>
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward"><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
+
+		</div>
+<br><hr>
+			<h3 data-i18n="quests.dragonCloak">Цепочка квестов - "Плащ дракона"</h3>
+			<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 				<br>
 	
 
@@ -24465,8 +25481,8 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 </div>
 
 
-<h3>Квесты на строительство</h3>
-<button class="accordion"><i>Отобразить квесты:</i></button><div class="panel">
+<h3 data-i18n="quests.build">Квесты на строительство</h3>
+<button class="accordion"><i data-i18n="quests.show">Отобразить квесты:</i></button><div class="panel">
 	<br>			
 <!--Военные рельсы -->
 	
@@ -24861,14 +25877,97 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 <script>
 	var acc = document.getElementsByClassName("accordion");
 	var expandAllBtn = document.getElementById("expandAll");
-  
-	expandAllBtn.addEventListener("click", function() {
-	  for (var i = 0; i < acc.length; i++) {
-		acc[i].classList.add("active");
-		acc[i].nextElementSibling.style.display = "block";
+	var searchInput = document.getElementById("questSearch");
+	var searchEmpty = document.getElementById("questSearchEmpty");
+	var allExpanded = false;
+
+	function t(key, fallback) {
+	  return window.MLI18N ? MLI18N.t(key) : fallback;
+	}
+
+	function sectionHeading(button) {
+	  var prev = button.previousElementSibling;
+	  while (prev && prev.tagName !== "H3") {
+		prev = prev.previousElementSibling;
 	  }
+	  return prev;
+	}
+
+	function updateExpandLabel() {
+	  var key = allExpanded ? "quests.hideAll" : "quests.showAll";
+	  expandAllBtn.setAttribute("data-i18n", key);
+	  expandAllBtn.textContent = t(key, allExpanded ? "Hide all quests" : "Show all quests");
+	}
+
+	function setAllPanels(open) {
+	  for (var i = 0; i < acc.length; i++) {
+		if (acc[i].style.display === "none") {
+		  continue;
+		}
+		acc[i].classList.toggle("active", open);
+		acc[i].nextElementSibling.style.display = open ? "block" : "none";
+	  }
+	  allExpanded = open;
+	  updateExpandLabel();
+	}
+
+	function applyQuestSearch() {
+	  var query = (searchInput.value || "").trim().toLowerCase();
+	  var holders = document.querySelectorAll(".quest-holder");
+	  var visibleCount = 0;
+
+	  for (var i = 0; i < holders.length; i++) {
+		var titleEl = holders[i].querySelector(".quest_header_title");
+		var title = titleEl ? titleEl.textContent.toLowerCase() : "";
+		var match = !query || title.indexOf(query) !== -1;
+		holders[i].style.display = match ? "" : "none";
+		if (match) {
+		  visibleCount++;
+		}
+	  }
+
+	  for (i = 0; i < acc.length; i++) {
+		var panel = acc[i].nextElementSibling;
+		var heading = sectionHeading(acc[i]);
+		var panelHolders = panel.querySelectorAll(".quest-holder");
+		var any = false;
+		for (var j = 0; j < panelHolders.length; j++) {
+		  if (panelHolders[j].style.display !== "none") {
+			any = true;
+			break;
+		  }
+		}
+
+		if (query) {
+		  acc[i].style.display = any ? "" : "none";
+		  if (heading) {
+			heading.style.display = any ? "" : "none";
+		  }
+		  acc[i].classList.toggle("active", any);
+		  panel.style.display = any ? "block" : "none";
+		} else {
+		  acc[i].style.display = "";
+		  if (heading) {
+			heading.style.display = "";
+		  }
+		  acc[i].classList.toggle("active", allExpanded);
+		  panel.style.display = allExpanded ? "block" : "none";
+		}
+	  }
+
+	  if (searchEmpty) {
+		searchEmpty.hidden = !query || visibleCount > 0;
+	  }
+	}
+
+	expandAllBtn.addEventListener("click", function() {
+	  setAllPanels(!allExpanded);
 	});
-  
+
+	if (searchInput) {
+	  searchInput.addEventListener("input", applyQuestSearch);
+	}
+
 	for (var i = 0; i < acc.length; i++) {
 	  acc[i].addEventListener("click", function() {
 		this.classList.toggle("active");
@@ -24879,6 +25978,16 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		  panel.style.display = "block";
 		}
 	  });
+	}
+
+	if (window.MLI18N) {
+	  var prevOnChange = MLI18N.onChange;
+	  MLI18N.onChange = function(lang) {
+		if (typeof prevOnChange === "function") {
+		  prevOnChange(lang);
+		}
+		updateExpandLabel();
+	  };
 	}
   </script>
 </body>

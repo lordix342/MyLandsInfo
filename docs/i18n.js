@@ -27,10 +27,8 @@
       "runes.build": "Create a combination",
       "runes.clearDraft": "Clear",
       "runes.removeRune": "Remove rune",
-      "runes.summary": "Total",
       "runes.summaryRunes": "Runes in slots",
       "runes.summaryBonuses": "Combined bonuses",
-      "runes.summaryEmpty": "Put runes into slots to see the total.",
       "runes.fromCombo": "combinations",
       "runes.fromSolo": "individual runes",
       "runes.perHour": "h",
@@ -151,8 +149,6 @@
       "calc.bigSpells": "Larger hero spell window:",
       "calc.attacker": "Attacker",
       "calc.defender": "Defender",
-      "calc.load": "Load",
-      "calc.save": "Save",
       "calc.unitLvl": "Unit lvl:",
       "calc.renegade": "renegade",
       "calc.faction": "Faction",
@@ -168,13 +164,88 @@
       "calc.military": "Military",
       "calc.factionWar": "Faction war",
       "calc.econom": "Economic",
-      "calc.pasteId": "Paste a save number to load the battle",
-      "calc.presets": "Presets",
-      "calc.savePlaceholder": "Paste save ID!",
       "calc.afterBattle": "(after battle)",
       "calc.won": "won",
       "calc.lost": "lost",
-      "calc.randomDmg": "Random damage"
+      "calc.randomDmg": "Random damage",
+      "calc.chimeras": "Chimeras",
+      "calc.predict": "Predict",
+      "calc.ancientRune": "Ancient runes",
+      "calc.auto": "auto",
+      "calc.retreatAt": "retreat at",
+      "calc.lossPct": "% losses",
+      "calc.clear": "Clear",
+      "calc.close": "Close",
+      "calc.disableHero": "disable hero",
+      "calc.addAttacker": "Add attacker",
+      "calc.removeAttacker": "Remove attacker",
+      "calc.addDefender": "Add defender",
+      "calc.removeDefender": "Remove defender",
+      "calc.kz": "CW",
+      "calc.maxDef": "max defense",
+      "calc.onLake": "on a lake",
+      "calc.landscape": "landscape",
+      "calc.terrain.sacred": "Sacred land",
+      "calc.terrain.dead": "Dead land",
+      "calc.terrain.magicForest": "Enchanted forests",
+      "calc.terrain.cursedForest": "Cursed forests",
+      "calc.terrain.mountains": "Mountains",
+      "calc.terrain.desert": "Desert",
+      "calc.terrain.forest": "Forests",
+      "calc.terrain.steppe": "Steppe",
+      "calc.terrain.underground": "Underground",
+      "calc.magicTower": "Magic tower",
+      "calc.tower": "Tower",
+      "calc.forts": "Fortifications",
+      "calc.gates": "Gates",
+      "calc.details": "Details",
+      "calc.mode.atkMinDefMax": "Atk.(min)/Def.(max)",
+      "calc.mode.atkMaxDefMin": "Atk.(max)/Def.(min)",
+      "calc.mode.atkMaxDefAvg": "Atk.(max)/Def.(avg)",
+      "calc.mode.atkMinDefAvg": "Atk.(min)/Def.(avg)",
+      "calc.mode.atkAvgDefMax": "Atk.(avg)/Def.(max)",
+      "calc.mode.atkAvgDefMin": "Atk.(avg)/Def.(min)",
+      "calc.mode.random": "Random damage",
+      "calc.mode.custom": "Set min/max",
+      "calc.min": "min",
+      "calc.max": "max",
+      "calc.rnd": "rnd",
+      "calc.avg": "avg",
+      "calc.atkShort": "Atk.",
+      "calc.defShort": "Def.",
+      "calc.ruins": "Ruins",
+      "calc.stonehedges": "Stonehenges",
+      "calc.tombs": "Tombs",
+      "calc.ruinLvl": "Ruins lvl {n}",
+      "calc.stonehedgeOf": "Stonehenge: {name}",
+      "calc.tomb.exchange": "Master of exchange",
+      "calc.tomb.quality": "Quantity into quality",
+      "calc.tomb.choice": "The right choice",
+      "calc.tomb.runes": "Rune extraction",
+      "calc.tomb.crystals": "Crystal fusion",
+      "calc.tombLvl": "{name} {n} lvl",
+      "calc.fortLvl": "Fortification[{n} lvl]",
+      "calc.towerLvl": "Tower[{n} lvl]",
+      "calc.magicTowerLvl": "Magic tower[{n} lvl]",
+      "calc.lossesUnits": "Losses: {n} units",
+      "calc.hideDetails": "Hide details",
+      "calc.chooseHero": "Select a hero to view extra skills!",
+      "calc.spec.paladin": "Paladin",
+      "calc.spec.warrior": "Warrior",
+      "calc.spec.saboteur": "Saboteur",
+      "calc.spec.scout": "Scout",
+      "calc.spec.peacemaker": "Peacemaker",
+      "calc.spec.destroyer": "Destroyer",
+      "calc.spec.gatherer": "Gatherer",
+      "calc.spec.defender": "Defender",
+      "calc.spec.mentor": "Mentor",
+      "calc.spec.trader": "Trader",
+      "calc.spec.builder": "Builder",
+      "calc.spec.healer": "Healer",
+      "calc.spec.illusionist": "Illusionist",
+      "calc.spec.dissipator": "Dissipator",
+      "calc.spec.necromancer": "Necromancer",
+      "calc.spec.spellcaster": "Spellcaster"
     },
     uk: {
       "meta.title": "MyLands Info",
@@ -200,10 +271,8 @@
       "runes.build": "Створити комбінацію",
       "runes.clearDraft": "Очистити",
       "runes.removeRune": "Прибрати руну",
-      "runes.summary": "Підсумок",
       "runes.summaryRunes": "Руни в слотах",
       "runes.summaryBonuses": "Загальні бонуси",
-      "runes.summaryEmpty": "Поставте руни в слоти, щоб побачити підсумок.",
       "runes.fromCombo": "комбінації",
       "runes.fromSolo": "окремі руни",
       "runes.perHour": "год",
@@ -324,8 +393,6 @@
       "calc.bigSpells": "Збільшене вікно заклять героя:",
       "calc.attacker": "Атакувальник",
       "calc.defender": "Захисник",
-      "calc.load": "Завантажити",
-      "calc.save": "Зберегти",
       "calc.unitLvl": "Рів. юнітів:",
       "calc.renegade": "відступник",
       "calc.faction": "Фракція",
@@ -341,13 +408,88 @@
       "calc.military": "Бойовий",
       "calc.factionWar": "Війна фракцій",
       "calc.econom": "Економічний",
-      "calc.pasteId": "Щоб завантажити бій, вставте номер збереження",
-      "calc.presets": "Пресети",
-      "calc.savePlaceholder": "Вставте ID збереження!",
       "calc.afterBattle": "(після бою)",
       "calc.won": "переміг",
       "calc.lost": "програв",
-      "calc.randomDmg": "Випадкова шкода"
+      "calc.randomDmg": "Випадкова шкода",
+      "calc.chimeras": "Химери",
+      "calc.predict": "Передбачити",
+      "calc.ancientRune": "Античні руни",
+      "calc.auto": "авто",
+      "calc.retreatAt": "відступати при",
+      "calc.lossPct": "% втрат",
+      "calc.clear": "Очистити",
+      "calc.close": "Закрити",
+      "calc.disableHero": "вимк. героя",
+      "calc.addAttacker": "Додати атакувальника",
+      "calc.removeAttacker": "Прибрати атакувальника",
+      "calc.addDefender": "Додати захисника",
+      "calc.removeDefender": "Прибрати захисника",
+      "calc.kz": "КЗ",
+      "calc.maxDef": "максимум захисту",
+      "calc.onLake": "на озері",
+      "calc.landscape": "ландшафт",
+      "calc.terrain.sacred": "Священна земля",
+      "calc.terrain.dead": "Мертва земля",
+      "calc.terrain.magicForest": "Чарівні ліси",
+      "calc.terrain.cursedForest": "Прокляті ліси",
+      "calc.terrain.mountains": "Гори",
+      "calc.terrain.desert": "Пустеля",
+      "calc.terrain.forest": "Ліси",
+      "calc.terrain.steppe": "Степ",
+      "calc.terrain.underground": "Підземелля",
+      "calc.magicTower": "Маг. вежа",
+      "calc.tower": "Вежа",
+      "calc.forts": "Укріплення",
+      "calc.gates": "Ворота",
+      "calc.details": "Докладно",
+      "calc.mode.atkMinDefMax": "Атак.(min)/Захист.(max)",
+      "calc.mode.atkMaxDefMin": "Атак.(max)/Захист.(min)",
+      "calc.mode.atkMaxDefAvg": "Атак.(max)/Захист.(сер)",
+      "calc.mode.atkMinDefAvg": "Атак.(min)/Захист.(сер)",
+      "calc.mode.atkAvgDefMax": "Атак.(сер)/Захист.(max)",
+      "calc.mode.atkAvgDefMin": "Атак.(сер)/Захист.(min)",
+      "calc.mode.random": "Випадкова шкода",
+      "calc.mode.custom": "Налаштувати min/max",
+      "calc.min": "min",
+      "calc.max": "max",
+      "calc.rnd": "вип",
+      "calc.avg": "сер",
+      "calc.atkShort": "Атак.",
+      "calc.defShort": "Зах.",
+      "calc.ruins": "Руїни",
+      "calc.stonehedges": "Стоунхеджі",
+      "calc.tombs": "Гробниці",
+      "calc.ruinLvl": "Руїни {n} рів.",
+      "calc.stonehedgeOf": "Стоунхедж: {name}",
+      "calc.tomb.exchange": "Майстер обміну",
+      "calc.tomb.quality": "Кількість у якість",
+      "calc.tomb.choice": "Правильний вибір",
+      "calc.tomb.runes": "Видобування рун",
+      "calc.tomb.crystals": "Злиття кристалів",
+      "calc.tombLvl": "{name} {n}рів",
+      "calc.fortLvl": "Укріплення[{n} рів.]",
+      "calc.towerLvl": "Вежа[{n} рів.]",
+      "calc.magicTowerLvl": "Маг. вежа[{n} рів.]",
+      "calc.lossesUnits": "Втрати: {n} юнітів",
+      "calc.hideDetails": "Сховати деталі",
+      "calc.chooseHero": "Обери героя, щоб побачити додаткові навички!",
+      "calc.spec.paladin": "Паладин",
+      "calc.spec.warrior": "Воїн",
+      "calc.spec.saboteur": "Диверсант",
+      "calc.spec.scout": "Розвідник",
+      "calc.spec.peacemaker": "Миротворець",
+      "calc.spec.destroyer": "Руйнівник",
+      "calc.spec.gatherer": "Здобувач",
+      "calc.spec.defender": "Захисник",
+      "calc.spec.mentor": "Наставник",
+      "calc.spec.trader": "Торговець",
+      "calc.spec.builder": "Будівельник",
+      "calc.spec.healer": "Цілитель",
+      "calc.spec.illusionist": "Ілюзіоніст",
+      "calc.spec.dissipator": "Розсіювач",
+      "calc.spec.necromancer": "Некромант",
+      "calc.spec.spellcaster": "Заклинатель"
     },
     ru: {
       "meta.title": "MyLands Info",
@@ -373,10 +515,8 @@
       "runes.build": "Создать комбинацию",
       "runes.clearDraft": "Очистить",
       "runes.removeRune": "Убрать руну",
-      "runes.summary": "Итог",
       "runes.summaryRunes": "Руны в слотах",
       "runes.summaryBonuses": "Общие бонусы",
-      "runes.summaryEmpty": "Поставьте руны в слоты, чтобы увидеть итог.",
       "runes.fromCombo": "комбинации",
       "runes.fromSolo": "отдельные руны",
       "runes.perHour": "ч",
@@ -497,8 +637,6 @@
       "calc.bigSpells": "Увеличенное окно с заклинаниями для героя:",
       "calc.attacker": "Атакующий",
       "calc.defender": "Защитник",
-      "calc.load": "Загрузить",
-      "calc.save": "Сохранить",
       "calc.unitLvl": "Ур. юнитов:",
       "calc.renegade": "отступник",
       "calc.faction": "Фракция",
@@ -514,13 +652,88 @@
       "calc.military": "Боевой",
       "calc.factionWar": "Война фракций",
       "calc.econom": "Экономический",
-      "calc.pasteId": "Для загрузки боя вставьте номер сохранения",
-      "calc.presets": "Пресеты",
-      "calc.savePlaceholder": "Вставьте ID сохранения!",
       "calc.afterBattle": "(после боя)",
       "calc.won": "победил",
       "calc.lost": "проиграл",
-      "calc.randomDmg": "Случайный урон"
+      "calc.randomDmg": "Случайный урон",
+      "calc.chimeras": "Химеры",
+      "calc.predict": "Предвидеть",
+      "calc.ancientRune": "Древние руны",
+      "calc.auto": "авто",
+      "calc.retreatAt": "отступать при",
+      "calc.lossPct": "% потерь",
+      "calc.clear": "Очистить",
+      "calc.close": "Закрыть",
+      "calc.disableHero": "откл. героя",
+      "calc.addAttacker": "Добавить атакующего",
+      "calc.removeAttacker": "Удалить атакующего",
+      "calc.addDefender": "Добавить защитника",
+      "calc.removeDefender": "Удалить защитника",
+      "calc.kz": "КЗ",
+      "calc.maxDef": "максимум защиты",
+      "calc.onLake": "на озере",
+      "calc.landscape": "ландшафт",
+      "calc.terrain.sacred": "Священная земля",
+      "calc.terrain.dead": "Мертвая земля",
+      "calc.terrain.magicForest": "Волшебные леса",
+      "calc.terrain.cursedForest": "Проклятые леса",
+      "calc.terrain.mountains": "Горы",
+      "calc.terrain.desert": "Пустыня",
+      "calc.terrain.forest": "Леса",
+      "calc.terrain.steppe": "Степь",
+      "calc.terrain.underground": "Подземелье",
+      "calc.magicTower": "Маг. башня",
+      "calc.tower": "Башня",
+      "calc.forts": "Укрепления",
+      "calc.gates": "Ворота",
+      "calc.details": "Подробно",
+      "calc.mode.atkMinDefMax": "Атак.(min)/Защит.(max)",
+      "calc.mode.atkMaxDefMin": "Атак.(max)/Защит.(min)",
+      "calc.mode.atkMaxDefAvg": "Атак.(max)/Защит.(сред)",
+      "calc.mode.atkMinDefAvg": "Атак.(min)/Защит.(сред)",
+      "calc.mode.atkAvgDefMax": "Атак.(сред)/Защит.(max)",
+      "calc.mode.atkAvgDefMin": "Атак.(сред)/Защит.(min)",
+      "calc.mode.random": "Случайный урон",
+      "calc.mode.custom": "Настроить min/max",
+      "calc.min": "min",
+      "calc.max": "max",
+      "calc.rnd": "случ",
+      "calc.avg": "сред",
+      "calc.atkShort": "Атак.",
+      "calc.defShort": "Защ.",
+      "calc.ruins": "Руины",
+      "calc.stonehedges": "Стоунхеджи",
+      "calc.tombs": "Гробницы",
+      "calc.ruinLvl": "Руины {n} лвл",
+      "calc.stonehedgeOf": "Стоунхедж: {name}",
+      "calc.tomb.exchange": "Мастер обмена",
+      "calc.tomb.quality": "Количество в качество",
+      "calc.tomb.choice": "Правильный выбор",
+      "calc.tomb.runes": "Извлечение рун",
+      "calc.tomb.crystals": "Слияние кристаллов",
+      "calc.tombLvl": "{name} {n}ур",
+      "calc.fortLvl": "Укрепление[{n}ур]",
+      "calc.towerLvl": "Башня[{n}ур]",
+      "calc.magicTowerLvl": "Маг.башня[{n}ур]",
+      "calc.lossesUnits": "Потери: {n} юнитов",
+      "calc.hideDetails": "Скрыть подробности",
+      "calc.chooseHero": "выбери героя для определения его дополнительных навыков!",
+      "calc.spec.paladin": "Паладин",
+      "calc.spec.warrior": "Воитель",
+      "calc.spec.saboteur": "Диверсант",
+      "calc.spec.scout": "Разведчик",
+      "calc.spec.peacemaker": "Миротворец",
+      "calc.spec.destroyer": "Разрушитель",
+      "calc.spec.gatherer": "Добытчик",
+      "calc.spec.defender": "Защитник",
+      "calc.spec.mentor": "Наставник",
+      "calc.spec.trader": "Торговец",
+      "calc.spec.builder": "Строитель",
+      "calc.spec.healer": "Целитель",
+      "calc.spec.illusionist": "Иллюзионист",
+      "calc.spec.dissipator": "Рассеиватель",
+      "calc.spec.necromancer": "Некромант",
+      "calc.spec.spellcaster": "Заклинатель"
     }
   };
 
@@ -622,9 +835,17 @@
     return "en";
   }
 
-  function t(key) {
+  function t(key, vars) {
     var pack = STRINGS[api.lang] || STRINGS.en;
-    return pack[key] != null ? pack[key] : (STRINGS.en[key] != null ? STRINGS.en[key] : key);
+    var s = pack[key] != null ? pack[key] : (STRINGS.en[key] != null ? STRINGS.en[key] : key);
+    if (vars) {
+      for (var k in vars) {
+        if (Object.prototype.hasOwnProperty.call(vars, k)) {
+          s = String(s).split("{" + k + "}").join(String(vars[k]));
+        }
+      }
+    }
+    return s;
   }
 
   function tEffect(text) {
@@ -678,20 +899,56 @@
     applyCalculator();
   }
 
-  function replaceExact(el, from, to) {
+  function setTextNode(el, text, prefix) {
     if (!el) {
       return;
     }
-    if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
-      el.textContent = to;
-      return;
-    }
-    for (var i = 0; i < el.childNodes.length; i++) {
-      var node = el.childNodes[i];
-      if (node.nodeType === 3 && node.nodeValue.indexOf(from) !== -1) {
-        node.nodeValue = node.nodeValue.replace(from, to);
+    var i;
+    var found = false;
+    for (i = 0; i < el.childNodes.length; i++) {
+      if (el.childNodes[i].nodeType === 3 && el.childNodes[i].nodeValue.replace(/\s/g, "")) {
+        el.childNodes[i].nodeValue = (prefix || "") + text;
+        found = true;
+        break;
       }
     }
+    if (!found) {
+      el.insertBefore(document.createTextNode((prefix || "") + text), el.firstChild);
+    }
+  }
+
+  function factionOptionLabel(index) {
+    var factions = ["calc.knights", "calc.lightElves", "calc.demons", "calc.darkElves", "calc.monsters", "calc.undead", "calc.mage", "calc.chimeras"];
+    if (index < factions.length) {
+      return t(factions[index]);
+    }
+    var extra = index - factions.length;
+    if (extra < 7) {
+      return t("calc.ruinLvl", { n: extra + 1 });
+    }
+    extra -= 7;
+    var runes = ["feo", "ur", "thorn", "io", "rad", "tyr", "gifu", "yar", "hegl"];
+    if (extra < runes.length) {
+      return t("calc.stonehedgeOf", { name: t("rune." + runes[extra]) });
+    }
+    extra -= runes.length;
+    var tombs = [
+      ["exchange", 5],
+      ["quality", 4],
+      ["choice", 5],
+      ["runes", 5],
+      ["crystals", 1]
+    ];
+    var tIdx = 0;
+    var g;
+    for (g = 0; g < tombs.length; g++) {
+      if (extra < tombs[g][1]) {
+        var lvl = tombs[g][0] === "crystals" ? 5 : extra + 1;
+        return t("calc.tombLvl", { name: t("calc.tomb." + tombs[g][0]), n: lvl });
+      }
+      extra -= tombs[g][1];
+    }
+    return "";
   }
 
   function applyCalculator() {
@@ -699,6 +956,8 @@
       return;
     }
 
+    var i;
+    var n;
     var volnu = document.querySelector("#volnu b");
     if (volnu) {
       volnu.textContent = t("calc.waves");
@@ -722,35 +981,22 @@
       labels[1].textContent = t("calc.bigSpells");
     }
 
+    var closeBtn = document.querySelector("#vkl_vukl_setting .button_nw_setting");
+    if (closeBtn) {
+      closeBtn.textContent = t("calc.close");
+    }
+
     var attackTexts = document.querySelectorAll(".attack_text");
-    for (var i = 0; i < attackTexts.length; i++) {
-      var raw = attackTexts[i].textContent.replace(/\s+/g, " ").trim();
-      if (raw.indexOf("Атак") === 0 || raw.indexOf("Attack") === 0 || raw === t("calc.attacker") || raw === t("calc.defender")) {
-        var isDef =
-          raw.indexOf("Захис") === 0 ||
-          raw.indexOf("Защит") === 0 ||
-          raw.indexOf("Defend") === 0 ||
-          attackTexts[i].closest && attackTexts[i].closest("#army_2, #army_3, #army_4, #army_5");
-        var army = attackTexts[i].closest ? attackTexts[i].closest("[id^='army_']") : null;
-        var num = army ? army.id.replace("army_", "") : "";
-        isDef = num === "2" || num === "3" || num === "4" || num === "5";
-        attackTexts[i].textContent = isDef ? t("calc.defender") : t("calc.attacker");
-      }
-    }
-
-    var loadBtns = document.querySelectorAll("button.load_one, button#load");
-    for (i = 0; i < loadBtns.length; i++) {
-      loadBtns[i].textContent = t("calc.load");
-    }
-
-    var saveBtns = document.querySelectorAll("button.save_one, button#save");
-    for (i = 0; i < saveBtns.length; i++) {
-      saveBtns[i].textContent = t("calc.save");
+    for (i = 0; i < attackTexts.length; i++) {
+      var army = attackTexts[i].closest ? attackTexts[i].closest("[id^='army_']") : null;
+      var num = army ? army.id.replace("army_", "") : "";
+      var isDef = num === "2" || num === "3" || num === "4" || num === "5";
+      attackTexts[i].textContent = isDef ? t("calc.defender") : t("calc.attacker");
     }
 
     var unitLvl = document.querySelectorAll("td.kastul_2");
     for (i = 0; i < unitLvl.length; i++) {
-      for (var n = 0; n < unitLvl[i].childNodes.length; n++) {
+      for (n = 0; n < unitLvl[i].childNodes.length; n++) {
         if (unitLvl[i].childNodes[n].nodeType === 3 && unitLvl[i].childNodes[n].nodeValue.trim()) {
           unitLvl[i].childNodes[n].nodeValue = t("calc.unitLvl") + " ";
         }
@@ -760,6 +1006,76 @@
     var renegade = document.querySelectorAll("td.kastul_1 label");
     for (i = 0; i < renegade.length; i++) {
       renegade[i].textContent = t("calc.renegade");
+    }
+
+    var retreat = document.querySelectorAll("td.kastul_3");
+    for (i = 0; i < retreat.length; i++) {
+      var texts = [];
+      for (n = 0; n < retreat[i].childNodes.length; n++) {
+        if (retreat[i].childNodes[n].nodeType === 3 && retreat[i].childNodes[n].nodeValue.trim()) {
+          texts.push(retreat[i].childNodes[n]);
+        }
+      }
+      if (texts[0]) {
+        texts[0].nodeValue = t("calc.retreatAt") + " ";
+      }
+      if (texts[1]) {
+        texts[1].nodeValue = " " + t("calc.lossPct");
+      }
+    }
+
+    var clearBtns = document.querySelectorAll(".cleen_class");
+    for (i = 0; i < clearBtns.length; i++) {
+      clearBtns[i].setAttribute("title", t("calc.clear"));
+    }
+
+    var heroOff = document.querySelectorAll(".vkl_vukl_hero label");
+    for (i = 0; i < heroOff.length; i++) {
+      heroOff[i].textContent = t("calc.disableHero");
+    }
+
+    var addAtk = document.querySelectorAll(".add_attacer");
+    for (i = 0; i < addAtk.length; i++) {
+      var atkKey = addAtk[i].querySelector(".mines") ? "calc.removeAttacker" : "calc.addAttacker";
+      setTextNode(addAtk[i], t(atkKey), " ");
+    }
+    var addDef = document.querySelectorAll(".add_defender");
+    for (i = 0; i < addDef.length; i++) {
+      var defKey = addDef[i].querySelector(".mines") ? "calc.removeDefender" : "calc.addDefender";
+      setTextNode(addDef[i], t(defKey), " ");
+    }
+
+    var typeSelects = document.querySelectorAll("select[id^='type_']");
+    for (i = 0; i < typeSelects.length; i++) {
+      if (!/^type_[0-6]$/.test(typeSelects[i].id)) {
+        continue;
+      }
+      var groups = typeSelects[i].querySelectorAll("optgroup");
+      if (groups[0]) {
+        groups[0].label = t("calc.faction");
+      }
+      if (groups[1]) {
+        groups[1].label = t("calc.ruins");
+      }
+      if (groups[2]) {
+        groups[2].label = t("calc.stonehedges");
+      }
+      if (groups[3]) {
+        groups[3].label = t("calc.tombs");
+      }
+      var nest = ["exchange", "quality", "choice", "runes", "crystals"];
+      for (n = 0; n < nest.length; n++) {
+        if (groups[4 + n]) {
+          groups[4 + n].label = t("calc.tomb." + nest[n]);
+        }
+      }
+      var opts = typeSelects[i].options;
+      for (n = 0; n < opts.length; n++) {
+        var label = factionOptionLabel(n);
+        if (label) {
+          opts[n].text = label;
+        }
+      }
     }
 
     var serverBox = document.querySelector(".type_server");
@@ -776,19 +1092,76 @@
       if (sl[3]) sl[3].textContent = " " + t("calc.econom");
     }
 
-    var paste = document.querySelector("#setting_razshet font");
-    if (paste) {
-      paste.textContent = t("calc.pasteId");
+    var ter = document.getElementById("teretory");
+    if (ter) {
+      var kzL = ter.querySelector("label[for='kz']");
+      var mzL = ter.querySelector("label[for='mz']");
+      var ozL = ter.querySelector("label[for='oz']");
+      if (kzL) kzL.textContent = " " + t("calc.kz");
+      if (mzL) mzL.textContent = " " + t("calc.maxDef");
+      if (ozL) ozL.textContent = " " + t("calc.onLake");
+      for (n = 0; n < ter.childNodes.length; n++) {
+        if (ter.childNodes[n].nodeType === 3 && /landscape|ландшафт/i.test(ter.childNodes[n].nodeValue)) {
+          ter.childNodes[n].nodeValue = " || " + t("calc.landscape") + " ";
+        }
+      }
+      var terSel = document.getElementById("ter");
+      var terrains = ["sacred", "dead", "magicForest", "cursedForest", "mountains", "desert", "forest", "steppe", "underground"];
+      if (terSel) {
+        for (n = 0; n < terSel.options.length && n < terrains.length; n++) {
+          terSel.options[n].text = t("calc.terrain." + terrains[n]);
+        }
+      }
     }
 
-    var preset = document.getElementById("image_hero_0");
-    if (preset) {
-      preset.textContent = t("calc.presets") + "   ";
+    setTextNode(document.getElementById("mb_add"), t("calc.magicTower") + " ");
+    setTextNode(document.getElementById("bb_add"), t("calc.tower") + " ");
+    setTextNode(document.getElementById("yb_add"), t("calc.forts") + " ");
+    setTextNode(document.getElementById("gate_add"), t("calc.gates") + " ");
+
+    var begin = document.getElementById("begin");
+    if (begin) {
+      begin.textContent = t("calc.predict");
+    }
+    var auto = document.getElementById("auto");
+    if (auto) {
+      auto.textContent = t("calc.auto");
     }
 
-    var saveId = document.getElementById("save_id");
-    if (saveId) {
-      saveId.setAttribute("placeholder", t("calc.savePlaceholder"));
+    var mode = document.getElementById("type_doing");
+    var modes = ["atkMinDefMax", "atkMaxDefMin", "atkMaxDefAvg", "atkMinDefAvg", "atkAvgDefMax", "atkAvgDefMin", "random", "custom"];
+    if (mode) {
+      for (n = 0; n < mode.options.length && n < modes.length; n++) {
+        mode.options[n].text = t("calc.mode." + modes[n]);
+      }
+    }
+
+    var mmKeys = ["calc.min", "calc.max", "calc.rnd", "calc.avg"];
+    var mmBoxes = document.querySelectorAll("#setting_min_max > div");
+    for (i = 0; i < mmBoxes.length; i++) {
+      var mmId = mmBoxes[i].id || "";
+      var mmNum = mmId.replace("min_max_", "");
+      setTextNode(mmBoxes[i], (mmNum === "2" || mmNum === "3" || mmNum === "4" || mmNum === "5") ? t("calc.defShort") : t("calc.atkShort"));
+      var mmSel = mmBoxes[i].querySelector("select");
+      if (mmSel) {
+        for (n = 0; n < mmSel.options.length && n < mmKeys.length; n++) {
+          mmSel.options[n].text = t(mmKeys[n]);
+        }
+      }
+    }
+
+    var details = document.querySelector("#open_ditals");
+    if (details) {
+      setTextNode(details, t("calc.details"), " ");
+    }
+    var hideDetails = document.querySelector(".closs_ditals");
+    if (hideDetails) {
+      setTextNode(hideDetails, t("calc.hideDetails"), " ");
+    }
+
+    var ancientBtns = document.querySelectorAll(".ancient_rune, .ancient_rune_vkl");
+    for (i = 0; i < ancientBtns.length; i++) {
+      ancientBtns[i].title = t("calc.ancientRune");
     }
   }
 
