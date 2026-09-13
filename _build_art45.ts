@@ -23,11 +23,15 @@ const SETS: Record<string, number[][]> = {
   DEATHKNIGHT: [[188, 194], [374, 194], [560, 194], [622, 194], [684, 194], [746, 194], [808, 194], [870, 194], [932, 194], [994, 194], [2, 193], [64, 193]],
   WATERDRAGON: [[498, 9], [188, 8], [374, 8], [560, 8], [622, 8], [684, 8], [746, 8], [808, 8], [870, 8], [932, 8], [994, 8], [2, 7]],
   MINOTAUR: [[1924, 76], [1490, 75], [1552, 74], [498, 71], [188, 70], [374, 70], [560, 70], [622, 70], [684, 70], [746, 70], [808, 70], [870, 70]],
+  // From assets.*.json / ArtifactAssets atlas:
+  // shared/artifacts/4/musketer/{back,wear,ring,helmet,item,weapon,footwear,necklace,weapon_offhand,thigh,belt,wrist}.png
+  MUSKETER: [[436, 441], [250, 440], [312, 440], [1056, 436], [1118, 436], [1180, 436], [1242, 436], [1304, 436], [1366, 436], [1428, 436], [1614, 386], [1676, 386]],
 };
 
 const ORDER = [
   "SNAKE", "WASP", "MANDRAKE", "MAG", "GHOST", "MEDUZE",
   "SPIDER", "ARCHANGEL", "ILFAR", "WIZARD", "DEATHKNIGHT", "WATERDRAGON", "MINOTAUR",
+  "MUSKETER",
 ];
 
 const TILE = 50;

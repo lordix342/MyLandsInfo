@@ -216,6 +216,20 @@
   if (!isArr(window.db_bonuses)) return;
   if (!isArr(window.db_dress)) return;
 
+  var extraArtRows = {};
+  if (isArr(data.legacySetPatches)) {
+    var e;
+    for (e = 0; e < data.legacySetPatches.length; e++) {
+      var p = data.legacySetPatches[e];
+      if (!p || p.key !== "MUSKETER" || typeof p.index !== "number") continue;
+      // MUSKETER art sits in the last row of ArtifactSets45.png.
+      extraArtRows[p.index] = data.sets.length;
+    }
+  }
+  function hasExtraArt(idx) {
+    return typeof extraArtRows[idx] === "number";
+  }
+
   function stubRow() {
     return [
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -257,18 +271,19 @@
     ids.push(idx);
   }
 
-  var ART45 = "url('img/ArtifactSets45.png?2')";
+  var ART45 = "url('img/ArtifactSets45.png?3')";
+  var ART45_ROWS = data.sets.length + Object.keys(extraArtRows).length;
 
   function artBg(idx, slot, size) {
-    var row = idx - start;
-    if (row < 0) return "";
+    var row = hasExtraArt(idx) ? extraArtRows[idx] : (idx - start);
+    if (row < 0 || row >= ART45_ROWS) return "";
     size = size || 50;
     if (size === 50) {
       return ART45 + " no-repeat -" + (slot * 50) + "px -" + (row * 50) + "px";
     }
     var scale = size / 50;
     return ART45 + " no-repeat -" + (slot * 50 * scale) + "px -" + (row * 50 * scale) +
-      "px / " + (12 * 50 * scale) + "px " + (ids.length * 50 * scale) + "px";
+      "px / " + (12 * 50 * scale) + "px " + (ART45_ROWS * 50 * scale) + "px";
   }
 
   function paintSlot(el, idx, slot, size) {
@@ -343,6 +358,51 @@
   }
 
   function injectUi() {
+    // Some stock HTML ids for set #5 were created with the army index in place
+    // of the set index (smotkisu___N___slot___N__). Rename them back so
+    // create_list_dress_one can paint the expected icons.
+    function fixSet5Ids(army) {
+      var slot;
+      for (slot = 0; slot < 12; slot++) {
+        if (slot === 5) continue;
+        var broken = document.getElementById("smotkisu_" + army + "_" + slot + "_" + army);
+        var good = "smotkisu_5_" + slot + "_" + army;
+        if (broken && broken.id !== good && !document.getElementById(good)) broken.id = good;
+      }
+    }
+
+    // Legacy human level-4 set keeps the existing sprite row in db20.js, but
+    // its effects are rebuilt from heropedia and routed through the same engine
+    // as new level 4-5 racial sets.
+    if (isArr(data.legacySetPatches) && isArr(window.db_dress)) {
+      var lp;
+      for (lp = 0; lp < data.legacySetPatches.length; lp++) {
+        var patch = data.legacySetPatches[lp];
+        var idx = patch.index;
+        if (typeof idx !== "number") continue;
+        var row = [];
+        var old = [];
+        var slot2;
+        for (slot2 = 0; slot2 < 12; slot2++) {
+          var piece = patch.slots[slot2];
+          if (!piece) continue;
+          if (piece.bonusId && !window.db_bonuses[piece.bonusId]) window.db_bonuses[piece.bonusId] = stubRow();
+          if (piece.oldBonusId && !window.db_bonuses[piece.oldBonusId]) window.db_bonuses[piece.oldBonusId] = stubRow();
+          row.push([piece.title, piece.bonusId, piece.bonusId ? 0 : 1, 0]);
+          old.push([piece.oldTitle, piece.oldBonusId, piece.oldBonusId ? 0 : 1, 0]);
+        }
+        if (patch.setBonusId && !window.db_bonuses[patch.setBonusId]) window.db_bonuses[patch.setBonusId] = stubRow();
+        if (patch.oldSetBonusId && !window.db_bonuses[patch.oldSetBonusId]) window.db_bonuses[patch.oldSetBonusId] = stubRow();
+        row.push([patch.setTitle, patch.setBonusId, 0, 0]);
+        row.push([patch.name + (patch.race ? " [" + patch.race + "]" : "")]);
+        old.push([patch.oldSetTitle, patch.oldSetBonusId, 0, 0]);
+        old.push([patch.name + " (древний)"]);
+        window.db_dress[idx] = row;
+        if (isArr(window.db_dress_old)) window.db_dress_old[idx] = old;
+        if (isArr(window.db_lvl_dress) && typeof patch.level === "number") window.db_lvl_dress[idx] = patch.level;
+      }
+    }
+
     var armies = [0, 1, 2, 3, 4, 5, 6];
     var a;
     var ordered = ids.slice().sort(function (a, b) {
@@ -351,7 +411,28 @@
     });
     for (a = 0; a < armies.length; a++) {
       var n = armies[a];
+      fixSet5Ids(n);
+      if (window.heroes && heroes[n] && typeof heroes[n].create_list_dress_one === "function") {
+        var rs;
+        for (rs = 0; rs < 12; rs++) heroes[n].create_list_dress_one(rs);
+      }
       var list = document.getElementById("complect_dres_" + n);
+      if (list && isArr(data.legacySetPatches)) {
+        for (i = 0; i < data.legacySetPatches.length; i++) {
+          var legacy = data.legacySetPatches[i];
+          if (!legacy || typeof legacy.index !== "number") continue;
+          var nameNode = document.getElementById("name_select_dress_" + legacy.index + "_" + n);
+          if (nameNode) insertByLevel(list, nameNode, legacy.index, ".name_select_dress", "name");
+          for (slot = 0; slot < 12; slot++) {
+            var pLegacy = document.getElementById("select_shmotka_" + slot + "_" + n);
+            var iconNode = document.getElementById("smotkisu_" + legacy.index + "_" + slot + "_" + n);
+            if (pLegacy && iconNode) {
+              insertByLevel(pLegacy, iconNode, legacy.index, ".smotkisu", "icon");
+              if (hasExtraArt(legacy.index)) paintSlot(iconNode, legacy.index, slot, 50);
+            }
+          }
+        }
+      }
       var dressBox = document.getElementById("div_all_dress_litle_" + n);
       var i;
       for (i = 0; i < ordered.length; i++) {
@@ -409,6 +490,17 @@
           paintSlot(el, ids[i], num_dress, 50);
         }
       }
+      if (isArr(data.legacySetPatches)) {
+        for (i = 0; i < data.legacySetPatches.length; i++) {
+          var legacy = data.legacySetPatches[i];
+          if (!legacy || !hasExtraArt(legacy.index)) continue;
+          var el2 = document.getElementById("smotkisu_" + legacy.index + "_" + num_dress + "_" + this.number);
+          if (el2) {
+            el2.title = window.db_dress[legacy.index][num_dress][0];
+            paintSlot(el2, legacy.index, num_dress, 50);
+          }
+        }
+      }
     };
   }
 
@@ -424,6 +516,17 @@
           el.title = window.db_dress[ids[i]][12][0];
         }
       }
+      if (isArr(data.legacySetPatches)) {
+        for (i = 0; i < data.legacySetPatches.length; i++) {
+          var legacy = data.legacySetPatches[i];
+          if (!legacy) continue;
+          var el2 = document.getElementById("name_select_dress_" + legacy.index + "_" + this.number);
+          if (el2) {
+            el2.innerHTML = "<div class='plus'></div> " + window.db_dress[legacy.index][13];
+            el2.title = window.db_dress[legacy.index][12][0];
+          }
+        }
+      }
     };
   }
 
@@ -431,7 +534,7 @@
   if (origWear) {
     Heroes.prototype.to_dress_one = function (num_dress, num) {
       origWear.call(this, num_dress, num);
-      if (num >= start) {
+      if (num >= start || hasExtraArt(num)) {
         paintSlot(document.getElementById("shmotka_" + num_dress + "_" + this.number), num, num_dress, 50);
         paintSlot(document.getElementById("litle_dress_" + this.number + "_" + num + "_" + num_dress), num, num_dress, 22);
         if (window.MLKalkAncientRunes && typeof window.MLKalkAncientRunes.inject === "function") {
