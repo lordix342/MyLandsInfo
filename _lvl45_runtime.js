@@ -327,6 +327,31 @@
     else parent.appendChild(node);
   }
 
+  // Keep the whole UI list ordered by set level, not only newly injected rows.
+  function sortByLevel(parent, selector, kind) {
+    if (!parent) return;
+    var nodes = parent.querySelectorAll(selector);
+    var rows = [];
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      var idx = parseSetId(nodes[i], kind);
+      if (!(idx >= 0)) continue;
+      rows.push({ el: nodes[i], idx: idx, lv: setLevel(idx) });
+    }
+    rows.sort(function (a, b) {
+      return a.lv - b.lv || a.idx - b.idx;
+    });
+    if (kind === "name") {
+      for (i = 0; i < rows.length; i++) parent.appendChild(rows[i].el);
+      return;
+    }
+    var marker = parent.querySelector("br") || parent.querySelector("button");
+    for (i = 0; i < rows.length; i++) {
+      if (marker) parent.insertBefore(rows[i].el, marker);
+      else parent.appendChild(rows[i].el);
+    }
+  }
+
   // Stock icons are 50px tiles with a 13px margin plus a ~4px HTML space, so
   // they land on the 67px cells of slots45.png. JS-created tiles have no
   // space, so they drift. Snap every visible tile onto that grid.
@@ -469,8 +494,11 @@
           }
         }
       }
+      sortByLevel(list, ".name_select_dress", "name");
       for (slot = 0; slot < 12; slot++) {
-        layoutPicker(document.getElementById("select_shmotka_" + slot + "_" + n));
+        var pickerNode = document.getElementById("select_shmotka_" + slot + "_" + n);
+        sortByLevel(pickerNode, ".smotkisu", "icon");
+        layoutPicker(pickerNode);
       }
     }
     if (window.MLKalkAncientRunes && typeof window.MLKalkAncientRunes.inject === "function") {
