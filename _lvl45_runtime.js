@@ -134,6 +134,15 @@
       unit.bonusu[33] += value;
     } else if (b === "CREMATION") {
       unit.bonusu[26] += value;
+    } else if (b === "HERO_EXPERIENCE") {
+      unit.bonusu[34] += value;
+    } else if (b === "ADDITIONAL_ATTACK") {
+      // Flat damage the hero adds in every round ("бонусный левый дамаг").
+      unit.bonusu[36] += value;
+    } else if (b === "ADDITIONAL_ATTACK_MULTIPLIER") {
+      // "Усиление атаки войска" multiplies damage after the per-type attack
+      // bonus, so it rides on yselenit_damag rather than an attack lane.
+      unit.mlAmplify = (unit.mlAmplify || 0) + value;
     } else if (b === "MIN_ATTACK") {
       // Min/max damage have no bonus lane; they ride on nanas_damag below.
       unit.mlMinAttack = (unit.mlMinAttack || 0) + value;
@@ -160,6 +169,23 @@
       origNull.call(this);
       this.mlMinAttack = 0;
       this.mlMaxAttack = 0;
+      this.mlAmplify = 0;
+    };
+
+    // "Усиление атаки войска" already has a slot the engine understands, but it
+    // doubles as a user input field, so borrow it for the duration of the call
+    // instead of writing artifact values into it permanently.
+    var origDamagAll = Units.prototype.nanas_damag_all;
+    Units.prototype.nanas_damag_all = function (mm) {
+      var extra = this.mlAmplify || 0;
+      if (!extra) return origDamagAll.call(this, mm);
+      var saved = this.yselenit_damag;
+      this.yselenit_damag = (saved || 0) + extra;
+      try {
+        return origDamagAll.call(this, mm);
+      } finally {
+        this.yselenit_damag = saved;
+      }
     };
 
     var origDamag = Units.prototype.nanas_damag;

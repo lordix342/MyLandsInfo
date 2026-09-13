@@ -289,11 +289,14 @@ const PERCENT_LANES = new Set([
   "NECROMANCY_FROM_ENEMIES",
   "CREMATION",
   "PARTIAL_RETREAT",
+  "HERO_EXPERIENCE",
+  "ADDITIONAL_ATTACK_MULTIPLIER",
 ]);
 const FLAT_LANES = new Set([
   "DEFENSE_BONUS",
   "INCREASE_MAX_DEFENCE",
   "MAGES_SUPPRESS_ATTACK",
+  "ADDITIONAL_ATTACK",
 ]);
 
 function engineEffect(e: Effect, myRaces?: string[]) {

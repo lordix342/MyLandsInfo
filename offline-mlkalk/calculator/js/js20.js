@@ -9566,6 +9566,15 @@ var num_div_unit = -1;
 
 //var info_div = $('#info_unit');
 //вывод информации о юните
+//вывод бонуса в подсказке: плюс зеленым, минус красным, ноль желтым
+function paint_bonus(id, value, suffix) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    value = value || 0;
+    el.style.color = value > 0 ? 'green' : (value < 0 ? 'red' : 'yellow');
+    el.innerHTML = (value > 0 ? '+' : '') + value + (suffix || '');
+}
+
 function se_info(num, num_unit) {
     if (num_div != num || num_div_unit != num_unit) {
         num_div = num;
@@ -9602,12 +9611,8 @@ function se_info(num, num_unit) {
 
         for (var iks = 0; iks < 7; iks++) {
             if (unitu[iks].bul_v_boy) {
-                if (document.getElementById("red_" + iks).checked) {
-                    unitu[iks].red = true;
-                }
-                else {
-                    unitu[iks].red = false;
-                }
+                var red_box = document.getElementById("red_" + iks);
+                unitu[iks].red = red_box ? red_box.checked : unitu[iks].red;
             }
         }
 
@@ -9705,48 +9710,14 @@ function se_info(num, num_unit) {
         unitu[num].limit_bonus(num_unit + 16, -75, false); //проверка мин hp
 
         //hp bonus
-        if (unitu[num].bonusu[16 + num_unit]) {
-
-            if (unitu[num].bonusu[16 + num_unit] > 0) {
-                document.getElementById('bonus_hp').style.color = 'green';
-                document.getElementById('bonus_hp').innerHTML = '+' + unitu[num].bonusu[16 + num_unit] + '%';
-            }
-            else {
-                document.getElementById('bonus_hp').style.color = 'red';
-                document.getElementById('bonus_hp').innerHTML = unitu[num].bonusu[16 + num_unit] + '%';
-            }
-        }
-        else {
-            document.getElementById('bonus_hp').innerHTML = '';
-        }
+        paint_bonus('bonus_hp', unitu[num].bonusu[16 + num_unit], '%');
         //damag bonus
-        if (unitu[num].bonusu[8 + num_unit]) {
-
-            if (unitu[num].bonusu[8 + num_unit] > 0) {
-                document.getElementById('bonus_attac').style.color = 'green';
-                document.getElementById('bonus_attac').innerHTML = '+' + unitu[num].bonusu[8 + num_unit] + '%';
-            }
-            else {
-                document.getElementById('bonus_attac').style.color = 'red';
-                document.getElementById('bonus_attac').innerHTML = unitu[num].bonusu[8 + num_unit] + '%';
-            }
-        }
-        else {
-            document.getElementById('bonus_attac').innerHTML = '';
-        }
-        //armor bonus
-        if (unitu[num].bonusu[num_unit]) {
-            document.getElementById('text_armor').innerHTML = unitu[num].bonusu[num_unit];
-            if (unitu[num].bonusu[num_unit] == unitu[num].bonusu[24]) {
-                document.getElementById('text_armor').style.color = 'orange';
-            }
-            else {
-                document.getElementById('text_armor').style.color = 'white';
-            }
-        }
-        else {
-            document.getElementById('text_armor').innerHTML = 0;
-            document.getElementById('text_armor').style.color = 'white';
+        paint_bonus('bonus_attac', unitu[num].bonusu[8 + num_unit], '%');
+        //armor bonus, оранжевый когда защита уперлась в свой предел
+        paint_bonus('text_armor', unitu[num].bonusu[num_unit], '%');
+        if (unitu[num].bonusu[num_unit] &&
+            unitu[num].bonusu[num_unit] == unitu[num].bonusu[24]) {
+            document.getElementById('text_armor').style.color = 'orange';
         }
 
         info_unit = $('#info_unit');
