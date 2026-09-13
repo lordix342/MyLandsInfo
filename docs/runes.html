@@ -1097,7 +1097,7 @@
       list.querySelectorAll(".combo-card").forEach(function (item) {
         item.classList.toggle("is-selected", Number(item.dataset.combo) === selected);
       });
-      list.classList.toggle("has-selection", selected >= 0 || hasCustom);
+      list.classList.toggle("has-selection", selected >= 0 || Boolean(hasCustom));
       if (selected >= 0) {
         const card = list.querySelector('.combo-card.is-selected');
         if (card && card.scrollIntoView) {
