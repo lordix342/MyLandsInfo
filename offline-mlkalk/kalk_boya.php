@@ -1,4 +1,4 @@
-﻿<!-- подключаем бд
+<!-- подключаем бд
 
 
 
@@ -167,7 +167,7 @@ img {
 
 <p align="right" class="calc-text" style="font-size: 11px;">ОБНОВЛЕННЫЙ калькулятор боя My Lands<b> Vr: 3.4.3</b>. Последняя редакция: <b>24.10.2023<i>/(23:02)</i></b> <a href="/ver_info.php" target="_blank"><span style="font-size:8pt"><u><span style="color:blue">[описание изменений]</span></u></span></a></p>
 
-<div align="center"><iframe style="border: none;" class="frame" src="/kalklb.php?v304" width="100%" height="3300px">
+<div align="center"><iframe style="border: none;" class="frame" src="./calculator/index.html" width="100%" height="3300px">
  </iframe></div>
  </div>
  </div>

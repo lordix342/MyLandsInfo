@@ -3,7 +3,7 @@
 This workspace includes scripts to build and serve an offline copy of the needed MLKALK modules:
 
 - `quest.php` + `qes.php` (quests database)
-- `kalk_boya.php` + `kalklb.php` (battle calculator)
+- `calculator/` (battle calculator: `index.html`, `css/`, `js/`, `img/`)
 
 ## 1) Build offline copy
 

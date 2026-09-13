@@ -47,9 +47,13 @@
     // db bonus indexes use unit order:
     // 0-carriers, 1-warriors, 2-cavalry, 3-flying, 4-rangers, 5-healers, 6-mercs, 7-mages.
     if (tag === "SCAVENGER") return [0];
-    if (tag === "MELEE") return [1, 2, 3];
+    if (tag === "MELEE") return [1];
     if (tag === "CAVALRY") return [2];
+    if (tag === "FLYING" || tag === "FLYER") return [3];
     if (tag === "RANGER") return [4];
+    if (tag === "HEALER") return [5];
+    if (tag === "MINER" || tag === "MERCENARY" || tag === "MERC") return [6];
+    if (tag === "MAGE") return [7];
     return [0, 1, 2, 3, 4, 5, 6, 7];
   }
 
@@ -203,6 +207,9 @@
       applyToTargetGroup(ctxUnit, effects[i]);
     }
     return true;
+  };
+  window.MLKalkApplyCustomSetEffect._applyBuff = function (ctxUnit, effect) {
+    applyToTargetGroup(ctxUnit, effect);
   };
 
   ensureCustomBonusRows();

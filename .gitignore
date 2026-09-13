@@ -14,3 +14,7 @@ live_*.php
 live_*.js
 live_*.css
 cdx_*.json
+
+# Raw getHeroConfig responses; _parse_heroconfig.ts distills them into
+# _data/sets_lvl45_*.json, which is the copy worth keeping.
+_data/heroconfig_*.json

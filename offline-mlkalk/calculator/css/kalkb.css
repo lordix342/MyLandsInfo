@@ -1,4 +1,4 @@
-﻿body {
+body {
     font-family: "Calibri Light", Times, serif;
     background: #f4e0b6;
     margin: 0;
@@ -334,11 +334,11 @@
   }
   
   .alximick {
-    background-image: url("image/crystal_deact.png");
+    background-image: url("../img/crystal_deact.png");
   }
   
   .alximick_vkl {
-    background-image: url("image/crystal_act.png");
+    background-image: url("../img/crystal_act.png");
   }
   
   .old_dress,
@@ -351,11 +351,11 @@
   }
   
   .old_dress {
-    background-image: url("image/drew_deact.png");
+    background-image: url("../img/drew_deact.png");
   }
   
   .old_dress_vkl {
-    background-image: url("image/drew_act.png");
+    background-image: url("../img/drew_act.png");
   }
   
   .rynu_label,
@@ -366,12 +366,40 @@
     position: relative;
   }
   
+  .ancient_rune,
+  .ancient_rune_vkl {
+    width: 16px;
+    height: 15px;
+    top: -36px;
+    left: 1px;
+    position: relative;
+    cursor: pointer;
+    font: 700 10px/15px sans-serif;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  .ancient_rune:after,
+  .ancient_rune_vkl:after {
+    content: "A";
+  }
+
+  .ancient_rune {
+    color: #c9a227;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .ancient_rune_vkl {
+    color: #fff7d6;
+    background: #8a5a12;
+  }
+
   .rynu_label {
-    background-image: url("image/mini_runa_deact.png?123");
+    background-image: url("../img/mini_runa_deact.png?123");
   }
   
   .rynu_label_vkl {
-    background-image: url("image/mini_runa_act.png?123");
+    background-image: url("../img/mini_runa_act.png?123");
   }
   
   .black_fon,
@@ -405,28 +433,29 @@
   
   }
   
-  .to_del_dress {
-    top: -4px;
-    left: 45px;
-    width: 75px;
+  /* Both buttons belong under the paperdoll. In normal flow the floated right
+     column pushes them ~300px below the panel, so they are pinned instead.
+     The element+class selector is needed to outrank .button_nw further down. */
+  button.to_del_dress,
+  button.save_hero {
+    position: absolute;
+    bottom: 3px;
     font-size: 12px;
-  }
-  
-  .save_hero {
-    font-size: 12px;
-    position: relative;
-    top: -4px;
-    left: 41px;
-    width: 110px;
-    height: 23px;
   }
 
-  #save_id {
-    width: 150px;
+  button.to_del_dress {
+    left: 12px;
+    width: 75px;
   }
+
+  button.save_hero {
+    left: 95px;
+    width: 110px;
+  }
+
   
   .units {
-    background: url(image/arm_slot.png?4);
+    background: url(../img/arm_slot.png?4);
     width: 591px;
     height: 98px;
     display: inline-block;
@@ -544,7 +573,7 @@
     width: 95px;
     height: 95px;
     margin-left: 7px;
-    background: url("image/spetc_zaschitnick.png");
+    background: url("../img/spetc_zaschitnick.png");
   
   }
   
@@ -588,43 +617,43 @@
   .kz_img {
     width: 32px;
     height: 33px;
-    background: url("image/worota_kz.png");
+    background: url("../img/worota_kz.png");
   }
   
   .terr_0 {
-    background: url("image/0.png");
+    background: url("../img/0.png");
   }
   
   .terr_1 {
-    background: url("image/1.png");
+    background: url("../img/1.png");
   }
   
   .terr_2 {
-    background: url("image/2.png");
+    background: url("../img/2.png");
   }
   
   .terr_3 {
-    background: url("image/3.png");
+    background: url("../img/3.png");
   }
   
   .terr_4 {
-    background: url("image/4.png");
+    background: url("../img/4.png");
   }
   
   .terr_5 {
-    background: url("image/5.png");
+    background: url("../img/5.png");
   }
   
   .terr_6 {
-    background: url("image/6.png");
+    background: url("../img/6.png");
   }
   
   .terr_7 {
-    background: url("image/7.png");
+    background: url("../img/7.png");
   }
   
   .terr_8 {
-    background: url("image/8.png");
+    background: url("../img/8.png");
   }
   
   div#yb div {
@@ -656,7 +685,7 @@
   .yb_img {
     width: 34px !important;
     height: 33px;
-    background: url("image/ycrep.png");
+    background: url("../img/ycrep.png");
     margin-bottom: 4px;
     cursor: pointer !important;
   }
@@ -664,7 +693,7 @@
   .bb_img {
     width: 23px !important;
     height: 33px;
-    background: url("image/tower.png");
+    background: url("../img/tower.png");
   }
   
   .bb_img span {
@@ -680,7 +709,7 @@
   .mb_img {
     width: 20px !important;
     height: 33px;
-    background: url("image/mag_tower.png");
+    background: url("../img/mag_tower.png");
   }
   
   .mb_img span {
@@ -693,11 +722,11 @@
   }
   
   ._w {
-    background: url("image/up.png");
+    background: url("../img/up.png");
   }
   
   ._q {
-    background: url("image/down.png");
+    background: url("../img/down.png");
   }
   
   ._w,
@@ -792,7 +821,7 @@
     margin-left: 10px;
     width: 200px;
     height: 324px;
-    background: url("image/_big2.jpg?410") no-repeat;
+    background: url("../img/_big2.jpg?410") no-repeat;
   }
   
   .navuki_hero {
@@ -822,16 +851,6 @@
     top: 0px;
     left: 229px;
   }
-  .update_hero_pr {
-    margin-top: -212px;
-    display: none;
-    background-color: #f3e5bb;
-    z-index: 25;
-    position: absolute;
-    overflow: auto;
-    width: 400px;
-    height: 648px;
-  }
   .vkl_vukl_setting {
     margin-top: -31px;
     margin-left: -233px;
@@ -860,6 +879,14 @@
     overflow: auto;
     width: 220px;
     height: 200px;
+  }
+
+  .smotkisu-extra {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-color: transparent;
   }
   
   .magic_to_hero_select {
@@ -965,7 +992,8 @@
     position: absolute;
     /* overflow: scroll; */
     width: 609px;
-    height: 488px;
+    /* 7 cell rows: level 4-5 sets add a row on top of the stock 6. */
+    height: 555px;
     top: -2px;
     margin-left: -18px;
   }
@@ -1016,7 +1044,7 @@
     height: 58px;
     width: 54px;
     display: block;
-    background: url("image/rynu.png") no-repeat;
+    background: url("../img/rynu.png") no-repeat;
   }
   
   .ryna_img_0 {
@@ -1104,7 +1132,7 @@
   }
   
   .fon_hero_div {
-    background: url("image/fon.png");
+    background: url("../img/fon.png");
     border: 2px solid #000;
   }
   
@@ -1490,14 +1518,14 @@
   .attac_img {
     width: 20px;
     height: 20px;
-    background: url("image/attack.png");
+    background: url("../img/attack.png");
     top: 5px;
   }
   
   #img_hp {
     width: 20px;
     height: 20px;
-    background: url("image/healt.png");
+    background: url("../img/healt.png");
     top: 5px;
   }
   
@@ -1505,7 +1533,7 @@
   #img_armor {
     width: 20px;
     height: 20px;
-    background: url("image/defender.png");
+    background: url("../img/defender.png");
     top: 5px;
   }
   
@@ -1680,23 +1708,23 @@
   }
   
   .first_cost_0 {
-    background: url("image/gold.png");
+    background: url("../img/gold.png");
   }
   
   .first_cost_1 {
-    background: url("image/wood.png");
+    background: url("../img/wood.png");
   }
   
   .first_cost_2 {
-    background: url("image/grain.png");
+    background: url("../img/grain.png");
   }
   
   .first_cost_3 {
-    background: url("image/iron.png");
+    background: url("../img/iron.png");
   }
   
   .first_cost_4 {
-    background: url("image/people.png");
+    background: url("../img/people.png");
   }
   
   .div_hero_select_img,
@@ -1713,12 +1741,12 @@
   }
   
   .first_img {
-    background: url("image/_first2.png?410") no-repeat;
+    background: url("../img/_first2.png?413") no-repeat;
    /* cursor: pointer; */
   }
   
   .big_img {
-    background: url("image/_big2.jpg?410") no-repeat;
+    background: url("../img/_big2.jpg?410") no-repeat;
     cursor: pointer;
   }
   
@@ -1738,11 +1766,11 @@
   }
   
   .plus {
-    background: url("image/plus.png");
+    background: url("../img/plus.png");
   }
   
   .mines {
-    background: url("image/deleted.png");
+    background: url("../img/deleted.png");
   }
   
   .cleen_class,
@@ -1755,16 +1783,10 @@
   
   .cleen_class,
   .cleen_hero {
-    background: url("image/clear.png");
+    background: url("../img/clear.png");
   }
   
-  #link-for-load {
-    display: none;
-  }
   
-  #link-for-load input {
-    width: 365px;
-  }
   
   /********new******/
   .unselect {
@@ -1837,13 +1859,13 @@
   
   .slots
   {
-  background: url("image/slots.png?6") no-repeat;
+  background: url("../img/slots.png?6") no-repeat;
   }
   
   .button_nw
   {
   border-width: 0 10px;
-  border-image: url(image/button.png);
+  border-image: url(../img/button.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -1862,7 +1884,7 @@
 
   .button_nw_setting {
       border-width: 0 10px;
-      border-image: url(image/button.png);
+      border-image: url(../img/button.png);
       border-image-slice: 0 10 0 10 fill;
       /* border-image-repeat: stretch; */
       border-radius: 0;
@@ -1882,7 +1904,7 @@
   .button_setting
   {
   border-width: 0 10px;
-  border-image: url(image/setting.png);
+  border-image: url(../img/setting.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -1905,7 +1927,7 @@
     margin-top: 8px;
   margin-left: 250px;
   border-width: 0 10px;
-  border-image: url(image/button.png);
+  border-image: url(../img/button.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -1927,7 +1949,7 @@
     margin-top: 8px;
   margin-left: 200px;
   border-width: 0 10px;
-  border-image: url(image/button.png);
+  border-image: url(../img/button.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -1951,7 +1973,7 @@
   border-style: solid;
   border-color: transparent;
   border-width: 4px;
-  border-image: url(image/box.png);
+  border-image: url(../img/box.png);
   border-image-slice: 4 4 4 4 fill;
   border-image-repeat: stretch;
   background: #f2eee2;
@@ -1985,35 +2007,6 @@
   background: #e1fefe
   }
   
-  .preset {
-  border-width: 0 10px;
-  border-image: url(image/preset.png);
-  border-image-slice: 0 10 0 10 fill;
-  /* border-image-repeat: stretch; */
-  border-radius: 0;
-  height: 30px;
-  background-color: transparent;
-  padding: 0 2px;
-  min-width: 37px;
-  background: none;
-  color: #000000;
-  font-weight: bold;
-  text-transform: none;
-  cursor: pointer;
-  position: relative;
-  }
-  .preset_list {
-    background: url("image/fon.png");
-    border: 2px solid #000;
-    display: inline-block;
-    float: inherit;
-    width: 350px;
-    padding: 3px;
-    padding-left: 5px;
-    position: relative;
-    left: 682px;
-    top: -333px;
-  }
   
   .popup {
   display: none;
@@ -2021,7 +2014,7 @@
   top: 22%;
   left: 38%;
   transform: translate(-50%, -50%);
-  background: url("image/fon.png");
+  background: url("../img/fon.png");
   border: 2px solid #000;
   padding: 10px;
   width: 390px;
@@ -2055,7 +2048,7 @@
   }
   .fe {
   border-width: 0 10px;
-  border-image: url(image/f.png);
+  border-image: url(../img/f.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2073,7 +2066,7 @@
   }
   .u {
   border-width: 0 10px;
-  border-image: url(image/u.png);
+  border-image: url(../img/u.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2091,7 +2084,7 @@
   }
   .th {
   border-width: 0 10px;
-  border-image: url(image/th.png);
+  border-image: url(../img/th.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2109,7 +2102,7 @@
   }
   .eo {
   border-width: 0 10px;
-  border-image: url(image/eo.png);
+  border-image: url(../img/eo.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2127,7 +2120,7 @@
   }
   .r {
   border-width: 0 10px;
-  border-image: url(image/r.png);
+  border-image: url(../img/r.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2145,7 +2138,7 @@
   }
   .t {
   border-width: 0 10px;
-  border-image: url(image/t.png);
+  border-image: url(../img/t.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2163,7 +2156,7 @@
   }
   .ia {
   border-width: 0 10px;
-  border-image: url(image/ia.png);
+  border-image: url(../img/ia.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2181,7 +2174,7 @@
   }
   .x {
   border-width: 0 10px;
-  border-image: url(image/x.png);
+  border-image: url(../img/x.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2199,7 +2192,7 @@
   }
   .h {
   border-width: 0 10px;
-  border-image: url(image/h.png);
+  border-image: url(../img/h.png);
   border-image-slice: 0 10 0 10 fill;
   /* border-image-repeat: stretch; */
   border-radius: 0;
@@ -2217,7 +2210,7 @@
   }
   .r1_1 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/1_1.png);
+  border-image: url(../img/recept/1_1.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2235,7 +2228,7 @@
   }
   .r1_2 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/1_2.png);
+  border-image: url(../img/recept/1_2.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2253,7 +2246,7 @@
   }
   .r1_3 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/1_3.png);
+  border-image: url(../img/recept/1_3.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2271,7 +2264,7 @@
   }
   .r1_4 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/1_4.png);
+  border-image: url(../img/recept/1_4.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2289,7 +2282,7 @@
   }
   .r1_5 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/1_5.png);
+  border-image: url(../img/recept/1_5.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2307,7 +2300,7 @@
   }
   .r2_1 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/2_1.png);
+  border-image: url(../img/recept/2_1.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2325,7 +2318,7 @@
   }
   .r2_2 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/2_2.png);
+  border-image: url(../img/recept/2_2.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2343,7 +2336,7 @@
   }
   .r2_3 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/2_3.png);
+  border-image: url(../img/recept/2_3.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2361,7 +2354,7 @@
   }
   .r2_4 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/2_4.png);
+  border-image: url(../img/recept/2_4.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2379,7 +2372,7 @@
   }
   .r3_1 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/3_1.png);
+  border-image: url(../img/recept/3_1.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2397,7 +2390,7 @@
   }
   .r3_2 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/3_2.png);
+  border-image: url(../img/recept/3_2.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2415,7 +2408,7 @@
   }
   .r3_3 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/3_3.png);
+  border-image: url(../img/recept/3_3.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2433,7 +2426,7 @@
   }
   .r3_4 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/3_4.png);
+  border-image: url(../img/recept/3_4.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2451,7 +2444,7 @@
   }
   .r3_5 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/3_5.png);
+  border-image: url(../img/recept/3_5.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2469,7 +2462,7 @@
   }
   .r4_1 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/4_1.png);
+  border-image: url(../img/recept/4_1.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2487,7 +2480,7 @@
   }
   .r4_2 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/4_2.png);
+  border-image: url(../img/recept/4_2.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2505,7 +2498,7 @@
   }
   .r4_3 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/4_3.png);
+  border-image: url(../img/recept/4_3.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2523,7 +2516,7 @@
   }
   .r4_4 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/4_4.png);
+  border-image: url(../img/recept/4_4.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2541,7 +2534,7 @@
   }
   .r4_5 {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/4_5.png);
+  border-image: url(../img/recept/4_5.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2559,7 +2552,7 @@
   }
   .rscroll_5_crystals {
   /*  border-width: 0 10px;*/
-  border-image: url(image/recept/scroll_5_crystals.png);
+  border-image: url(../img/recept/scroll_5_crystals.png);
   border-image-slice: 0 10 0 10 fill;
   border-image-repeat: stretch;
   border-radius: 0;
@@ -2578,7 +2571,7 @@
   
   .armystrength1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrength_1.png);
+      border-image: url(../img/zatochki/armystrength_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2596,7 +2589,7 @@
     }
   .armystrength2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrength_2.png);
+      border-image: url(../img/zatochki/armystrength_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2614,7 +2607,7 @@
     }
   .armystrength3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrength_3.png);
+      border-image: url(../img/zatochki/armystrength_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2632,7 +2625,7 @@
     }
   .armystrength4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrength_4.png);
+      border-image: url(../img/zatochki/armystrength_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2650,7 +2643,7 @@
     }
   .armystrength5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrength_5.png);
+      border-image: url(../img/zatochki/armystrength_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2669,7 +2662,7 @@
 
   .protection1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protection_1.png);
+      border-image: url(../img/zatochki/protection_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2687,7 +2680,7 @@
     }
   .protection2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protection_2.png);
+      border-image: url(../img/zatochki/protection_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2705,7 +2698,7 @@
     }
   .protection3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protection_3.png);
+      border-image: url(../img/zatochki/protection_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2723,7 +2716,7 @@
     }
       .protection4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protection_4.png);
+      border-image: url(../img/zatochki/protection_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2741,7 +2734,7 @@
     }
       .protection5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protection_5.png);
+      border-image: url(../img/zatochki/protection_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2760,7 +2753,7 @@
   
   .armyres1 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyres_1.png);
+    border-image: url(../img/zatochki/armyres_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2778,7 +2771,7 @@
     }
   .armyres2 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyres_2.png);
+    border-image: url(../img/zatochki/armyres_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2796,7 +2789,7 @@
     }
   .armyres3 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyres_3.png);
+    border-image: url(../img/zatochki/armyres_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2814,7 +2807,7 @@
     }
   .armyres4 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyres_4.png);
+    border-image: url(../img/zatochki/armyres_4.png);
     border-image-slice: 0 10 0 10 fill;
     border-image-repeat: stretch;
     border-radius: 0;
@@ -2832,7 +2825,7 @@
   }
   .armyres5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armyres_5.png);
+      border-image: url(../img/zatochki/armyres_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -2851,7 +2844,7 @@
     /**/
     .armystrength1s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrength_s_1.png);
+          border-image: url(../img/zatochki/armystrength_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2869,7 +2862,7 @@
         }
       .armystrength2s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrength_s_2.png);
+          border-image: url(../img/zatochki/armystrength_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2887,7 +2880,7 @@
         }
       .armystrength3s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrength_s_3.png);
+          border-image: url(../img/zatochki/armystrength_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2905,7 +2898,7 @@
         }
       .armystrength4s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrength_s_4.png);
+          border-image: url(../img/zatochki/armystrength_s_4.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2923,7 +2916,7 @@
         }
       .armystrength5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrength_s_5.png);
+          border-image: url(../img/zatochki/armystrength_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2942,7 +2935,7 @@
     
       .protection1s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protection_s_1.png);
+          border-image: url(../img/zatochki/protection_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2960,7 +2953,7 @@
         }
       .protection2s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protection_s_2.png);
+          border-image: url(../img/zatochki/protection_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2978,7 +2971,7 @@
         }
       .protection3s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protection_s_3.png);
+          border-image: url(../img/zatochki/protection_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -2996,7 +2989,7 @@
         }
           .protection4s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protection_s_4.png);
+          border-image: url(../img/zatochki/protection_s_4.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3014,7 +3007,7 @@
         }
           .protection5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protection_s_5.png);
+          border-image: url(../img/zatochki/protection_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3033,7 +3026,7 @@
       
       .armyres1s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyres_s_1.png);
+        border-image: url(../img/zatochki/armyres_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3051,7 +3044,7 @@
         }
       .armyres2s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyres_s_2.png);
+        border-image: url(../img/zatochki/armyres_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3069,7 +3062,7 @@
         }
       .armyres3s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyres_s_3.png);
+        border-image: url(../img/zatochki/armyres_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3087,7 +3080,7 @@
         }
       .armyres4s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyres_s_4.png);
+        border-image: url(../img/zatochki/armyres_s_4.png);
         border-image-slice: 0 10 0 10 fill;
         border-image-repeat: stretch;
         border-radius: 0;
@@ -3105,7 +3098,7 @@
       }
       .armyres5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armyres_s_5.png);
+          border-image: url(../img/zatochki/armyres_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3123,7 +3116,7 @@
         }
   .armystrengthally1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrengthally_1.png);
+      border-image: url(../img/zatochki/armystrengthally_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3141,7 +3134,7 @@
     }
   .armystrengthally2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrengthally_2.png);
+      border-image: url(../img/zatochki/armystrengthally_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3159,7 +3152,7 @@
     }
   .armystrengthally3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrengthally_3.png);
+      border-image: url(../img/zatochki/armystrengthally_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3177,7 +3170,7 @@
     }
   .armystrengthally4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrengthally_4.png);
+      border-image: url(../img/zatochki/armystrengthally_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3195,7 +3188,7 @@
     }
   .armystrengthally5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armystrengthally_5.png);
+      border-image: url(../img/zatochki/armystrengthally_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3214,7 +3207,7 @@
 
   .protectally1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protectally_1.png);
+      border-image: url(../img/zatochki/protectally_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3232,7 +3225,7 @@
     }
   .protectally2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protectally_2.png);
+      border-image: url(../img/zatochki/protectally_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3250,7 +3243,7 @@
     }
   .protectally3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protectally_3.png);
+      border-image: url(../img/zatochki/protectally_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3268,7 +3261,7 @@
     }
       .protectally4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protectally_4.png);
+      border-image: url(../img/zatochki/protectally_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3286,7 +3279,7 @@
     }
       .protectally5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/protectally_5.png);
+      border-image: url(../img/zatochki/protectally_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3305,7 +3298,7 @@
   
   .armyresally1 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyresally_1.png);
+    border-image: url(../img/zatochki/armyresally_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3323,7 +3316,7 @@
     }
   .armyresally2 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyresally_2.png);
+    border-image: url(../img/zatochki/armyresally_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3341,7 +3334,7 @@
     }
   .armyresally3 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyresally_3.png);
+    border-image: url(../img/zatochki/armyresally_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3359,7 +3352,7 @@
     }
   .armyresally4 {
     /*  border-width: 0 10px;*/
-    border-image: url(image/zatochki/armyresally_4.png);
+    border-image: url(../img/zatochki/armyresally_4.png);
     border-image-slice: 0 10 0 10 fill;
     border-image-repeat: stretch;
     border-radius: 0;
@@ -3377,7 +3370,7 @@
   }
   .armyresally5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/armyresally_5.png);
+      border-image: url(../img/zatochki/armyresally_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -3396,7 +3389,7 @@
     /**/
     .armystrengthally1s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrengthally_s_1.png);
+          border-image: url(../img/zatochki/armystrengthally_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3414,7 +3407,7 @@
         }
       .armystrengthally2s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrengthally_s_2.png);
+          border-image: url(../img/zatochki/armystrengthally_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3432,7 +3425,7 @@
         }
       .armystrengthally3s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrengthally_s_3.png);
+          border-image: url(../img/zatochki/armystrengthally_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3450,7 +3443,7 @@
         }
       .armystrengthally4s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrengthally_s_4.png);
+          border-image: url(../img/zatochki/armystrengthally_s_4.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3468,7 +3461,7 @@
         }
       .armystrengthally5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armystrengthally_s_5.png);
+          border-image: url(../img/zatochki/armystrengthally_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3487,7 +3480,7 @@
     
       .protectally1s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protectally_s_1.png);
+          border-image: url(../img/zatochki/protectally_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3505,7 +3498,7 @@
         }
       .protectally2s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protectally_s_2.png);
+          border-image: url(../img/zatochki/protectally_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3523,7 +3516,7 @@
         }
       .protectally3s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protectally_s_3.png);
+          border-image: url(../img/zatochki/protectally_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3541,7 +3534,7 @@
         }
           .protectally4s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protectally_s_4.png);
+          border-image: url(../img/zatochki/protectally_s_4.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3559,7 +3552,7 @@
         }
           .protectally5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/protectally_s_5.png);
+          border-image: url(../img/zatochki/protectally_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3578,7 +3571,7 @@
       
       .armyresally1s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyresally_s_1.png);
+        border-image: url(../img/zatochki/armyresally_s_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3596,7 +3589,7 @@
         }
       .armyresally2s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyresally_s_2.png);
+        border-image: url(../img/zatochki/armyresally_s_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3614,7 +3607,7 @@
         }
       .armyresally3s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyresally_s_3.png);
+        border-image: url(../img/zatochki/armyresally_s_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3632,7 +3625,7 @@
         }
       .armyresally4s {
         /*  border-width: 0 10px;*/
-        border-image: url(image/zatochki/armyresally_s_4.png);
+        border-image: url(../img/zatochki/armyresally_s_4.png);
         border-image-slice: 0 10 0 10 fill;
         border-image-repeat: stretch;
         border-radius: 0;
@@ -3650,7 +3643,7 @@
       }
       .armyresally5s {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/armyresally_s_5.png);
+          border-image: url(../img/zatochki/armyresally_s_5.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3668,7 +3661,7 @@
         }
       .maxdef1 {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/maxdef_1.png);
+          border-image: url(../img/zatochki/maxdef_1.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3686,7 +3679,7 @@
         }
         .maxdef2 {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/maxdef_2.png);
+          border-image: url(../img/zatochki/maxdef_2.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3704,7 +3697,7 @@
         }
         .maxdef3 {
         /*  border-width: 0 10px;*/
-          border-image: url(image/zatochki/maxdef_3.png);
+          border-image: url(../img/zatochki/maxdef_3.png);
           border-image-slice: 0 10 0 10 fill;
           border-image-repeat: stretch;
           border-radius: 0;
@@ -3722,7 +3715,7 @@
         }
         .maxdef1s {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/maxdef_s_1.png);
+              border-image: url(../img/zatochki/maxdef_s_1.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -3740,7 +3733,7 @@
             }
             .maxdef2s {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/maxdef_s_2.png);
+              border-image: url(../img/zatochki/maxdef_s_2.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -3758,7 +3751,7 @@
             }
             .maxdef3s {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/maxdef_s_3.png);
+              border-image: url(../img/zatochki/maxdef_s_3.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -3776,7 +3769,7 @@
 }
         .maxdefally1 {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/maxdefally_1.png);
+              border-image: url(../img/zatochki/maxdefally_1.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -3794,7 +3787,7 @@
 }
         .maxdefally2 {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/maxdefally_2.png);
+              border-image: url(../img/zatochki/maxdefally_2.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -3812,7 +3805,7 @@
             }
             .maxdefally1s {
                 /*  border-width: 0 10px;*/
-                  border-image: url(image/zatochki/maxdefally_s_1.png);
+                  border-image: url(../img/zatochki/maxdefally_s_1.png);
                   border-image-slice: 0 10 0 10 fill;
                   border-image-repeat: stretch;
                   border-radius: 0;
@@ -3830,7 +3823,7 @@
     }
             .maxdefally2s {
                 /*  border-width: 0 10px;*/
-                  border-image: url(image/zatochki/maxdefally_s_2.png);
+                  border-image: url(../img/zatochki/maxdefally_s_2.png);
                   border-image-slice: 0 10 0 10 fill;
                   border-image-repeat: stretch;
                   border-radius: 0;
@@ -3848,7 +3841,7 @@
     }
             .terr1 {
                 /*  border-width: 0 10px;*/
-                  border-image: url(image/zatochki/terr_1.png);
+                  border-image: url(../img/zatochki/terr_1.png);
                   border-image-slice: 0 10 0 10 fill;
                   border-image-repeat: stretch;
                   border-radius: 0;
@@ -3866,7 +3859,7 @@
     }
             .terr2 {
                 /*  border-width: 0 10px;*/
-                  border-image: url(image/zatochki/terr_2.png);
+                  border-image: url(../img/zatochki/terr_2.png);
                   border-image-slice: 0 10 0 10 fill;
                   border-image-repeat: stretch;
                   border-radius: 0;
@@ -3884,7 +3877,7 @@
     }
             .terr3 {
                 /*  border-width: 0 10px;*/
-                  border-image: url(image/zatochki/terr_3.png);
+                  border-image: url(../img/zatochki/terr_3.png);
                   border-image-slice: 0 10 0 10 fill;
                   border-image-repeat: stretch;
                   border-radius: 0;
@@ -3902,7 +3895,7 @@
                 }
                 .terr1s {
                     /*  border-width: 0 10px;*/
-                      border-image: url(image/zatochki/terr_s_1.png);
+                      border-image: url(../img/zatochki/terr_s_1.png);
                       border-image-slice: 0 10 0 10 fill;
                       border-image-repeat: stretch;
                       border-radius: 0;
@@ -3920,7 +3913,7 @@
                     }
                     .terr2s {
                         /*  border-width: 0 10px;*/
-                          border-image: url(image/zatochki/terr_s_2.png);
+                          border-image: url(../img/zatochki/terr_s_2.png);
                           border-image-slice: 0 10 0 10 fill;
                           border-image-repeat: stretch;
                           border-radius: 0;
@@ -3938,7 +3931,7 @@
                         }
                         .terr3s {
                             /*  border-width: 0 10px;*/
-                              border-image: url(image/zatochki/terr_s_3.png);
+                              border-image: url(../img/zatochki/terr_s_3.png);
                               border-image-slice: 0 10 0 10 fill;
                               border-image-repeat: stretch;
                               border-radius: 0;
@@ -3956,7 +3949,7 @@
                         }
                         .herospeed1 {
                             /*  border-width: 0 10px;*/
-                              border-image: url(image/zatochki/herospeed_1.png);
+                              border-image: url(../img/zatochki/herospeed_1.png);
                               border-image-slice: 0 10 0 10 fill;
                               border-image-repeat: stretch;
                               border-radius: 0;
@@ -3974,7 +3967,7 @@
                         }
                         .herospeed2 {
                             /*  border-width: 0 10px;*/
-                              border-image: url(image/zatochki/herospeed_2.png);
+                              border-image: url(../img/zatochki/herospeed_2.png);
                               border-image-slice: 0 10 0 10 fill;
                               border-image-repeat: stretch;
                               border-radius: 0;
@@ -3992,7 +3985,7 @@
                 }
                 .herospeed3 {
                     /*  border-width: 0 10px;*/
-                      border-image: url(image/zatochki/herospeed_3.png);
+                      border-image: url(../img/zatochki/herospeed_3.png);
                       border-image-slice: 0 10 0 10 fill;
                       border-image-repeat: stretch;
                       border-radius: 0;
@@ -4010,7 +4003,7 @@
         }
         .herospeed1s {
             /*  border-width: 0 10px;*/
-              border-image: url(image/zatochki/herospeed_s_1.png);
+              border-image: url(../img/zatochki/herospeed_s_1.png);
               border-image-slice: 0 10 0 10 fill;
               border-image-repeat: stretch;
               border-radius: 0;
@@ -4028,7 +4021,7 @@
 }
 .herospeed2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/herospeed_s_2.png);
+      border-image: url(../img/zatochki/herospeed_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4046,7 +4039,7 @@
 }
 .herospeed3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/herospeed_s_3.png);
+      border-image: url(../img/zatochki/herospeed_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4064,7 +4057,7 @@
 }
 .magdefense1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_1.png);
+      border-image: url(../img/zatochki/Magdefense_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4082,7 +4075,7 @@
 }
 .magdefense2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_2.png);
+      border-image: url(../img/zatochki/Magdefense_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4100,7 +4093,7 @@
 }
 .magdefense3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_3.png);
+      border-image: url(../img/zatochki/Magdefense_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4118,7 +4111,7 @@
 }
 .magdefense4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_4.png);
+      border-image: url(../img/zatochki/Magdefense_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4136,7 +4129,7 @@
 }
 .magdefense5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_5.png);
+      border-image: url(../img/zatochki/Magdefense_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4154,7 +4147,7 @@
 }
 .magdefense1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_s_1.png);
+      border-image: url(../img/zatochki/Magdefense_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4172,7 +4165,7 @@
 }
 .magdefense2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_s_2.png);
+      border-image: url(../img/zatochki/Magdefense_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4190,7 +4183,7 @@
 }
 .magdefense3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_s_3.png);
+      border-image: url(../img/zatochki/Magdefense_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4208,7 +4201,7 @@
 }
 .magdefense4s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_s_4.png);
+      border-image: url(../img/zatochki/Magdefense_s_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4226,7 +4219,7 @@
 }
 .magdefense5s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/Magdefense_s_5.png);
+      border-image: url(../img/zatochki/Magdefense_s_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4244,7 +4237,7 @@
 }
 .heoexp1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_1.png);
+      border-image: url(../img/zatochki/heoexp_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4262,7 +4255,7 @@
 }
 .heoexp2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_2.png);
+      border-image: url(../img/zatochki/heoexp_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4280,7 +4273,7 @@
 }
 .heoexp3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_3.png);
+      border-image: url(../img/zatochki/heoexp_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4298,7 +4291,7 @@
 }
 .heoexp4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_4.png);
+      border-image: url(../img/zatochki/heoexp_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4316,7 +4309,7 @@
 }
 .heoexp5 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_5.png);
+      border-image: url(../img/zatochki/heoexp_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4334,7 +4327,7 @@
 }
 .heoexp1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_s_1.png);
+      border-image: url(../img/zatochki/heoexp_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4352,7 +4345,7 @@
 }
 .heoexp2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_s_2.png);
+      border-image: url(../img/zatochki/heoexp_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4370,7 +4363,7 @@
 }
 .heoexp3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_s_3.png);
+      border-image: url(../img/zatochki/heoexp_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4388,7 +4381,7 @@
 }
 .heoexp4s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_s_4.png);
+      border-image: url(../img/zatochki/heoexp_s_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4406,7 +4399,7 @@
 }
 .heoexp5s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/heoexp_s_5.png);
+      border-image: url(../img/zatochki/heoexp_s_5.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4424,7 +4417,7 @@
 }
 .enemweak1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_1.png);
+      border-image: url(../img/zatochki/enemweak_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4442,7 +4435,7 @@
 }
 .enemweak2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_2.png);
+      border-image: url(../img/zatochki/enemweak_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4460,7 +4453,7 @@
 }
 .enemweak3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_3.png);
+      border-image: url(../img/zatochki/enemweak_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4478,7 +4471,7 @@
 }
 .enemweak4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_4.png);
+      border-image: url(../img/zatochki/enemweak_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4496,7 +4489,7 @@
 }
 .enemweak1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_s_1.png);
+      border-image: url(../img/zatochki/enemweak_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4514,7 +4507,7 @@
 }
 .enemweak2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_s_2.png);
+      border-image: url(../img/zatochki/enemweak_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4532,7 +4525,7 @@
 }
 .enemweak3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_s_3.png);
+      border-image: url(../img/zatochki/enemweak_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4550,7 +4543,7 @@
 }
 .enemweak4s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemweak_s_4.png);
+      border-image: url(../img/zatochki/enemweak_s_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4568,7 +4561,7 @@
 }
 .enemdef1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_1.png);
+      border-image: url(../img/zatochki/enemdef_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4586,7 +4579,7 @@
 }
 .enemdef2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_2.png);
+      border-image: url(../img/zatochki/enemdef_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4604,7 +4597,7 @@
 }
 .enemdef3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_3.png);
+      border-image: url(../img/zatochki/enemdef_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4622,7 +4615,7 @@
 }
 .enemdef4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_4.png);
+      border-image: url(../img/zatochki/enemdef_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4640,7 +4633,7 @@
 }
 .enemdef1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_s_1.png);
+      border-image: url(../img/zatochki/enemdef_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4658,7 +4651,7 @@
 }
 .enemdef2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_s_2.png);
+      border-image: url(../img/zatochki/enemdef_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4676,7 +4669,7 @@
 }
 .enemdef3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_s_3.png);
+      border-image: url(../img/zatochki/enemdef_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4694,7 +4687,7 @@
 }
 .enemdef4s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemdef_s_4.png);
+      border-image: url(../img/zatochki/enemdef_s_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4712,7 +4705,7 @@
 }
 .enemhealth1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_1.png);
+      border-image: url(../img/zatochki/enemhealth_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4730,7 +4723,7 @@
 }
 .enemhealth2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_2.png);
+      border-image: url(../img/zatochki/enemhealth_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4748,7 +4741,7 @@
 }
 .enemhealth3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_3.png);
+      border-image: url(../img/zatochki/enemhealth_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4766,7 +4759,7 @@
 }
 .enemhealth4 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_4.png);
+      border-image: url(../img/zatochki/enemhealth_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4784,7 +4777,7 @@
 }
 .enemhealth1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_s_1.png);
+      border-image: url(../img/zatochki/enemhealth_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4802,7 +4795,7 @@
 }
 .enemhealth2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_s_2.png);
+      border-image: url(../img/zatochki/enemhealth_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4820,7 +4813,7 @@
 }
 .enemhealth3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_s_3.png);
+      border-image: url(../img/zatochki/enemhealth_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4838,7 +4831,7 @@
 }
 .enemhealth4s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemhealth_s_4.png);
+      border-image: url(../img/zatochki/enemhealth_s_4.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4856,7 +4849,7 @@
 }
 .enemmaxdef1 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_1.png);
+      border-image: url(../img/zatochki/enemmaxdef_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4874,7 +4867,7 @@
 }
 .enemmaxdef2 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_2.png);
+      border-image: url(../img/zatochki/enemmaxdef_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4892,7 +4885,7 @@
 }
 .enemmaxdef3 {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_3.png);
+      border-image: url(../img/zatochki/enemmaxdef_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4910,7 +4903,7 @@
 }
 .enemmaxdef1s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_s_1.png);
+      border-image: url(../img/zatochki/enemmaxdef_s_1.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4928,7 +4921,7 @@
 }
 .enemmaxdef2s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_s_2.png);
+      border-image: url(../img/zatochki/enemmaxdef_s_2.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4946,7 +4939,7 @@
 }
 .enemmaxdef3s {
     /*  border-width: 0 10px;*/
-      border-image: url(image/zatochki/enemmaxdef_s_3.png);
+      border-image: url(../img/zatochki/enemmaxdef_s_3.png);
       border-image-slice: 0 10 0 10 fill;
       border-image-repeat: stretch;
       border-radius: 0;
@@ -4964,7 +4957,7 @@
 }
 .box {
   border: 4px solid transparent;
-  border-image: url(image/box_ramka.png);
+  border-image: url(../img/box_ramka.png);
   border-image-repeat: stretch;
   border-image-slice: 4 4 4 4 fill;
 }
@@ -4979,7 +4972,7 @@
   left: -4px;
 }
 .hero_icon {
-  background: url(image/tabs/hero.png);
+  background: url(../img/tabs/hero.png);
   width: 40px !important;
   height: 24px !important;
   display: inline-block !important;
@@ -4990,7 +4983,7 @@
   left: 9px;
 }
 .hero_icon_2 {
-  background: url(image/tabs/skills.png);
+  background: url(../img/tabs/skills.png);
   width: 31px !important;
   height: 20px !important;
   display: inline-block !important;
@@ -5001,7 +4994,7 @@
   left: 237px;
 }
 .hero_icon_3 {
-  background: url(image/tabs/spells.png);
+  background: url(../img/tabs/spells.png);
   width: 31px !important;
   height: 20px !important;
   display: inline-block !important;
@@ -5012,7 +5005,7 @@
   left: 286px;
 }
 .hero_icon_4 {
-  background: url(image/tabs/hero_exchange.png);
+  background: url(../img/tabs/hero_exchange.png);
   width: 40px !important;
   height: 22px !important;
   display: inline-block !important;
@@ -5023,7 +5016,7 @@
   left: 338px;
 }
 .hero_icon_5 {
-  background: url(image/tabs/artifact_store.png);
+  background: url(../img/tabs/artifact_store.png);
   width: 40px !important;
   height: 22px !important;
   display: inline-block !important;
@@ -5035,7 +5028,7 @@
 }
 .hero_box{
   z-index: 16;
-  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image: url("../img/tabs/fon_button_mini_icon.png");
   border-image-slice: 0 10 0 10 fill;
   border-style: solid;
   border-width: 0 10px;
@@ -5047,7 +5040,7 @@
 }
 .hero_box_2{
   z-index: 16;
-  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image: url("../img/tabs/fon_button_mini_icon.png");
   border-image-slice: 0 10 0 10 fill;
   border-style: solid;
   border-width: 0 10px;
@@ -5060,7 +5053,7 @@
 }
 .hero_box_3{
   z-index: 16;
-  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image: url("../img/tabs/fon_button_mini_icon.png");
   border-image-slice: 0 10 0 10 fill;
   border-style: solid;
   border-width: 0 10px;
@@ -5073,7 +5066,7 @@
 }
 .hero_box_4{
   z-index: 16;
-  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image: url("../img/tabs/fon_button_mini_icon.png");
   border-image-slice: 0 10 0 10 fill;
   border-style: solid;
   border-width: 0 10px;
@@ -5086,7 +5079,7 @@
 }
 .hero_box_5{
   z-index: 16;
-  border-image: url("image/tabs/fon_button_mini_icon.png");
+  border-image: url("../img/tabs/fon_button_mini_icon.png");
   border-image-slice: 0 10 0 10 fill;
   border-style: solid;
   border-width: 0 10px;
