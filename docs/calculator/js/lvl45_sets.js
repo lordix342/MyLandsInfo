@@ -552,5 +552,15 @@ window.MLKalkLvl45Data = {"effects":{"19200":[{"buffType":"PARTIAL_RETREAT","tar
     injectUi();
   }
 
+  // The "choose full set" popup can be reopened after various UI refreshes.
+  // Re-inject just before opening so new sets are always present in that list.
+  if (typeof window.update_art_list_hero === "function") {
+    var prevOpen = window.update_art_list_hero;
+    window.update_art_list_hero = function (num) {
+      injectUi();
+      return prevOpen.call(this, num);
+    };
+  }
+
   window.MLKalkLvl45 = { ids: ids, start: start, sets: data.sets };
 })();

@@ -4271,7 +4271,7 @@ Heroes.prototype.create_list_dress = function () {
 
 ////TODO: (цикл сменить)Формирование перечня комплектов для шмоток
 Heroes.prototype.create_dress = function () {
-    var msx = 48;
+    var msx = db_dress.length;
     do {
         msx--;
 
