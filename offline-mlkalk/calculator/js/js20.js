@@ -11001,8 +11001,10 @@ function load() {
 
 
     $(".monster_settings input").click(function () {
-        var num = $(this).parent().data('number');
-        heroes[num].monster_type = parseInt($(this).val());
+        var box = $(this).closest(".monster_settings");
+        var num = parseInt(box.attr("data-number"), 10);
+        if (!heroes[num]) return;
+        heroes[num].monster_type = parseInt($(this).val(), 10);
         heroes[num].set_skils_stounhedj();
     })
 
