@@ -1,9 +1,13 @@
 // Builds offline-mlkalk/artifacts_data.js for artifacts.html.
 // Prices: _data/heroconfig_MILITARY.json (+ HEROIC to mark server-specific sets).
-// Names/sets: mlgame_artifact_sets.json. Pictures: ru.mlgame.org/shared/artifacts/...
+// Names/sets: mlgame_artifact_sets.json. Pictures: cut from the game's ArtifactAssets
+// atlas (positions from the heropedia assets manifest), server files as a fallback.
 // Effects: _archive_mlkalk/arts_php_2026.html (Wayback copy of mlkalk.site/arts.php)
 // and the calculator's lvl45_sets.js for the level 4-5 racial sets missing there.
 // Run: deno run --allow-read --allow-write --allow-net scripts/build-artifacts-data.ts [--no-download]
+
+import { Buffer } from "node:buffer";
+import { PNG } from "npm:pngjs";
 
 type Obj = Record<string, unknown>;
 
@@ -14,16 +18,13 @@ const DOWNLOAD = !Deno.args.includes("--no-download");
 
 const SLOTS = ["HEAD", "NECK", "FINGER", "LEFT_HAND", "CHEST", "WAIST", "LEGS", "ITEM", "RIGHT_HAND", "WRIST", "THIGH", "BACK"];
 
-// ArtifactSets45.png: 50px tiles, columns follow SLOTS, rows follow this list.
-const SPRITE45 = ["SNAKE", "WASP", "MANDRAKE", "MAG", "GHOST", "MEDUZE", "SPIDER", "ARCHANGEL", "ILFAR", "WIZARD", "DEATHKNIGHT", "WATERDRAGON", "MINOTAUR", "MUSKETER"];
-
 const FILE_CAND: Record<string, string[]> = {
   HEAD: ["helmet", "head"],
   NECK: ["necklace", "neck"],
   FINGER: ["ring", "finger"],
-  CHEST: ["wear", "torso", "chest"],
+  CHEST: ["wear", "chest", "torso"],
   WAIST: ["belt", "waist"],
-  LEGS: ["footwear", "feet", "legs"],
+  LEGS: ["footwear", "legs", "feet"],
   ITEM: ["item", "artefact"],
   BACK: ["back"],
   THIGH: ["thigh"],
@@ -32,6 +33,27 @@ const FILE_CAND: Record<string, string[]> = {
   RIGHT_HAND: ["shield", "weapon_offhand", "right_hand"],
 };
 const SET_DIR: Record<string, string> = { ROYAL: "king" };
+
+// "shared/artifacts/4/meduze/thigh.png" -> [x, y, w, h] inside the ArtifactAssets atlas.
+async function loadAtlas() {
+  if (!DOWNLOAD) return null;
+  const init = await (await fetch("https://ru.mlgame.org/portal-init-params?app=heropedia&viewType=ARTIFACTS")).json();
+  const manifest = await (await fetch("https://ru.mlgame.org" + init.pathToAssetsJson)).json();
+  const [url, group] = Object.entries(manifest.ArtifactAssets.atlas)[0] as [string, { assets: Record<string, string> }];
+  const rects = new Map<string, number[]>();
+  for (const [k, v] of Object.entries(group.assets)) rects.set(k, v.split(":").map(Number));
+  const sheet = PNG.sync.read(Buffer.from(await (await fetch("https://ru.mlgame.org/" + url)).arrayBuffer()));
+  return { rects, sheet };
+}
+
+function cropPng(sheet: PNG, [x, y, w, h]: number[]) {
+  const out = new PNG({ width: w, height: h });
+  for (let row = 0; row < h; row++) {
+    const si = ((y + row) * sheet.width + x) * 4;
+    sheet.data.copy(out.data, row * w * 4, si, si + w * 4);
+  }
+  return new Uint8Array(PNG.sync.write(out, { deflateLevel: 9 }));
+}
 
 function collect(file: string) {
   const root = JSON.parse(Deno.readTextFileSync(file));
@@ -109,7 +131,7 @@ for (const [key, codes] of orphans) {
 
 type Fx = { n?: string[]; a?: string[]; p?: string[]; up?: string };
 type Item = { slot: string; code: string; name: string; twoHanded?: 1; sell: number; ancient: number; img?: string; fx?: Fx };
-type SetOut = { key: string; name: string; level: number; servers?: string; sprite?: number; fx?: string[]; items: Item[] };
+type SetOut = { key: string; name: string; level: number; servers?: string; fx?: string[]; items: Item[] };
 
 const ASSETS = `${SITE}/wp-content/assets/`;
 const REMOTE_ROOT = "https://ru.mlgame.org/";
@@ -219,8 +241,6 @@ for (const s of setOrder) {
     items: [],
   };
   if (inMil !== inHer) set.servers = inMil ? "MILITARY" : "HEROIC";
-  const spriteRow = SPRITE45.indexOf(s.key);
-  if (spriteRow >= 0) set.sprite = spriteRow;
   for (const code of base) {
     const a = military.get(code) ?? heroic.get(code);
     if (!a) continue;
@@ -234,7 +254,9 @@ for (const s of setOrder) {
     };
     if (a.twoHanded) item.twoHanded = 1;
     set.items.push(item);
-    if (spriteRow < 0) probes.push({ set, item, dir: `${s.level}/${SET_DIR[s.key] ?? s.key.toLowerCase()}` });
+    // Asset folders follow the level digit in the code (DRAGONHELMET is a level 5 set with DRAGONHELMET4_* items).
+    const dirLevel = code.match(/(\d)_[A-Z_]+$/)?.[1] ?? s.level;
+    probes.push({ set, item, dir: `${dirLevel}/${SET_DIR[s.key] ?? s.key.toLowerCase()}` });
   }
   set.items.sort((x, y) => SLOTS.indexOf(x.slot) - SLOTS.indexOf(y.slot));
   attachEffects(set);
@@ -287,17 +309,30 @@ const missingIcons: string[] = [];
 for (const p of icons) if (!(await fileExists(ASSETS + p))) missingIcons.push(p);
 
 let downloaded = 0;
+let cropped = 0;
+const atlas = await loadAtlas();
 await pool(probes, 12, async ({ item, dir }) => {
-  for (const f of FILE_CAND[item.slot] ?? []) {
+  const cands = FILE_CAND[item.slot] ?? [];
+  for (const f of cands) {
     const rel = `${dir}/${f}.png`;
-    const local = `${ART_DIR}/${rel}`;
-    if (await fileExists(local)) { item.img = rel; return; }
-    if (!DOWNLOAD) continue;
+    if (await fileExists(`${ART_DIR}/${rel}`)) { item.img = rel; return; }
+  }
+  if (!DOWNLOAD) return;
+  await Deno.mkdir(`${ART_DIR}/${dir}`, { recursive: true });
+  for (const f of cands) {
+    const rel = `${dir}/${f}.png`;
+    const rect = atlas?.rects.get(`shared/artifacts/${rel}`);
+    if (!rect) continue;
+    await Deno.writeFile(`${ART_DIR}/${rel}`, cropPng(atlas!.sheet, rect));
+    cropped++;
+    item.img = rel;
+    return;
+  }
+  for (const f of cands) {
+    const rel = `${dir}/${f}.png`;
     if (!(await exists(REMOTE + rel))) continue;
     const r = await fetch(REMOTE + rel);
-    const bytes = new Uint8Array(await r.arrayBuffer());
-    await Deno.mkdir(`${ART_DIR}/${dir}`, { recursive: true });
-    await Deno.writeFile(local, bytes);
+    await Deno.writeFile(`${ART_DIR}/${rel}`, new Uint8Array(await r.arrayBuffer()));
     downloaded++;
     item.img = rel;
     return;
@@ -307,11 +342,11 @@ await pool(probes, 12, async ({ item, dir }) => {
 sets.sort((a, b) => a.level - b.level || setOrder.findIndex((s) => s.key === a.key) - setOrder.findIndex((s) => s.key === b.key));
 
 const total = sets.reduce((n, s) => n + s.items.length, 0);
-const noImg = sets.flatMap((s) => s.sprite != null ? [] : s.items.filter((i) => !i.img).map((i) => i.code));
+const noImg = sets.flatMap((s) => s.items.filter((i) => !i.img).map((i) => i.code));
 const payload = { source: "heroconfig (MILITARY/HEROIC)", generated: new Date().toISOString().slice(0, 10), sets };
 await Deno.writeTextFile(`${SITE}/artifacts_data.js`, "window.ML_ARTIFACTS = " + JSON.stringify(payload) + ";\n");
 
-console.log(`sets ${sets.length}, artifacts ${total}, downloaded ${downloaded}, without picture ${noImg.length}`);
+console.log(`sets ${sets.length}, artifacts ${total}, cut from atlas ${cropped}, downloaded ${downloaded}, without picture ${noImg.length}: ${noImg.join(" ")}`);
 const noFx = sets.flatMap((s) => s.items.filter((i) => !i.fx?.n).map((i) => `${s.key}:${i.name}`));
 console.log(`without effects ${noFx.length}: ${noFx.join(", ")}`);
 console.log(`sets without set effects: ${sets.filter((s) => !s.fx).map((s) => s.key).join(" ")}`);

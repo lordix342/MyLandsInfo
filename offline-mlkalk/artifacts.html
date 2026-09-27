@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="tab.arts">Артефакти</title>
   <script src="i18n.js?8"></script>
-  <script src="artifacts_data.js?2"></script>
+  <script src="artifacts_data.js?3"></script>
   <style>
     :root {
       --parchment: #f4e0b6;
@@ -164,11 +164,6 @@
       overflow: hidden;
     }
 
-    .pic.sprite {
-      background-image: url("calculator/img/ArtifactSets45.png?4");
-      background-size: 600px 700px;
-    }
-
     .info {
       min-width: 0;
       font-size: 12px;
@@ -243,10 +238,6 @@
       height: 32px;
       flex-basis: 32px;
       font-size: 8px;
-    }
-
-    table.list .pic.sprite {
-      background-size: 384px 448px;
     }
 
     .empty {
@@ -395,12 +386,6 @@
 
       function pic(set, item, size) {
         var label = esc(t("arts.slot." + item.slot));
-        if (set.sprite != null) {
-          var col = SLOTS.indexOf(item.slot);
-          var k = size / TILE;
-          return "<div class='pic sprite' style='background-position:-" + (col * size) + "px -" +
-            (set.sprite * TILE * k) + "px'></div>";
-        }
         if (item.img) {
           return "<div class='pic' style=\"background-image:url('wp-content/assets/shared/artifacts/" + item.img + "')\"></div>";
         }
