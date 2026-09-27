@@ -19824,6 +19824,46 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	</div>
 
 
+<!--Чокнутый алхимик-->
+	
+	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
+		<div class="quest" data-qid="" style="margin-left:0px; width: calc(100% - 320px);" data-rewards="REWARD_GIVE_RANDOM_RUNE " data-servers="Miner Military Econom Tactical " data-timeout="0" data-pearls="0">
+				<div class='quest_header'>
+					<span class='quest_header_icons'><img src='/wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+	
+					<span class='quest_header_title'>Чокнутый алхимик</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='/wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='/wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='/wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='/wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='/wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+				</div>
+				<div class='quest_body'>
+					<span class='quest_body_text'>
+						<span class='quest_body_helper'><img src='/wp-content/assets/elf/advisor.png' /></span>
+						<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/44.png' /></span>
+						Повелитель! Мы наведались в гости к правителю соседних земель и преподнесли ему в подарок Черный Жемчуг. В благодарность он познакомил нас со своим придворным алхимиком, который согласился поделиться своими знаниями о рунных словах. Но оказалось, что он был учеником Рунмейстера, и это сильно отразилось на его психике. Откровенно говоря, он выглядел немного чокнутым, что являлось результатом многолетних экспериментов с рунной магией. Поэтому его просьбы тоже выглядели странными, но взамен он готов был делиться очень ценными знаниями.
+						<br><br>
+	
+						Алхимик рассказал, что его поместье находится рядом с поместьем Верховного мага. И вот однажды этот наглый сосед решил посадить картофель и так увлекся, что залез на огород алхимика. Все аргументы, что это чужой огород, Верховный маг отклонял, а в конце вообще пригрозил превратить алхимика в жабу. Поэтому алхимик требует вытоптать все до единой грядки этого старого наглеца! В награду он обещает 2 руны, одна из которых точно входит в рунное слово для пояса.
+						<br><br>
+					<b>Задача:</b>
+					Вытоптать весь огород соседу
+					  <br><br>
+					  <b>Подсказка от bbv2008:</b>
+					Cломайте соседу поселки. Достаточно сломать 24 поселка одного типа! 
+		
+							</span>
+				<br><br><br>
+				<span class='quest_body_bg'>Условия появления:</span>Появляется после выполнения квеста <B>Ответный визит</B>.
+				<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+					<br>
+					<span class='quest_body_reward'>
+						<span style="color:green;font-weight:bold;"> <img src="/wp-content/assets/shared/artifacts/rune/u.png" scale="0"></span>
+	<br>
+	<span style="color:green;font-weight:bold;"> <img src="/wp-content/assets/shared/artifacts/rune/f.png" scale="0"></span>
+	
+	
+					</span>
+		</div>
+		</div>		</div>
+
+
 <!--Уникальное предложение - 2-->
 	
 	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="/wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
@@ -20932,54 +20972,6 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 				<br>
 			</div>
 		</div></div>
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!--Чокнутый алхимик-->
-	
-	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a>
-		<div class="quest" data-qid="" style="margin-left:0px; width: calc(100% - 0px);" data-rewards="BUFF_SCIENCE_BOOST " data-servers="Miner Military Econom Tactical " data-timeout="1" data-pearls="-100">
-				<div class='quest_header'>
-					<span class='quest_header_icons'><img src='/wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
-	
-					<span class='quest_header_title'>Чокнутый алхимик</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='/wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='/wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='/wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='/wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='/wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
-				</div>
-				<div class='quest_body'>
-					<span class='quest_body_text'>
-						<span class='quest_body_helper'><img src='/wp-content/assets/elf/advisor.png' /></span>
-						<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/44.png' /></span>
-						Повелитель! Мы наведались в гости к правителю соседних земель и преподнесли ему в подарок Черный Жемчуг. В благодарность он познакомил нас со своим придворным алхимиком, который согласился поделиться своими знаниями о рунных словах. Но оказалось, что он был учеником Рунмейстера, и это сильно отразилось на его психике. Откровенно говоря, он выглядел немного чокнутым, что являлось результатом многолетних экспериментов с рунной магией. Поэтому его просьбы тоже выглядели странными, но взамен он готов был делиться очень ценными знаниями.
-						<br><br>
-	
-						Алхимик рассказал, что его поместье находится рядом с поместьем Верховного мага. И вот однажды этот наглый сосед решил посадить картофель и так увлекся, что залез на огород алхимика. Все аргументы, что это чужой огород, Верховный маг отклонял, а в конце вообще пригрозил превратить алхимика в жабу. Поэтому алхимик требует вытоптать все до единой грядки этого старого наглеца! В награду он обещает 2 руны, одна из которых точно входит в рунное слово для пояса.
-						<br><br>
-					<b>Задача:</b>
-					Вытоптать весь огород соседу
-					  <br><br>
-					  <b>Подсказка от bbv2008:</b>
-					Cломайте соседу поселки. Достаточно сломать 24 поселка одного типа! 
-		
-							</span>
-				<br><br><br>
-				<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
-					<br>
-					<span class='quest_body_reward'>
-						<span style="color:green;font-weight:bold;"> <img src="/wp-content/assets/shared/artifacts/rune/u.png" scale="0"></span>
-	<br>
-	<span style="color:green;font-weight:bold;"> <img src="/wp-content/assets/shared/artifacts/rune/u.png" scale="0"></span>
-	
-	
-					</span>
-		</div>
-		</div>		</div>	
 		
 	
 	
