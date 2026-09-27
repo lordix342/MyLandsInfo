@@ -70,13 +70,14 @@
       color: #fff;
     }
   </style>
-  <script src="./i18n.js"></script>
+  <script src="./i18n.js?8"></script>
 </head>
 <body>
   <div class="topbar">
     <button class="tab-btn active" data-target="quests" data-i18n="tab.quests">Квести</button>
     <button class="tab-btn" data-target="battle" data-i18n="tab.battle">Калькулятор битв</button>
     <button class="tab-btn" data-target="runes" data-i18n="tab.runes">Руни</button>
+    <button class="tab-btn" data-target="arts" data-i18n="tab.arts">Артефакти</button>
     <div class="lang-switch" role="group" aria-label="Language">
       <button type="button" class="lang-btn" data-lang="en" title="English">EN</button>
       <button type="button" class="lang-btn" data-lang="uk" title="Українська">УК</button>
@@ -94,6 +95,10 @@
 
   <section id="runes" class="panel">
     <iframe src="./runes.html" data-i18n-title="iframe.runes" title="Runes"></iframe>
+  </section>
+
+  <section id="arts" class="panel">
+    <iframe src="./artifacts.html" data-i18n-title="iframe.arts" title="Artifacts"></iframe>
   </section>
 
   <script>

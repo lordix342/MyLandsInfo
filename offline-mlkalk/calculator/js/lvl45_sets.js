@@ -273,7 +273,7 @@ window.MLKalkLvl45Data = {"effects":{"19200":[{"buffType":"PARTIAL_RETREAT","tar
     ids.push(idx);
   }
 
-  var ART45 = "url('img/ArtifactSets45.png?3')";
+  var ART45 = "url('img/ArtifactSets45.png?4')";
   var ART45_ROWS = data.sets.length + Object.keys(extraArtRows).length;
 
   function artBg(idx, slot, size) {

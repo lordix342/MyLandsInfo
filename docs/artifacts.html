@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="tab.arts">Артефакти</title>
+  <script src="i18n.js?8"></script>
+  <script src="artifacts_data.js?2"></script>
+  <style>
+    :root {
+      --parchment: #f4e0b6;
+      --panel: #f8e9c8;
+      --card: #fff4de;
+      --ink: #2f2413;
+      --muted: #7a6443;
+      --frame: #b38f50;
+      --ancient: #b26a00;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--frame);
+    }
+
+    .toolbar h1 {
+      margin: 0 12px 0 0;
+      font-size: 18px;
+    }
+
+    .search {
+      flex: 1 1 220px;
+      max-width: 340px;
+      padding: 8px 10px;
+      border: 1px solid var(--frame);
+      border-radius: 8px;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    .btn,
+    .slot-select {
+      border: 1px solid var(--frame);
+      background: var(--card);
+      color: var(--ink);
+      padding: 7px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .btn.is-active {
+      background: var(--frame);
+      color: #fff;
+    }
+
+    .meta {
+      padding: 8px 16px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    main {
+      padding: 12px 16px 24px;
+    }
+
+    .level-title {
+      margin: 18px 0 8px;
+      font-size: 16px;
+    }
+
+    .set {
+      margin-bottom: 12px;
+      border: 1px solid var(--frame);
+      border-radius: 10px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .set-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 14px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #e0c998;
+    }
+
+    .set-name {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .badge {
+      padding: 1px 7px;
+      border-radius: 10px;
+      background: #e8d3a4;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .set-total {
+      margin-left: auto;
+      font-size: 13px;
+    }
+
+    .set-total b.anc {
+      color: var(--ancient);
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 6px;
+      padding: 8px;
+    }
+
+    .item {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid #e0c998;
+      border-radius: 8px;
+      background: var(--card);
+      min-width: 0;
+    }
+
+    .pic {
+      flex: 0 0 50px;
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      background-color: #3b2f1c;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d8c08a;
+      font-size: 10px;
+      text-align: center;
+      line-height: 1.1;
+      overflow: hidden;
+    }
+
+    .pic.sprite {
+      background-image: url("calculator/img/ArtifactSets45.png?4");
+      background-size: 600px 700px;
+    }
+
+    .info {
+      min-width: 0;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .info .name {
+      font-weight: 700;
+      font-size: 12.5px;
+    }
+
+    .info .slot {
+      color: var(--muted);
+    }
+
+    .price {
+      white-space: nowrap;
+    }
+
+    .price.anc {
+      color: var(--ancient);
+    }
+
+    .pearl {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      vertical-align: -2px;
+      margin-left: 2px;
+      background: url("wp-content/assets/shared/icons/resources/pearl.png") center / contain no-repeat;
+    }
+
+    table.list {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      font-size: 13px;
+    }
+
+    table.list th,
+    table.list td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #e0c998;
+      text-align: left;
+    }
+
+    table.list th {
+      position: sticky;
+      top: 58px;
+      background: #ead3a3;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    table.list th.num,
+    table.list td.num {
+      text-align: right;
+    }
+
+    table.list th.sorted::after {
+      content: " ▲";
+      font-size: 10px;
+    }
+
+    table.list th.sorted.desc::after {
+      content: " ▼";
+    }
+
+    table.list .pic {
+      width: 32px;
+      height: 32px;
+      flex-basis: 32px;
+      font-size: 8px;
+    }
+
+    table.list .pic.sprite {
+      background-size: 384px 448px;
+    }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .item,
+    .set-name,
+    table.list tbody tr {
+      cursor: help;
+    }
+
+    .item:hover,
+    table.list tbody tr:hover {
+      border-color: var(--frame);
+      background: #fffaf0;
+    }
+
+    .tip {
+      position: fixed;
+      z-index: 50;
+      display: none;
+      max-width: 360px;
+      padding: 10px 12px;
+      border: 1px solid #7a5a26;
+      border-radius: 8px;
+      background: #2c2214;
+      color: #f3e6c8;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      font-size: 12px;
+      line-height: 1.45;
+      pointer-events: none;
+    }
+
+    .tip.is-open {
+      display: block;
+    }
+
+    .tip-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #ffd98a;
+    }
+
+    .tip-meta {
+      margin-bottom: 4px;
+      color: #c9b58c;
+    }
+
+    .tip-h {
+      margin: 7px 0 2px;
+      font-weight: 700;
+      color: #e8c37a;
+    }
+
+    .tip-h.anc {
+      color: #ffaa00;
+    }
+
+    .tip-h.perf {
+      color: #a9a9ff;
+    }
+
+    .tip b {
+      color: #fff;
+    }
+
+    .tip b.up {
+      color: #7ddc6f;
+    }
+
+    .tip b.dn {
+      color: #ff7a6b;
+    }
+
+    .tip .sub {
+      display: block;
+      padding-left: 12px;
+      color: #d9c9a6;
+    }
+
+    .tip .ri {
+      width: 16px;
+      height: 16px;
+      vertical-align: -3px;
+      margin: 0 1px;
+    }
+
+    .tip .up-cost {
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <h1 data-i18n="arts.title">Артефакти та ціни</h1>
+    <input class="search" id="search" type="search" data-i18n-placeholder="arts.search" placeholder="Пошук" />
+    <div class="btn-group" id="levels"></div>
+    <select class="slot-select" id="slot"></select>
+    <div class="btn-group">
+      <button type="button" class="btn is-active" data-view="sets" data-i18n="arts.viewSets">За сетами</button>
+      <button type="button" class="btn" data-view="list" data-i18n="arts.viewList">Списком</button>
+    </div>
+  </div>
+  <div class="meta" id="meta"></div>
+  <main id="content"></main>
+  <div class="tip" id="tip" role="tooltip"></div>
+
+  <script>
+    (function () {
+      var DATA = window.ML_ARTIFACTS || { sets: [] };
+      var SLOTS = ["HEAD", "NECK", "FINGER", "LEFT_HAND", "CHEST", "WAIST", "LEGS", "ITEM", "RIGHT_HAND", "WRIST", "THIGH", "BACK"];
+      var TILE = 50;
+      var state = { q: "", level: 0, slot: "", view: "sets", sort: "sell", desc: true };
+      DATA.sets.forEach(function (set, i) {
+        set._i = i;
+        set.items.forEach(function (it, j) { it._j = j; });
+      });
+
+      var searchEl = document.getElementById("search");
+      var levelsEl = document.getElementById("levels");
+      var slotEl = document.getElementById("slot");
+      var metaEl = document.getElementById("meta");
+      var contentEl = document.getElementById("content");
+
+      function t(key, vars) {
+        return window.MLI18N ? MLI18N.t(key, vars) : key;
+      }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c];
+        });
+      }
+
+      function fmt(n) {
+        return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      }
+
+      function money(n, cls, title) {
+        return "<span class='price" + (cls ? " " + cls : "") + "'" + (title ? " title='" + esc(title) + "'" : "") + ">" +
+          fmt(n) + "<i class='pearl'></i></span>";
+      }
+
+      function pic(set, item, size) {
+        var label = esc(t("arts.slot." + item.slot));
+        if (set.sprite != null) {
+          var col = SLOTS.indexOf(item.slot);
+          var k = size / TILE;
+          return "<div class='pic sprite' style='background-position:-" + (col * size) + "px -" +
+            (set.sprite * TILE * k) + "px'></div>";
+        }
+        if (item.img) {
+          return "<div class='pic' style=\"background-image:url('wp-content/assets/shared/artifacts/" + item.img + "')\"></div>";
+        }
+        return "<div class='pic'>" + label + "</div>";
+      }
+
+      function matches(set, item) {
+        if (state.level && set.level !== state.level) return false;
+        if (state.slot && item.slot !== state.slot) return false;
+        if (!state.q) return true;
+        return (item.name + " " + set.name + " " + item.code).toLowerCase().indexOf(state.q) !== -1;
+      }
+
+      function filtered() {
+        var out = [];
+        DATA.sets.forEach(function (set) {
+          var setHit = state.q && set.name.toLowerCase().indexOf(state.q) !== -1;
+          var items = set.items.filter(function (it) {
+            if (setHit && (!state.level || set.level === state.level) && (!state.slot || it.slot === state.slot)) return true;
+            return matches(set, it);
+          });
+          if (items.length) out.push({ set: set, items: items });
+        });
+        return out;
+      }
+
+      function sum(items, key) {
+        return items.reduce(function (n, it) { return n + (it[key] || 0); }, 0);
+      }
+
+      function itemHtml(set, it) {
+        var credit = it.ancient - it.sell;
+        return "<div class='item' data-s='" + set._i + "' data-i='" + it._j + "'>" + pic(set, it, TILE) +
+          "<div class='info'><div class='name'>" + esc(it.name) + "</div>" +
+          "<div class='slot'>" + esc(t("arts.slot." + it.slot)) + (it.twoHanded ? ", " + esc(t("arts.twoHanded")) : "") + "</div>" +
+          "<div>" + esc(t("arts.sell")) + ": " + money(it.sell) + "</div>" +
+          (it.ancient ? "<div>" + esc(t("arts.ancient")) + ": " + money(it.ancient, "anc") + "</div>" +
+            "<div title='" + esc(t("arts.creditHint")) + "'>" + esc(t("arts.credit")) + ": " + money(credit) + "</div>" : "") +
+          "</div></div>";
+      }
+
+      function renderSets(groups) {
+        var html = "";
+        var lastLevel = 0;
+        groups.forEach(function (g) {
+          var set = g.set;
+          if (set.level !== lastLevel) {
+            lastLevel = set.level;
+            html += "<h2 class='level-title'>" + esc(t("arts.level", { n: set.level })) + "</h2>";
+          }
+          html += "<section class='set'><div class='set-head'>" +
+            "<span class='set-name' data-s='" + set._i + "'>" + esc(set.name) + "</span>" +
+            "<span class='badge'>" + esc(t("arts.level", { n: set.level })) + "</span>" +
+            (set.servers ? "<span class='badge'>" + esc(t("arts.onlyServer", { server: set.servers })) + "</span>" : "") +
+            "<span class='set-total'>" + esc(t("arts.setTotal")) + ": " + esc(t("arts.setRegular")) + " <b>" + money(sum(set.items, "sell")) +
+            "</b> · " + esc(t("arts.setAncient")) + " <b class='anc'>" + money(sum(set.items, "ancient")) + "</b></span>" +
+            "</div><div class='items'>" + g.items.map(function (it) { return itemHtml(set, it); }).join("") + "</div></section>";
+        });
+        return html;
+      }
+
+      var COLS = [
+        { key: "name", label: "arts.colName" },
+        { key: "set", label: "arts.colSet" },
+        { key: "level", label: "arts.colLevel", num: true },
+        { key: "slot", label: "arts.colSlot" },
+        { key: "sell", label: "arts.sell", num: true },
+        { key: "ancient", label: "arts.ancient", num: true },
+        { key: "credit", label: "arts.credit", num: true }
+      ];
+
+      function renderList(groups) {
+        var rows = [];
+        groups.forEach(function (g) {
+          g.items.forEach(function (it) {
+            rows.push({ set: g.set, it: it, name: it.name, setName: g.set.name, level: g.set.level,
+              slot: SLOTS.indexOf(it.slot), sell: it.sell, ancient: it.ancient, credit: it.ancient - it.sell });
+          });
+        });
+        var key = state.sort === "set" ? "setName" : state.sort;
+        rows.sort(function (a, b) {
+          var x = a[key];
+          var y = b[key];
+          var r = typeof x === "string" ? x.localeCompare(y, "ru") : x - y;
+          return state.desc ? -r : r;
+        });
+        var head = COLS.map(function (c) {
+          var cls = (c.num ? "num " : "") + (state.sort === c.key ? "sorted" + (state.desc ? " desc" : "") : "");
+          return "<th class='" + cls + "' data-sort='" + c.key + "'>" + esc(t(c.label)) + "</th>";
+        }).join("");
+        var body = rows.map(function (r) {
+          return "<tr data-s='" + r.set._i + "' data-i='" + r.it._j + "'><td><div style='display:flex;align-items:center;gap:8px'>" +
+            pic(r.set, r.it, 32) + esc(r.name) + "</div></td>" +
+            "<td>" + esc(r.setName) + "</td><td class='num'>" + r.level + "</td>" +
+            "<td>" + esc(t("arts.slot." + r.it.slot)) + "</td>" +
+            "<td class='num'>" + money(r.sell) + "</td>" +
+            "<td class='num'>" + (r.ancient ? money(r.ancient, "anc") : "—") + "</td>" +
+            "<td class='num'>" + (r.ancient ? money(r.credit) : "—") + "</td></tr>";
+        }).join("");
+        return "<table class='list'><thead><tr>" + head + "</tr></thead><tbody>" + body + "</tbody></table>";
+      }
+
+      function render() {
+        var groups = filtered();
+        var count = groups.reduce(function (n, g) { return n + g.items.length; }, 0);
+        hideTip();
+        metaEl.textContent = t("arts.source", { date: DATA.generated || "" }) + " " +
+          t("arts.found", { sets: groups.length, items: count }) + " " + t("arts.fx.hint");
+        if (!groups.length) {
+          contentEl.innerHTML = "<div class='empty'>" + esc(t("arts.empty")) + "</div>";
+          return;
+        }
+        contentEl.innerHTML = state.view === "list" ? renderList(groups) : renderSets(groups);
+      }
+
+      function buildControls() {
+        var lv = [0, 1, 2, 3, 4, 5];
+        levelsEl.innerHTML = lv.map(function (n) {
+          return "<button type='button' class='btn" + (state.level === n ? " is-active" : "") + "' data-level='" + n + "'>" +
+            esc(n ? String(n) : t("arts.all")) + "</button>";
+        }).join("");
+        slotEl.innerHTML = "<option value=''>" + esc(t("arts.allSlots")) + "</option>" + SLOTS.map(function (s) {
+          return "<option value='" + s + "'" + (state.slot === s ? " selected" : "") + ">" + esc(t("arts.slot." + s)) + "</option>";
+        }).join("");
+      }
+
+      levelsEl.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-level]");
+        if (!b) return;
+        state.level = Number(b.getAttribute("data-level"));
+        buildControls();
+        render();
+      });
+
+      slotEl.addEventListener("change", function () {
+        state.slot = slotEl.value;
+        render();
+      });
+
+      searchEl.addEventListener("input", function () {
+        state.q = searchEl.value.trim().toLowerCase();
+        render();
+      });
+
+      document.querySelectorAll("[data-view]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          state.view = b.getAttribute("data-view");
+          document.querySelectorAll("[data-view]").forEach(function (x) {
+            x.classList.toggle("is-active", x === b);
+          });
+          render();
+        });
+      });
+
+      contentEl.addEventListener("click", function (e) {
+        var th = e.target.closest("th[data-sort]");
+        if (!th) return;
+        var key = th.getAttribute("data-sort");
+        if (state.sort === key) state.desc = !state.desc;
+        else { state.sort = key; state.desc = ["sell", "ancient", "credit", "level"].indexOf(key) !== -1; }
+        render();
+      });
+
+      var tipEl = document.getElementById("tip");
+      var tipFor = null;
+
+      function fxHtml(lines) {
+        return (lines || []).map(function (l) {
+          return "<div>" + l.replace(/\[\[([^\]]+)\]\]/g, "<img class='ri' src='wp-content/assets/$1' alt=''>") + "</div>";
+        }).join("");
+      }
+
+      function section(key, cls, lines) {
+        if (!lines || !lines.length) return "";
+        return "<div class='tip-h" + (cls ? " " + cls : "") + "'>" + esc(t(key)) + "</div>" + fxHtml(lines);
+      }
+
+      function tipHtml(el) {
+        var set = DATA.sets[Number(el.getAttribute("data-s"))];
+        if (!set) return "";
+        if (!el.hasAttribute("data-i")) {
+          return "<div class='tip-title'>" + esc(set.name) + "</div>" +
+            "<div class='tip-meta'>" + esc(t("arts.level", { n: set.level })) + "</div>" +
+            (section("arts.fx.set", "", set.fx) || "<div>—</div>");
+        }
+        var it = set.items[Number(el.getAttribute("data-i"))];
+        if (!it) return "";
+        var fx = it.fx || {};
+        return "<div class='tip-title'>" + esc(it.name) + "</div>" +
+          "<div class='tip-meta'>" + esc(set.name) + " · " + esc(t("arts.level", { n: set.level })) + " · " +
+          esc(t("arts.slot." + it.slot)) + (it.twoHanded ? ", " + esc(t("arts.twoHanded")) : "") + "</div>" +
+          section("arts.fx.regular", "", fx.n) +
+          section("arts.fx.ancient", "anc", fx.a) +
+          section("arts.fx.perfect", "perf", fx.p) +
+          (fx.up ? "<div class='up-cost'>" + esc(t("arts.fx.upgrade")) + " " + fxHtml([fx.up]).replace(/^<div>|<\/div>$/g, "") + "</div>" : "");
+      }
+
+      function placeTip(x, y) {
+        var pad = 14;
+        var w = tipEl.offsetWidth;
+        var h = tipEl.offsetHeight;
+        var left = x + pad;
+        var top = y + pad;
+        if (left + w > window.innerWidth - 4) left = Math.max(4, x - w - pad);
+        if (top + h > window.innerHeight - 4) top = Math.max(4, window.innerHeight - h - 4);
+        tipEl.style.left = left + "px";
+        tipEl.style.top = top + "px";
+      }
+
+      function showTip(el, x, y) {
+        if (tipFor !== el) {
+          tipFor = el;
+          tipEl.innerHTML = tipHtml(el);
+        }
+        tipEl.classList.add("is-open");
+        placeTip(x, y);
+      }
+
+      function hideTip() {
+        tipFor = null;
+        tipEl.classList.remove("is-open");
+      }
+
+      function tipTarget(node) {
+        return node && node.closest ? node.closest(".item[data-s], tr[data-s], .set-name[data-s]") : null;
+      }
+
+      contentEl.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return;
+        var el = tipTarget(e.target);
+        if (el) showTip(el, e.clientX, e.clientY);
+        else hideTip();
+      });
+      contentEl.addEventListener("pointerleave", function (e) {
+        if (e.pointerType === "mouse") hideTip();
+      });
+      contentEl.addEventListener("click", function (e) {
+        if (e.pointerType === "mouse") return;
+        var el = tipTarget(e.target);
+        if (!el) return hideTip();
+        if (tipFor === el) return hideTip();
+        showTip(el, e.clientX, e.clientY);
+      });
+      window.addEventListener("scroll", hideTip, { passive: true });
+
+      if (window.MLI18N) {
+        MLI18N.onChange = function () {
+          buildControls();
+          render();
+        };
+      }
+
+      buildControls();
+      render();
+    })();
+  </script>
+</body>
+</html>
