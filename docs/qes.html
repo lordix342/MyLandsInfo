@@ -19864,6 +19864,77 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 		</div>		</div>
 
 
+<!--Хвостики и лапки-->
+	
+	
+	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
+		<div class="quest" data-qid="" style="margin-left:0px; width: calc(100% - 340px);" data-rewards="REWARD_GIVE_RANDOM_RUNE " data-servers="Miner Military Econom Tactical " data-timeout="0" data-pearls="0">
+				<div class='quest_header'>
+					<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+	
+					<span class='quest_header_title'>Хвостики и лапки</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+				</div>
+				<div class='quest_body'>
+					<span class='quest_body_text'>
+						<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+						<span class='quest_body_icon'><img src='https://s1.ru.mlgame.org/quests/elf/41.png' /></span>
+						Ваше величество! Алхимик очень доволен тем, как вы утерли нос Верховному магу. Поэтому он доверяет вам следующее задание. Недавно ему стукнуло 135 лет, и для поддержания сил он каждый год выпивает зелье молодости, которое алхимик разработал лично для себя. Для его изготовления нужны разные ингредиенты, в том числе хвостики и лапки монстров. Он выдал вам длинный список трофеев, которые необходимо собрать. Для этого вам нужно отправиться в поход на руины с монстрами.
+						<br><br>
+						В награду алхимик обещает отдать руну из двух имеющихся у него, но только одна из них входит в рунное слово для пояса. Какую именно он вам отдаст, решит монетка. Видимо, алхимик чокнулся окончательно...
+						<br><br>
+					<b>Задача:</b>
+					Ограбить 1 руину 1 уровня, 2 руины 2 уровня, 3 руины 3 уровня, 4 руины 4 уровня, 5 руин 5 уровня и 6 руин 6 уровня.
+					  <br><br>
+				
+		
+							</span>
+				<br><br><br>
+				<span class='quest_body_bg'>Условия появления:</span>Появляется после выполнения квеста <B>Чокнутый алхимик</B>.
+				<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+					<br>
+					<span class='quest_body_reward'>
+	Cлучайная руна
+	
+					</span>
+		</div>
+		</div>
+		</div>
+
+
+<!-- Лунный гороскоп-->
+	
+	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
+		
+	<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 360px);' data-rewards="REWARD_GIVE_RANDOM_RUNE " data-servers='Miner Military Econom Tactical ' data-timeout="1" data-pearls='0'>
+		<div class='quest_header'>
+			<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_in_progress.png" title="Этот квест выполняется как за ЧЖ, так и без ЧЖ" scale="0"></span>
+
+			<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span><span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время" scale="0"></span><span class='quest_header_title'>Лунный гороскоп</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+		<div class='quest_body'>
+			<span class='quest_body_text'>
+				<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+				<span class='quest_body_icon'><img src='https://s1.ru.mlgame.org/quests/elf/stone.png' /></span>
+				Государь! Мы уже близки к разгадке рецепта для рунного слова! Но задания алхимика после выпитого эликсира молодости становятся все сложнее и загадочнее. Как-то утром он прочитал лунный гороскоп и решил, что ему нужно срочно посетить 3 Стоунхенджа, чтобы провести там сеансы прямой связи с космосом. Он настаивает, что это нужно сделать в ближайшие сутки, иначе нужно вновь ждать целый месяц до полнолуния. Поэтому последнее задание – сообщить алхимику местоположение 3 Стоунхенджей в ближайшие сутки. Впрочем, вы можете купить эту информацию на черном рынке.
+									<br><br>
+			<b>Задача:</b>
+			Обнаружить исследователями 3 владения Стоунхендж, или оплатить 999 ЧЖ.
+			<br><br>
+
+		</span>
+			<span class='quest_body_bg'>Время: 24 часа</span>
+			<span class='quest_body_bg'>Условия появления:</span>Появляется после выполнения квеста <B>Хвостики и лапки</B>.
+			<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+			<br>
+
+			<br>
+			Случайная руна<br>
+
+		</div>
+</div>
+</div>
+
+
 <!--Уникальное предложение - 2-->
 	
 	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
@@ -20983,40 +21054,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 	
 	
 	
-	<!--Хвостики и лапки-->
 	
-	
-	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
-		<div class="quest" data-qid="" style="margin-left:0px; width: calc(100% - 25px);" data-rewards="BUFF_SCIENCE_BOOST " data-servers="Miner Military Econom Tactical " data-timeout="1" data-pearls="-100">
-				<div class='quest_header'>
-					<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
-	
-					<span class='quest_header_title'>Хвостики и лапки</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
-				</div>
-				<div class='quest_body'>
-					<span class='quest_body_text'>
-						<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
-						<span class='quest_body_icon'><img src='https://s1.ru.mlgame.org/quests/elf/41.png' /></span>
-						Ваше величество! Алхимик очень доволен тем, как вы утерли нос Верховному магу. Поэтому он доверяет вам следующее задание. Недавно ему стукнуло 135 лет, и для поддержания сил он каждый год выпивает зелье молодости, которое алхимик разработал лично для себя. Для его изготовления нужны разные ингредиенты, в том числе хвостики и лапки монстров. Он выдал вам длинный список трофеев, которые необходимо собрать. Для этого вам нужно отправиться в поход на руины с монстрами.
-						<br><br>
-						В награду алхимик обещает отдать руну из двух имеющихся у него, но только одна из них входит в рунное слово для пояса. Какую именно он вам отдаст, решит монетка. Видимо, алхимик чокнулся окончательно...
-						<br><br>
-					<b>Задача:</b>
-					Ограбить 1 руину 1 уровня, 2 руины 2 уровня, 3 руины 3 уровня, 4 руины 4 уровня, 5 руин 5 уровня и 6 руин 6 уровня.
-					  <br><br>
-				
-		
-							</span>
-				<br><br><br>
-				<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
-					<br>
-					<span class='quest_body_reward'>
-	Cлучайная руна
-	
-					</span>
-		</div>
-		</div>
-		</div>
 	
 	
 	<br><br>
@@ -21069,36 +21107,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 			</div>
 			</div>
 		
-	<!-- Лунный гороскоп-->
 	
-	<div class="quest-holder" data-shift="20" data-quest=""><a name=""></a><div class="quest_pre"><a ><img src="./wp-content/assets/q_next_level.png?3" title="" scale="0"></a></div>
-		
-	<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 25px);' data-rewards='REWARD_SUBSCRIPTION BUFF_SCIENCE_BOOST ' data-servers='Miner Military Econom Tactical ' data-timeout='0' data-pearls='0'>
-		<div class='quest_header'>
-			<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_in_progress.png" title="Этот квест выполняется как за ЧЖ, так и без ЧЖ" scale="0"></span>
-
-			<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span><span class='quest_header_title'>Лунный гороскоп</span><span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span><span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span><span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
-					</div>
-		<div class='quest_body'>
-			<span class='quest_body_text'>
-				<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
-				<span class='quest_body_icon'><img src='https://s1.ru.mlgame.org/quests/elf/stone.png' /></span>
-				Государь! Мы уже близки к разгадке рецепта для рунного слова! Но задания алхимика после выпитого эликсира молодости становятся все сложнее и загадочнее. Как-то утром он прочитал лунный гороскоп и решил, что ему нужно срочно посетить 3 Стоунхенджа, чтобы провести там сеансы прямой связи с космосом. Он настаивает, что это нужно сделать в ближайшие сутки, иначе нужно вновь ждать целый месяц до полнолуния. Поэтому последнее задание – сообщить алхимику местоположение 3 Стоунхенджей в ближайшие сутки. Впрочем, вы можете купить эту информацию на черном рынке.
-									<br><br>
-			<b>Задача:</b>
-			Обнаружить исследователями 3 владения Стоунхендж, или оплатить 999 ЧЖ.
-			<br><br>
-
-		</span>
-			<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
-			<br>
-
-			<br>
-			Случайная руна<br>
-
-		</div>
-</div>
-</div>
 </div></div></div></div></div>
 </div></div>
 <br><hr>
