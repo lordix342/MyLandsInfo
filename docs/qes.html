@@ -21139,6 +21139,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 						<br><br>
 		
 					</span>
+						<span class='quest_body_bg'>Условия появления:</span>Появляется после выполнения квеста <B>Лунный гороскоп</B>.
 						<span class='quest_body_rewserver'>Награда на серверах: шахтерский, боевой, экономический, тактический</span>
 						<br>
 	
@@ -23737,6 +23738,7 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 							Заплатив ЧЖ за этот квест, Вы изучите науку "Алхимия 5". Если Вы изучите науку "Алхимия 5" каким-либо другим способом до того, как истечет время таймера, квест просто будет засчитан как выполненный.
 						</span>
 						<span class='quest_body_bg'>Стоимость квеста: 7500 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Появляется через месяц после изучения науки "Алхимия 4".
 						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
 						<span class="quest_body_reward">Мгновенное изучение науки Алхимия-5</span>
 					</div>
@@ -24467,6 +24469,51 @@ DIV[data-content="personal-quests"] {display: block; width: 100%; border: 1px so
 				</div>
 			</div>
 			<div class="quest-children-holder">
+
+						<!--Диллбир повышает ставки-->
+			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_DILLBIR_STAKES"><a name="ALCHEMY5_DILLBIR_STAKES"></a>
+				<div class="quest_pre"><a href="#ALCHEMY5_HELLAS"><img src="./wp-content/assets/q_next_level.png?3" title="Сокровища Эллады"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ACROPOLIS"><img src="./wp-content/assets/q_next_level.png?3" title="Подземный Акрополь"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_ANCIENT_RUNE"><img src="./wp-content/assets/q_next_level.png?3" title="Античная руна"></a></div>
+				<div class="quest_pre"><a href="#ALCHEMY5_RAD"><img src="./wp-content/assets/q_next_level.png?3" title="РАДостная новость"></a></div>
+				<div class='quest' data-qid='' style='margin-left:0px; width: calc(100% - 85px);' data-rewards='REWARD_GIVE_RANDOM_RUNE ' data-servers='Miner Military Econom Tactical ' data-timeout='1' data-pearls='999'>
+					<div class='quest_header'>
+						<span class='quest_header_icons'><img src='./wp-content/assets/elf/advisor.png' title='Условия появления квеста известны'></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/time.png" title="Квест на время"></span>
+						<span class="quest_header_icons"><img src="./wp-content/assets/shared/icons/ancient_magic_clickable.png" title="Этот квест выполняется за ЧЖ"></span>
+						<span class='quest_header_title'>Диллбир повышает ставки</span>
+						<span class='quest_header_server' server='Tactical' server-appear='yes'><img src='./wp-content/assets/server/Tactical.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Econom' server-appear='yes'><img src='./wp-content/assets/server/Econom.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server gs' server='Survival' server-appear='unknown'><img src='./wp-content/assets/server/Survival.png' title='Нет информации о наличии квеста на данном типе серверов'></span>
+						<span class='quest_header_server' server='Military' server-appear='yes'><img src='./wp-content/assets/server/Military.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server' server='Miner' server-appear='yes'><img src='./wp-content/assets/server/Miner.png' title='На данном типе серверов квест есть'></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='select'><i class='fa fa-question fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='done'><i class='fa fa-check fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='inpr'><i class='fa fa-spinner fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='fail'><i class='fa fa-times fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='noqu'><i class='fa fa-ban fa-2x'></i></span>
+						<span class='quest_header_server q_button' data-action='quest-state' quest-state='clear'><i class='fa fa-history fa-2x'></i></span>
+					</div>
+					<div class='quest_body'>
+						<span class='quest_body_text'>
+							<span class='quest_body_helper'><img src='./wp-content/assets/elf/advisor.png' /></span>
+							<span class='quest_body_icon'><img src='https://s12.ru.mlgame.org/quests/elf/dilbir.png' /></span>
+							Император! Диллбир оценил Ваш азарт в прошлый раз, и ему не терпится снова испытать глубину Вашего кошелька. На этот раз у него точно приготовлено что-то ценное...
+							<br><br>
+							<b>Задача:</b>
+							Обменять 999 ЧЖ на суперприз Диллбира
+							<br><br>
+							<b>Подсказка:</b>
+							В награду за этот квест вы получите случайную Античную руну из списка: Гифу, Йар, Хегль
+						</span>
+						<span class='quest_body_bg'>Время: 24 часа. Стоимость квеста: 999 ЧЖ</span>
+						<span class='quest_body_bg'>Условия появления:</span>Выполнить квест "РАДостная новость"
+						<span class="quest_body_rewserver">Награда на серверах: шахтерский, боевой, экономический, тактический</span>
+						<span class="quest_body_reward">Случайная античная руна:<br><img src="./wp-content/assets/shared/artifacts/rune/xp.png" alt="Античная руна Гифу" /> Античная руна Гифу<br><img src="./wp-content/assets/shared/artifacts/rune/iap.png" alt="Античная руна Йар" /> Античная руна Йар<br><img src="./wp-content/assets/shared/artifacts/rune/hp.png" alt="Античная руна Хегль" /> Античная руна Хегль</span>
+					</div>
+				</div>
+			</div>
+			<div class="quest-children-holder"></div>
 
 			<!--Редкая находка-->
 			<div class="quest-holder" data-shift="80" data-quest="ALCHEMY5_RARE_FIND"><a name="ALCHEMY5_RARE_FIND"></a>
